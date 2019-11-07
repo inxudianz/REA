@@ -11,6 +11,7 @@
 		1EE6D1C423741A3400A07759 /* Overview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C323741A3300A07759 /* Overview.storyboard */; };
 		1EE6D1C623741A5C00A07759 /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C523741A5C00A07759 /* Preview.storyboard */; };
 		1EE6D1C823741A6A00A07759 /* Processing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C723741A6A00A07759 /* Processing.storyboard */; };
+		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D42372D0CC00BCFC5C /* AppDelegate.swift */; };
 		920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */; };
 		920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D82372D0CC00BCFC5C /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 		1EE6D1C523741A5C00A07759 /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
 		1EE6D1C723741A6A00A07759 /* Processing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Processing.storyboard; sourceTree = "<group>"; };
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
+		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920F63D12372D0CC00BCFC5C /* Creativ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Creativ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920F63D42372D0CC00BCFC5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		920AF3312374271000F8FB7A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				920AF3322374272400F8FB7A /* CoreDataHelper.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		920F63C82372D0CC00BCFC5C = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +130,7 @@
 		920F63D32372D0CC00BCFC5C /* Creativ */ = {
 			isa = PBXGroup;
 			children = (
+				920AF3312374271000F8FB7A /* Helper */,
 				F51CEC30237416270007FCC4 /* Controller */,
 				F51CEC2F237416000007FCC4 /* Storyboard */,
 				8A03B0012372D71400682C73 /* Creativ.entitlements */,
@@ -311,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */,
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
 				920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */,
 				F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */,
