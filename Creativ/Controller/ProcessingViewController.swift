@@ -11,10 +11,11 @@ import UIKit
 class ProcessingViewController: UIViewController {
 
     @IBOutlet weak var mascotSpriteImage: UIImageView!
+    @IBOutlet weak var bubbleMessage: UIView!
     
-    @IBOutlet weak var labelProcess1: UILabel!
-    @IBOutlet weak var labelProcess2: UILabel!
-    @IBOutlet weak var labelProcess3: UILabel!
+//    @IBOutlet weak var labelProcess1: UILabel!
+//    @IBOutlet weak var labelProcess2: UILabel!
+//    @IBOutlet weak var labelProcess3: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
