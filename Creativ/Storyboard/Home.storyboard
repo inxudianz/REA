@@ -14,12 +14,22 @@
                     <view key="view" contentMode="scaleToFill" id="qZ7-1R-f24">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZTi-hp-iHg">
+                                <rect key="frame" x="184" y="433" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="btn:" destination="Nh6-1O-WgL" eventType="touchUpInside" id="Puu-al-Ush"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="iCJ-tz-Smb"/>
                     </view>
                     <navigationItem key="navigationItem" id="NN5-XS-FsU"/>
                     <connections>
-                        <segue destination="5HN-gf-Cj2" kind="show" id="PQ1-kg-chH"/>
+                        <segue destination="5HN-gf-Cj2" kind="show" identifier="gotoprocess" id="PQ1-kg-chH"/>
                         <segue destination="77G-t5-pU3" kind="show" id="EXy-Aa-JCS"/>
                     </connections>
                 </viewController>
