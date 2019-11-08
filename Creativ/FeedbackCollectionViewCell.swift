@@ -20,7 +20,8 @@ import UIKit
 class FeedbackCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var feedbackGlyph: UIImageView!
-    @IBOutlet var feedbackTitle: UILabel!
+    @IBOutlet var feedbackOverview: UILabel!
+    @IBOutlet weak var feedbackCommentedContent: UILabel!
     @IBOutlet var feedbackComment: UILabel!
     @IBOutlet var feedbackRecommendation: UILabel!
     
@@ -29,7 +30,7 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
 
         // Menggunakan array dulu sebagai patokan jenis-jenis feedback
         feedbackGlyph.image = image
-        feedbackTitle.text = title
+        feedbackOverview.text = title
         feedbackComment.text = comment
         feedbackRecommendation.text = recommendation
     }

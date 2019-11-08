@@ -14,7 +14,7 @@ class PreviewViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     // Images
     @IBOutlet weak var mascotSprite: UIImageView!
-    @IBOutlet weak var bubbleMessage: UIImageView!
+    @IBOutlet weak var bubbleMessage: UIView!
     
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
