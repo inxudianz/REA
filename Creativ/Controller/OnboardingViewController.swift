@@ -10,11 +10,20 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
 
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var continueButton: UIButton! {
+        didSet {
+            continueButton.layer.cornerRadius = continueButton.frame.height/5
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        continueButton.layer.cornerRadius = continueButton.frame.height/5
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func masukButton(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        self.present(newViewController, animated: true, completion: nil)
     }
     
 

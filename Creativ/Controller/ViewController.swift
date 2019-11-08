@@ -16,7 +16,7 @@ class ViewController: UIViewController, UIDocumentMenuDelegate,UIDocumentPickerD
         guard let myURL = urls.first else {
             return
         }
-        //                 print("import result : \(myURL)")
+        print("import result : \(myURL)")
         urlPicked = myURL
         print(urlPicked)
     }
