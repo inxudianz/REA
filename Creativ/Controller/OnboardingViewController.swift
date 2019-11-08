@@ -16,6 +16,12 @@ class OnboardingViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func masukButton(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+        self.present(newViewController, animated: true, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation
