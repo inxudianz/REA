@@ -26,7 +26,11 @@ class OnboardingViewController: UIViewController {
         self.present(newViewController, animated: true, completion: nil)
     }
     
+    @IBAction func continueButton(_ sender: Any) {
+        performSegue(withIdentifier: "goToHome", sender: self)
 
+    }
+    
     /*
     // MARK: - Navigation
 

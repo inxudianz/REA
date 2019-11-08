@@ -43,7 +43,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="bBQ-jf-FFb">
             <objects>
-                <viewController id="Rds-zn-w78" customClass="OnboardingViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingViewController" id="Rds-zn-w78" customClass="OnboardingViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6ar-zr-UTk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,6 +63,9 @@
                                 <state key="normal" title="Continue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="continueButton:" destination="Rds-zn-w78" eventType="touchUpInside" id="d33-ay-kkC"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload your resume" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ps6-Kc-Bnf">
                                 <rect key="frame" x="161" y="329" width="157" height="21"/>
@@ -108,7 +111,7 @@
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="vLt-YY-Uk9" id="Kdk-O6-aIV"/>
-                        <segue destination="vHw-rH-gcK" kind="show" id="pn5-Sg-vpy"/>
+                        <segue destination="vHw-rH-gcK" kind="show" identifier="goToHome" id="pn5-Sg-vpy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLU-Cc-dfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
