@@ -13,6 +13,7 @@ import PDFKit
 class HomeViewController: UIViewController {
     
     var urlPicked: URL?
+    var cellColour = true
 
     @IBOutlet weak var cvCollectionView: UICollectionView!
     @IBOutlet weak var thumbnailImage: UIImageView!
@@ -25,7 +26,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+
     }
     
 
@@ -39,6 +40,27 @@ class HomeViewController: UIViewController {
     }
     */
 
+}
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVCollectionViewCell", for: indexPath)
+        
+        cell.backgroundColor = cellColour ? UIColor.red : UIColor.blue
+        cellColour = !cellColour
+        
+        return cell
+    }
+    
+    
 }
 
 

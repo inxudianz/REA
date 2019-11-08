@@ -9,5 +9,6 @@
 import UIKit
 
 class CVCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var cvThumbnailImage: UIImageView!
     
 }

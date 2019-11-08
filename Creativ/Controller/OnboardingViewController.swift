@@ -10,10 +10,13 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
 
-    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var continueButton: UIButton! {
+        didSet {
+            continueButton.layer.cornerRadius = continueButton.frame.height/5
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-        continueButton.layer.cornerRadius = continueButton.frame.height/5
         // Do any additional setup after loading the view.
     }
     
