@@ -44,9 +44,9 @@ class CoreDataHelper {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let resume = Resume(context: managedContext)
-        resume.name = model.name
-        resume.created = model.created
-        resume.path = model.path
+//        resume.name = model.name
+//        resume.created = model.created
+//        resume.path = model.path
         
         do {
             try managedContext.save()
@@ -66,13 +66,13 @@ class CoreDataHelper {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
-        let resumes = fetch(entityName: "Resume")
+//        let resumes = fetch(entityName: "Resume")
         
-        for resume in resumes {
-            if names.contains(resume.name) {
-                managedContext.delete(resume)
-            }
-        }
+//        for resume in resumes {
+//            if names.contains(resume.name) {
+//                managedContext.delete(resume)
+//            }
+//        }
         
         do {
             try managedContext.save()
