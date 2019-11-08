@@ -10,13 +10,25 @@ import UIKit
 
 class ProcessingViewController: UIViewController {
 
+    @IBOutlet weak var mascotSpriteImage: UIImageView!
+    
+    @IBOutlet weak var labelProcess1: UILabel!
+    @IBOutlet weak var labelProcess2: UILabel!
+    @IBOutlet weak var labelProcess3: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        // Setting up the image/sprite of Rena
+        // mascotSpriteImage.image = UIImage(named: "")
+        
     }
-    
 
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "goToOverview", sender: self)
+    }
     /*
     // MARK: - Navigation
 

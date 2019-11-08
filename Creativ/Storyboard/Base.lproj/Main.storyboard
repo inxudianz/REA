@@ -47,11 +47,21 @@
                     <view key="view" contentMode="scaleToFill" id="6ar-zr-UTk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JtQ-NV-KJH">
+                                <rect key="frame" x="178" y="477" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="btn:" destination="Rds-zn-w78" eventType="touchUpInside" id="QH2-nr-u3Z"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="51C-xl-Uz1"/>
                     </view>
                     <connections>
-                        <segue destination="vHw-rH-gcK" kind="show" id="pn5-Sg-vpy"/>
+                        <segue destination="vHw-rH-gcK" kind="show" identifier="gotohome" id="pn5-Sg-vpy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLU-Cc-dfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
