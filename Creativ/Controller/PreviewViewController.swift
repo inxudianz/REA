@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PreviewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class PreviewViewController: UIViewController {
 
     @IBOutlet weak var previewNavigationBar: UINavigationItem!
     
@@ -31,18 +31,6 @@ class PreviewViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         feedback.createFeedbackSection()
         
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "feedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
-        
-        cell.displayFeedbackContent(image: feedback.images[indexPath.row], title: feedback.titles[indexPath.row], comment: feedback.comments[indexPath.row], recommendation: feedback.recommendations[indexPath.row])
-        
-        return cell
     }
     
     // Unwind back to the All Resume Page
@@ -68,4 +56,19 @@ class PreviewViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     */
 
+}
+
+
+extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       return 6
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+       let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "feedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
+       
+       cell.displayFeedbackContent(image: feedback.images[indexPath.row], title: feedback.titles[indexPath.row], comment: feedback.comments[indexPath.row], recommendation: feedback.recommendations[indexPath.row])
+       
+       return cell
+    }
 }

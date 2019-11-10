@@ -16,6 +16,7 @@
 		1EE6D1D1237538AC00A07759 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CF237538AC00A07759 /* FeedbackView.swift */; };
 		1EE6D1D2237538AC00A07759 /* FeedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D0237538AC00A07759 /* FeedbackView.xib */; };
 		1EE6D1D423753AA000A07759 /* CustomFeedbackCellShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */; };
+		1EE6D1D62375A91C00A07759 /* ProcessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D52375A91C00A07759 /* ProcessTableViewCell.swift */; };
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D42372D0CC00BCFC5C /* AppDelegate.swift */; };
 		920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */; };
@@ -61,6 +62,7 @@
 		1EE6D1CF237538AC00A07759 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		1EE6D1D0237538AC00A07759 /* FeedbackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackView.xib; sourceTree = "<group>"; };
 		1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeedbackCellShape.swift; sourceTree = "<group>"; };
+		1EE6D1D52375A91C00A07759 /* ProcessTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTableViewCell.swift; sourceTree = "<group>"; };
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920F63D12372D0CC00BCFC5C /* Creativ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Creativ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 				1EE6D1CF237538AC00A07759 /* FeedbackView.swift */,
 				1EE6D1D0237538AC00A07759 /* FeedbackView.xib */,
 				1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */,
+				1EE6D1D52375A91C00A07759 /* ProcessTableViewCell.swift */,
 			);
 			path = Creativ;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */,
 				1EE6D1CC237511AE00A07759 /* FeedbackContent.swift in Sources */,
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
+				1EE6D1D62375A91C00A07759 /* ProcessTableViewCell.swift in Sources */,
 				1EE6D1D1237538AC00A07759 /* FeedbackView.swift in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
