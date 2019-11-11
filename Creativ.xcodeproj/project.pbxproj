@@ -11,12 +11,12 @@
 		1EE6D1C423741A3400A07759 /* Overview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C323741A3300A07759 /* Overview.storyboard */; };
 		1EE6D1C623741A5C00A07759 /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C523741A5C00A07759 /* Preview.storyboard */; };
 		1EE6D1C823741A6A00A07759 /* Processing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C723741A6A00A07759 /* Processing.storyboard */; };
-		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		1EE6D1CA2374376500A07759 /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C92374376500A07759 /* FeedbackCollectionViewCell.swift */; };
 		1EE6D1CC237511AE00A07759 /* FeedbackContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackContent.swift */; };
 		1EE6D1D1237538AC00A07759 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CF237538AC00A07759 /* FeedbackView.swift */; };
 		1EE6D1D2237538AC00A07759 /* FeedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D0237538AC00A07759 /* FeedbackView.xib */; };
 		1EE6D1D423753AA000A07759 /* CustomFeedbackCellShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */; };
+		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D42372D0CC00BCFC5C /* AppDelegate.swift */; };
 		920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */; };
 		920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D82372D0CC00BCFC5C /* ViewController.swift */; };
@@ -32,6 +32,7 @@
 		F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC21237413780007FCC4 /* PreviewViewController.swift */; };
 		F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC23237413890007FCC4 /* OverviewViewController.swift */; };
 		F51CEC322374292C0007FCC4 /* CVCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC312374292C0007FCC4 /* CVCollectionViewCell.swift */; };
+		F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		F51CEC21237413780007FCC4 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		F51CEC23237413890007FCC4 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		F51CEC312374292C0007FCC4 /* CVCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVCollectionViewCell.swift; sourceTree = "<group>"; };
+		F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 				1EE6D1CF237538AC00A07759 /* FeedbackView.swift */,
 				1EE6D1D0237538AC00A07759 /* FeedbackView.xib */,
 				1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */,
+				F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */,
 			);
 			path = Creativ;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */,
 				920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */,
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
 				F51CEC322374292C0007FCC4 /* CVCollectionViewCell.swift in Sources */,
