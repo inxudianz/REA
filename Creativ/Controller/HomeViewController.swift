@@ -14,7 +14,8 @@ class HomeViewController: UIViewController {
     
     var urlPicked: URL?
     var cellColour = true
-
+    
+    @IBOutlet weak var homeNavigationBar: UINavigationBar!
     @IBOutlet weak var addNewButton: UIButton!{
         didSet{
             addNewButton.layer.borderColor = UIColor.init(hex: "#30669BFF")?.cgColor
@@ -30,33 +31,63 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let widthNavigationBar = self.view.frame.width
+        
+        let navigationBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: widthNavigationBar, height: 44))
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        
+        let navBarAppearance = UINavigationBarAppearance()
+        navBarAppearance.configureWithOpaqueBackground()
+        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navBarAppearance.backgroundColor = UIColor.init(hex: "#30669BFF")
+        
+        navigationBar.standardAppearance = navBarAppearance
+        navigationBar.scrollEdgeAppearance = navBarAppearance
+        
+        
+        self.view.addSubview(navigationBar)
+        view.bringSubviewToFront(navigationBar)
+        
+        
+        let navigationItem = UINavigationItem(title: "Navigation bar")
+        //        let doneBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: #selector())
+        //        navigationItem.rightBarButtonItem = doneBtn
+        navigationBar.setItems([navigationItem], animated: false)
+        
+        addBubble()
+        
+    }
+    
+    func addBubble(){
         let width: CGFloat = 252
-               let height: CGFloat = 87
-               
-               let bezierPath = UIBezierPath()
-               bezierPath.move(to: CGPoint(x: 22, y: height))
-               bezierPath.addLine(to: CGPoint(x: width - 17, y: height))
-               bezierPath.addCurve(to: CGPoint(x: width, y: height - 17), controlPoint1: CGPoint(x: width - 7.61, y: height), controlPoint2: CGPoint(x: width, y: height - 7.61))
-               bezierPath.addLine(to: CGPoint(x: width, y: 17))
-               bezierPath.addCurve(to: CGPoint(x: width - 17, y: 0), controlPoint1: CGPoint(x: width, y: 7.61), controlPoint2: CGPoint(x: width - 7.61, y: 0))
-               bezierPath.addLine(to: CGPoint(x: 21, y: 0))
-               bezierPath.addCurve(to: CGPoint(x: 4, y: 17), controlPoint1: CGPoint(x: 11.61, y: 0), controlPoint2: CGPoint(x: 4, y: 7.61))
-               bezierPath.addLine(to: CGPoint(x: 4, y: height - 11))
-               bezierPath.addCurve(to: CGPoint(x: 0, y: height), controlPoint1: CGPoint(x: 4, y: height - 1), controlPoint2: CGPoint(x: 0, y: height))
-               bezierPath.addLine(to: CGPoint(x: -0.05, y: height - 0.01))
-               bezierPath.addCurve(to: CGPoint(x: 11.04, y: height - 4.04), controlPoint1: CGPoint(x: 4.07, y: height + 0.43), controlPoint2: CGPoint(x: 8.16, y: height - 1.06))
-               bezierPath.addCurve(to: CGPoint(x: 22, y: height), controlPoint1: CGPoint(x: 16, y: height), controlPoint2: CGPoint(x: 19, y: height))
-               bezierPath.close()
-               
-               let outgoingMessageLayer = CAShapeLayer()
-               outgoingMessageLayer.path = bezierPath.cgPath
-               outgoingMessageLayer.frame = CGRect(x: 115,
-                                                   y: 163,
-                                                   width: 68,
-                                                   height: 34)
-               outgoingMessageLayer.fillColor = UIColor(red: 0.09, green: 0.54, blue: 1, alpha: 1).cgColor
-               
-                view.layer.addSublayer(outgoingMessageLayer)
+        let height: CGFloat = 87
+        
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 22, y: height))
+        bezierPath.addLine(to: CGPoint(x: width - 17, y: height))
+        bezierPath.addCurve(to: CGPoint(x: width, y: height - 17), controlPoint1: CGPoint(x: width - 7.61, y: height), controlPoint2: CGPoint(x: width, y: height - 7.61))
+        bezierPath.addLine(to: CGPoint(x: width, y: 17))
+        bezierPath.addCurve(to: CGPoint(x: width - 17, y: 0), controlPoint1: CGPoint(x: width, y: 7.61), controlPoint2: CGPoint(x: width - 7.61, y: 0))
+        bezierPath.addLine(to: CGPoint(x: 21, y: 0))
+        bezierPath.addCurve(to: CGPoint(x: 4, y: 17), controlPoint1: CGPoint(x: 11.61, y: 0), controlPoint2: CGPoint(x: 4, y: 7.61))
+        bezierPath.addLine(to: CGPoint(x: 4, y: height - 11))
+        bezierPath.addCurve(to: CGPoint(x: 0, y: height), controlPoint1: CGPoint(x: 4, y: height - 1), controlPoint2: CGPoint(x: 0, y: height))
+        bezierPath.addLine(to: CGPoint(x: -0.05, y: height - 0.01))
+        bezierPath.addCurve(to: CGPoint(x: 11.04, y: height - 4.04), controlPoint1: CGPoint(x: 4.07, y: height + 0.43), controlPoint2: CGPoint(x: 8.16, y: height - 1.06))
+        bezierPath.addCurve(to: CGPoint(x: 22, y: height), controlPoint1: CGPoint(x: 16, y: height), controlPoint2: CGPoint(x: 19, y: height))
+        bezierPath.close()
+        
+        let outgoingMessageLayer = CAShapeLayer()
+        outgoingMessageLayer.path = bezierPath.cgPath
+        outgoingMessageLayer.frame = CGRect(x: 115,
+                                            y: 163,
+                                            width: 68,
+                                            height: 34)
+        outgoingMessageLayer.fillColor = UIColor(red: 0.09, green: 0.54, blue: 1, alpha: 1).cgColor
+        
+        view.layer.addSublayer(outgoingMessageLayer)
     }
     
     @IBAction func addNewButtonTapped(_ sender: Any) {
@@ -64,15 +95,15 @@ class HomeViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -137,9 +168,9 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     
     //menampilkan thumbnail pdf ke view controller
     func showPDFThumbnail() {
-         let thumbnailSize = CGSize(width: 100, height: 100)
-         let thumbnail = generatePdfThumbnail(of: thumbnailSize, for: urlPicked!, atPage: 0)
-         thumbnailImage.image = thumbnail
+        let thumbnailSize = CGSize(width: 100, height: 100)
+        let thumbnail = generatePdfThumbnail(of: thumbnailSize, for: urlPicked!, atPage: 0)
+        thumbnailImage.image = thumbnail
     }
     
     //ubah pdf ke string
