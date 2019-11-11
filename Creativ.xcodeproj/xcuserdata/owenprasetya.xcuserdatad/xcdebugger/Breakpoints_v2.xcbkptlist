@@ -16,7 +16,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
-            landmarkName = "displayFeedbackContent(image:title:comment:recommendation:)"
+            landmarkName = "displayFeedbackContent(feedback:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

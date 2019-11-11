@@ -26,13 +26,14 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     @IBOutlet var feedbackRecommendation: UILabel!
     
     
-    func displayFeedbackContent(image: UIImage, title: String, comment: String, recommendation: String) {
+    func displayFeedbackContent(feedback: Feedbacks) {
 
         // Menggunakan array dulu sebagai patokan jenis-jenis feedback
-        feedbackGlyph.image = image
-        feedbackOverview.text = title
-        feedbackComment.text = comment
-        feedbackRecommendation.text = recommendation
+        feedbackGlyph.image = feedback.image
+        feedbackOverview.text = feedback.title
+        feedbackCommentedContent.text = feedback.commentedText
+        feedbackComment.text = feedback.comment
+        feedbackRecommendation.text = feedback.recommendation
     }
     
     

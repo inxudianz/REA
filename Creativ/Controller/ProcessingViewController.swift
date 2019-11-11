@@ -9,8 +9,9 @@
 import UIKit
 
 
-enum IndicatorType {
-    case dormant, active, done
+class onGoingProcess {
+    var rowIndexPath: IndexPath?
+    var doneArray: [Int]?
 }
 
 
@@ -19,67 +20,55 @@ class ProcessingViewController: UIViewController {
     @IBOutlet weak var mascotSpriteImage: UIImageView!
     @IBOutlet weak var bubbleMessage: UIView!
     
-    @IBOutlet weak var processTableView: UITableView! {
+    @IBOutlet weak var processCollectionView: UICollectionView! {
         didSet {
-            processTableView.rowHeight = processTableView.frame.height/4.5
-            
-            processTableView.separatorStyle = .none
-            processTableView.isUserInteractionEnabled = false
+            processCollectionView.isUserInteractionEnabled = false
         }
     }
     
-    var activityIndicator: UIActivityIndicatorView!
+    // Explanation: -Process Details memuat detail dari proses yang akan dijalankan-
+    var processDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating Your Work", "Analyzing Skills", "Finalizing"]
+    // Explanation: -onGoingRow merupakan instance onGoingProcess, yang berisi row yang sedang berjalan dan array proses yang telah selesai berjalan-
+    var onGoingRow = onGoingProcess()
     
-    // Komponen dalam table view
-    var progressDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating Your Work", "Analyzing Skills", "Finalizing"]
-    var flagRow = 2    // Minimal 2 ; karena ada 2 cell kosong di atas dan bawah (0, 1)
+//    var xOffSet: CGFloat = 0
+//    var yOffSet: CGFloat = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        onGoingRow.rowIndexPath = IndexPath(row: 0, section: processCollectionView.numberOfSections - 1)
+        onGoingRow.doneArray = []
         
-        // Setting up the image/sprite of Rena
-        // mascotSpriteImage.image = UIImage(named: "")
-        
-        activityIndicator = UIActivityIndicatorView.init(style: .medium)
-    }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        scrollToRowDelegate(tableView: processTableView, row: flagRow)
-//        processTableView.reloadData()
-//    }
-    
-    func scrollToRowDelegate(tableView: UITableView, flagRow: Int) {
-        let indexPath = IndexPath(row: flagRow, section: tableView.numberOfSections-1)
-        
-        if indexPath.row >= 2 {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
-        
-        processTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: true)
-        print("Scroll success")
+        setCollectionViewLayout()
     }
 
     // Change this function with the function to be called automatically upon completion on certain progress
     @IBAction func moveTableCellTapped(_ sender: Any) {
-//        let deleteIndexPath = IndexPath(row: 1, section: 0)
-//        let insertIndexPath = IndexPath(row: 3, section: 0)
-//        processTableView.deleteRows(at: [deleteIndexPath], with: .top)
-//        processTableView.insertRows(at: [insertIndexPath], with: .bottom)
         
-        print("HI \(flagRow)")
-        //activityIndicator.stopAnimating()
+        var cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
         
-        if flagRow < progressDetails.count + 2 {
-//            processTableView.cellForRow(at: IndexPath(row: flagRow, section: processTableView.numberOfSections-1))?.accessoryView = activityIndicator
-            scrollToRowDelegate(tableView: processTableView, flagRow: flagRow)
-    
-            flagRow += 1
+        if onGoingRow.rowIndexPath!.row < processDetails.count - 1 {
+            onGoingRow.doneArray?.append(onGoingRow.rowIndexPath?.row ?? -1)
+            cell?.setCellStatus(statusType: .done)
+            
+            onGoingRow.rowIndexPath?.row += 1
+            cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
+            cell?.setCellStatus(statusType: .working)
+            
+            processCollectionView.scrollToItem(at: onGoingRow.rowIndexPath!, at: .centeredVertically, animated: true)
         }
-        else{
-            performSegue(withIdentifier: "goToOverview", sender: self)
-            flagRow = 2
+        else {
+            if !(onGoingRow.doneArray?.contains(onGoingRow.rowIndexPath!.row))! {
+                onGoingRow.doneArray?.append(onGoingRow.rowIndexPath!.row)
+                cell?.setCellStatus(statusType: .done)
+            }
+            else {
+                onGoingRow.rowIndexPath?.row = 0
+                performSegue(withIdentifier: "goToOverview", sender: self)
+            }
         }
 
     }
@@ -96,26 +85,37 @@ class ProcessingViewController: UIViewController {
 
 }
 
-extension ProcessingViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return progressDetails.count + 4
+extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return processDetails.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = processTableView.dequeueReusableCell(withIdentifier: "processDetail", for: indexPath) as! ProcessTableViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell  =  processCollectionView.dequeueReusableCell(withReuseIdentifier: "processCell", for: indexPath) as! ProcessCollectionViewCell
+        cell.setProcessContent(text: processDetails[indexPath.row])
         
-        if flagRow != indexPath.row {
-            cell.accessoryType = .none
-        }
-        
-        if indexPath.row > 1 && indexPath.row < progressDetails.count + 2 {
-            cell.displayFeedbackContent(text: progressDetails[indexPath.row - 2])
+        if indexPath.row == 0 {
+            cell.setCellStatus(statusType: .working)
         }
         else {
-            cell.displayFeedbackContent(text: "")
+            cell.setCellStatus(statusType: .idle)
         }
         
         return cell
     }
+    
+    func setCollectionViewLayout() {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 1
+        layout.minimumLineSpacing = 1
+        layout.sectionInset = UIEdgeInsets(
+            top: (processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!)?.frame.size.height ?? processCollectionView.frame.height / 2),
+            left: processCollectionView.frame.size.width / 4,
+            bottom: (processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!)?.frame.size.height ?? processCollectionView.frame.height / 4),
+            right: processCollectionView.frame.size.width / 4)
+        layout.itemSize = CGSize(width: self.processCollectionView.frame.width, height: processCollectionView.frame.height / 4)
+        
+        processCollectionView.collectionViewLayout = layout
+    }
+    
 }

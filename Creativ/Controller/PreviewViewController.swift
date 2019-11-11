@@ -18,7 +18,7 @@ class PreviewViewController: UIViewController {
     
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
-    let feedback = FeedbackContent()
+    let feedbackContents = FeedbackContent()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,7 @@ class PreviewViewController: UIViewController {
         // Do any additional setup after loading the view.
         setCollectionViewLayout()
         
-        
-        feedback.createFeedbackSection()
+        feedbackContents.createFeedbackSection()
         
     }
     
@@ -41,7 +40,7 @@ class PreviewViewController: UIViewController {
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = 10
         layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height)
+        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 3/4)
         
         feedbackCollectionView.collectionViewLayout = layout
     }
@@ -61,14 +60,16 @@ class PreviewViewController: UIViewController {
 
 extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       return 6
+        return feedbackContents.titles.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "feedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
-       
-       cell.displayFeedbackContent(image: feedback.images[indexPath.row], title: feedback.titles[indexPath.row], comment: feedback.comments[indexPath.row], recommendation: feedback.recommendations[indexPath.row])
-       
-       return cell
+        let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "feedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
+        
+        let cellFeedback = Feedbacks(image: feedbackContents.images[indexPath.row], title: feedbackContents.titles[indexPath.row], commentedText: feedbackContents.commentedTexts[indexPath.row], comment: feedbackContents.comments[indexPath.row], recommendation: feedbackContents.recommendations[indexPath.row])
+
+        cell.displayFeedbackContent(feedback: cellFeedback)
+
+        return cell
     }
 }

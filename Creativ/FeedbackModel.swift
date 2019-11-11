@@ -14,6 +14,8 @@ class FeedbackContent {
     var images: [UIImage] = []
     var titles: [String] = []
     
+    var commentedTexts: [String] = []
+    
     var comments:[String] = []
     // var comment:[Int:String]?
     
@@ -23,7 +25,16 @@ class FeedbackContent {
     func createFeedbackSection() {
         images = [UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp")] as! [UIImage]
         titles = ["Profile", "Education", "Summary", "Working Experience", "Organisational Experience", "Skills"]
-        comments = ["Good job", "G Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good jobGood jobGood jobGood jobGood jobGood jobGood job", "Y", "K", "O", "H"]
-        recommendations = ["Good job", "G", "Y", "K", "O", "H"]
+        commentedTexts = ["I am diligent", "I am a nice and hard working man", "Hello", "Test 4", "Test 5", "Tes 6"]
+        comments = ["Good job", "G Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job", "Y", "K", "O", "H"]
+        recommendations = ["Good job", "Good", "Yay!!", "Kayyyy", "Ol right", "Huperb!"]
     }
+}
+
+struct Feedbacks {
+    var image = UIImage()
+    var title = String()
+    var commentedText = String()
+    var comment = String()
+    var recommendation = String()
 }

@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */; };
 		1EE6D1C223741A0000A07759 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C123741A0000A07759 /* Home.storyboard */; };
 		1EE6D1C423741A3400A07759 /* Overview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C323741A3300A07759 /* Overview.storyboard */; };
 		1EE6D1C623741A5C00A07759 /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C523741A5C00A07759 /* Preview.storyboard */; };
 		1EE6D1C823741A6A00A07759 /* Processing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C723741A6A00A07759 /* Processing.storyboard */; };
 		1EE6D1CA2374376500A07759 /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C92374376500A07759 /* FeedbackCollectionViewCell.swift */; };
-		1EE6D1CC237511AE00A07759 /* FeedbackContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackContent.swift */; };
+		1EE6D1CC237511AE00A07759 /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */; };
 		1EE6D1D1237538AC00A07759 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CF237538AC00A07759 /* FeedbackView.swift */; };
 		1EE6D1D2237538AC00A07759 /* FeedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D0237538AC00A07759 /* FeedbackView.xib */; };
 		1EE6D1D423753AA000A07759 /* CustomFeedbackCellShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */; };
-		1EE6D1D62375A91C00A07759 /* ProcessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D52375A91C00A07759 /* ProcessTableViewCell.swift */; };
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D42372D0CC00BCFC5C /* AppDelegate.swift */; };
 		920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */; };
@@ -53,16 +53,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EE6D1C123741A0000A07759 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		1EE6D1C323741A3300A07759 /* Overview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Overview.storyboard; sourceTree = "<group>"; };
 		1EE6D1C523741A5C00A07759 /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
 		1EE6D1C723741A6A00A07759 /* Processing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Processing.storyboard; sourceTree = "<group>"; };
 		1EE6D1C92374376500A07759 /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
-		1EE6D1CB237511AE00A07759 /* FeedbackContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackContent.swift; sourceTree = "<group>"; };
+		1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
 		1EE6D1CF237538AC00A07759 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		1EE6D1D0237538AC00A07759 /* FeedbackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackView.xib; sourceTree = "<group>"; };
 		1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeedbackCellShape.swift; sourceTree = "<group>"; };
-		1EE6D1D52375A91C00A07759 /* ProcessTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessTableViewCell.swift; sourceTree = "<group>"; };
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920F63D12372D0CC00BCFC5C /* Creativ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Creativ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,12 +153,12 @@
 				920F63E02372D0CE00BCFC5C /* Assets.xcassets */,
 				920F63E52372D0CE00BCFC5C /* Info.plist */,
 				920F63DD2372D0CC00BCFC5C /* Creativ.xcdatamodeld */,
-				1EE6D1CB237511AE00A07759 /* FeedbackContent.swift */,
+				1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */,
 				1EE6D1C92374376500A07759 /* FeedbackCollectionViewCell.swift */,
 				1EE6D1CF237538AC00A07759 /* FeedbackView.swift */,
 				1EE6D1D0237538AC00A07759 /* FeedbackView.xib */,
 				1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */,
-				1EE6D1D52375A91C00A07759 /* ProcessTableViewCell.swift */,
+				1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */,
 			);
 			path = Creativ;
 			sourceTree = "<group>";
@@ -348,10 +348,10 @@
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
 				F51CEC322374292C0007FCC4 /* CVCollectionViewCell.swift in Sources */,
 				920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */,
+				1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */,
 				F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */,
-				1EE6D1CC237511AE00A07759 /* FeedbackContent.swift in Sources */,
+				1EE6D1CC237511AE00A07759 /* FeedbackModel.swift in Sources */,
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
-				1EE6D1D62375A91C00A07759 /* ProcessTableViewCell.swift in Sources */,
 				1EE6D1D1237538AC00A07759 /* FeedbackView.swift in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
