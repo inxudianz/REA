@@ -17,6 +17,7 @@
 		1EE6D1D2237538AC00A07759 /* FeedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D0237538AC00A07759 /* FeedbackView.xib */; };
 		1EE6D1D423753AA000A07759 /* CustomFeedbackCellShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */; };
 		8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A244E6A23758751006E6CC0 /* UIColorExtension.swift */; };
+		8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */; };
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D42372D0CC00BCFC5C /* AppDelegate.swift */; };
 		920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */; };
@@ -64,6 +65,7 @@
 		1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeedbackCellShape.swift; sourceTree = "<group>"; };
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		8A244E6A23758751006E6CC0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeNavigationViewController.swift; path = Creativ/Controller/HomeNavigationViewController.swift; sourceTree = SOURCE_ROOT; };
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920F63D12372D0CC00BCFC5C /* Creativ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Creativ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920F63D42372D0CC00BCFC5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				F51CEC23237413890007FCC4 /* OverviewViewController.swift */,
 				920F63D82372D0CC00BCFC5C /* ViewController.swift */,
 				F51CEC312374292C0007FCC4 /* CVCollectionViewCell.swift */,
+				8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
 				F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */,
 				8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */,
+				8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */,
 				920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */,
 				1EE6D1D423753AA000A07759 /* CustomFeedbackCellShape.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* FeedbackCollectionViewCell.swift in Sources */,

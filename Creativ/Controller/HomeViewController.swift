@@ -14,8 +14,7 @@ class HomeViewController: UIViewController {
     
     var urlPicked: URL?
     var cellColour = true
-    
-    @IBOutlet weak var homeNavigationBar: UINavigationBar!
+
     @IBOutlet weak var addNewButton: UIButton!{
         didSet{
             addNewButton.layer.borderColor = UIColor.init(hex: "#30669BFF")?.cgColor
@@ -30,31 +29,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        let widthNavigationBar = self.view.frame.width
+        // Do any additional setup after loading the view
         
-        let navigationBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: widthNavigationBar, height: 44))
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        
-        let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        navBarAppearance.backgroundColor = UIColor.init(hex: "#30669BFF")
-        
-        navigationBar.standardAppearance = navBarAppearance
-        navigationBar.scrollEdgeAppearance = navBarAppearance
-        
-        
-        self.view.addSubview(navigationBar)
-        view.bringSubviewToFront(navigationBar)
-        
-        
-        let navigationItem = UINavigationItem(title: "Navigation bar")
-        //        let doneBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: nil, action: #selector())
-        //        navigationItem.rightBarButtonItem = doneBtn
-        navigationBar.setItems([navigationItem], animated: false)
         
         addBubble()
         
@@ -82,7 +58,7 @@ class HomeViewController: UIViewController {
         let outgoingMessageLayer = CAShapeLayer()
         outgoingMessageLayer.path = bezierPath.cgPath
         outgoingMessageLayer.frame = CGRect(x: 115,
-                                            y: 163,
+                                            y: 45,
                                             width: 68,
                                             height: 34)
         outgoingMessageLayer.fillColor = UIColor(red: 0.09, green: 0.54, blue: 1, alpha: 1).cgColor
