@@ -35,11 +35,11 @@ class HomeViewController: UIViewController {
         navBar.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
         navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButton))
 
-        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
-        
-        cellAdd.isUserInteractionEnabled = false
+//        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
+//        cellAdd.isUserInteractionEnabled = false
         
         isEdit = true
+        cvCollectionView.reloadData()
     }
     
     @objc func cancelButton() {
@@ -51,16 +51,16 @@ class HomeViewController: UIViewController {
         self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
         
         self.selectedItem = clearSelectedItem
-        //setChecklist.checklistImg.image = UIImage(named: "CombinedShape")
         
         for editCell in cell {
             editCell.layer.backgroundColor = .none
         }
         
-        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
-        cellAdd.isUserInteractionEnabled = true
+//        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
+//        cellAdd.isUserInteractionEnabled = true
         
         self.isEdit = false
+        cvCollectionView.reloadData()
     }
     
     @objc func doneButton() {
@@ -96,24 +96,24 @@ class HomeViewController: UIViewController {
                 }
                 
                 self.isEdit = false
+                self.cvCollectionView.reloadData()
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             
-            let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
-            cellAdd.isUserInteractionEnabled = true
+//            let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
+//            cellAdd.isUserInteractionEnabled = true
             
             self.isEdit = false
+            cvCollectionView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        
-        
+
     }
 }
 
@@ -144,10 +144,16 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell?.content = content
             
-            if selectedItem.contains(indexPath.row){
-                cell?.backgroundColor = .lightGray
+            if isEdit == true {
+                if selectedItem.contains(indexPath.row){
+                    cell?.backgroundColor = .lightGray
+                    cell?.checklistImg.image = UIImage(named: "Checklist")
+                } else {
+                    cell?.backgroundColor = .clear
+                    cell?.checklistImg.image = UIImage(named: "CombinedShape")
+                }
             } else {
-                cell?.backgroundColor = .clear
+                cell?.checklistImg.image = nil
             }
             
             return cell!
@@ -183,7 +189,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         let size = CGSize(width: 140, height: 211)
         let thumbnail = generatePdfThumbnail(of: size, for: urlPicked!, atPage: 0)
         let fileName = urlPicked!.lastPathComponent
-        
         let date = Date()
         let format = DateFormatter()
         format.dateFormat = "dd-MM-yyyy"
@@ -210,22 +215,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     //view was cancelled
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    //ubah pdf ke string
-    func readPDFFile(){
-        if let pdf = PDFDocument(url: urlPicked!) {
-            let pageCount = pdf.pageCount
-            let documentContent = NSMutableAttributedString()
-            print("aw")
-            print(pageCount)
-            for i in 0 ..< pageCount {
-                guard let page = pdf.page(at: i) else { continue }
-                guard let pageContent = page.attributedString else { continue }
-                documentContent.append(pageContent)
-            }
-            print("\(documentContent)")
-        }
     }
     
     //menampilkan pdf file
