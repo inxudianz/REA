@@ -93,6 +93,9 @@ class HomeViewController: UIViewController {
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 self.selectedItem = clearSelectedItem
+                
+                self.isEdit = true
+                self.cvCollectionView.reloadData()
             }))
             
             present(alert, animated: true, completion: nil)
