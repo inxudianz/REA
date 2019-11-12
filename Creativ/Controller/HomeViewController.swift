@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func deleteButton() {
+//        let cell = cvCollectionView.visibleCells
         navBar.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
         navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButton))
 
@@ -43,7 +44,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func cancelButton() {
-        let cell = cvCollectionView.visibleCells
+//        let cell = cvCollectionView.visibleCells
         let clearSelectedItem = [Int]()
         
         self.navBar.leftBarButtonItem?.isEnabled = false
@@ -51,10 +52,6 @@ class HomeViewController: UIViewController {
         self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
         
         self.selectedItem = clearSelectedItem
-        
-        for editCell in cell {
-            editCell.layer.backgroundColor = .none
-        }
         
 //        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
 //        cellAdd.isUserInteractionEnabled = true
@@ -64,21 +61,20 @@ class HomeViewController: UIViewController {
     }
     
     @objc func doneButton() {
+//        let cell = cvCollectionView.visibleCells
+        let clearSelectedItem = [Int]()
+        
         if selectedItem.count == 0 {
             self.navBar.leftBarButtonItem?.isEnabled = false
             self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
             self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
         } else {
-            let cell = cvCollectionView.visibleCells
-            
-            
+
             let alert = UIAlertController(title: "Delete CV", message: "This CV will be deleted from iCloud Documents on all your devices.", preferredStyle: .actionSheet)
             
             alert.addAction(UIAlertAction(title: "Delete CV", style: .default, handler: { action in
-                print("Data Kehapus")
                 
                 for item in 0..<self.selectedItem.count {
-                    //print(self.selectedItem[item])
                     self.contents.removeAll{$0.cvName == self.tempContents[self.selectedItem[item]-1].cvName}
                 }
                 
@@ -91,15 +87,14 @@ class HomeViewController: UIViewController {
                 self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
                 self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
                 
-                for editCell in cell {
-                    editCell.layer.backgroundColor = .none
-                }
-                
                 self.isEdit = false
                 self.cvCollectionView.reloadData()
             }))
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                self.selectedItem = clearSelectedItem
+            }))
+            
             present(alert, animated: true, completion: nil)
             
 //            let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
@@ -153,7 +148,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     cell?.checklistImg.image = UIImage(named: "CombinedShape")
                 }
             } else {
-                cell?.checklistImg.image = nil
+                cell?.checklistImg.image = .none
+                cell?.backgroundColor = .clear
             }
             
             return cell!
