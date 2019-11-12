@@ -31,10 +31,6 @@ class ProcessingViewController: UIViewController {
     // Explanation: -onGoingRow merupakan instance onGoingProcess, yang berisi row yang sedang berjalan dan array proses yang telah selesai berjalan-
     var onGoingRow = onGoingProcess()
     
-//    var xOffSet: CGFloat = 0
-//    var yOffSet: CGFloat = 0
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -72,17 +68,6 @@ class ProcessingViewController: UIViewController {
         }
 
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -100,7 +85,6 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
         else {
             cell.setCellStatus(statusType: .idle)
         }
-        
         return cell
     }
     

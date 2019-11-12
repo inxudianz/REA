@@ -37,10 +37,11 @@ class OverviewViewController: UIViewController {
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 5
-        layout.minimumLineSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height)
+        layout.minimumInteritemSpacing = 4
+        layout.minimumLineSpacing = 4
+        layout.sectionInset = UIEdgeInsets(top: 2, left:
+            layout.minimumInteritemSpacing, bottom: 2, right: layout.minimumInteritemSpacing)
+        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 5/6)
         
         feedbackCollectionView.collectionViewLayout = layout
     }

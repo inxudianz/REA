@@ -14,9 +14,6 @@
 		1EE6D1C823741A6A00A07759 /* Processing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C723741A6A00A07759 /* Processing.storyboard */; };
 		1EE6D1CA2374376500A07759 /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C92374376500A07759 /* FeedbackCollectionViewCell.swift */; };
 		1EE6D1CC237511AE00A07759 /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */; };
-		1EE6D1D1237538AC00A07759 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CF237538AC00A07759 /* FeedbackView.swift */; };
-		1EE6D1D2237538AC00A07759 /* FeedbackView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D0237538AC00A07759 /* FeedbackView.xib */; };
-		1EE6D1D423753AA000A07759 /* CustomFeedbackCellShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */; };
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D42372D0CC00BCFC5C /* AppDelegate.swift */; };
 		920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */; };
@@ -60,9 +57,6 @@
 		1EE6D1C723741A6A00A07759 /* Processing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Processing.storyboard; sourceTree = "<group>"; };
 		1EE6D1C92374376500A07759 /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
 		1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
-		1EE6D1CF237538AC00A07759 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
-		1EE6D1D0237538AC00A07759 /* FeedbackView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackView.xib; sourceTree = "<group>"; };
-		1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFeedbackCellShape.swift; sourceTree = "<group>"; };
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920F63D12372D0CC00BCFC5C /* Creativ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Creativ.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,9 +149,6 @@
 				920F63DD2372D0CC00BCFC5C /* Creativ.xcdatamodeld */,
 				1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */,
 				1EE6D1C92374376500A07759 /* FeedbackCollectionViewCell.swift */,
-				1EE6D1CF237538AC00A07759 /* FeedbackView.swift */,
-				1EE6D1D0237538AC00A07759 /* FeedbackView.xib */,
-				1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */,
 				1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */,
 			);
 			path = Creativ;
@@ -313,7 +304,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				920F63E42372D0CE00BCFC5C /* LaunchScreen.storyboard in Resources */,
-				1EE6D1D2237538AC00A07759 /* FeedbackView.xib in Resources */,
 				1EE6D1C223741A0000A07759 /* Home.storyboard in Resources */,
 				920F63E12372D0CE00BCFC5C /* Assets.xcassets in Resources */,
 				1EE6D1C423741A3400A07759 /* Overview.storyboard in Resources */,
@@ -352,12 +342,10 @@
 				F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */,
 				1EE6D1CC237511AE00A07759 /* FeedbackModel.swift in Sources */,
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
-				1EE6D1D1237538AC00A07759 /* FeedbackView.swift in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
 				F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */,
 				920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */,
-				1EE6D1D423753AA000A07759 /* CustomFeedbackCellShape.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* FeedbackCollectionViewCell.swift in Sources */,
 				F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */,
 			);
