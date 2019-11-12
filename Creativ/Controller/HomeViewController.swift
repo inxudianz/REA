@@ -14,137 +14,151 @@ class HomeViewController: UIViewController {
     
     var contents: [HomeContent] = HomeContent.createHomeContent()
     var tempContents : [HomeContent] = HomeContent.createHomeContent()
-    var itemsSelected = [IndexPath]()
     var urlPicked: URL?
-    var cellColour = true
-    var isDelete = false
-    var tesDelete = false
-    var selectedItem = [Int]() // yang bener
+    var isEdit = false
+    var selectedItem = [Int]()
+    
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var cvCollectionView: UICollectionView! {
         didSet {
             cvCollectionView?.allowsMultipleSelection = true
         }
     }
+    
     @IBOutlet weak var navBar: UINavigationItem! {
         didSet {
             navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButton))
         }
     }
-    @IBAction func addNewBtn(_ sender: Any) {
-        importCV()
-    }
+    
     @objc func deleteButton() {
         navBar.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
         navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButton))
-        isDelete = true
+
+        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
+        
+        cellAdd.isUserInteractionEnabled = false
+        
+        isEdit = true
     }
+    
     @objc func cancelButton() {
         let cell = cvCollectionView.visibleCells
-        navBar.leftBarButtonItem?.isEnabled = false
-        navBar.leftBarButtonItem?.tintColor = UIColor.clear
-        navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButton))
+        let clearSelectedItem = [Int]()
+        
+        self.navBar.leftBarButtonItem?.isEnabled = false
+        self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
+        self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
+        
+        self.selectedItem = clearSelectedItem
+        //setChecklist.checklistImg.image = UIImage(named: "CombinedShape")
         
         for editCell in cell {
             editCell.layer.backgroundColor = .none
         }
         
-        isDelete = false
+        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
+        cellAdd.isUserInteractionEnabled = true
+        
+        self.isEdit = false
     }
+    
     @objc func doneButton() {
-//        itemsSelected.forEach {
-//            contents.remove(at: $0.row)
-//
-//        }
-//
-//        cvCollectionView.deleteItems(at: itemsSelected)
-//        itemsSelected.removeAll()
-        
-        let cell = cvCollectionView.visibleCells
-        
-//        if let selectedCells = cvCollectionView.indexPathsForSelectedItems {
-//          // 1
-//          let items = selectedCells.map { $0.item }.sorted().reversed()
-//          // 2
-//          for item in items {
-//              contents.remove(at: item)
-//          }
-//          // 3
-//          cvCollectionView.deleteItems(at: selectedCells)
-//            isDelete = false
-//        }
-        for item in 0..<selectedItem.count{
-            print(selectedItem[item])
-            contents.removeAll{$0.cvName == tempContents[selectedItem[item]].cvName}
+        if selectedItem.count == 0 {
+            self.navBar.leftBarButtonItem?.isEnabled = false
+            self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
+            self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
+        } else {
+            let cell = cvCollectionView.visibleCells
+            
+            
+            let alert = UIAlertController(title: "Delete CV", message: "This CV will be deleted from iCloud Documents on all your devices.", preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Delete CV", style: .default, handler: { action in
+                print("Data Kehapus")
+                
+                for item in 0..<self.selectedItem.count {
+                    //print(self.selectedItem[item])
+                    self.contents.removeAll{$0.cvName == self.tempContents[self.selectedItem[item]-1].cvName}
+                }
+                
+                self.selectedItem.removeAll()
+                self.tempContents = self.contents
+                self.cvCollectionView.reloadData()
+                
+                self.cvCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.navBar.leftBarButtonItem?.isEnabled = false
+                self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
+                self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
+                
+                for editCell in cell {
+                    editCell.layer.backgroundColor = .none
+                }
+                
+                self.isEdit = false
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+            
+            let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
+            cellAdd.isUserInteractionEnabled = true
+            
+            self.isEdit = false
         }
-        selectedItem.removeAll()
-        tempContents = contents
-        isDelete = false
-        cvCollectionView.reloadData()
-        cvCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-        navBar.leftBarButtonItem?.isEnabled = false
-        navBar.leftBarButtonItem?.tintColor = UIColor.clear
-        navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButton))
-        
-        for editCell in cell {
-            editCell.layer.backgroundColor = .none
-        }
-        
-        //isDelete = false
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-    }
-    func removeFromArray(indexPath : IndexPath){
-        for array in 0..<selectedItem.count{
-            if indexPath.row == selectedItem[array]{
-                selectedItem.remove(at: array)
-                self.cvCollectionView.reloadData()
-            }
-        }
+        
+        
     }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         return CGSize(width: 154.0, height: 277.0)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return contents.count
+        return contents.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVCollectionViewCell", for: indexPath) as? CVCollectionViewCell
         
-//        if indexPath.row == 0 {
-//            cell?.cvNameLbl.text = ""
-//            cell?.cvDateLbl.text = ""
-//        } else {
-        let content = contents[indexPath.row]
-        cell?.content = content
-        if selectedItem.contains(indexPath.row){
-            cell?.backgroundColor = .lightGray
+        if indexPath.item == 0 {
+            let cellAddCv = collectionView.dequeueReusableCell(withReuseIdentifier: "AddCollectionViewCell", for: indexPath) as? AddCollectionViewCell
+            
+            cellAddCv?.addNewCvBtn.tag = indexPath.row
+            cellAddCv?.addNewCvBtn.addTarget(self, action: #selector(importCV(sender:)), for: .touchUpInside)
+            
+            return cellAddCv!
         } else {
-            cell?.backgroundColor = .clear
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVCollectionViewCell", for: indexPath) as? CVCollectionViewCell
+            let content = contents[indexPath.row - 1]
+            
+            cell?.content = content
+            
+            if selectedItem.contains(indexPath.row){
+                cell?.backgroundColor = .lightGray
+            } else {
+                cell?.backgroundColor = .clear
+            }
+            
+            return cell!
         }
-//        }
         
-        return cell!
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if isDelete == true {
+        if isEdit == true {
             if !selectedItem.contains(indexPath.row){
                 selectedItem.append(indexPath.row)
-                print(indexPath.row)
                 collectionView.reloadData()
             } else {
                 selectedItem.removeAll{$0 == indexPath.row}
@@ -157,7 +171,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-
 extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate {
     
     //mengambil url file
@@ -166,13 +179,23 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             return
         }
         urlPicked = myURL
-        print(urlPicked)
-        //showPDFThumbnail()
-        //readPDFFile()
+        
+        let size = CGSize(width: 140, height: 211)
+        let thumbnail = generatePdfThumbnail(of: size, for: urlPicked!, atPage: 0)
+        let fileName = urlPicked!.lastPathComponent
+        
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yyyy"
+        let formattedDate = format.string(from: date)
+        
+        contents.append(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate))
+        tempContents = contents
+        cvCollectionView.reloadData()
         
     }
     
-    func importCV() {
+    @objc func importCV(sender: UIButton!) {
         let importMenu = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
         importMenu.delegate = self
         importMenu.modalPresentationStyle = .formSheet
@@ -184,23 +207,9 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         present(documentPicker, animated: true, completion: nil)
     }
     
+    //view was cancelled
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print("view was cancelled")
         dismiss(animated: true, completion: nil)
-    }
-    
-    //menampilkan pdf file
-    func generatePdfThumbnail(of thumbnailSize: CGSize , for documentUrl: URL, atPage pageIndex: Int) -> UIImage? {
-        let pdfDocument = PDFDocument(url: documentUrl)
-        let pdfDocumentPage = pdfDocument?.page(at: pageIndex)
-        return pdfDocumentPage?.thumbnail(of: thumbnailSize, for: PDFDisplayBox.trimBox)
-    }
-    
-    //menampilkan thumbnail pdf ke view controller
-    func showPDFThumbnail() {
-         let thumbnailSize = CGSize(width: 100, height: 100)
-         let thumbnail = generatePdfThumbnail(of: thumbnailSize, for: urlPicked!, atPage: 0)
-         thumbnailImage.image = thumbnail
     }
     
     //ubah pdf ke string
@@ -218,6 +227,14 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             print("\(documentContent)")
         }
     }
+    
+    //menampilkan pdf file
+    func generatePdfThumbnail(of thumbnailSize: CGSize , for documentUrl: URL, atPage pageIndex: Int) -> UIImage? {
+        let pdfDocument = PDFDocument(url: documentUrl)
+        let pdfDocumentPage = pdfDocument?.page(at: pageIndex)
+        return pdfDocumentPage?.thumbnail(of: thumbnailSize, for: PDFDisplayBox.trimBox)
+    }
+    
 }
 
 

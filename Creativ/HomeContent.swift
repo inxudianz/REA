@@ -10,19 +10,20 @@ import Foundation
 import UIKit
 
 struct HomeContent {
+    var cvId: UUID
     var cvImage: UIImage
     var cvName: String
     var cvCreated: String
     
     static func createHomeContent() -> [HomeContent] {
         
-        let Content1 = HomeContent(cvImage: UIImage(named: "Content1")!, cvName: "RobbyCV", cvCreated: "2019-11-01")
-        let Content2 = HomeContent(cvImage: UIImage(named: "Content1")!, cvName: "CaesarCV", cvCreated: "2019-11-01")
-        let Content3 = HomeContent(cvImage: UIImage(named: "Content1")!, cvName: "EvanCV", cvCreated: "2019-11-01")
-        let Content4 = HomeContent(cvImage: UIImage(named: "Content1")!, cvName: "OwenCV", cvCreated: "2019-11-01")
-        let Content5 = HomeContent(cvImage: UIImage(named: "Content1")!, cvName: "WillCV", cvCreated: "2019-11-01")
-        let Content6 = HomeContent(cvImage: UIImage(named: "Content1")!, cvName: "AgnesCV", cvCreated: "2019-11-01")
-        
-        return [Content1, Content2, Content3, Content4, Content5, Content6]
+        let content1 = HomeContent(cvId: UUID(), cvImage: UIImage(named: "Content1")!, cvName: "RobbyCV", cvCreated: "12-11-2019")
+        let content2 = HomeContent(cvId: UUID(), cvImage: UIImage(named: "Content1")!, cvName: "CaesarCV", cvCreated: "12-11-2019")
+        let content3 = HomeContent(cvId: UUID(), cvImage: UIImage(named: "Content1")!, cvName: "OwenCV", cvCreated: "12-11-2019")
+        let content4 = HomeContent(cvId: UUID(), cvImage: UIImage(named: "Content1")!, cvName: "EvanCV", cvCreated: "12-11-2019")
+        let content5 = HomeContent(cvId: UUID(), cvImage: UIImage(named: "Content1")!, cvName: "WillCV", cvCreated: "12-11-2019")
+        let content6 = HomeContent(cvId: UUID(), cvImage: UIImage(named: "Content1")!, cvName: "AgnesCV", cvCreated: "12-11-2019")
+    
+        return [content1, content2, content3, content4, content5, content6]
     }
 }

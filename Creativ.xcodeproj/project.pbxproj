@@ -33,6 +33,7 @@
 		F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC23237413890007FCC4 /* OverviewViewController.swift */; };
 		F51CEC322374292C0007FCC4 /* CVCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC312374292C0007FCC4 /* CVCollectionViewCell.swift */; };
 		F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */; };
+		F5EAE043237A7317006D8571 /* AddCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EAE042237A7317006D8571 /* AddCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		F51CEC23237413890007FCC4 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		F51CEC312374292C0007FCC4 /* CVCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVCollectionViewCell.swift; sourceTree = "<group>"; };
 		F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContent.swift; sourceTree = "<group>"; };
+		F5EAE042237A7317006D8571 /* AddCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 				F51CEC23237413890007FCC4 /* OverviewViewController.swift */,
 				920F63D82372D0CC00BCFC5C /* ViewController.swift */,
 				F51CEC312374292C0007FCC4 /* CVCollectionViewCell.swift */,
+				F5EAE042237A7317006D8571 /* AddCollectionViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				920F63CD2372D0CC00BCFC5C /* Sources */,
 				920F63CE2372D0CC00BCFC5C /* Frameworks */,
 				920F63CF2372D0CC00BCFC5C /* Resources */,
+				F5EAE03F237A5DA9006D8571 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -339,6 +343,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		F5EAE03F237A5DA9006D8571 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		920F63CD2372D0CC00BCFC5C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -352,6 +376,7 @@
 				F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */,
 				1EE6D1CC237511AE00A07759 /* FeedbackContent.swift in Sources */,
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
+				F5EAE043237A7317006D8571 /* AddCollectionViewCell.swift in Sources */,
 				1EE6D1D1237538AC00A07759 /* FeedbackView.swift in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
