@@ -146,6 +146,7 @@
 		920F63D32372D0CC00BCFC5C /* Creativ */ = {
 			isa = PBXGroup;
 			children = (
+				F50027B8237BF5D300E0B08F /* Model */,
 				920AF3312374271000F8FB7A /* Helper */,
 				F51CEC30237416270007FCC4 /* Controller */,
 				F51CEC2F237416000007FCC4 /* Storyboard */,
@@ -160,7 +161,6 @@
 				1EE6D1CF237538AC00A07759 /* FeedbackView.swift */,
 				1EE6D1D0237538AC00A07759 /* FeedbackView.xib */,
 				1EE6D1D323753AA000A07759 /* CustomFeedbackCellShape.swift */,
-				F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */,
 			);
 			path = Creativ;
 			sourceTree = "<group>";
@@ -181,6 +181,14 @@
 				920F63FB2372D0CE00BCFC5C /* Info.plist */,
 			);
 			path = CreativUITests;
+			sourceTree = "<group>";
+		};
+		F50027B8237BF5D300E0B08F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F51CEC2F237416000007FCC4 /* Storyboard */ = {

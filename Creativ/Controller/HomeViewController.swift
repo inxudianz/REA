@@ -32,19 +32,14 @@ class HomeViewController: UIViewController {
     }
     
     @objc func deleteButton() {
-//        let cell = cvCollectionView.visibleCells
         navBar.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
         navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButton))
-
-//        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
-//        cellAdd.isUserInteractionEnabled = false
         
         isEdit = true
         cvCollectionView.reloadData()
     }
     
     @objc func cancelButton() {
-//        let cell = cvCollectionView.visibleCells
         let clearSelectedItem = [Int]()
         
         self.navBar.leftBarButtonItem?.isEnabled = false
@@ -53,21 +48,20 @@ class HomeViewController: UIViewController {
         
         self.selectedItem = clearSelectedItem
         
-//        let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
-//        cellAdd.isUserInteractionEnabled = true
-        
         self.isEdit = false
         cvCollectionView.reloadData()
     }
     
     @objc func doneButton() {
-//        let cell = cvCollectionView.visibleCells
         let clearSelectedItem = [Int]()
         
         if selectedItem.count == 0 {
             self.navBar.leftBarButtonItem?.isEnabled = false
             self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
             self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
+            
+            self.isEdit = false
+            cvCollectionView.reloadData()
         } else {
 
             let alert = UIAlertController(title: "Delete CV", message: "This CV will be deleted from iCloud Documents on all your devices.", preferredStyle: .actionSheet)
@@ -99,9 +93,6 @@ class HomeViewController: UIViewController {
             }))
             
             present(alert, animated: true, completion: nil)
-            
-//            let cellAdd = cvCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! AddCollectionViewCell
-//            cellAdd.isUserInteractionEnabled = true
             
             self.isEdit = false
             cvCollectionView.reloadData()
@@ -135,6 +126,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cellAddCv?.addNewCvBtn.tag = indexPath.row
             cellAddCv?.addNewCvBtn.addTarget(self, action: #selector(importCV(sender:)), for: .touchUpInside)
             
+            if isEdit == true {
+                cellAddCv?.isUserInteractionEnabled = false
+            } else {
+                cellAddCv?.isUserInteractionEnabled = true
+            }
+            
             return cellAddCv!
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVCollectionViewCell", for: indexPath) as? CVCollectionViewCell
@@ -154,6 +151,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell?.checklistImg.image = .none
                 cell?.backgroundColor = .clear
             }
+            
             
             return cell!
         }
@@ -193,7 +191,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         format.dateFormat = "dd-MM-yyyy"
         let formattedDate = format.string(from: date)
         
-        contents.append(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate))
+        contents.insert(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate), at: 0)
         tempContents = contents
         cvCollectionView.reloadData()
         
