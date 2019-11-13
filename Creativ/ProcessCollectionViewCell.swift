@@ -33,7 +33,7 @@ class ProcessCollectionViewCell: UICollectionViewCell {
         switch statusType {
         case .idle:
             print("\(String(describing: processLabel.text)) \(statusType)")
-            processLabel.alpha = 0.5
+            processLabel.alpha = 0.4
             //Set indicator view to nothing
         case .working:
             print("\(String(describing: processLabel.text)) \(statusType)")
@@ -41,7 +41,7 @@ class ProcessCollectionViewCell: UICollectionViewCell {
             // Set indicator view to indicator view image
         case .done:
             print("\(String(describing: processLabel.text)) \(statusType)")
-            processLabel.alpha = 0.5
+            processLabel.alpha = 0.3
             // Set indicator view to checkmark
             break
         }

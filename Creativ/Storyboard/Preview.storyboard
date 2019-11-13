@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULy-Wv-uRC">
-                                <rect key="frame" x="18" y="354" width="376" height="542"/>
+                                <rect key="frame" x="20" y="354" width="374" height="542"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="10" id="Xm7-HY-T1Z">
@@ -33,7 +33,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="feedbackCollectionViewCell" id="CPi-xU-Ijy" customClass="FeedbackCollectionViewCell" customModule="Creativ" customModuleProvider="target">
-                                        <rect key="frame" x="3" y="2" width="370" height="516"/>
+                                        <rect key="frame" x="2" y="2" width="370" height="516"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jMy-YE-w70" customClass="CustomFeedbackShape" customModule="Creativ" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="516"/>

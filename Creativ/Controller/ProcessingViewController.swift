@@ -46,18 +46,24 @@ class ProcessingViewController: UIViewController {
         
         var cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
         
-        if onGoingRow.rowIndexPath!.row < processDetails.count - 1 {
-            onGoingRow.doneArray?.append(onGoingRow.rowIndexPath?.row ?? -1)
-            cell?.setCellStatus(statusType: .done)
-            
-            onGoingRow.rowIndexPath?.row += 1
-            cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
-            cell?.setCellStatus(statusType: .working)
-            
-            processCollectionView.scrollToItem(at: onGoingRow.rowIndexPath!, at: .centeredVertically, animated: true)
+        guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
+        onGoingRow.doneArray?.append(onGoingIndex.row)
+        cell?.setCellStatus(statusType: .done)
+        print("Done: \(onGoingRow.rowIndexPath?.row)")
+        
+        onGoingRow.rowIndexPath?.row += 1
+        cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
+        cell?.setCellStatus(statusType: .working)
+        print("Working: \(onGoingRow.rowIndexPath?.row)")
+        
+        if onGoingRow.rowIndexPath!.row + 2 < processDetails.count {
+            processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row + 1, section: 0), at: .bottom, animated: true)
+        }
+        else if onGoingRow.rowIndexPath!.row < processDetails.count{
+             processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 2, section: 0), at: .top, animated: true)
         }
         else {
-            if !(onGoingRow.doneArray?.contains(onGoingRow.rowIndexPath!.row))! {
+            if onGoingRow.doneArray!.count < processDetails.count {
                 onGoingRow.doneArray?.append(onGoingRow.rowIndexPath!.row)
                 cell?.setCellStatus(statusType: .done)
             }
@@ -90,15 +96,17 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 1
-        layout.minimumLineSpacing = 1
         layout.sectionInset = UIEdgeInsets(
-            top: (processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!)?.frame.size.height ?? processCollectionView.frame.height / 2),
+            top: layout.itemSize.height * 2,
             left: processCollectionView.frame.size.width / 4,
-            bottom: (processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!)?.frame.size.height ?? processCollectionView.frame.height / 4),
+            bottom: layout.itemSize.height * 2,
             right: processCollectionView.frame.size.width / 4)
         layout.itemSize = CGSize(width: self.processCollectionView.frame.width, height: processCollectionView.frame.height / 4)
+        layout.minimumLineSpacing = 1
+        layout.minimumInteritemSpacing = layout.itemSize.width
         
+        processCollectionView.contentInsetAdjustmentBehavior = .always
+        processCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         processCollectionView.collectionViewLayout = layout
     }
     

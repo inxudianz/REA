@@ -73,7 +73,6 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
             case "Skills":
                 colorView.layer.borderColor = UIColor(red: CGFloat(65/255), green: CGFloat(145/255), blue: CGFloat(30/255), alpha: 0.2).cgColor
             default:
-                print("Bangsad")
                 colorView.layer.borderColor = UIColor(red: CGFloat(0/255), green: CGFloat(0/255), blue: CGFloat(0/255), alpha: 0.2).cgColor
                 break
         }

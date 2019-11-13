@@ -10,7 +10,15 @@ import UIKit
 
 class OverviewViewController: UIViewController {
 
-    @IBOutlet weak var overviewNavigationBar: UINavigationItem!
+    @IBOutlet weak var overviewNavigationBar: UINavigationItem! {
+        didSet {
+            let standard = UINavigationBarAppearance()
+            let button = UIBarButtonItemAppearance(style: .plain)
+            standard.buttonAppearance = button
+
+            overviewNavigationBar.backBarButtonItem = UIBarButtonItem(title: "All Resume", style: .plain, target: self, action: #selector(backToHome))
+        }
+    }
         
     // Images
     @IBOutlet weak var mascotSprite: UIImageView!
@@ -22,40 +30,24 @@ class OverviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        overviewNavigationBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneReview))
 
         // Do any additional setup after loading the view.
         setCollectionViewLayout()
-        
-        
         feedbackContents.createFeedbackSection()
     }
     
     // Unwind back to the All Resume Page
-    @objc func doneReview(_ unwindSegue: UIStoryboardSegue) {}
+    @objc func backToHome(_ unwindSegue: UIStoryboardSegue) { print("back") }
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 4
-        layout.minimumLineSpacing = 4
+        layout.minimumInteritemSpacing = 6
+        layout.minimumLineSpacing = layout.minimumInteritemSpacing * 2
         layout.sectionInset = UIEdgeInsets(top: 2, left:
             layout.minimumInteritemSpacing, bottom: 2, right: layout.minimumInteritemSpacing)
-        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 5/6)
-        
+        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 9/10)
         feedbackCollectionView.collectionViewLayout = layout
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 
@@ -68,7 +60,14 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
        let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "feedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
        
         
-       let cellFeedback = Feedbacks(image: feedbackContents.images[indexPath.row], title: feedbackContents.titles[indexPath.row], commentedText: feedbackContents.commentedTexts[indexPath.row], comment: feedbackContents.comments[indexPath.row], recommendation: feedbackContents.recommendations[indexPath.row])
+       let cellFeedback = Feedbacks(image: feedbackContents.images[indexPath.row], title: feedbackContents.titles[indexPath.row], overviewText: feedbackContents.overviewTexts[indexPath.row], commentedText: feedbackContents.commentedTexts[indexPath.row], comment: feedbackContents.comments[indexPath.row], recommendation: feedbackContents.recommendations[indexPath.row])
+       
+       print(cellFeedback.title)
+       
+       cell.setColor(colorView: &cell.feedbackView)
+       cell.setColor(colorView: &cell.notchView)
+       cell.setColor(colorView: &cell.commentView)
+       cell.setupUI()
 
        cell.displayFeedbackContent(feedback: cellFeedback)
        
