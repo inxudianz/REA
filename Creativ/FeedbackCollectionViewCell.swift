@@ -12,8 +12,16 @@ import UIKit
 class FeedbackCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var feedbackGlyph: UIImageView!
-    @IBOutlet weak var feedbackSegment: UILabel!
-    @IBOutlet var feedbackOverview: UILabel!
+    @IBOutlet weak var feedbackSegment: UILabel! {
+        didSet {
+            feedbackSegment.textColor = UIColor.white
+        }
+    }
+    @IBOutlet var feedbackOverview: UILabel! {
+        didSet {
+            feedbackOverview.textAlignment = .left
+        }
+    }
     @IBOutlet weak var feedbackCommentedContent: UILabel!
     @IBOutlet var feedbackComment: UILabel!
     @IBOutlet var feedbackRecommendation: UILabel!
@@ -56,7 +64,7 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     
     func setColor(colorView: inout UIView) {
         colorView.layer.borderWidth = 2.0
-        colorView.layer.borderColor = UIColor(red: 0.255, green: 0.118, blue: 0.863, alpha: 1.0).cgColor
+        colorView.layer.borderColor = UIColor(red: 0.294, green: 0.588, blue: 0.863, alpha: 1.0).cgColor
         
         /*
          switch feedbackSegment.text {

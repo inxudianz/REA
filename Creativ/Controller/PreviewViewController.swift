@@ -35,10 +35,10 @@ class PreviewViewController: UIViewController {
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 6
+        layout.minimumInteritemSpacing = 4
         layout.minimumLineSpacing = layout.minimumInteritemSpacing * 2
-        layout.sectionInset = UIEdgeInsets(top: 2, left:
-            layout.minimumInteritemSpacing, bottom: 2, right: layout.minimumInteritemSpacing)
+        layout.sectionInset = UIEdgeInsets(top: 0, left:
+            layout.minimumInteritemSpacing, bottom: 0, right: layout.minimumInteritemSpacing)
         layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 9/10)
         feedbackCollectionView.collectionViewLayout = layout
     }
