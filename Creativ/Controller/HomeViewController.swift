@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     var myData: Data!
 
     @IBOutlet weak var testImg: UIImageView!
+    var name: String?
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var cvCollectionView: UICollectionView!
     @IBOutlet weak var navBar: UINavigationItem! {
@@ -87,7 +88,6 @@ class HomeViewController: UIViewController {
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 self.selectedItem = clearSelectedItem
-                
                 self.isEdit = true
                 self.cvCollectionView.reloadData()
             }))
@@ -102,7 +102,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
-        self.navigationController?.navigationItem.rightBarButtonItem
         cvCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         cvCollectionView.register(UINib(nibName: "AddNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddNewCollectionViewCellID")
         cvCollectionView.register(UINib(nibName: "CVNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CVNewCollectionViewCellID")
@@ -117,6 +116,19 @@ class HomeViewController: UIViewController {
         
 
     }
+    
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
+        //let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToOverview" {
+            if let overviewViewController = segue.destination as? OverviewViewController {
+                    overviewViewController.nama = name
+            }
+        }
+    }
         
 }
 
@@ -126,9 +138,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return 1
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contents.count + 1
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
@@ -188,6 +204,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 collectionView.reloadData()
             }
         } else {
+            let content = contents[indexPath.row - 1]
+            name =
+                content.cvName
+            print(name)
+            performSegue(withIdentifier: "goToOverview", sender: self)
             print("Delete button not selected")
         }
     }
@@ -252,6 +273,8 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         
         tempContents = contents
         cvCollectionView.reloadData()
+        performSegue(withIdentifier: "gotoprocess", sender: self)
+
         
     }
     

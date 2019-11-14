@@ -10,11 +10,6 @@ import UIKit
 
 class PreviewViewController: UIViewController {
 
-    @IBOutlet weak var previewNavigationBar: UINavigationItem! {
-        didSet {
-            previewNavigationBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneReview))
-        }
-    }
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
     let feedbackDatas = FeedbackData()
@@ -22,6 +17,9 @@ class PreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneReview))
+        self.navigationItem.title = "Feedback"
         feedbackCollectionView.delegate = self
         feedbackCollectionView.register(UINib(nibName: "FeedbackHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackHeaderCollectionReusableView")
         feedbackCollectionView.register(UINib(nibName: "FeedbackCollectionViewCell", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackCollectionViewCell")
@@ -32,7 +30,9 @@ class PreviewViewController: UIViewController {
     }
     
     // Unwind back to the All Resume Page
-    @objc func doneReview(_ unwindSegue: UIStoryboardSegue) {}
+    @objc func doneReview(_ unwindSegue: UIStoryboardSegue) {
+        performSegue(withIdentifier: "unwindToHome", sender: self)
+    }
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
