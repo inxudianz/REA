@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Content" representedClassName="Content" syncable="YES" codeGenerationType="class">
-        <attribute name="education" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="identity" optional="YES" attributeType="String"/>
-        <attribute name="organization" optional="YES" attributeType="String"/>
-        <attribute name="skill" optional="YES" attributeType="String"/>
-        <attribute name="summary" optional="YES" attributeType="String"/>
-        <attribute name="work" optional="YES" attributeType="String"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Feedback" inverseName="relationship" inverseEntity="Feedback"/>
-    </entity>
     <entity name="Feedback" representedClassName="Feedback" syncable="YES" codeGenerationType="class">
-        <attribute name="feedback" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Content" inverseName="relationship" inverseEntity="Content"/>
-        <relationship name="relationship1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Wording" inverseName="relationship" inverseEntity="Wording"/>
+        <relationship name="hasManyContent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FeedbackContent" inverseName="hasFeedback" inverseEntity="FeedbackContent"/>
+        <relationship name="hasResume" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Resume" inverseName="hasFeedback" inverseEntity="Resume"/>
+    </entity>
+    <entity name="FeedbackContent" representedClassName="FeedbackContent" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="hasFeedback" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Feedback" inverseName="hasManyContent" inverseEntity="Feedback"/>
+        <relationship name="hasManyDetail" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FeedbackContentDetail" inverseName="hasContent" inverseEntity="FeedbackContentDetail"/>
+    </entity>
+    <entity name="FeedbackContentDetail" representedClassName="FeedbackContentDetail" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="hasContent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FeedbackContent" inverseName="hasManyDetail" inverseEntity="FeedbackContent"/>
     </entity>
     <entity name="Resume" representedClassName="Resume" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="filePath" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="thumbnailImage" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="Wording" representedClassName="Wording" syncable="YES" codeGenerationType="class">
-        <attribute name="grammar" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="vocabulary" optional="YES" attributeType="String"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Feedback" inverseName="relationship1" inverseEntity="Feedback"/>
+        <relationship name="hasFeedback" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Feedback" inverseName="hasResume" inverseEntity="Feedback"/>
     </entity>
     <elements>
         <element name="Resume" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Feedback" positionX="-54" positionY="27" width="128" height="118"/>
-        <element name="Content" positionX="-36" positionY="36" width="128" height="163"/>
-        <element name="Wording" positionX="-18" positionY="45" width="128" height="103"/>
+        <element name="FeedbackContent" positionX="-54" positionY="45" width="128" height="133"/>
+        <element name="FeedbackContentDetail" positionX="-45" positionY="54" width="128" height="118"/>
+        <element name="Feedback" positionX="-36" positionY="27" width="128" height="118"/>
     </elements>
 </model>
