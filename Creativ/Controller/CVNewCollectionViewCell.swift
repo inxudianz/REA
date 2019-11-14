@@ -1,14 +1,15 @@
 //
-//  CVCollectionViewCell.swift
+//  CVNewCollectionViewCell.swift
 //  Creativ
 //
-//  Created by Robby Awalul Meviansyah Abdillah on 07/11/19.
+//  Created by Robby Awalul Meviansyah Abdillah on 13/11/19.
 //  Copyright © 2019 William Inx. All rights reserved.
 //
 
 import UIKit
 
-class CVCollectionViewCell: UICollectionViewCell {
+class CVNewCollectionViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var cvThumbnailImage: UIImageView!
     @IBOutlet weak var cvNameLbl: UILabel!
     @IBOutlet weak var cvDateLbl: UILabel!

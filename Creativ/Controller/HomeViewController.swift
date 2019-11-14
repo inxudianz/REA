@@ -19,12 +19,7 @@ class HomeViewController: UIViewController {
     var selectedItem = [Int]()
     
     @IBOutlet weak var thumbnailImage: UIImageView!
-    @IBOutlet weak var cvCollectionView: UICollectionView! {
-        didSet {
-            cvCollectionView?.allowsMultipleSelection = true
-        }
-    }
-    
+    @IBOutlet weak var cvCollectionView: UICollectionView!
     @IBOutlet weak var navBar: UINavigationItem! {
         didSet {
             navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButton))
@@ -102,26 +97,51 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
+        cvCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
+        //cvCollectionView.register(HomeCollectionReusableView.self, forCellWithReuseIdentifier: "HomeCollectionReusableViewID")
+        
+        cvCollectionView.register(UINib(nibName: "AddNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddNewCollectionViewCellID")
+        cvCollectionView.register(UINib(nibName: "CVNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CVNewCollectionViewCellID")
+        
     }
 }
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: 154.0, height: 277.0)
-        
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        return CGSize(width: 154.0, height: 277.0)
+//
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView,
+//                        layout collectionViewLayout: UICollectionViewLayout,
+//                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+//
+//        return CGSize(width: collectionView.bounds.width, height: 100)
+//    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contents.count + 1
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
+            //headerView.reaImageView.image = UIImage(named: "Rea_Home")
+            print("OOOOOO")
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.item == 0 {
-            let cellAddCv = collectionView.dequeueReusableCell(withReuseIdentifier: "AddCollectionViewCell", for: indexPath) as? AddCollectionViewCell
+            let cellAddCv = collectionView.dequeueReusableCell(withReuseIdentifier: "AddNewCollectionViewCellID", for: indexPath) as? AddNewCollectionViewCell
             
             cellAddCv?.addNewCvBtn.tag = indexPath.row
             cellAddCv?.addNewCvBtn.addTarget(self, action: #selector(importCV(sender:)), for: .touchUpInside)
@@ -134,7 +154,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             return cellAddCv!
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVCollectionViewCell", for: indexPath) as? CVCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVNewCollectionViewCellID", for: indexPath) as? CVNewCollectionViewCell
             let content = contents[indexPath.row - 1]
             
             cell?.content = content
@@ -171,6 +191,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             print("Delete button not selected")
         }
     }
+    
     
 }
 
