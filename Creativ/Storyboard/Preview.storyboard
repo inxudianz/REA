@@ -16,20 +16,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULy-Wv-uRC">
-                                <rect key="frame" x="20" y="181" width="374" height="715"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULy-Wv-uRC">
+                                <rect key="frame" x="20" y="0.0" width="374" height="793"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="10" id="Xm7-HY-T1Z">
                                     <size key="itemSize" width="370" height="520"/>
                                     <size key="estimatedItemSize" width="75" height="75"/>
-                                    <size key="headerReferenceSize" width="50" height="108"/>
+                                    <size key="headerReferenceSize" width="50" height="193"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedbackCollectionViewCell" id="CPi-xU-Ijy" customClass="FeedbackCollectionViewCell" customModule="Creativ" customModuleProvider="target">
-                                        <rect key="frame" x="2" y="110" width="370" height="516"/>
+                                        <rect key="frame" x="2" y="195" width="370" height="516"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jMy-YE-w70" customClass="CustomFeedbackShape" customModule="Creativ" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="516"/>
@@ -133,7 +133,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="" id="yDy-b0-kEQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="108"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="193"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
@@ -153,7 +153,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="afs-dr-cBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="KkH-0l-63A" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2668" y="1760"/>
+            <point key="canvasLocation" x="2666.666666666667" y="1759.8214285714284"/>
         </scene>
     </scenes>
 </document>
