@@ -101,7 +101,7 @@
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="vLt-YY-Uk9" id="Kdk-O6-aIV"/>
-                        <segue destination="vHw-rH-gcK" kind="show" identifier="goToHome" id="pn5-Sg-vpy"/>
+                        <segue destination="vHw-rH-gcK" kind="presentation" identifier="goToHome" modalPresentationStyle="fullScreen" id="pn5-Sg-vpy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLU-Cc-dfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

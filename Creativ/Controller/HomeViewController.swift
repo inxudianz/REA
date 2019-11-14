@@ -192,7 +192,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         } else {
             let content = contents[indexPath.row - 1]
-            name = content.cvName
+            name =
+                content.cvName
             print(name)
             performSegue(withIdentifier: "goToOverview", sender: self)
             print("Delete button not selected")

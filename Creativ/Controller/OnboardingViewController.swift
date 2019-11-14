@@ -23,7 +23,6 @@ class OnboardingViewController: UIViewController {
     
     @IBAction func continueButton(_ sender: Any) {
         performSegue(withIdentifier: "goToHome", sender: self)
-
     }
     
     /*
