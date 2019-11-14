@@ -10,12 +10,11 @@ import UIKit
 
 class PreviewViewController: UIViewController {
 
-    @IBOutlet weak var previewNavigationBar: UINavigationItem!
-    
-    // Images
-    @IBOutlet weak var mascotSprite: UIImageView!
-    @IBOutlet weak var bubbleMessage: UIView!
-    
+    @IBOutlet weak var previewNavigationBar: UINavigationItem! {
+        didSet {
+            previewNavigationBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneReview))
+        }
+    }
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
     let feedbackContents = FeedbackContent()
@@ -23,7 +22,9 @@ class PreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        previewNavigationBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneReview))
+        feedbackCollectionView.delegate = self
+        feedbackCollectionView.register(UINib(nibName: "FeedbackHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackHeaderCollectionReusableView")
+        feedbackCollectionView.register(UINib(nibName: "FeedbackCollectionViewCell", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackCollectionViewCell")
 
         // Do any additional setup after loading the view.
         setCollectionViewLayout()
@@ -37,33 +38,41 @@ class PreviewViewController: UIViewController {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 4
         layout.minimumLineSpacing = layout.minimumInteritemSpacing * 2
-        layout.sectionInset = UIEdgeInsets(top: 0, left:
-            layout.minimumInteritemSpacing, bottom: 0, right: layout.minimumInteritemSpacing)
-        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 9/10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 7/10)
         feedbackCollectionView.collectionViewLayout = layout
     }
 
 }
 
-extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return feedbackContents.titles.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "feedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
-        
+        print("setopbiasa")
+        let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "FeedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
         let cellFeedback = Feedbacks(image: feedbackContents.images[indexPath.row], title: feedbackContents.titles[indexPath.row], overviewText: feedbackContents.overviewTexts[indexPath.row], commentedText: feedbackContents.commentedTexts[indexPath.row], comment: feedbackContents.comments[indexPath.row], recommendation: feedbackContents.recommendations[indexPath.row])
-        
-        print(cellFeedback.title)
         
         cell.setColor(colorView: &cell.feedbackView)
         cell.setColor(colorView: &cell.notchView)
         cell.setColor(colorView: &cell.commentView)
         cell.setupUI()
-
         cell.displayFeedbackContent(feedback: cellFeedback)
 
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) ->
+        UICollectionReusableView {
+        if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FeedbackHeaderCollectionReusableView", for: indexPath) as? UICollectionReusableView {
+            return headerView
+        }
+        return UICollectionReusableView()
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0))?.frame.height ?? collectionView.frame.height / 5)
     }
 }

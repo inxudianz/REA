@@ -32,15 +32,15 @@ class ProcessCollectionViewCell: UICollectionViewCell {
     func setStatusIndicator(statusType: StatusType) {
         switch statusType {
         case .idle:
-            print("\(String(describing: processLabel.text)) \(statusType)")
+           // print("\(String(describing: processLabel.text)) \(statusType)")
             processLabel.alpha = 0.4
             //Set indicator view to nothing
         case .working:
-            print("\(String(describing: processLabel.text)) \(statusType)")
+           // print("\(String(describing: processLabel.text)) \(statusType)")
             processLabel.alpha = 1.0
             // Set indicator view to indicator view image
         case .done:
-            print("\(String(describing: processLabel.text)) \(statusType)")
+            // print("\(String(describing: processLabel.text)) \(statusType)")
             processLabel.alpha = 0.3
             // Set indicator view to checkmark
             break

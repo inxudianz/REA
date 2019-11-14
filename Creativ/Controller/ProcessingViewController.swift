@@ -49,12 +49,10 @@ class ProcessingViewController: UIViewController {
         guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
         onGoingRow.doneArray?.append(onGoingIndex.row)
         cell?.setCellStatus(statusType: .done)
-        print("Done: \(onGoingRow.rowIndexPath?.row)")
         
         onGoingRow.rowIndexPath?.row += 1
         cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
         cell?.setCellStatus(statusType: .working)
-        print("Working: \(onGoingRow.rowIndexPath?.row)")
         
         if onGoingRow.rowIndexPath!.row + 2 < processDetails.count {
             processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row + 1, section: 0), at: .bottom, animated: true)

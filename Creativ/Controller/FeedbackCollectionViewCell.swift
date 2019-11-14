@@ -2,15 +2,14 @@
 //  FeedbackCollectionViewCell.swift
 //  Creativ
 //
-//  Created by Owen Prasetya on 07/11/19.
+//  Created by Owen Prasetya on 13/11/19.
 //  Copyright © 2019 William Inx. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class FeedbackCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet var feedbackGlyph: UIImageView!
     @IBOutlet weak var feedbackSegment: UILabel! {
         didSet {
@@ -39,6 +38,11 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
         didSet {
             commentView.clipsToBounds = true
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
     }
     
     func displayFeedbackContent(feedback: Feedbacks) {
