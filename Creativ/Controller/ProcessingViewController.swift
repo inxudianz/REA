@@ -9,7 +9,7 @@
 import UIKit
 
 
-class onGoingProcess {
+struct onGoingProcess {
     var rowIndexPath: IndexPath?
     var doneArray: [Int]?
 }
@@ -35,9 +35,7 @@ class ProcessingViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        onGoingRow.rowIndexPath = IndexPath(row: 0, section: processCollectionView.numberOfSections - 1)
-        onGoingRow.doneArray = []
-        
+        onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
     }
 
