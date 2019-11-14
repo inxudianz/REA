@@ -13,7 +13,7 @@
             <objects>
                 <viewController storyboardIdentifier="PreviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VgA-y5-qoY" customClass="PreviewViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2QF-wx-iQ6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULy-Wv-uRC">
@@ -140,25 +140,20 @@
                                     <outlet property="dataSource" destination="VgA-y5-qoY" id="mXB-zL-6Cr"/>
                                 </connections>
                             </collectionView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qiy-4v-Vam">
-                                <rect key="frame" x="0.0" y="33" width="414" height="96"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Feedback" id="7jB-KV-nlo"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="2sk-PE-J7O"/>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="feedbackCollectionView" destination="ULy-Wv-uRC" id="yCM-YM-YEM"/>
-                        <outlet property="previewNavigationBar" destination="7jB-KV-nlo" id="I6t-pZ-jf1"/>
+                        <segue destination="KkH-0l-63A" kind="unwind" identifier="unwindToHome" unwindAction="unwindToHome:" id="cR6-ZN-8xt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="afs-dr-cBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="KkH-0l-63A" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3334.7826086956525" y="1723.6607142857142"/>
+            <point key="canvasLocation" x="2668" y="1760"/>
         </scene>
     </scenes>
 </document>

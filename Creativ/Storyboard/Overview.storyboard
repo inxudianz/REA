@@ -13,7 +13,7 @@
             <objects>
                 <viewController storyboardIdentifier="OverviewViewController" id="oFC-x5-uTM" customClass="OverviewViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hwj-QE-4nd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VbZ-y5-QTD">
@@ -141,21 +141,13 @@
                                     <outlet property="delegate" destination="oFC-x5-uTM" id="fza-E3-uP5"/>
                                 </connections>
                             </collectionView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFH-Vn-O4e">
-                                <rect key="frame" x="0.0" y="33" width="414" height="96"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Feedback" id="ZBt-iL-xc3"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="2ge-I4-wab"/>
                     </view>
-                    <navigationItem key="navigationItem" id="lCq-Gu-gS3"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="feedbackCollectionView" destination="VbZ-y5-QTD" id="vR0-Nr-oce"/>
-                        <outlet property="overviewNavigationBar" destination="ZBt-iL-xc3" id="Hfs-hw-HtL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzk-2b-p12" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

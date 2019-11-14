@@ -11,7 +11,7 @@
         <!--Processing View Controller-->
         <scene sceneID="xRf-h2-AnL">
             <objects>
-                <viewController storyboardIdentifier="ProcessingViewController" id="zJk-Gt-RMs" customClass="ProcessingViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProcessingViewController" modalPresentationStyle="fullScreen" id="zJk-Gt-RMs" customClass="ProcessingViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ffg-tm-mIz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,12 +81,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="QxG-eb-pos"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3ZU-kJ-Dhv"/>
                     <connections>
                         <outlet property="bubbleMessage" destination="P8D-pU-JfV" id="hJD-JY-Bkq"/>
                         <outlet property="mascotSpriteImage" destination="h2K-Fz-rLF" id="2j5-ly-FZO"/>
                         <outlet property="processCollectionView" destination="Hlb-bF-zAi" id="nqh-08-Hck"/>
-                        <segue destination="Poz-sd-nb7" kind="presentation" identifier="goToOverview" modalPresentationStyle="fullScreen" id="kLd-Uw-qSt"/>
+                        <segue destination="Poz-sd-nb7" kind="show" identifier="goToOverview" id="kLd-Uw-qSt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jgi-l6-iHX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -97,7 +96,7 @@
         <scene sceneID="cma-XZ-EZP">
             <objects>
                 <viewControllerPlaceholder storyboardName="Preview" id="Poz-sd-nb7" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="eJ5-yF-mYT"/>
+                    <navigationItem key="navigationItem" id="eJ5-yF-mYT" customClass="NavigationItem" customModule="Creativ" customModuleProvider="target"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yo0-cv-9Q7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

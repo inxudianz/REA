@@ -10,15 +10,7 @@ import UIKit
 
 class OverviewViewController: UIViewController {
 
-    @IBOutlet weak var overviewNavigationBar: UINavigationItem! {
-        didSet {
-            let standard = UINavigationBarAppearance()
-            let button = UIBarButtonItemAppearance(style: .plain)
-            standard.buttonAppearance = button
-
-            overviewNavigationBar.backBarButtonItem = UIBarButtonItem(title: "All Resume", style: .plain, target: self, action: #selector(backToHome))
-        }
-    }
+    var nama: String?
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
     let feedbackContents = FeedbackContent()
@@ -26,6 +18,7 @@ class OverviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = nama
         feedbackCollectionView.delegate = self
         feedbackCollectionView.register(UINib(nibName: "FeedbackHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackHeaderCollectionReusableView")
         feedbackCollectionView.register(UINib(nibName: "FeedbackCollectionViewCell", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackCollectionViewCell")
@@ -35,8 +28,6 @@ class OverviewViewController: UIViewController {
         feedbackContents.createFeedbackSection()
     }
     
-    // Unwind back to the All Resume Page
-    @objc func backToHome(_ unwindSegue: UIStoryboardSegue) { print("back") }
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -47,6 +38,8 @@ class OverviewViewController: UIViewController {
         layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 7/10)
         feedbackCollectionView.collectionViewLayout = layout
     }
+    
+    
 }
 
 

@@ -10,13 +10,17 @@
         <!--Home Navigation View Controller-->
         <scene sceneID="pcb-7a-NLp">
             <objects>
-                <navigationController storyboardIdentifier="HomeNavigationViewController" modalPresentationStyle="fullScreen" interfaceStyle="light" id="omJ-kh-LUx" customClass="HomeNavigationViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                <navigationController storyboardIdentifier="HomeNavigationViewController" id="omJ-kh-LUx" customClass="HomeNavigationViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="cu7-FN-QO8">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Nh6-1O-WgL" kind="relationship" relationship="rootViewController" id="GXe-vg-YrF"/>
@@ -26,7 +30,7 @@
             </objects>
             <point key="canvasLocation" x="-107" y="27"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Home-->
         <scene sceneID="1fj-e0-VHj">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="Nh6-1O-WgL" customClass="HomeViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,14 +67,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iCJ-tz-Smb"/>
                     </view>
-                    <navigationItem key="navigationItem" id="rdZ-eY-Hf0"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationItem key="navigationItem" title="Home" id="rdZ-eY-Hf0"/>
                     <connections>
                         <outlet property="cvCollectionView" destination="ZXX-ye-g6K" id="Yd5-UY-4Iz"/>
                         <outlet property="navBar" destination="rdZ-eY-Hf0" id="fpa-bz-DDm"/>
                         <segue destination="5HN-gf-Cj2" kind="show" identifier="gotoprocess" id="PQ1-kg-chH"/>
-                        <segue destination="77G-t5-pU3" kind="show" id="EXy-Aa-JCS"/>
+                        <segue destination="77G-t5-pU3" kind="show" identifier="goToOverview" id="EXy-Aa-JCS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hn-Or-cpj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -80,9 +82,7 @@
         <!--Overview-->
         <scene sceneID="dsV-rg-c5a">
             <objects>
-                <viewControllerPlaceholder storyboardName="Overview" id="77G-t5-pU3" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="axz-0e-gdu"/>
-                </viewControllerPlaceholder>
+                <viewControllerPlaceholder storyboardName="Overview" id="77G-t5-pU3" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfc-gZ-K66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1251" y="1603"/>
@@ -90,9 +90,7 @@
         <!--Processing-->
         <scene sceneID="7D1-ek-Me1">
             <objects>
-                <viewControllerPlaceholder storyboardName="Processing" id="5HN-gf-Cj2" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="eAa-7c-HXC"/>
-                </viewControllerPlaceholder>
+                <viewControllerPlaceholder storyboardName="Processing" id="5HN-gf-Cj2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9so-OW-erN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2596" y="518"/>
