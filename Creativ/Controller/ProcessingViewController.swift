@@ -64,8 +64,8 @@ class ProcessingViewController: UIViewController {
                                                y: self.view.frame.maxY/3,
                                                width: 68,
                                                height: 34)
-           outgoingMessageLayer.fillColor = UIColor(red: 0.09, green: 0.54, blue: 1, alpha: 1).cgColor
-           
+           outgoingMessageLayer.fillColor = UIColor(hex: "#4B96DCFF")?.cgColor
+
         self.view.layer.addSublayer(outgoingMessageLayer)
        }
 
