@@ -25,13 +25,15 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationItem! {
         didSet {
             navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButton))
+            navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         }
     }
     
     @objc func deleteButton() {
         navBar.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
         navBar.rightBarButtonItem = UIBarButtonItem(title: "Confirm", style: .done, target: self, action: #selector(doneButton))
-        
+        navBar.leftBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
+        navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         isEdit = true
         cvCollectionView.reloadData()
     }
@@ -42,7 +44,7 @@ class HomeViewController: UIViewController {
         self.navBar.leftBarButtonItem?.isEnabled = false
         self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
         self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
-        
+        self.navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         self.selectedItem = clearSelectedItem
         
         self.isEdit = false
@@ -56,6 +58,7 @@ class HomeViewController: UIViewController {
             self.navBar.leftBarButtonItem?.isEnabled = false
             self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
             self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
+            self.navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
             
             self.isEdit = false
             cvCollectionView.reloadData()
@@ -77,6 +80,7 @@ class HomeViewController: UIViewController {
                 self.navBar.leftBarButtonItem?.isEnabled = false
                 self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
                 self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
+                self.navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
                 
                 self.isEdit = false
                 self.cvCollectionView.reloadData()
