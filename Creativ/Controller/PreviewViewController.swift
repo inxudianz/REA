@@ -19,6 +19,7 @@ class PreviewViewController: UIViewController {
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneReview))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         self.navigationItem.title = "Feedback"
         feedbackCollectionView.delegate = self
         feedbackCollectionView.register(UINib(nibName: "FeedbackHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackHeaderCollectionReusableView")
