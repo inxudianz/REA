@@ -30,7 +30,7 @@
             </objects>
             <point key="canvasLocation" x="-107" y="27"/>
         </scene>
-        <!--Home-->
+        <!--All Resume-->
         <scene sceneID="1fj-e0-VHj">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" id="Nh6-1O-WgL" customClass="HomeViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
@@ -67,7 +67,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iCJ-tz-Smb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="rdZ-eY-Hf0"/>
+                    <navigationItem key="navigationItem" title="All Resume" id="rdZ-eY-Hf0"/>
                     <connections>
                         <outlet property="cvCollectionView" destination="ZXX-ye-g6K" id="Yd5-UY-4Iz"/>
                         <outlet property="navBar" destination="rdZ-eY-Hf0" id="fpa-bz-DDm"/>
