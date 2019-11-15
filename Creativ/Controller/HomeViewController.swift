@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     
     @objc func deleteButton() {
         navBar.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
-        navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButton))
+        navBar.rightBarButtonItem = UIBarButtonItem(title: "Confirm", style: .done, target: self, action: #selector(doneButton))
         
         isEdit = true
         cvCollectionView.reloadData()

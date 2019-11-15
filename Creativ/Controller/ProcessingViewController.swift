@@ -60,7 +60,7 @@ class ProcessingViewController: UIViewController {
            
            let outgoingMessageLayer = CAShapeLayer()
            outgoingMessageLayer.path = bezierPath.cgPath
-           outgoingMessageLayer.frame = CGRect(x: 115,
+           outgoingMessageLayer.frame = CGRect(x: 145,
                                                y: self.view.frame.maxY/3,
                                                width: 68,
                                                height: 34)
