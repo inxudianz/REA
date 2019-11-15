@@ -17,7 +17,7 @@ class PreviewViewController: UIViewController {
     }
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
-    let feedbackContents = FeedbackContent()
+    let feedbackDatas = FeedbackData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class PreviewViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setCollectionViewLayout()
-        feedbackContents.createFeedbackSection()
+        feedbackDatas.createFeedbackSection()
     }
     
     // Unwind back to the All Resume Page
@@ -47,13 +47,13 @@ class PreviewViewController: UIViewController {
 
 extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return feedbackContents.titles.count
+        return feedbackDatas.titles.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("setopbiasa")
         let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "FeedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
-        let cellFeedback = Feedbacks(image: feedbackContents.images[indexPath.row], title: feedbackContents.titles[indexPath.row], overviewText: feedbackContents.overviewTexts[indexPath.row], commentedText: feedbackContents.commentedTexts[indexPath.row], comment: feedbackContents.comments[indexPath.row], recommendation: feedbackContents.recommendations[indexPath.row])
+        let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
         
         cell.setColor(colorView: &cell.feedbackView)
         cell.setColor(colorView: &cell.notchView)
