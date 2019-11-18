@@ -40,7 +40,7 @@ class PreviewViewController: UIViewController {
         layout.minimumInteritemSpacing = 4
         layout.minimumLineSpacing = layout.minimumInteritemSpacing * 2
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 7/10)
+        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 7/11)
         feedbackCollectionView.collectionViewLayout = layout
     }
 

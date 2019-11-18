@@ -21,17 +21,22 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.91791570190000005" green="0.9368798733" blue="0.96078830959999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                        <state key="normal" title="+">
+                        <state key="normal">
                             <color key="titleColor" red="0.32850110529999998" green="0.48346751929999998" blue="0.63923507930000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add New" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4f-gm-qdi">
-                        <rect key="frame" x="48" y="148" width="59" height="17"/>
+                        <rect key="frame" x="48" y="139" width="59" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.32850110529999998" green="0.48346751929999998" blue="0.63923507930000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="GfF-dY-Fht">
+                        <rect key="frame" x="44" y="89" width="67" height="36"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" red="0.18823529411764706" green="0.40000000000000002" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
                 </subviews>
             </collectionViewCellContentView>
             <size key="customSize" width="154" height="277"/>
@@ -41,4 +46,7 @@
             <point key="canvasLocation" x="-84.057971014492765" y="140.95982142857142"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="plus" width="14" height="14"/>
+    </resources>
 </document>
