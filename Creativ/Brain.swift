@@ -15,7 +15,9 @@ enum GPAStatus {
 class Brain {
     
     /* Array of action verbs necessary in a summary or when making experience description */
-    let arrayActionVerb: [String] = ["Simplify", "Create", "Produce", "Achieve", "Improve", "Enhance", "Nurture", "Manage", "Maintain", "Develop", "Lead", "Assemble", "Build", "Ensure", "Help", "Engineer", "Design", "Construct", "Upgrade"]
+    let arrayActionVerb: [String] = ["Simplify", "Create", "Produce", "Achieve", "Improve", "Enhance", "Nurture", "Manage", "Maintain", "Develop", "Lead", "Assemble", "Build", "Ensure", "Help", "Engineer", "Design", "Construct", "Upgrade", "Reduce", "Prove", "Eliminate"]
+    
+    let arrayRelatedSkills: [String] = ["JSON", "API", "Array", "Dictionary", "Set", "Git", "Github", "Core Data", "Human Interface Guidelines", "HIG"]
     
     /* Function to check phone number regex */
     func isPhoneNumberRegexFound(text: String) -> Bool {
@@ -79,5 +81,27 @@ class Brain {
             totalWordSummary += 1
         }
         return wordDictionary
+    }
+    
+    func getYear(for text: String) -> [String] {
+        do {
+            let regex = try NSRegularExpression(pattern: "[0-9]{2,4}\\s", options: .caseInsensitive)
+            return regex.matches(in: text, options: .reportCompletion, range: NSRange(location: 0, length: text.count)).map {
+                String(text[Range($0.range, in: text)!])
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
+
+    func isChronological(text: [String]) -> Bool {
+        let sortedText = text.sorted() { $0 > $1 }
+        if text != sortedText {
+            print(text)
+            print(sortedText)
+            return false
+        }
+        return true
     }
 }
