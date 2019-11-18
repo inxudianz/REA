@@ -99,14 +99,17 @@ class HomeViewController: UIViewController {
         }
     }
     
+    var coreData = CoreDataHelper()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
+        
         cvCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         cvCollectionView.register(UINib(nibName: "AddNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddNewCollectionViewCellID")
         cvCollectionView.register(UINib(nibName: "CVNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CVNewCollectionViewCellID")
         
-        print(listFilesFromDocumentsFolder())
+        //print(listFilesFromDocumentsFolder())
         
         //read file
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString

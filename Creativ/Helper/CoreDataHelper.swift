@@ -52,17 +52,17 @@ class CoreDataHelper {
         feedback.score = Int64(model.feedback.score)
         feedback.overview = model.feedback.overview
         
-        let contents = model.feedback.contents
+        resume.hasFeedback = feedback
         
-        var feedbackContents = [FeedbackContent(context: managedContext)]
-        var feedbackDetails = [FeedbackContentDetail(context: managedContext)]
+        let contents = model.feedback.contents
+
         for content in contents {
             let feedbackContent = FeedbackContent(context: managedContext)
             feedbackContent.type = content.type
             feedbackContent.score = Int64(content.score)
             feedbackContent.overview = content.overview
             
-            feedbackContents.append(feedbackContent)
+            feedback.addToHasManyContent(feedbackContent)
             
             let contentDetails = content.details
             
@@ -72,7 +72,7 @@ class CoreDataHelper {
                 feedbackDetail.score = Int64(contentDetail.score)
                 feedbackDetail.type = contentDetail.type
                 
-                feedbackDetails.append(feedbackDetail)
+                feedbackContent.addToHasManyDetail(feedbackDetail)
             }
             
         }
