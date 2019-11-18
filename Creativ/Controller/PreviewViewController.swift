@@ -34,7 +34,6 @@ class PreviewViewController: UIViewController {
     @objc func doneReview(_ unwindSegue: UIStoryboardSegue) {
         performSegue(withIdentifier: "unwindToHome", sender: self)
     }
-    
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 4
