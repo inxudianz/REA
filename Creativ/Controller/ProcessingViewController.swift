@@ -31,14 +31,13 @@ class ProcessingViewController: UIViewController {
     
     @IBOutlet weak var mascotSpriteImage: UIImageView!
     @IBOutlet weak var bubbleMessage: UIView!
-    
     @IBOutlet weak var processCollectionView: UICollectionView! {
         didSet {
             processCollectionView.isUserInteractionEnabled = false
         }
     }
     
-    
+    var sharedResources = [String]()
     
     // Explanation: Process Details memuat detail dari proses yang akan dijalankan
     var processDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating Your Work", "Analyzing Skills", "Finalizing"]
@@ -51,11 +50,40 @@ class ProcessingViewController: UIViewController {
         // Do any additional setup after loading the view.
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
-        handleClassification()
+        dispatchHandler()
+        //handleClassification()
+    }
+    
+    func dispatchHandler() {
+        let semaphore = DispatchSemaphore(value: 0)
+        let dispatchQueue = DispatchQueue.global(qos: .background)
+        let dispatchMain = DispatchQueue.main
+        
+        dispatchQueue.async {
+            self.handleClassification()
+            self.sharedResources.append("1")
+            semaphore.signal()
+            dispatchMain.sync {
+                // Update UI here
+            }
+            semaphore.wait()
+            
+            self.handleClassification()
+            self.sharedResources.append("2")
+            semaphore.signal()
+            dispatchMain.sync {
+                // Update UI here
+            }
+            semaphore.wait()
+        }
+        
+        print("Start handling classification")
+        
+        
     }
     
     func handleClassification() {
-        let json: [String:[String]] = ["data": ["I love to learn and apply what is learned. Experienced in Mobile Development for both Android with Kotlin and iOS with Swift. Has implemented Git version control and understands Mobile UI and UX design."]]
+        let json: [String:[String]] = ["data": ["I love to learn and apply what is learned. Experienced in Mobile Development for both Android with Kotlin and iOS with Swift. Has implemented Git version control and understands Mobile UI and UX design.", "i'm passionate at developing apps and really want to make the best app"]]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         let link = "https://api.monkeylearn.com/v3/classifiers/cl_kTazyVJA/classify/"
