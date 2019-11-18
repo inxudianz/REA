@@ -25,7 +25,6 @@ class ProcessingViewController: UIViewController {
         var text: String
         var error: Bool
         var classifications: [Classifications]
-        //var external_id: Int
     }
     
     @IBOutlet weak var mascotSpriteImage: UIImageView!
@@ -39,9 +38,9 @@ class ProcessingViewController: UIViewController {
     var sharedResources = [String]()
     var resumeClassification = [String]()
     
-    // Explanation: Process Details memuat detail dari proses yang akan dijalankan
+    // DESC: Process Details memuat detail dari proses yang akan dijalankan
     var processDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating Your Work", "Analyzing Skills", "Finalizing"]
-    // Explanation: instance onGoingProcessp; berisi row yang sedang berjalan dan array proses yang telah selesai berjalan
+    // DESC: instance onGoingProcessp; berisi row yang sedang berjalan dan array proses yang telah selesai berjalan
     var onGoingRow = onGoingProcess()
     
     override func viewDidLoad() {
@@ -50,11 +49,10 @@ class ProcessingViewController: UIViewController {
         // Do any additional setup after loading the view.
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
-        dispatchHandler()
-        //handleClassification()
+        dispatchClassificationHandler()
     }
     
-    func dispatchHandler() {
+    func dispatchClassificationHandler() {
         let semaphore = DispatchSemaphore(value: 0)
         let dispatchQueue = DispatchQueue.global(qos: .background)
         let dispatchMain = DispatchQueue.main
@@ -114,6 +112,7 @@ class ProcessingViewController: UIViewController {
             print(users![0].classifications[1].tag_name)
             print(users![0].classifications[1].confidence)
             
+            // Check the classification confidence, which one has higher confidence
             for user in users! {
                 if user.classifications[0].confidence >= user.classifications[1].confidence {
                     taggedClassification = user.classifications[0].tag_name
@@ -122,29 +121,8 @@ class ProcessingViewController: UIViewController {
                     taggedClassification = user.classifications[1].tag_name
                 }
             }
-/*
-            guard let jsonArray = responseJSON as? [[String: Any]] else {
-                  return
-            }
-            print("==============================")
-            print(jsonArray)
-
-            var model = [User]()
-            for dic in jsonArray{
-                model.append(User(dic)) // adding now value in Model array
-            }
-            print("Confidence parsing : \(model[0].confidence)")
-            print("Tag id parsing : \(model[0].tag_id)")
-            print("Tag name parsing : \(model[0].tag_name)")
-
-            if let responseJSON = responseJSON as? [String: Any] {
-                print("AA")
-                print(responseJSON)
-            }
-*/
         }
         task.resume()
-        
         return taggedClassification
     }
     
@@ -152,7 +130,6 @@ class ProcessingViewController: UIViewController {
     @IBAction func moveTableCellTapped(_ sender: Any) {
         
         var cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
-        
         guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
         onGoingRow.doneArray?.append(onGoingIndex.row)
         cell?.setCellStatus(statusType: .done)
