@@ -78,7 +78,7 @@
 		8A244E6A23758751006E6CC0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeNavigationViewController.swift; path = Creativ/Controller/HomeNavigationViewController.swift; sourceTree = SOURCE_ROOT; };
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
-		920F63D12372D0CC00BCFC5C /* Creativ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Creativ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		920F63D12372D0CC00BCFC5C /* REA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = REA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920F63D42372D0CC00BCFC5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		920F63D82372D0CC00BCFC5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 		920F63D22372D0CC00BCFC5C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				920F63D12372D0CC00BCFC5C /* Creativ.app */,
+				920F63D12372D0CC00BCFC5C /* REA.app */,
 				920F63EA2372D0CE00BCFC5C /* CreativTests.xctest */,
 				920F63F52372D0CE00BCFC5C /* CreativUITests.xctest */,
 			);
@@ -261,7 +261,7 @@
 			);
 			name = Creativ;
 			productName = Creativ;
-			productReference = 920F63D12372D0CC00BCFC5C /* Creativ.app */;
+			productReference = 920F63D12372D0CC00BCFC5C /* REA.app */;
 			productType = "com.apple.product-type.application";
 		};
 		920F63E92372D0CE00BCFC5C /* CreativTests */ = {
@@ -609,7 +609,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = agnespricilia17.Creativ;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = REA;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -629,7 +629,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = agnespricilia17.Creativ;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = REA;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
