@@ -8,26 +8,25 @@
 
 import UIKit
 
-
-struct onGoingProcess {
-    var rowIndexPath: IndexPath?
-    var doneArray: [Int]?
-}
-
-struct Classifications: Codable{
-    var tag_name: String
-    var tag_id: Int
-    var confidence: Float
-}
-
-struct User: Codable{
-    var text: String
-    var error: Bool
-    var classifications: [Classifications]
-    //var external_id: Int
-}
-
 class ProcessingViewController: UIViewController {
+    
+    struct onGoingProcess {
+        var rowIndexPath: IndexPath?
+        var doneArray: [Int]?
+    }
+
+    struct Classifications: Codable{
+        var tag_name: String
+        var tag_id: Int
+        var confidence: Float
+    }
+
+    struct User: Codable{
+        var text: String
+        var error: Bool
+        var classifications: [Classifications]
+        //var external_id: Int
+    }
     
     @IBOutlet weak var mascotSpriteImage: UIImageView!
     @IBOutlet weak var bubbleMessage: UIView!
@@ -38,6 +37,7 @@ class ProcessingViewController: UIViewController {
     }
     
     var sharedResources = [String]()
+    var resumeClassification = [String]()
     
     // Explanation: Process Details memuat detail dari proses yang akan dijalankan
     var processDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating Your Work", "Analyzing Skills", "Finalizing"]
@@ -60,7 +60,8 @@ class ProcessingViewController: UIViewController {
         let dispatchMain = DispatchQueue.main
         
         dispatchQueue.async {
-            self.handleClassification()
+            // 1
+            self.resumeClassification.append(self.handleClassification(text: "I love to learn and apply what is learned. Experienced in Mobile Development for both Android with Kotlin and iOS with Swift. Has implemented Git version control and understands Mobile UI and UX design."))
             self.sharedResources.append("1")
             semaphore.signal()
             dispatchMain.sync {
@@ -68,7 +69,8 @@ class ProcessingViewController: UIViewController {
             }
             semaphore.wait()
             
-            self.handleClassification()
+            // 2
+            self.resumeClassification.append(self.handleClassification(text: "i'm passionate at developing apps and really want to make the best app"))
             self.sharedResources.append("2")
             semaphore.signal()
             dispatchMain.sync {
@@ -76,19 +78,13 @@ class ProcessingViewController: UIViewController {
             }
             semaphore.wait()
         }
-        
-        print("Start handling classification")
-        
-        
     }
     
-    func handleClassification() {
-        let json: [String:[String]] = ["data": ["I love to learn and apply what is learned. Experienced in Mobile Development for both Android with Kotlin and iOS with Swift. Has implemented Git version control and understands Mobile UI and UX design.", "i'm passionate at developing apps and really want to make the best app"]]
+    func handleClassification(text: String) -> String {
+        let json: [String:[String]] = ["data": [text]]
         
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         let link = "https://api.monkeylearn.com/v3/classifiers/cl_kTazyVJA/classify/"
-        
-        print(json)
         
         // create post request
         let url = URL(string: link)!
@@ -100,6 +96,7 @@ class ProcessingViewController: UIViewController {
         // insert json data to the request
         request.httpBody = jsonData
         
+        var taggedClassification = ""
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
@@ -116,6 +113,15 @@ class ProcessingViewController: UIViewController {
             print(users![0].classifications[0].confidence)
             print(users![0].classifications[1].tag_name)
             print(users![0].classifications[1].confidence)
+            
+            for user in users! {
+                if user.classifications[0].confidence >= user.classifications[1].confidence {
+                    taggedClassification = user.classifications[0].tag_name
+                }
+                else {
+                    taggedClassification = user.classifications[1].tag_name
+                }
+            }
 /*
             guard let jsonArray = responseJSON as? [[String: Any]] else {
                   return
@@ -138,6 +144,8 @@ class ProcessingViewController: UIViewController {
 */
         }
         task.resume()
+        
+        return taggedClassification
     }
     
     // Change this function with the function to be called automatically upon completion on certain progress
