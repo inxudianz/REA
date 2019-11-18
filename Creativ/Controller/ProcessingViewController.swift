@@ -37,8 +37,35 @@ class ProcessingViewController: UIViewController {
         // Do any additional setup after loading the view.
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
+        
+        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(recursiveLoop), userInfo: nil, repeats: false)
     }
-    
+    var countRecursiveLoop = 0
+    @objc func recursiveLoop(){
+        if self.countRecursiveLoop <= self.processDetails.count+1{
+            UIView.animate(withDuration: 1.0, animations: {
+                if self.countRecursiveLoop == 0{
+                    self.countRecursiveLoop += 1
+                } else {
+                    self.moveItem()
+                    self.countRecursiveLoop += 1
+                }
+            }) { (finished) in
+                if finished{
+                    UIView.animate(withDuration: 1.0, animations: {
+                        if self.countRecursiveLoop <= self.processDetails.count{
+                            self.recursiveLoop()
+                        } else{
+                            
+                        }
+                    })
+                }
+            }
+        } else{
+            
+        }
+        
+    }
     func addBubble(){
            let width: CGFloat = 252
            let height: CGFloat = 87
@@ -70,6 +97,34 @@ class ProcessingViewController: UIViewController {
        }
 
     // Change this function with the function to be called automatically upon completion on certain progress
+    func moveItem(){
+        var cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
+        guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
+        onGoingRow.doneArray?.append(onGoingIndex.row)
+        cell?.setCellStatus(statusType: .done)
+
+        onGoingRow.rowIndexPath?.row += 1
+        cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
+        cell?.setCellStatus(statusType: .working)
+
+        if onGoingRow.rowIndexPath!.row + 2 < processDetails.count {
+           processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row + 1, section: 0), at: .bottom, animated: true)
+        }
+        else if onGoingRow.rowIndexPath!.row < processDetails.count{
+            processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 2, section: 0), at: .top, animated: true)
+        }
+        else {
+           if onGoingRow.doneArray!.count < processDetails.count {
+               onGoingRow.doneArray?.append(onGoingRow.rowIndexPath!.row)
+               cell?.setCellStatus(statusType: .done)
+           }
+           else {
+               onGoingRow.rowIndexPath?.row = 0
+               performSegue(withIdentifier: "goToOverview", sender: self)
+           }
+        }
+    }
+    
     @IBAction func moveTableCellTapped(_ sender: Any) {
         
         var cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
