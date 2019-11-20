@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */; };
+		1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E407539237D6EA200FDAA31 /* Brain.swift */; };
 		1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */; };
 		1E7F758A237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */; };
 		1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */; };
@@ -17,6 +18,7 @@
 		1EE6D1C623741A5C00A07759 /* Preview.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C523741A5C00A07759 /* Preview.storyboard */; };
 		1EE6D1C823741A6A00A07759 /* Processing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C723741A6A00A07759 /* Processing.storyboard */; };
 		1EE6D1CA2374376500A07759 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		1EE6D1CC237511AE00A07759 /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */; };
 
 		1EE6D1CC237511AE00A07759 /* FeedbackData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackData.swift */; };
 		1EE6D1D2237538AC00A07759 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -72,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessCollectionViewCell.swift; sourceTree = "<group>"; };
+		1E407539237D6EA200FDAA31 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -189,6 +192,7 @@
 				8A244E6A23758751006E6CC0 /* UIColorExtension.swift */,
 				1EE6D1CB237511AE00A07759 /* FeedbackData.swift */,
 				1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */,
+				1E407539237D6EA200FDAA31 /* Brain.swift */,
 			);
 			path = Creativ;
 			sourceTree = "<group>";
@@ -443,11 +447,13 @@
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
 				F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */,
 				8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */,
+				1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */,
 				8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */,
 				920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */,
 				1EE6D1D423753AA000A07759 /* (null) in Sources */,
 				F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* (null) in Sources */,
+
 				F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */,
 
 				1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */,
