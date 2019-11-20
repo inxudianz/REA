@@ -16,15 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h2K-Fz-rLF">
-                                <rect key="frame" x="71" y="329" width="120" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P8D-pU-JfV">
-                                <rect key="frame" x="191" y="284" width="203" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UX-Fd-wIt">
                                 <rect key="frame" x="188" y="728" width="38" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -77,14 +68,16 @@
                                     <outlet property="delegate" destination="zJk-Gt-RMs" id="qRQ-lN-h2x"/>
                                 </connections>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rea" id="SSN-xm-vph">
+                                <rect key="frame" x="0.0" y="351" width="189" height="144"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="QxG-eb-pos"/>
                     </view>
                     <navigationItem key="navigationItem" id="3ZU-kJ-Dhv"/>
                     <connections>
-                        <outlet property="bubbleMessage" destination="P8D-pU-JfV" id="hJD-JY-Bkq"/>
-                        <outlet property="mascotSpriteImage" destination="h2K-Fz-rLF" id="2j5-ly-FZO"/>
                         <outlet property="processCollectionView" destination="Hlb-bF-zAi" id="nqh-08-Hck"/>
                         <segue destination="Poz-sd-nb7" kind="presentation" identifier="goToOverview" modalPresentationStyle="fullScreen" id="kLd-Uw-qSt"/>
                     </connections>
@@ -104,4 +97,7 @@
             <point key="canvasLocation" x="2596" y="1724"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="rea" width="116" height="121"/>
+    </resources>
 </document>

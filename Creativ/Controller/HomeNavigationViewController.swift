@@ -17,10 +17,10 @@ class HomeNavigationViewController: UINavigationController {
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = UIColor.white
+            navBarAppearance.backgroundColor = UIColor.init(hex: "#30669BFF")
             navigationBar.standardAppearance = navBarAppearance
             navigationBar.scrollEdgeAppearance = navBarAppearance
-            
+            navigationController?.navigationBar.prefersLargeTitles = true
         }
         // Do any additional setup after loading the view.
     }

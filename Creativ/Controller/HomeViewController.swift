@@ -19,7 +19,11 @@ class HomeViewController: UIViewController {
 
     var isEdit = false
     var selectedItem = [Int]()
+    var filePath = Bundle.main.url(forResource: "file", withExtension: "txt")
+    var myData: Data!
 
+    @IBOutlet weak var testImg: UIImageView!
+    var name: String?
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var cvCollectionView: UICollectionView!
     @IBOutlet weak var navBar: UINavigationItem! {
@@ -84,7 +88,6 @@ class HomeViewController: UIViewController {
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
                 self.selectedItem = clearSelectedItem
-                
                 self.isEdit = true
                 self.cvCollectionView.reloadData()
             }))
@@ -96,13 +99,38 @@ class HomeViewController: UIViewController {
         }
     }
     
+    var coreData = CoreDataHelper()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
-        self.navigationController?.navigationItem.rightBarButtonItem
+        
         cvCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         cvCollectionView.register(UINib(nibName: "AddNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddNewCollectionViewCellID")
         cvCollectionView.register(UINib(nibName: "CVNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CVNewCollectionViewCellID")
+        
+        //print(listFilesFromDocumentsFolder())
+        
+        //read file
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let getImagePath = paths.appendingPathComponent("TIKET INDONESIA PERTAMA.pdf")
+        //testImg.image = UIImage(contentsOfFile: getImagePath)
+        
+        
+
+    }
+    
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
+        //let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToOverview" {
+            if let overviewViewController = segue.destination as? OverviewViewController {
+                    overviewViewController.nama = name
+            }
+        }
     }
         
 }
@@ -113,9 +141,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return 1
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contents.count + 1
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
@@ -175,6 +207,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 collectionView.reloadData()
             }
         } else {
+            let content = contents[indexPath.row - 1]
+            name =
+                content.cvName
+            print(name)
+            performSegue(withIdentifier: "goToOverview", sender: self)
             print("Delete button not selected")
         }
     }
@@ -200,9 +237,59 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         let formattedDate = format.string(from: date)
         
         contents.insert(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate), at: 0)
+        
+        //save file to directory
+        // get the documents directory url
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        // choose a name for your image
+        let ImageName = fileName
+        // create the destination file url to save your image
+        let fileURL = documentsDirectory.appendingPathComponent(ImageName)
+        // get your UIImage jpeg data representation and check if the destination file url already exists
+        if let data = thumbnail!.jpegData(compressionQuality:  1.0),
+          !FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                // writes the image data to disk
+                try data.write(to: fileURL)
+                print("file saved")
+            } catch {
+                print("error saving file:", error)
+            }
+        }
+        
+        //cek ada filenya di directory atau tidak
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("RobbyC.pdf") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                print("FILE AVAILABLE")
+            } else {
+                print("FILE NOT AVAILABLE")
+            }
+        } else {
+            print("FILE PATH NOT AVAILABLE")
+        }
+        
+        readPDFFile()
+        
         tempContents = contents
         cvCollectionView.reloadData()
+        performSegue(withIdentifier: "gotoprocess", sender: self)
+
         
+    }
+    
+    //cek isi directory
+    func listFilesFromDocumentsFolder() -> [String]? {
+        let fileMngr = FileManager.default;
+
+        // Full path to documents directory
+        let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask)[0].path
+
+        // List all contents of directory and return as [String] OR nil if failed
+        return try? fileMngr.contentsOfDirectory(atPath:docs)
     }
     
     @objc func importCV(sender: UIButton!) {
@@ -234,7 +321,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         if let pdf = PDFDocument(url: urlPicked!) {
             let pageCount = pdf.pageCount
             let documentContent = NSMutableAttributedString()
-            print("aw")
             print(pageCount)
             for i in 0 ..< pageCount {
                 guard let page = pdf.page(at: i) else { continue }
@@ -244,6 +330,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             print("\(documentContent)")
         }
     }
+    
 }
 
 
