@@ -10,12 +10,11 @@
         <!--Home Navigation View Controller-->
         <scene sceneID="pcb-7a-NLp">
             <objects>
-                <navigationController storyboardIdentifier="HomeNavigationViewController" id="omJ-kh-LUx" customClass="HomeNavigationViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigationViewController" id="omJ-kh-LUx" customClass="HomeNavigationViewController" customModule="REA" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="cu7-FN-QO8">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="0.82352941176470584" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -34,13 +33,14 @@
         <!--All Resume-->
         <scene sceneID="1fj-e0-VHj">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" title="All Resume" id="Nh6-1O-WgL" customClass="HomeViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" title="All Resume" id="Nh6-1O-WgL" customClass="HomeViewController" customModule="REA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="qZ7-1R-f24">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZXX-ye-g6K">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZXX-ye-g6K">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="j80-mW-Pc5">
                                     <size key="itemSize" width="154" height="277"/>
@@ -49,7 +49,7 @@
                                     <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HomeCollectionReusableViewID" id="ZXF-It-ZmB" customClass="HomeCollectionReusableView" customModule="Creativ" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HomeCollectionReusableViewID" id="ZXF-It-ZmB" customClass="HomeCollectionReusableView" customModule="REA" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="8" width="414" height="193"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
@@ -60,12 +60,6 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="iCJ-tz-Smb" firstAttribute="bottom" secondItem="ZXX-ye-g6K" secondAttribute="bottom" id="Bmg-Fi-PtC"/>
-                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="trailing" secondItem="iCJ-tz-Smb" secondAttribute="trailing" id="KBO-QG-i7z"/>
-                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="top" secondItem="iCJ-tz-Smb" secondAttribute="top" id="leI-La-Olr"/>
-                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="leading" secondItem="iCJ-tz-Smb" secondAttribute="leading" id="onR-Ms-QFy"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iCJ-tz-Smb"/>
                     </view>
                     <navigationItem key="navigationItem" title="All Resume" id="rdZ-eY-Hf0"/>
