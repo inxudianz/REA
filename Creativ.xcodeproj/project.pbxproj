@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */; };
+		1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E407539237D6EA200FDAA31 /* Brain.swift */; };
 		1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */; };
 		1E7F758A237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */; };
 		1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */; };
@@ -18,11 +19,17 @@
 		1EE6D1C823741A6A00A07759 /* Processing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EE6D1C723741A6A00A07759 /* Processing.storyboard */; };
 		1EE6D1CA2374376500A07759 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		1EE6D1CC237511AE00A07759 /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */; };
+
+		1EE6D1CC237511AE00A07759 /* FeedbackData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackData.swift */; };
 		1EE6D1D2237538AC00A07759 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		1EE6D1D423753AA000A07759 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A244E6A23758751006E6CC0 /* UIColorExtension.swift */; };
 		8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */; };
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
+		920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF39E237E630F00F8FB7A /* ResumeModel.swift */; };
+		920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3A0237E631800F8FB7A /* FeedbackModel.swift */; };
+		920AF3A3237E633500F8FB7A /* FeedbackContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3A2237E633500F8FB7A /* FeedbackContentModel.swift */; };
+		920AF3A5237E633C00F8FB7A /* FeedbackContentDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3A4237E633C00F8FB7A /* FeedbackContentDetailModel.swift */; };
 		920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D42372D0CC00BCFC5C /* AppDelegate.swift */; };
 		920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */; };
 		920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63D82372D0CC00BCFC5C /* ViewController.swift */; };
@@ -37,6 +44,8 @@
 		F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1F237413670007FCC4 /* HomeViewController.swift */; };
 		F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC21237413780007FCC4 /* PreviewViewController.swift */; };
 		F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC23237413890007FCC4 /* OverviewViewController.swift */; };
+		F55134662384FDFB0054854F /* SegmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55134652384FDFB0054854F /* SegmentModel.swift */; };
+		F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55134672384FE0F0054854F /* SegmentedModel.swift */; };
 		F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */; };
 		F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */; };
 		F5F70677237C0F6100771249 /* HomeCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */; };
@@ -65,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessCollectionViewCell.swift; sourceTree = "<group>"; };
+		1E407539237D6EA200FDAA31 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -73,12 +83,17 @@
 		1EE6D1C323741A3300A07759 /* Overview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Overview.storyboard; sourceTree = "<group>"; };
 		1EE6D1C523741A5C00A07759 /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
 		1EE6D1C723741A6A00A07759 /* Processing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Processing.storyboard; sourceTree = "<group>"; };
-		1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
+		1EE6D1CB237511AE00A07759 /* FeedbackData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackData.swift; sourceTree = "<group>"; };
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		8A244E6A23758751006E6CC0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeNavigationViewController.swift; path = Creativ/Controller/HomeNavigationViewController.swift; sourceTree = SOURCE_ROOT; };
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920F63D12372D0CC00BCFC5C /* REA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = REA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		920AF39E237E630F00F8FB7A /* ResumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeModel.swift; sourceTree = "<group>"; };
+		920AF3A0237E631800F8FB7A /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
+		920AF3A2237E633500F8FB7A /* FeedbackContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackContentModel.swift; sourceTree = "<group>"; };
+		920AF3A4237E633C00F8FB7A /* FeedbackContentDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackContentDetailModel.swift; sourceTree = "<group>"; };
+		920F63D12372D0CC00BCFC5C /* Creativ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Creativ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		920F63D42372D0CC00BCFC5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		920F63D82372D0CC00BCFC5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +113,8 @@
 		F51CEC1F237413670007FCC4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F51CEC21237413780007FCC4 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		F51CEC23237413890007FCC4 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
+		F55134652384FDFB0054854F /* SegmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentModel.swift; sourceTree = "<group>"; };
+		F55134672384FE0F0054854F /* SegmentedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedModel.swift; sourceTree = "<group>"; };
 		F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContent.swift; sourceTree = "<group>"; };
 		F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionReusableView.swift; sourceTree = "<group>"; };
 		F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -174,8 +191,9 @@
 				920F63E52372D0CE00BCFC5C /* Info.plist */,
 				920F63DD2372D0CC00BCFC5C /* Creativ.xcdatamodeld */,
 				8A244E6A23758751006E6CC0 /* UIColorExtension.swift */,
-				1EE6D1CB237511AE00A07759 /* FeedbackModel.swift */,
+				1EE6D1CB237511AE00A07759 /* FeedbackData.swift */,
 				1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */,
+				1E407539237D6EA200FDAA31 /* Brain.swift */,
 			);
 			path = Creativ;
 			sourceTree = "<group>";
@@ -202,6 +220,12 @@
 			isa = PBXGroup;
 			children = (
 				F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */,
+				F55134652384FDFB0054854F /* SegmentModel.swift */,
+				F55134672384FE0F0054854F /* SegmentedModel.swift */,
+				920AF39E237E630F00F8FB7A /* ResumeModel.swift */,
+				920AF3A0237E631800F8FB7A /* FeedbackModel.swift */,
+				920AF3A2237E633500F8FB7A /* FeedbackContentModel.swift */,
+				920AF3A4237E633C00F8FB7A /* FeedbackContentDetailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,6 +259,8 @@
 				F5F70679237C17B700771249 /* AddNewCollectionViewCell.xib */,
 				F5F7067C237C180300771249 /* CVNewCollectionViewCell.swift */,
 				F5F7067D237C180300771249 /* CVNewCollectionViewCell.xib */,
+				8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */,
+				F51CEC23237413890007FCC4 /* OverviewViewController.swift */,
 				1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */,
 				1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */,
 				1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */,
@@ -408,22 +434,29 @@
 				F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */,
 				920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */,
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
+				920AF3A5237E633C00F8FB7A /* FeedbackContentDetailModel.swift in Sources */,
 				F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */,
+				920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */,
 				920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */,
 				F5F7067E237C180300771249 /* CVNewCollectionViewCell.swift in Sources */,
 				1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */,
 				F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */,
-				1EE6D1CC237511AE00A07759 /* FeedbackModel.swift in Sources */,
+				1EE6D1CC237511AE00A07759 /* FeedbackData.swift in Sources */,
+				920AF3A3237E633500F8FB7A /* FeedbackContentModel.swift in Sources */,
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
+				F55134662384FDFB0054854F /* SegmentModel.swift in Sources */,
+				920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
 				F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */,
 				8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */,
+				1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */,
 				8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */,
 				920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */,
 				1EE6D1D423753AA000A07759 /* (null) in Sources */,
 				F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* (null) in Sources */,
+				F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */,
 				1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */,
 				1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */,
 				F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */,
@@ -608,6 +641,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+
 				PRODUCT_BUNDLE_IDENTIFIER = agnespricilia17.Creativ;
 				PRODUCT_NAME = REA;
 				SWIFT_VERSION = 5.0;

@@ -20,7 +20,7 @@ class HomeNavigationViewController: UINavigationController {
             navBarAppearance.backgroundColor = UIColor.init(hex: "#30669BFF")
             navigationBar.standardAppearance = navBarAppearance
             navigationBar.scrollEdgeAppearance = navBarAppearance
-            
+            navigationController?.navigationBar.prefersLargeTitles = true
         }
         // Do any additional setup after loading the view.
     }

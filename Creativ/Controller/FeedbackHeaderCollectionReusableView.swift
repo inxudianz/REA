@@ -48,5 +48,5 @@ class FeedbackHeaderCollectionReusableView: UICollectionReusableView {
 
         self.layer.addSublayer(outgoingMessageLayer)
     }
-    
+
 }

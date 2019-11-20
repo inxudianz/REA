@@ -10,15 +10,25 @@ import UIKit
 import MobileCoreServices
 import PDFKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController{
     
     var contents: [HomeContent] = HomeContent.createHomeContent()
     var tempContents : [HomeContent] = HomeContent.createHomeContent()
+    var segmentModel: SegmentedModel?
+    var segmentedModel: SegmentedModel?
     var urlPicked: URL?
     var cellColour = true
-
+    
     var isEdit = false
     var selectedItem = [Int]()
+    var filePath = Bundle.main.url(forResource: "file", withExtension: "txt")
+    var myData: Data!
+    var fontMean: Float = 0
+    var totalFont = 0
+    
+    
+    @IBOutlet weak var testImg: UIImageView!
+
     var name: String?
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var cvCollectionView: UICollectionView!
@@ -63,7 +73,7 @@ class HomeViewController: UIViewController {
             self.isEdit = false
             cvCollectionView.reloadData()
         } else {
-
+            
             let alert = UIAlertController(title: "Delete CV", message: "This CV will be deleted from iCloud Documents on all your devices.", preferredStyle: .actionSheet)
             
             alert.addAction(UIAlertAction(title: "Delete CV", style: .default, handler: { action in
@@ -99,12 +109,12 @@ class HomeViewController: UIViewController {
         }
     }
     
+    var coreData = CoreDataHelper()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
-        cvCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
-        cvCollectionView.register(UINib(nibName: "AddNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddNewCollectionViewCellID")
-        cvCollectionView.register(UINib(nibName: "CVNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CVNewCollectionViewCellID")
+        registerXIB()
     }
     
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
@@ -120,6 +130,38 @@ class HomeViewController: UIViewController {
         }
     }
         
+
+    }
+    
+    func registerXIB() {
+        cvCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
+        cvCollectionView.register(UINib(nibName: "AddNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddNewCollectionViewCellID")
+        cvCollectionView.register(UINib(nibName: "CVNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CVNewCollectionViewCellID")
+        
+        //print(listFilesFromDocumentsFolder())
+        
+        //read file
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
+        let getImagePath = paths.appendingPathComponent("TIKET INDONESIA PERTAMA.pdf")
+        //testImg.image = UIImage(contentsOfFile: getImagePath)
+        
+        
+
+    }
+    
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
+        //let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToOverview" {
+            if let overviewViewController = segue.destination as? OverviewViewController {
+                    overviewViewController.nama = name
+            }
+        }
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -138,7 +180,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
-        
+            
             return headerView
         }
         return UICollectionReusableView()
@@ -224,11 +266,75 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         let formattedDate = format.string(from: date)
         
         contents.insert(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate), at: 0)
+        
+        //save file to directory
+        // get the documents directory url
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        // choose a name for your image
+        let ImageName = fileName
+        // create the destination file url to save your image
+        let fileURL = documentsDirectory.appendingPathComponent(ImageName)
+        // get your UIImage jpeg data representation and check if the destination file url already exists
+        if let data = thumbnail!.jpegData(compressionQuality:  1.0),
+            !FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                // writes the image data to disk
+                try data.write(to: fileURL)
+                // print("file saved")
+            } catch {
+                //  print("error saving file:", error)
+            }
+        }
+        
+        readPDFFile()
+        fontMean = fontMean/Float(totalFont)
+          !FileManager.default.fileExists(atPath: fileURL.path) {
+            do {
+                // writes the image data to disk
+                try data.write(to: fileURL)
+                print("file saved")
+            } catch {
+                print("error saving file:", error)
+            }
+        }
+        
+        //cek ada filenya di directory atau tidak
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("RobbyC.pdf") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                print("FILE AVAILABLE")
+            } else {
+                print("FILE NOT AVAILABLE")
+            }
+        } else {
+            print("FILE PATH NOT AVAILABLE")
+        }
+        
+        readPDFFile()
+        
         tempContents = contents
         cvCollectionView.reloadData()
         performSegue(withIdentifier: "gotoprocess", sender: self)
 
         
+    }
+    
+    //cek isi directory
+    func listFilesFromDocumentsFolder() -> [String]? {
+        let fileMngr = FileManager.default;
+        
+        // Full path to documents directory
+        let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask)[0].path
+        
+
+        // Full path to documents directory
+        let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask)[0].path
+
+        // List all contents of directory and return as [String] OR nil if failed
+        return try? fileMngr.contentsOfDirectory(atPath:docs)
     }
     
     @objc func importCV(sender: UIButton!) {
@@ -257,20 +363,259 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     
     //ubah pdf ke string
     func readPDFFile(){
+        var cvContents:[(String,Double,Bool)] = []
+        var pointAvg:Double = 0
+        var count = 0
+        var arrFontSize: [Double] = []
+        var categorisedcvContent:[SegmentedModel] = []
+        
         if let pdf = PDFDocument(url: urlPicked!) {
             let pageCount = pdf.pageCount
             let documentContent = NSMutableAttributedString()
-            print("aw")
-            print(pageCount)
+
             for i in 0 ..< pageCount {
                 guard let page = pdf.page(at: i) else { continue }
                 guard let pageContent = page.attributedString else { continue }
                 documentContent.append(pageContent)
             }
-            print("\(documentContent)")
+            
+            documentContent.enumerateAttribute(NSAttributedString.Key.font, in: NSMakeRange(0, documentContent.length), options: .longestEffectiveRangeNotRequired) { (value, range, stop) in
+                guard let currentFont = value as? UIFont else {
+                    return
+                }
+                let floatFontSize = Double(currentFont.pointSize)
+                arrFontSize.append(floatFontSize)
+                
+                
+                let content = documentContent.string
+                let rangeContent = content[range.location..<range.location + range.length]
+                let isBold = currentFont.fontDescriptor.symbolicTraits.contains(.traitBold)
+                count += 1
+                pointAvg += Double(currentFont.pointSize)
+                
+                cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
+            }
+            
         }
+        
+        if count != 0 {
+            let sortWithoutDuplicates = Array(Set(arrFontSize))
+            let fontSizeSorted = sortWithoutDuplicates.sorted()
+            let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
+            
+            pointAvg = pointAvg / Double(count)
+
+            let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
+            var arrHeading:[(String,String)] = []
+            var arrBody:[(String,String)] = []
+            let checkMedian:Bool = pointAvg < medianFontSize
+            
+            for cvContent in cvContents {
+                if cvContent.1 >= Double(medianFontSize)  {
+                    for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
+                        if cvContent.1 == largeFont {
+                            arrHeading.append((cvContent.0,"Header\(index + 2)"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                        }
+                        else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
+                            arrHeading.append((cvContent.0,"Header1"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
+                        }
+                        
+                    }
+                }
+                else {
+                    for (index,smallFont) in fontSizeSortedSplit[0].enumerated() {
+                        if cvContent.1 == smallFont {
+                            arrBody.append((cvContent.0,"Body\(index + 2)"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                        }
+                        else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
+                            arrBody.append((cvContent.0,"Body1"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            
+        }
+        let result = segmentContent(contents: categorisedcvContent)
+    }
+    
+    func segmentContent(contents:[SegmentedModel]) -> Segment {
+        var result:Segment = Segment()
+        
+        if contents.isEmpty {
+            return result
+        }
+        
+        var currLevelNode: [SegmentedModel] = []
+        var currNode: SegmentedModel = SegmentedModel()
+        var prevNode: SegmentedModel = SegmentedModel()
+        var lastHeader: SegmentedModel = SegmentedModel()
+        var currSegment:Segment = Segment()
+        var nestedSegment:Segment = Segment()
+
+        var nestedHeaderLevel = -1
+
+        for (index,content) in contents.enumerated() {
+            currNode = content
+            
+            if currNode == prevNode {
+                continue
+            }
+            // Start of segment
+            if index == 0 {
+                prevNode = currNode
+                if currNode.type.first == "H" {
+                    lastHeader = currNode
+                }
+                currLevelNode.append(currNode)
+
+                continue
+            }
+            else if index == 1 {
+                prevNode = currNode
+                if currNode.type.first == "H" {
+                    
+                    currSegment.addContents(contents: currLevelNode)
+                    
+                    result.addSegment(segment: currSegment)
+                    
+                    currSegment = Segment()
+                    lastHeader = currNode
+                    
+                    currLevelNode.removeAll()
+                    currLevelNode.append(currNode)
+                    nestedHeaderLevel += 1
+                    
+                }
+                else if currNode.type.first == "B" {
+                    currLevelNode.append(currNode)
+                }
+                continue
+            }
+            
+            
+            
+            // if node is header
+            if currNode.type.first == "H" {
+                // check if node(header) value is lower than equal to the last header
+                if (currNode.type.last?.hexDigitValue)! <= (lastHeader.type.last?.hexDigitValue)! {
+                    // if the previous node is also header
+                    if prevNode.type.first == "H" {
+                        lastHeader = currNode
+                        
+                        nestedSegment.addContents(contents: currLevelNode)
+                        
+                        currLevelNode.removeAll()
+                        currLevelNode.append(currNode)
+                        nestedHeaderLevel += 1
+                    }
+                    // if previous node is a body
+                    else if prevNode.type.first == "B" {
+                        // if the current node header value is equal to the last header value
+                        if (currNode.type.last?.hexDigitValue)! == (lastHeader.type.last?.hexDigitValue)! {
+                            if nestedHeaderLevel > 0 {
+                                nestedSegment.addContents(contents: currLevelNode)
+                                currLevelNode.removeAll()
+                                currSegment.addSegment(segment: nestedSegment)
+                                currLevelNode.append(currNode)
+                            }
+                            else {
+                                nestedSegment.addContents(contents: currLevelNode)
+                                currLevelNode.removeAll()
+                                currLevelNode.append(currNode)
+                                currSegment.addSegment(segment: nestedSegment)
+                                nestedSegment = Segment()
+
+                            }
+                        }
+                        // if the current node header value is not equal to the last header value
+                        else {
+                            lastHeader = currNode
+                            currLevelNode.append(currNode)
+                            
+                            nestedSegment.addContents(contents: currLevelNode)
+                            currLevelNode.removeAll()
+                            
+                            result.addSegment(segment: currSegment)
+                            
+                            currSegment = Segment()
+                            nestedHeaderLevel -= 1
+                            
+                        }
+                    }
+                }
+                // If current header is higher than last header
+                else {
+                    if prevNode.type.first == "H" {
+                        lastHeader = currNode
+                        currLevelNode.append(currNode)
+                        
+                        currSegment.addContents(contents: currLevelNode)
+                        
+                        currLevelNode.removeAll()
+                        currLevelNode.append(currNode)
+                        
+                    }
+                    else if prevNode.type.first == "B" {
+                        if nestedHeaderLevel > 0 {
+                            nestedSegment.addContents(contents: currLevelNode)
+                            
+                            currLevelNode.removeAll()
+                            currLevelNode.append(currNode)
+                            
+                            nestedHeaderLevel -= 1
+                        }
+                        else {
+                            
+                            nestedSegment.addContents(contents: currLevelNode)
+                            currLevelNode.removeAll()
+                            currLevelNode.append(currNode)
+                            
+                            currSegment.addSegment(segment: nestedSegment)
+                            
+                            result.addSegment(segment: currSegment)
+                            
+                            currSegment = Segment()
+                            nestedSegment = Segment()
+                            
+                            nestedHeaderLevel -= 1
+                            
+                        }
+                    }
+                }
+                
+            }
+                // If current node is a body
+            else if currNode.type.first == "B" {
+                currLevelNode.append(currNode)
+            }
+            prevNode = currNode
+        }
+        
+        currSegment.addContents(contents: currLevelNode)
+        currLevelNode.removeAll()
+        result.addSegment(segment: currSegment)
+        currSegment = Segment()
+        
+        return result
     }
 }
 
-
-
+extension String {
+    subscript (bounds: CountableClosedRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start...end])
+    }
+    
+    subscript (bounds: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: bounds.lowerBound)
+        let end = index(startIndex, offsetBy: bounds.upperBound)
+        return String(self[start..<end])
+    }
+}

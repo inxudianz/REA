@@ -18,7 +18,7 @@ struct Feedbacks {
     var recommendation = String()
 }
 
-class FeedbackContent {
+class FeedbackData {
     
     // Array yang berisi data feedback section
     var images: [UIImage] = []
