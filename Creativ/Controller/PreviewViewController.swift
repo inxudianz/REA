@@ -19,6 +19,7 @@ class PreviewViewController: UIViewController {
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneReview))
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         self.navigationItem.title = "Feedback"
         feedbackCollectionView.delegate = self
         feedbackCollectionView.register(UINib(nibName: "FeedbackHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackHeaderCollectionReusableView")
@@ -33,13 +34,13 @@ class PreviewViewController: UIViewController {
     @objc func doneReview(_ unwindSegue: UIStoryboardSegue) {
         performSegue(withIdentifier: "unwindToHome", sender: self)
     }
-    
+  
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 4
         layout.minimumLineSpacing = layout.minimumInteritemSpacing * 2
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 7/10)
+        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 7/11)
         feedbackCollectionView.collectionViewLayout = layout
     }
 

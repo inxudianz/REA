@@ -19,6 +19,7 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     @IBOutlet var feedbackOverview: UILabel! {
         didSet {
             feedbackOverview.textAlignment = .left
+            
         }
     }
     @IBOutlet weak var feedbackCommentedContent: UILabel!
@@ -42,7 +43,7 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
     
     func displayFeedbackContent(feedback: Feedbacks) {
@@ -62,8 +63,25 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
         notchView.backgroundColor = UIColor(cgColor: notchView.layer.borderColor!)
         notchView.layer.cornerRadius = notchView.frame.size.width / 2
         
-        commentView.backgroundColor = UIColor.white
+        //commentView.backgroundColor = UIColor.white
+        if traitCollection.userInterfaceStyle == .dark {
+            commentView.backgroundColor = UIColor.black
+        }
+        else if traitCollection.userInterfaceStyle == .light {
+            commentView.backgroundColor = UIColor.white
+        }
         commentView.layer.cornerRadius = commentView.frame.size.height / 20
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.userInterfaceStyle == .dark {
+            commentView.backgroundColor = UIColor.black
+        }
+        else if traitCollection.userInterfaceStyle == .light {
+            commentView.backgroundColor = UIColor.white
+        }
     }
     
     func setColor(colorView: inout UIView) {
@@ -91,3 +109,4 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
         */
     }
 }
+

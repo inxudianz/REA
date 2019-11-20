@@ -27,7 +27,7 @@ class CVNewCollectionViewCell: UICollectionViewCell {
         cvDateLbl.text = content.cvCreated
         
         cvThumbnailImage.layer.borderWidth = 3.0
-        cvThumbnailImage.layer.borderColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        cvThumbnailImage.layer.borderColor = #colorLiteral(red: 0.1882352941, green: 0.4, blue: 0.6078431373, alpha: 1)
         cvThumbnailImage.layer.cornerRadius = 8.0
         cvThumbnailImage.layer.masksToBounds = false
         cvThumbnailImage.clipsToBounds = true

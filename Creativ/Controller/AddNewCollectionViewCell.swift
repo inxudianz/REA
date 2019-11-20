@@ -15,6 +15,13 @@ class AddNewCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        addNewCvBtn.layer.borderColor = #colorLiteral(red: 0.1882352941, green: 0.4, blue: 0.6078431373, alpha: 1)
+        addNewCvBtn.layer.borderWidth = 4
+        addNewCvBtn.layer.cornerRadius = 8
+        addNewCvBtn.layer.masksToBounds = false
+        addNewCvBtn.clipsToBounds = true
     }
-
+    
+    
+    
 }

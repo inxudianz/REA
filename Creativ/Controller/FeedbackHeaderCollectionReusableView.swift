@@ -40,12 +40,13 @@ class FeedbackHeaderCollectionReusableView: UICollectionReusableView {
         
         let outgoingMessageLayer = CAShapeLayer()
         outgoingMessageLayer.path = bezierPath.cgPath
-        outgoingMessageLayer.frame = CGRect(x: 115,
-                                            y: 45,
+        outgoingMessageLayer.frame = CGRect(x: 122,
+                                            y: 15,
                                             width: 68,
                                             height: 34)
-        outgoingMessageLayer.fillColor = UIColor(red: 0.09, green: 0.54, blue: 1, alpha: 1).cgColor
-        
+        outgoingMessageLayer.fillColor = UIColor(hex: "#4B96DCFF")?.cgColor
+
         self.layer.addSublayer(outgoingMessageLayer)
     }
+
 }

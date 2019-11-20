@@ -14,6 +14,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="cu7-FN-QO8">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.82352941176470584" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -29,9 +31,7 @@
             </objects>
             <point key="canvasLocation" x="-107" y="27"/>
         </scene>
-
         <!--All Resume-->
-
         <scene sceneID="1fj-e0-VHj">
             <objects>
                 <viewController storyboardIdentifier="HomeViewController" title="All Resume" id="Nh6-1O-WgL" customClass="HomeViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
@@ -68,7 +68,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iCJ-tz-Smb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="rdZ-eY-Hf0"/>
+                    <navigationItem key="navigationItem" title="All Resume" id="rdZ-eY-Hf0"/>
                     <connections>
                         <outlet property="cvCollectionView" destination="ZXX-ye-g6K" id="Yd5-UY-4Iz"/>
                         <outlet property="navBar" destination="rdZ-eY-Hf0" id="fpa-bz-DDm"/>

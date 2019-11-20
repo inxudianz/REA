@@ -35,13 +35,15 @@ class HomeViewController: UIViewController{
     @IBOutlet weak var navBar: UINavigationItem! {
         didSet {
             navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteButton))
+            navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         }
     }
     
     @objc func deleteButton() {
         navBar.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelButton))
-        navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButton))
-        
+        navBar.rightBarButtonItem = UIBarButtonItem(title: "Confirm", style: .done, target: self, action: #selector(doneButton))
+        navBar.leftBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
+        navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         isEdit = true
         cvCollectionView.reloadData()
     }
@@ -52,7 +54,7 @@ class HomeViewController: UIViewController{
         self.navBar.leftBarButtonItem?.isEnabled = false
         self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
         self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
-        
+        self.navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         self.selectedItem = clearSelectedItem
         
         self.isEdit = false
@@ -66,6 +68,7 @@ class HomeViewController: UIViewController{
             self.navBar.leftBarButtonItem?.isEnabled = false
             self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
             self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
+            self.navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
             
             self.isEdit = false
             cvCollectionView.reloadData()
@@ -87,6 +90,7 @@ class HomeViewController: UIViewController{
                 self.navBar.leftBarButtonItem?.isEnabled = false
                 self.navBar.leftBarButtonItem?.tintColor = UIColor.clear
                 self.navBar.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(self.deleteButton))
+                self.navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
                 
                 self.isEdit = false
                 self.cvCollectionView.reloadData()
@@ -111,6 +115,21 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         // Do any additional setup after loading the view
         registerXIB()
+    }
+    
+    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
+        //let sourceViewController = unwindSegue.source
+        // Use data from the view controller which initiated the unwind segue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToOverview" {
+            if let overviewViewController = segue.destination as? OverviewViewController {
+                    overviewViewController.nama = name
+            }
+        }
+    }
+        
 
     }
     
