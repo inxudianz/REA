@@ -37,6 +37,8 @@
 		F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1F237413670007FCC4 /* HomeViewController.swift */; };
 		F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC21237413780007FCC4 /* PreviewViewController.swift */; };
 		F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC23237413890007FCC4 /* OverviewViewController.swift */; };
+		F55134662384FDFB0054854F /* SegmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55134652384FDFB0054854F /* SegmentModel.swift */; };
+		F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55134672384FE0F0054854F /* SegmentedModel.swift */; };
 		F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */; };
 		F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */; };
 		F5F70677237C0F6100771249 /* HomeCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */; };
@@ -98,6 +100,8 @@
 		F51CEC1F237413670007FCC4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F51CEC21237413780007FCC4 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		F51CEC23237413890007FCC4 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
+		F55134652384FDFB0054854F /* SegmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentModel.swift; sourceTree = "<group>"; };
+		F55134672384FE0F0054854F /* SegmentedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedModel.swift; sourceTree = "<group>"; };
 		F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContent.swift; sourceTree = "<group>"; };
 		F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionReusableView.swift; sourceTree = "<group>"; };
 		F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */,
+				F55134652384FDFB0054854F /* SegmentModel.swift */,
+				F55134672384FE0F0054854F /* SegmentedModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -416,6 +422,7 @@
 				1EE6D1CC237511AE00A07759 /* FeedbackModel.swift in Sources */,
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
+				F55134662384FDFB0054854F /* SegmentModel.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
 				F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */,
 				8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */,
@@ -424,6 +431,7 @@
 				1EE6D1D423753AA000A07759 /* (null) in Sources */,
 				F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* (null) in Sources */,
+				F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */,
 				1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */,
 				1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */,
 				F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */,
@@ -608,7 +616,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Creativ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativ.segmen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -628,7 +636,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Creativ;
+				PRODUCT_BUNDLE_IDENTIFIER = com.creativ.segmen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
