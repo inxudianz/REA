@@ -15,20 +15,14 @@ class OnboardingViewController: UIViewController {
             continueButton.layer.cornerRadius = continueButton.frame.height/5
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func masukButton(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        self.present(newViewController, animated: true, completion: nil)
-    }
-    
     @IBAction func continueButton(_ sender: Any) {
         performSegue(withIdentifier: "goToHome", sender: self)
-
     }
     
     /*

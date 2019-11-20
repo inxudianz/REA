@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="omJ-kh-LUx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,13 +10,16 @@
         <!--Home Navigation View Controller-->
         <scene sceneID="pcb-7a-NLp">
             <objects>
-                <navigationController storyboardIdentifier="HomeNavigationViewController" modalPresentationStyle="fullScreen" interfaceStyle="light" id="omJ-kh-LUx" customClass="HomeNavigationViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                <navigationController storyboardIdentifier="HomeNavigationViewController" id="omJ-kh-LUx" customClass="HomeNavigationViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="cu7-FN-QO8">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="Nh6-1O-WgL" kind="relationship" relationship="rootViewController" id="GXe-vg-YrF"/>
@@ -26,10 +29,12 @@
             </objects>
             <point key="canvasLocation" x="-107" y="27"/>
         </scene>
-        <!--Home View Controller-->
+
+        <!--All Resume-->
+
         <scene sceneID="1fj-e0-VHj">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" id="Nh6-1O-WgL" customClass="HomeViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" title="All Resume" id="Nh6-1O-WgL" customClass="HomeViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="qZ7-1R-f24">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,33 +61,29 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="iCJ-tz-Smb" firstAttribute="trailing" secondItem="ZXX-ye-g6K" secondAttribute="trailing" id="2wa-0w-fDH"/>
-                            <constraint firstItem="iCJ-tz-Smb" firstAttribute="bottom" secondItem="ZXX-ye-g6K" secondAttribute="bottom" id="FLu-o8-ema"/>
-                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="leading" secondItem="iCJ-tz-Smb" secondAttribute="leading" id="niy-yK-veV"/>
-                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="top" secondItem="iCJ-tz-Smb" secondAttribute="top" id="tdV-LB-RMr"/>
+                            <constraint firstItem="iCJ-tz-Smb" firstAttribute="bottom" secondItem="ZXX-ye-g6K" secondAttribute="bottom" id="Bmg-Fi-PtC"/>
+                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="trailing" secondItem="iCJ-tz-Smb" secondAttribute="trailing" id="KBO-QG-i7z"/>
+                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="top" secondItem="iCJ-tz-Smb" secondAttribute="top" id="leI-La-Olr"/>
+                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="leading" secondItem="iCJ-tz-Smb" secondAttribute="leading" id="onR-Ms-QFy"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iCJ-tz-Smb"/>
                     </view>
-                    <navigationItem key="navigationItem" id="rdZ-eY-Hf0"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <navigationItem key="navigationItem" title="Home" id="rdZ-eY-Hf0"/>
                     <connections>
                         <outlet property="cvCollectionView" destination="ZXX-ye-g6K" id="Yd5-UY-4Iz"/>
                         <outlet property="navBar" destination="rdZ-eY-Hf0" id="fpa-bz-DDm"/>
                         <segue destination="5HN-gf-Cj2" kind="show" identifier="gotoprocess" id="PQ1-kg-chH"/>
-                        <segue destination="77G-t5-pU3" kind="show" id="EXy-Aa-JCS"/>
+                        <segue destination="77G-t5-pU3" kind="show" identifier="goToOverview" id="EXy-Aa-JCS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hn-Or-cpj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1250.7246376811595" y="517.63392857142856"/>
+            <point key="canvasLocation" x="1610.144927536232" y="531.69642857142856"/>
         </scene>
         <!--Overview-->
         <scene sceneID="dsV-rg-c5a">
             <objects>
-                <viewControllerPlaceholder storyboardName="Overview" id="77G-t5-pU3" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="axz-0e-gdu"/>
-                </viewControllerPlaceholder>
+                <viewControllerPlaceholder storyboardName="Overview" id="77G-t5-pU3" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfc-gZ-K66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1251" y="1603"/>
@@ -90,9 +91,7 @@
         <!--Processing-->
         <scene sceneID="7D1-ek-Me1">
             <objects>
-                <viewControllerPlaceholder storyboardName="Processing" id="5HN-gf-Cj2" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="eAa-7c-HXC"/>
-                </viewControllerPlaceholder>
+                <viewControllerPlaceholder storyboardName="Processing" id="5HN-gf-Cj2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9so-OW-erN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2596" y="518"/>
