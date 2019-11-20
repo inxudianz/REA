@@ -51,6 +51,12 @@ class ProcessingViewController: UIViewController {
         setCollectionViewLayout()
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(recursiveLoop), userInfo: nil, repeats: false)
+        
+        addBubble()
+        
+        onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
+        setCollectionViewLayout()
+        dispatchClassificationHandler()
     }
     var countRecursiveLoop = 0
     @objc func recursiveLoop(){
@@ -78,16 +84,6 @@ class ProcessingViewController: UIViewController {
         }
         
     }
-
-        addBubble()
-
-        // Do any additional setup after loading the view.
-        onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
-        setCollectionViewLayout()
-        dispatchClassificationHandler()
-    }
-    
-
     func dispatchClassificationHandler() {
         let semaphore = DispatchSemaphore(value: 0)
         let dispatchQueue = DispatchQueue.global(qos: .background)
@@ -258,16 +254,6 @@ class ProcessingViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-
     }
 }
 

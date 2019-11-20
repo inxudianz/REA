@@ -129,9 +129,6 @@ class HomeViewController: UIViewController{
             }
         }
     }
-        
-
-    }
     
     func registerXIB() {
         cvCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
@@ -148,20 +145,6 @@ class HomeViewController: UIViewController{
         
 
     }
-    
-    @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
-        //let sourceViewController = unwindSegue.source
-        // Use data from the view controller which initiated the unwind segue
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToOverview" {
-            if let overviewViewController = segue.destination as? OverviewViewController {
-                    overviewViewController.nama = name
-            }
-        }
-    }
-    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -286,18 +269,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             }
         }
         
-        readPDFFile()
-        fontMean = fontMean/Float(totalFont)
-          !FileManager.default.fileExists(atPath: fileURL.path) {
-            do {
-                // writes the image data to disk
-                try data.write(to: fileURL)
-                print("file saved")
-            } catch {
-                print("error saving file:", error)
-            }
-        }
-        
         //cek ada filenya di directory atau tidak
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)
@@ -326,10 +297,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     func listFilesFromDocumentsFolder() -> [String]? {
         let fileMngr = FileManager.default;
         
-        // Full path to documents directory
-        let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask)[0].path
-        
-
         // Full path to documents directory
         let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask)[0].path
 
