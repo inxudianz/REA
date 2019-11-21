@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rds-zn-w78">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Merriweather-Bold.otf">
+            <string>Merriweather-Bold</string>
+        </array>
+        <array key="Merriweather-Regular.otf">
+            <string>Merriweather-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="REA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fej-hM-Q9k">
@@ -33,7 +41,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="znj-HQ-qLh"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -43,19 +51,85 @@
         <!--Onboarding View Controller-->
         <scene sceneID="bBQ-jf-FFb">
             <objects>
-                <viewController storyboardIdentifier="OnboardingViewController" id="Rds-zn-w78" customClass="OnboardingViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingViewController" id="Rds-zn-w78" customClass="OnboardingViewController" customModule="REA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6ar-zr-UTk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Onboarding 2" translatesAutoresizingMaskIntoConstraints="NO" id="uWF-Hv-PQ9">
-                                <rect key="frame" x="51" y="434" width="90" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLt-YY-Uk9">
-                                <rect key="frame" x="71" y="806" width="273" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gS-YL-ZP6" userLabel="Content">
+                                <rect key="frame" x="20" y="218" width="374" height="300"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding 2" translatesAutoresizingMaskIntoConstraints="NO" id="uWF-Hv-PQ9">
+                                        <rect key="frame" x="31" y="159" width="90" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="Eld-db-w42"/>
+                                            <constraint firstAttribute="height" constant="90" id="LdN-0O-pt0"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding 1" translatesAutoresizingMaskIntoConstraints="NO" id="3QY-Kq-M5e">
+                                        <rect key="frame" x="31" y="40" width="90" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="KVO-3U-o4q"/>
+                                            <constraint firstAttribute="width" constant="90" id="mxD-np-Kj6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import resume from your device and we will help you analyse it." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5W-qQ-uo4">
+                                        <rect key="frame" x="129" y="77" width="202" height="53"/>
+                                        <fontDescription key="fontDescription" name="Merriweather-Regular" family="Merriweather" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Upload Your CV" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ps6-Kc-Bnf">
+                                        <rect key="frame" x="129" y="40" width="202" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="Merriweather-Bold" family="Merriweather" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Feedbacks" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HvA-cj-9L5">
+                                        <rect key="frame" x="129" y="159" width="202" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="Merriweather-Bold" family="Merriweather" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" text="Receive feedbacks on what you should put in your resume." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gj-5h-EfF">
+                                        <rect key="frame" x="129" y="195.66666666666669" width="202" height="53.333333333333343"/>
+                                        <fontDescription key="fontDescription" name="Merriweather-Regular" family="Merriweather" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="uWF-Hv-PQ9" firstAttribute="leading" secondItem="0gS-YL-ZP6" secondAttribute="leading" constant="31" id="5mC-lo-0xI"/>
+                                    <constraint firstAttribute="bottom" secondItem="uWF-Hv-PQ9" secondAttribute="bottom" constant="51" id="7N7-b1-z7x"/>
+                                    <constraint firstAttribute="height" constant="300" id="HVp-Ff-6pf"/>
+                                    <constraint firstAttribute="trailing" secondItem="HvA-cj-9L5" secondAttribute="trailing" constant="43" id="InR-kp-3v9"/>
+                                    <constraint firstItem="4gj-5h-EfF" firstAttribute="top" secondItem="HvA-cj-9L5" secondAttribute="bottom" constant="16.5" id="LPU-53-Jpm"/>
+                                    <constraint firstAttribute="trailing" secondItem="4gj-5h-EfF" secondAttribute="trailing" constant="43" id="MKM-xp-gXk"/>
+                                    <constraint firstItem="Ps6-Kc-Bnf" firstAttribute="top" secondItem="0gS-YL-ZP6" secondAttribute="top" constant="40" id="MzY-Jq-Vai"/>
+                                    <constraint firstAttribute="trailing" secondItem="b5W-qQ-uo4" secondAttribute="trailing" constant="43" id="Ore-aR-byA"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ps6-Kc-Bnf" secondAttribute="trailing" constant="43" id="QMC-oY-Uze"/>
+                                    <constraint firstItem="4gj-5h-EfF" firstAttribute="leading" secondItem="uWF-Hv-PQ9" secondAttribute="trailing" constant="8" id="V0G-rF-20g"/>
+                                    <constraint firstItem="b5W-qQ-uo4" firstAttribute="leading" secondItem="3QY-Kq-M5e" secondAttribute="trailing" constant="8" id="X0B-YV-AZI"/>
+                                    <constraint firstItem="Ps6-Kc-Bnf" firstAttribute="leading" secondItem="3QY-Kq-M5e" secondAttribute="trailing" constant="8" id="eDy-Pg-XgO"/>
+                                    <constraint firstItem="b5W-qQ-uo4" firstAttribute="top" secondItem="Ps6-Kc-Bnf" secondAttribute="bottom" constant="16.5" id="i6D-IT-e3Z"/>
+                                    <constraint firstItem="3QY-Kq-M5e" firstAttribute="leading" secondItem="0gS-YL-ZP6" secondAttribute="leading" constant="31" id="kVs-gH-ybq"/>
+                                    <constraint firstItem="HvA-cj-9L5" firstAttribute="top" secondItem="b5W-qQ-uo4" secondAttribute="bottom" constant="29" id="rvW-B0-7Rj"/>
+                                    <constraint firstItem="HvA-cj-9L5" firstAttribute="leading" secondItem="uWF-Hv-PQ9" secondAttribute="trailing" constant="8" id="tMW-pY-Sqb"/>
+                                    <constraint firstAttribute="bottom" secondItem="4gj-5h-EfF" secondAttribute="bottom" constant="51" id="wzW-3k-ECj"/>
+                                    <constraint firstItem="3QY-Kq-M5e" firstAttribute="top" secondItem="0gS-YL-ZP6" secondAttribute="top" constant="40" id="xpW-WP-9QR"/>
+                                    <constraint firstItem="uWF-Hv-PQ9" firstAttribute="top" secondItem="3QY-Kq-M5e" secondAttribute="bottom" constant="29" id="zHb-H1-cTO"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLt-YY-Uk9">
+                                <rect key="frame" x="70.666666666666686" y="686" width="273" height="34"/>
                                 <color key="backgroundColor" red="0.18823529411764706" green="0.40000000000000002" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="RTd-AG-Ort"/>
+                                    <constraint firstAttribute="width" constant="273" id="ULV-1x-bDR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Merriweather-Bold" family="Merriweather" pointSize="17"/>
                                 <state key="normal" title="Continue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -63,41 +137,18 @@
                                     <action selector="continueButton:" destination="Rds-zn-w78" eventType="touchUpInside" id="d33-ay-kkC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload Your Resume" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ps6-Kc-Bnf">
-                                <rect key="frame" x="161" y="346" width="157" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Get Feedbacks" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HvA-cj-9L5">
-                                <rect key="frame" x="161" y="445" width="110" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Receive feedbacks on what you should put in your resume." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gj-5h-EfF">
-                                <rect key="frame" x="161" y="457" width="200" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Onboarding 1" translatesAutoresizingMaskIntoConstraints="NO" id="3QY-Kq-M5e">
-                                <rect key="frame" x="51" y="335" width="90" height="90"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Import resume from your device and we will help you analyse it." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5W-qQ-uo4">
-                                <rect key="frame" x="161" y="358" width="208" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="51C-xl-Uz1"/>
+                        <constraints>
+                            <constraint firstItem="0gS-YL-ZP6" firstAttribute="centerX" secondItem="6ar-zr-UTk" secondAttribute="centerX" id="4tF-ya-Ylp"/>
+                            <constraint firstItem="HX7-zi-uG3" firstAttribute="bottom" secondItem="vLt-YY-Uk9" secondAttribute="bottom" constant="16" id="5oR-cd-giy"/>
+                            <constraint firstItem="vLt-YY-Uk9" firstAttribute="centerX" secondItem="6ar-zr-UTk" secondAttribute="centerX" id="6VH-2V-o2v"/>
+                            <constraint firstItem="vLt-YY-Uk9" firstAttribute="centerX" secondItem="6ar-zr-UTk" secondAttribute="centerX" id="HRX-UB-VEP"/>
+                            <constraint firstItem="0gS-YL-ZP6" firstAttribute="centerY" secondItem="6ar-zr-UTk" secondAttribute="centerY" id="KDx-Oo-BhZ"/>
+                            <constraint firstItem="0gS-YL-ZP6" firstAttribute="trailing" secondItem="6ar-zr-UTk" secondAttribute="trailingMargin" id="Ohe-rJ-J1C"/>
+                            <constraint firstItem="0gS-YL-ZP6" firstAttribute="leading" secondItem="6ar-zr-UTk" secondAttribute="leadingMargin" id="TY3-Ir-yvO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HX7-zi-uG3"/>
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="vLt-YY-Uk9" id="Kdk-O6-aIV"/>
@@ -106,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLU-Cc-dfW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="766.66666666666674" y="-270.53571428571428"/>
+            <point key="canvasLocation" x="766.66666666666674" y="-271.20535714285711"/>
         </scene>
         <!--Home-->
         <scene sceneID="Mx6-KF-TgA">

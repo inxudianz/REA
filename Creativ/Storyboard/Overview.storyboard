@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oFC-x5-uTM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,14 +11,13 @@
         <!--Overview View Controller-->
         <scene sceneID="3gq-fx-fhO">
             <objects>
-                <viewController storyboardIdentifier="OverviewViewController" id="oFC-x5-uTM" customClass="OverviewViewController" customModule="Creativ" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OverviewViewController" id="oFC-x5-uTM" customClass="OverviewViewController" customModule="REA" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hwj-QE-4nd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VbZ-y5-QTD">
-                                <rect key="frame" x="20" y="0.0" width="374" height="808"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VbZ-y5-QTD">
+                                <rect key="frame" x="20" y="0.0" width="374" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="10" id="Q0b-jB-3YK">
                                     <size key="itemSize" width="370" height="520"/>
@@ -28,10 +27,10 @@
                                     <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedbackCollectionViewCell" id="5Au-eZ-NKV" customClass="FeedbackCollectionViewCell" customModule="Creativ" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedbackCollectionViewCell" id="5Au-eZ-NKV" customClass="FeedbackCollectionViewCell" customModule="REA" customModuleProvider="target">
                                         <rect key="frame" x="2" y="110" width="370" height="516"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="thg-MZ-oBu" customClass="CustomFeedbackShape" customModule="Creativ" customModuleProvider="target">
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="thg-MZ-oBu" customClass="CustomFeedbackShape" customModule="REA" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="516"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -143,6 +142,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="VbZ-y5-QTD" firstAttribute="bottom" secondItem="2ge-I4-wab" secondAttribute="bottom" id="6Uc-rn-XyR"/>
+                            <constraint firstItem="VbZ-y5-QTD" firstAttribute="top" secondItem="2ge-I4-wab" secondAttribute="top" id="az4-Ff-BcW"/>
+                            <constraint firstItem="2ge-I4-wab" firstAttribute="trailing" secondItem="VbZ-y5-QTD" secondAttribute="trailing" constant="20" id="lOC-Kq-yGp"/>
+                            <constraint firstItem="VbZ-y5-QTD" firstAttribute="leading" secondItem="2ge-I4-wab" secondAttribute="leading" constant="20" id="wwx-nQ-5nG"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="2ge-I4-wab"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

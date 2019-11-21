@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10272E64238567EB00032BA3 /* merriweather in Resources */ = {isa = PBXBuildFile; fileRef = 10272E63238567EB00032BA3 /* merriweather */; };
 		1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */; };
 		1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E407539237D6EA200FDAA31 /* Brain.swift */; };
 		1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10272E63238567EB00032BA3 /* merriweather */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merriweather; path = "../../../../Dropbox (DeveloperAcademy-ID)/Final Challenge/Design/Font/merriweather"; sourceTree = "<group>"; };
 		1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E407539237D6EA200FDAA31 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		920F63D32372D0CC00BCFC5C /* Creativ */ = {
 			isa = PBXGroup;
 			children = (
+				10272E63238567EB00032BA3 /* merriweather */,
 				F50027B8237BF5D300E0B08F /* Model */,
 				920AF3312374271000F8FB7A /* Helper */,
 				F51CEC30237416270007FCC4 /* Controller */,
@@ -370,6 +373,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E7F758E237C6A2D00A1DB9D /* FeedbackCollectionViewCell.xib in Resources */,
+				10272E64238567EB00032BA3 /* merriweather in Resources */,
 				920F63E42372D0CE00BCFC5C /* LaunchScreen.storyboard in Resources */,
 				F5F7067F237C180300771249 /* CVNewCollectionViewCell.xib in Resources */,
 				1EE6D1D2237538AC00A07759 /* (null) in Resources */,
