@@ -14,11 +14,13 @@ class OverviewViewController: UIViewController {
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
     let feedbackData = FeedbackData()
+    let customFont = CustomFont()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.title = nama
+        self.navigationItem.backBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: customFont.getCustomFontType(type: .Regular, size: 17)], for: .normal)
         feedbackCollectionView.delegate = self
         feedbackCollectionView.register(UINib(nibName: "FeedbackHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackHeaderCollectionReusableView")
         feedbackCollectionView.register(UINib(nibName: "FeedbackCollectionViewCell", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackCollectionViewCell")

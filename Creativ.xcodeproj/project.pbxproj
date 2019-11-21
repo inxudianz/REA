@@ -21,6 +21,15 @@
 		1EE6D1CC237511AE00A07759 /* FeedbackData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE6D1CB237511AE00A07759 /* FeedbackData.swift */; };
 		1EE6D1D2237538AC00A07759 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		1EE6D1D423753AA000A07759 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		1EE84B3A23863F57001E2DA1 /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE84B3923863F57001E2DA1 /* FontHelper.swift */; };
+		1EE84B4323864057001E2DA1 /* Merriweather-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B402386404C001E2DA1 /* Merriweather-Black.otf */; };
+		1EE84B442386405B001E2DA1 /* Merriweather-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B412386404D001E2DA1 /* Merriweather-BlackItalic.otf */; };
+		1EE84B452386405B001E2DA1 /* Merriweather-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B3C2386404C001E2DA1 /* Merriweather-Bold.otf */; };
+		1EE84B462386405B001E2DA1 /* Merriweather-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B422386404D001E2DA1 /* Merriweather-BoldItalic.otf */; };
+		1EE84B472386405B001E2DA1 /* Merriweather-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B3D2386404C001E2DA1 /* Merriweather-Italic.otf */; };
+		1EE84B482386405B001E2DA1 /* Merriweather-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B3F2386404C001E2DA1 /* Merriweather-Light.otf */; };
+		1EE84B492386405B001E2DA1 /* Merriweather-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B3E2386404C001E2DA1 /* Merriweather-LightItalic.otf */; };
+		1EE84B4A2386405B001E2DA1 /* Merriweather-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B3B2386404C001E2DA1 /* Merriweather-Regular.otf */; };
 		8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A244E6A23758751006E6CC0 /* UIColorExtension.swift */; };
 		8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */; };
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
@@ -82,6 +91,15 @@
 		1EE6D1C523741A5C00A07759 /* Preview.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preview.storyboard; sourceTree = "<group>"; };
 		1EE6D1C723741A6A00A07759 /* Processing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Processing.storyboard; sourceTree = "<group>"; };
 		1EE6D1CB237511AE00A07759 /* FeedbackData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackData.swift; sourceTree = "<group>"; };
+		1EE84B3923863F57001E2DA1 /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
+		1EE84B3B2386404C001E2DA1 /* Merriweather-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.otf"; sourceTree = "<group>"; };
+		1EE84B3C2386404C001E2DA1 /* Merriweather-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Bold.otf"; sourceTree = "<group>"; };
+		1EE84B3D2386404C001E2DA1 /* Merriweather-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Italic.otf"; sourceTree = "<group>"; };
+		1EE84B3E2386404C001E2DA1 /* Merriweather-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-LightItalic.otf"; sourceTree = "<group>"; };
+		1EE84B3F2386404C001E2DA1 /* Merriweather-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Light.otf"; sourceTree = "<group>"; };
+		1EE84B402386404C001E2DA1 /* Merriweather-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Black.otf"; sourceTree = "<group>"; };
+		1EE84B412386404D001E2DA1 /* Merriweather-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-BlackItalic.otf"; sourceTree = "<group>"; };
+		1EE84B422386404D001E2DA1 /* Merriweather-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-BoldItalic.otf"; sourceTree = "<group>"; };
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		8A244E6A23758751006E6CC0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeNavigationViewController.swift; path = Creativ/Controller/HomeNavigationViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -146,10 +164,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EE84B3323863CAA001E2DA1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1EE84B402386404C001E2DA1 /* Merriweather-Black.otf */,
+				1EE84B412386404D001E2DA1 /* Merriweather-BlackItalic.otf */,
+				1EE84B3C2386404C001E2DA1 /* Merriweather-Bold.otf */,
+				1EE84B422386404D001E2DA1 /* Merriweather-BoldItalic.otf */,
+				1EE84B3D2386404C001E2DA1 /* Merriweather-Italic.otf */,
+				1EE84B3F2386404C001E2DA1 /* Merriweather-Light.otf */,
+				1EE84B3E2386404C001E2DA1 /* Merriweather-LightItalic.otf */,
+				1EE84B3B2386404C001E2DA1 /* Merriweather-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		920AF3312374271000F8FB7A /* Helper */ = {
 			isa = PBXGroup;
 			children = (
 				920AF3322374272400F8FB7A /* CoreDataHelper.swift */,
+				1EE84B3923863F57001E2DA1 /* FontHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -177,6 +211,7 @@
 		920F63D32372D0CC00BCFC5C /* Creativ */ = {
 			isa = PBXGroup;
 			children = (
+				1EE84B3323863CAA001E2DA1 /* Fonts */,
 				F50027B8237BF5D300E0B08F /* Model */,
 				920AF3312374271000F8FB7A /* Helper */,
 				F51CEC30237416270007FCC4 /* Controller */,
@@ -370,12 +405,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E7F758E237C6A2D00A1DB9D /* FeedbackCollectionViewCell.xib in Resources */,
+				1EE84B482386405B001E2DA1 /* Merriweather-Light.otf in Resources */,
 				920F63E42372D0CE00BCFC5C /* LaunchScreen.storyboard in Resources */,
+				1EE84B462386405B001E2DA1 /* Merriweather-BoldItalic.otf in Resources */,
 				F5F7067F237C180300771249 /* CVNewCollectionViewCell.xib in Resources */,
+				1EE84B492386405B001E2DA1 /* Merriweather-LightItalic.otf in Resources */,
+				1EE84B4A2386405B001E2DA1 /* Merriweather-Regular.otf in Resources */,
 				1EE6D1D2237538AC00A07759 /* (null) in Resources */,
+				1EE84B4323864057001E2DA1 /* Merriweather-Black.otf in Resources */,
 				1EE6D1C223741A0000A07759 /* Home.storyboard in Resources */,
+				1EE84B442386405B001E2DA1 /* Merriweather-BlackItalic.otf in Resources */,
 				F5F70677237C0F6100771249 /* HomeCollectionReusableView.xib in Resources */,
 				920F63E12372D0CE00BCFC5C /* Assets.xcassets in Resources */,
+				1EE84B472386405B001E2DA1 /* Merriweather-Italic.otf in Resources */,
+				1EE84B452386405B001E2DA1 /* Merriweather-Bold.otf in Resources */,
 				F5F7067B237C17B700771249 /* AddNewCollectionViewCell.xib in Resources */,
 				1EE6D1C423741A3400A07759 /* Overview.storyboard in Resources */,
 				920F63DC2372D0CC00BCFC5C /* Main.storyboard in Resources */,
@@ -432,6 +475,7 @@
 				920AF3A5237E633C00F8FB7A /* FeedbackContentDetailModel.swift in Sources */,
 				F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */,
 				920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */,
+				1EE84B3A23863F57001E2DA1 /* FontHelper.swift in Sources */,
 				920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */,
 				F5F7067E237C180300771249 /* CVNewCollectionViewCell.swift in Sources */,
 				1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */,

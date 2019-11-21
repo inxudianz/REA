@@ -9,10 +9,33 @@
 import UIKit
 
 class OnboardingViewController: UIViewController {
-
+    
+    let customFont = CustomFont()
+    
+    @IBOutlet weak var onboardingTitle1: UILabel! {
+        didSet {
+            onboardingTitle1.font = customFont.getCustomFontType(type: .Bold, size: 16)
+        }
+    }
+    @IBOutlet weak var onboardingLabel1: UILabel! {
+        didSet {
+            onboardingLabel1.font = customFont.getCustomFontType(type: .Regular, size: 14)
+        }
+    }
+    @IBOutlet weak var onboardingTitle2: UILabel! {
+        didSet {
+            onboardingTitle2.font = customFont.getCustomFontType(type: .Bold, size: 16)
+        }
+    }
+    @IBOutlet weak var onboardingLabel2: UILabel! {
+        didSet {
+            onboardingLabel2.font = customFont.getCustomFontType(type: .Regular, size: 14)
+        }
+    }
     @IBOutlet weak var continueButton: UIButton! {
         didSet {
             continueButton.layer.cornerRadius = continueButton.frame.height/5
+            continueButton.titleLabel?.font = customFont.getCustomFontType(type: .Bold, size: 17)
         }
     }
     

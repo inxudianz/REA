@@ -16,8 +16,13 @@ enum StatusType {
 class ProcessCollectionViewCell: UICollectionViewCell {
     
     private var status: StatusType?
+    let customFont = CustomFont()
     
-    @IBOutlet weak var processLabel: UILabel!
+    @IBOutlet weak var processLabel: UILabel! {
+        didSet {
+            processLabel.font = customFont.getCustomFontType(type: .Regular, size: 16)
+        }
+    }
     @IBOutlet weak var statusIndicator: UIView!
     
     func setProcessContent(text: String) {

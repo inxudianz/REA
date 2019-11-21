@@ -10,9 +10,19 @@ import UIKit
 
 class CVNewCollectionViewCell: UICollectionViewCell {
     
+    let customFont = CustomFont()
+    
     @IBOutlet weak var cvThumbnailImage: UIImageView!
-    @IBOutlet weak var cvNameLbl: UILabel!
-    @IBOutlet weak var cvDateLbl: UILabel!
+    @IBOutlet weak var cvNameLbl: UILabel! {
+        didSet {
+            cvNameLbl.font = customFont.getCustomFontType(type: .Regular, size: 21)
+        }
+    }
+    @IBOutlet weak var cvDateLbl: UILabel! {
+        didSet {
+            cvDateLbl.font = customFont.getCustomFontType(type: .Light, size: 14)
+        }
+    }
     @IBOutlet weak var checklistImg: UIImageView!
     
     var content: HomeContent! {
