@@ -19,7 +19,8 @@ class HomeCollectionReusableView: UICollectionReusableView {
     }
     
     func addBubble(){
-        let width: CGFloat = 252
+
+        let width: CGFloat = UIScreen.main.bounds.width - 162
         let height: CGFloat = 87
         
         let bezierPath = UIBezierPath()

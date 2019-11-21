@@ -38,9 +38,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZXX-ye-g6K">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZXX-ye-g6K">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="j80-mW-Pc5">
                                     <size key="itemSize" width="154" height="277"/>
@@ -60,6 +59,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="leading" secondItem="iCJ-tz-Smb" secondAttribute="leading" id="8O0-RJ-8yb"/>
+                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="top" secondItem="iCJ-tz-Smb" secondAttribute="top" id="Bap-iO-wen"/>
+                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="trailing" secondItem="iCJ-tz-Smb" secondAttribute="trailing" id="QkV-5e-9L7"/>
+                            <constraint firstItem="ZXX-ye-g6K" firstAttribute="bottom" secondItem="iCJ-tz-Smb" secondAttribute="bottom" id="x1i-tC-yd7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iCJ-tz-Smb"/>
                     </view>
                     <navigationItem key="navigationItem" title="All Resume" id="rdZ-eY-Hf0"/>
