@@ -19,42 +19,52 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ULy-Wv-uRC">
                                 <rect key="frame" x="20" y="0.0" width="374" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="774" id="DvF-dr-lMQ"/>
+                                    <constraint firstAttribute="width" constant="374" id="cqe-gV-QgL"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="10" id="Xm7-HY-T1Z">
                                     <size key="itemSize" width="370" height="520"/>
                                     <size key="estimatedItemSize" width="75" height="75"/>
-                                    <size key="headerReferenceSize" width="50" height="193"/>
+                                    <size key="headerReferenceSize" width="640" height="193"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="2" minY="2" maxX="2" maxY="2"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FeedbackCollectionViewCell" id="CPi-xU-Ijy" customClass="FeedbackCollectionViewCell" customModule="REA" customModuleProvider="target">
                                         <rect key="frame" x="2" y="195" width="370" height="516"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jMy-YE-w70" customClass="CustomFeedbackShape" customModule="REA" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="516"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6yJ-pM-ZgC">
-                                                    <rect key="frame" x="2" y="23" width="366" height="464"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6yJ-pM-ZgC">
+                                                    <rect key="frame" x="0.0" y="26" width="370" height="464"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Etv-Ff-8JA">
-                                                    <rect key="frame" x="163.98741762620375" y="6.0000000000004547" width="40" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etv-Ff-8JA">
+                                                    <rect key="frame" x="165" y="6" width="40" height="40"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ViJ-tw-pcQ">
-                                                            <rect key="frame" x="10" y="10.089080459768411" width="20" height="20"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ViJ-tw-pcQ">
+                                                            <rect key="frame" x="6" y="6" width="28" height="28"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="28" id="Asp-kj-vj8"/>
+                                                                <constraint firstAttribute="width" constant="28" id="dOc-5a-JlR"/>
+                                                            </constraints>
                                                         </imageView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="2IY-SI-KjY"/>
+                                                        <constraint firstItem="ViJ-tw-pcQ" firstAttribute="centerY" secondItem="Etv-Ff-8JA" secondAttribute="centerY" id="468-ON-WCT"/>
+                                                        <constraint firstItem="ViJ-tw-pcQ" firstAttribute="centerX" secondItem="Etv-Ff-8JA" secondAttribute="centerX" id="JSb-H7-VVN"/>
+                                                        <constraint firstAttribute="height" constant="40" id="qjZ-du-MNp"/>
+                                                    </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RDk-zj-eXi">
-                                                    <rect key="frame" x="6" y="84" width="358" height="398"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RDk-zj-eXi">
+                                                    <rect key="frame" x="7" y="76" width="356" height="407"/>
                                                     <subviews>
                                                         <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WWG-BT-3lw">
                                                             <rect key="frame" x="9" y="115" width="338" height="2"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
                                                             <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="tintColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
@@ -116,6 +126,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RDk-zj-eXi" firstAttribute="top" secondItem="6yJ-pM-ZgC" secondAttribute="top" constant="50" id="1sK-Cc-dnL"/>
+                                                <constraint firstItem="6yJ-pM-ZgC" firstAttribute="top" secondItem="jMy-YE-w70" secondAttribute="top" constant="26" id="2RC-Cn-o6x"/>
+                                                <constraint firstItem="Etv-Ff-8JA" firstAttribute="top" secondItem="jMy-YE-w70" secondAttribute="top" constant="6" id="C50-5s-VYX"/>
+                                                <constraint firstItem="6yJ-pM-ZgC" firstAttribute="leading" secondItem="jMy-YE-w70" secondAttribute="leading" id="Eai-sV-awM"/>
+                                                <constraint firstAttribute="trailing" secondItem="Etv-Ff-8JA" secondAttribute="trailing" constant="165" id="FNa-Dx-WYi"/>
+                                                <constraint firstItem="RDk-zj-eXi" firstAttribute="bottom" secondItem="6yJ-pM-ZgC" secondAttribute="bottom" constant="-7" id="LAd-9U-G50"/>
+                                                <constraint firstAttribute="trailing" secondItem="6yJ-pM-ZgC" secondAttribute="trailing" id="Xtp-Au-l6x"/>
+                                                <constraint firstAttribute="bottom" secondItem="6yJ-pM-ZgC" secondAttribute="bottom" constant="26" id="nyP-2f-UZw"/>
+                                                <constraint firstItem="RDk-zj-eXi" firstAttribute="leading" secondItem="6yJ-pM-ZgC" secondAttribute="leading" constant="7" id="pDl-vl-2Rc"/>
+                                                <constraint firstItem="Etv-Ff-8JA" firstAttribute="leading" secondItem="jMy-YE-w70" secondAttribute="leading" constant="165" id="sff-dG-aM1"/>
+                                                <constraint firstItem="RDk-zj-eXi" firstAttribute="trailing" secondItem="6yJ-pM-ZgC" secondAttribute="trailing" constant="-7" id="udM-dh-OSH"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="370" height="516"/>
                                         <connections>
@@ -142,10 +165,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="ULy-Wv-uRC" firstAttribute="bottom" secondItem="2sk-PE-J7O" secondAttribute="bottom" id="5qo-mT-5TG"/>
-                            <constraint firstItem="ULy-Wv-uRC" firstAttribute="leading" secondItem="2sk-PE-J7O" secondAttribute="leading" constant="20" id="KGe-aX-5iz"/>
-                            <constraint firstItem="ULy-Wv-uRC" firstAttribute="top" secondItem="2sk-PE-J7O" secondAttribute="top" id="ZvN-dY-0D6"/>
-                            <constraint firstItem="2sk-PE-J7O" firstAttribute="trailing" secondItem="ULy-Wv-uRC" secondAttribute="trailing" constant="20" id="jMC-Ni-SNc"/>
+                            <constraint firstItem="ULy-Wv-uRC" firstAttribute="bottom" secondItem="2sk-PE-J7O" secondAttribute="bottom" id="1Ij-4J-IYR"/>
+                            <constraint firstItem="2sk-PE-J7O" firstAttribute="trailing" secondItem="ULy-Wv-uRC" secondAttribute="trailing" constant="20" id="MxS-sj-5uh"/>
+                            <constraint firstItem="ULy-Wv-uRC" firstAttribute="top" secondItem="2sk-PE-J7O" secondAttribute="top" id="jv1-wi-HwN"/>
+                            <constraint firstItem="ULy-Wv-uRC" firstAttribute="leading" secondItem="2sk-PE-J7O" secondAttribute="leading" constant="20" id="wtm-Qd-Fit"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2sk-PE-J7O"/>
                     </view>
