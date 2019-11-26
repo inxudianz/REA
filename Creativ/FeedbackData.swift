@@ -35,9 +35,15 @@ class FeedbackData {
     func createFeedbackSection() {
         images = [UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp"), UIImage(named: "feedbackGlyphTemp")] as! [UIImage]
         titles = ["Profile", "Education", "Summary", "Working Experience", "Organisational Experience", "Skills"]
-        overviewTexts = ["Good job", "Good", "Yay!!", "Kayyyy", "Ol right", "Huperb!"]
+        overviewTexts = ["""
+                200 characters for a summary is enough to explain a brief sentences about yourself. Use first person when introducing yourself because it’s considered more approachable. Be specific and highlight your specialties. Show your passion and relevant interests. Avoid vague statements that are not specific enough to carry any weight.
+        """, "Good", "Yay!!", "Kayyyy", "Ol right", "Huperb!"]
         commentedTexts = ["I am diligent", "I am a nice and hard working man", "Hello", "Hello", "Hello", "Hello"]
-        comments = ["Good job", "G Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job", "Y", "K", "O", "H"]
-        recommendations = ["Good job", "Good", "Yay!!", "Kayyyy", "Ol right", "Huperb!"]
+        comments = ["""
+                200 characters for a summary is enough to explain a brief sentences about yourself. Use first person when introducing yourself because it’s considered more approachable. Be specific and highlight your specialties. Show your passion and relevant interests. Avoid vague statements that are not specific enough to carry any weight.
+        """, "G Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job Good job", "Y", "K", "O", "H"]
+        recommendations = ["""
+        200 characters for a summary is enough to explain a brief sentences about yourself. Use first person when introducing yourself because it’s considered more approachable. Be specific and highlight your specialties. Show your passion and relevant interests. Avoid vague statements that are not specific enough to carry any weight.
+""", "Good", "Yay!!", "Kayyyy", "Ol right", "Huperb!"]
     }
 }

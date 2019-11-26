@@ -32,10 +32,8 @@ class OverviewViewController: UIViewController {
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 4
-        layout.minimumLineSpacing = layout.minimumInteritemSpacing * 2
-        layout.sectionInset = UIEdgeInsets(top: 0, left:
-            0, bottom: 0, right: 0)
-        layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 7/11)
+        layout.estimatedItemSize = CGSize(width: self.feedbackCollectionView.bounds.width, height: self.feedbackCollectionView.bounds.height)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: (self.feedbackCollectionView.bounds.width - layout.estimatedItemSize.width) / 2, bottom: 0, right: (self.feedbackCollectionView.bounds.width - layout.estimatedItemSize.width) / 2)
         feedbackCollectionView.collectionViewLayout = layout
     }
     
@@ -71,6 +69,6 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0))?.frame.height ?? collectionView.frame.height / 5)
+        return CGSize(width: collectionView.frame.width, height: UIScreen.main.bounds.height - collectionView.frame.height)
     }
 }

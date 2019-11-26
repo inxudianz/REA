@@ -17,22 +17,22 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" id="aDb-3X-r9K">
-                        <rect key="frame" x="2" y="17" width="366" height="464"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <rect key="frame" x="0.0" y="44" width="370" height="428"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GvM-WT-uuz">
                         <rect key="frame" x="170" y="0.0" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K5j-YP-a41">
-                                <rect key="frame" x="5.4291160128163938" y="6.2646823155938591" width="28.000000000000085" height="27.999999999999986"/>
+                                <rect key="frame" x="6" y="6" width="28" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                     </view>
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xNC-a1-MN1">
-                        <rect key="frame" x="13" y="78" width="358" height="398"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <rect key="frame" x="13" y="79" width="358" height="397"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <subviews>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qH-ft-EXg">
                                 <rect key="frame" x="9" y="115" width="338" height="2"/>
@@ -86,7 +86,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bi-s8-Snk">
                         <rect key="frame" x="23" y="31" width="335" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -112,7 +112,7 @@
                 <outlet property="feedbackView" destination="aDb-3X-r9K" id="Oon-Pw-4qh"/>
                 <outlet property="notchView" destination="GvM-WT-uuz" id="i7c-xC-sxu"/>
             </connections>
-            <point key="canvasLocation" x="375.36231884057975" y="232.03125"/>
+            <point key="canvasLocation" x="375.36231884057975" y="231.69642857142856"/>
         </collectionViewCell>
     </objects>
 </document>

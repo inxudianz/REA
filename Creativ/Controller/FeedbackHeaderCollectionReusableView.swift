@@ -12,7 +12,6 @@ class FeedbackHeaderCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet weak var reaImageView: UIImageView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         addBubble()
