@@ -1,3 +1,4 @@
+
 //
 //  SegmentedModel.swift
 //  Creativ

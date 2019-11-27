@@ -18,6 +18,7 @@ class HomeViewController: UIViewController{
     var segmentedModel: SegmentedModel?
     var urlPicked: URL?
     var cellColour = true
+    var segmentedResult: Segment?
     
     var isEdit = false
     var selectedItem = [Int]()
@@ -126,6 +127,10 @@ class HomeViewController: UIViewController{
         if segue.identifier == "goToOverview" {
             if let overviewViewController = segue.destination as? OverviewViewController {
                     overviewViewController.nama = name
+            }
+        } else if segue.identifier == "gotoprocess" {
+            if let processingViewController = segue.destination as? ProcessingViewController {
+                processingViewController.resultContent = segmentedResult
             }
         }
     }
@@ -289,8 +294,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         tempContents = contents
         cvCollectionView.reloadData()
         performSegue(withIdentifier: "gotoprocess", sender: self)
-
-        
     }
     
     //cek isi directory
@@ -408,7 +411,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         else {
             
         }
-        let result = segmentContent(contents: categorisedcvContent)
+        segmentedResult = segmentContent(contents: categorisedcvContent)
     }
     
     func segmentContent(contents:[SegmentedModel]) -> Segment {
