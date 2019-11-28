@@ -19,6 +19,7 @@ class HomeCollectionReusableView: UICollectionReusableView {
         // Initialization code
     }
     
+    let customFont = CustomFont()
     func addBubble(height: CGFloat, width: CGFloat){
 
 //        let width: CGFloat = UIScreen.main.bounds.width - 162
@@ -73,16 +74,13 @@ class HomeCollectionReusableView: UICollectionReusableView {
 //        textLayer.alignmentMode = .left
 //        textLayer.contentsScale = UIScreen.main.scale
         
-        textDescription.font = UIFont(name: "Merriweather", size: 12)
+        textDescription.font = customFont.getCustomFontType(type: .Regular, size: 16)
         textDescription.textColor = .white
-        textDescription.textAlignment = .left
+        textDescription.textAlignment = .center
         
         
         self.bubbleChatView.layer.addSublayer(outgoingMessageLayer)
         bubbleChatView.bringSubviewToFront(textDescription)
-        //print(textDescription)
-        //print(bubbleHeight, bubbleWidth)
-        //self.bubbleChatView.layer.addSublayer(textLayer)
     }
     
 }

@@ -47,6 +47,8 @@ class HomeViewController: UIViewController{
         navBar.rightBarButtonItem = UIBarButtonItem(title: "Confirm", style: .done, target: self, action: #selector(doneButton))
         navBar.leftBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
         navBar.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
+        navBar.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: customFont.getCustomFontType(type: .Regular, size: 17)], for: .normal)
+        navBar.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: customFont.getCustomFontType(type: .Regular, size: 17)], for: .normal)
         isEdit = true
         cvCollectionView.reloadData()
     }
@@ -117,9 +119,6 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         // Do any additional setup after loading the view
         registerXIB()
-        
-//        let custom = CustomFont()
-//        custom.printAllFont()
     }
     
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
@@ -177,8 +176,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             headerView.textDescription.sizeToFit()
             headerView.textDescription.numberOfLines = 0
             headerView.textDescription.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 162, height: headerView.textDescription.bounds.height)
-            print("__________________\(headerView.textDescription.frame.width)")
-            print("__________________\(headerView.textDescription.frame.height)")
             headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - 162)
             headerView.bringSubviewToFront(headerView.textDescription)
             return headerView

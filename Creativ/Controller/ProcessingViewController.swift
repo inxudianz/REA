@@ -103,8 +103,8 @@ class ProcessingViewController: UIViewController {
     
     var countRecursiveLoop = 0
     @objc func recursiveLoop(){
-        if self.countRecursiveLoop <= self.processDetails.count + 1 {
-            UIView.animate(withDuration: 1.3, animations: {
+        if self.countRecursiveLoop <= self.processDetails.count + 2 {
+            UIView.animate(withDuration: 1.2, animations: {
                 if self.countRecursiveLoop == 0 {
                     self.countRecursiveLoop += 1
                 } else {
@@ -114,7 +114,7 @@ class ProcessingViewController: UIViewController {
             }) { (finished) in
                 if finished{
                     UIView.animate(withDuration: 1.3, animations: {
-                        if self.countRecursiveLoop <= self.processDetails.count{
+                        if self.countRecursiveLoop <= self.processDetails.count + 2{
                             self.recursiveLoop()
                         } else{
                             
@@ -141,6 +141,28 @@ class ProcessingViewController: UIViewController {
 //    var tempString = 0
     
     func appointSummaryFeedback(for text: String) {
+        // ML
+        // Do any additional setup after loading the view.
+        let modelPassionate = TextClassifierPassionate()
+        let modelVague = TextClassifierVague()
+        guard let passionateOutput = try? modelPassionate.prediction(text: text) else {
+            fatalError("Unexpected runtime error.")
+        }
+        let output1 = passionateOutput.label
+        
+        print("Passionate Output : \(output1)")
+        
+        guard let vagueOutput = try? modelVague.prediction(text: text) else {
+            fatalError("Unexpected runtime error.")
+        }
+        let output2 = vagueOutput.label
+        
+        print("Vague Output : \(output2)")
+        
+        finalFeedbackResult[0].append("\(output1)\n")
+        finalFeedbackResult[0].append("\(output2)\n")
+
+        
         // Check word count
         let words =  text.split { !$0.isLetter }
         if text.count > 200 + words.count {
@@ -238,10 +260,6 @@ class ProcessingViewController: UIViewController {
                 segmentationExtractedResult["\(headerCV[index])"]?.append(extractedContent[q])
             }
         }
-        
-//        for l in segmentationExtractedResult.keys{
-//            print("segmentationExtractedResult \(l) = \(segmentationExtractedResult[l])\n")
-//        }
     }
     
     func dispatchFeedbackHandler() {
@@ -434,12 +452,15 @@ class ProcessingViewController: UIViewController {
     // Change this function with the function to be called automatically upon completion on certain progress
     func moveItem(){
         var cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
-        guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
+        guard var onGoingIndex = onGoingRow.rowIndexPath else { return }
+        
         onGoingRow.doneArray?.append(onGoingIndex.row)
         cell?.setCellStatus(statusType: .done)
         
         onGoingRow.rowIndexPath?.row += 1
-        cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
+        onGoingIndex.row += 1
+        
+        cell = processCollectionView.cellForItem(at: onGoingIndex) as? ProcessCollectionViewCell
         cell?.setCellStatus(statusType: .working)
         
         if onGoingRow.rowIndexPath!.row + 2 < processDetails.count {
@@ -449,12 +470,10 @@ class ProcessingViewController: UIViewController {
             processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 2, section: 0), at: .top, animated: true)
         }
         else {
-            processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 1, section: 0), at: .top, animated: true)
-            if !onGoingRow.doneArray!.contains(onGoingRow.rowIndexPath!.row - 1) {
-                print("-91-=4===========================")
-                guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
+            if onGoingRow.rowIndexPath!.row <= processDetails.count {
                 onGoingRow.doneArray?.append(onGoingIndex.row)
                 cell?.setCellStatus(statusType: .done)
+                onGoingRow.rowIndexPath?.row += 1
             }
             else {
                 onGoingRow.rowIndexPath?.row = 0

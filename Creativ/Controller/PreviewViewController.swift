@@ -33,7 +33,6 @@ class PreviewViewController: UIViewController {
         self.navigationItem.title = "Feedback"
         feedbackCollectionView.delegate = self
         feedbackCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
-        //        feedbackCollectionView.register(UINib(nibName: "FeedbackCollectionViewCell", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackCollectionViewCell")
         
         // Do any additional setup after loading the view.
         setCollectionViewLayout()
