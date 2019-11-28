@@ -13,6 +13,7 @@ class PreviewViewController: UIViewController {
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
     let feedbackDatas = FeedbackData()
+    var finalFeedbackResult: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,6 @@ class PreviewViewController: UIViewController {
         layout.itemSize = CGSize(width: self.feedbackCollectionView.frame.width, height: self.feedbackCollectionView.frame.height * 7/11)
         feedbackCollectionView.collectionViewLayout = layout
     }
-
 }
 
 extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -52,17 +52,32 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("setopbiasa")
-        let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "FeedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
-        let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
         
-        cell.setColor(colorView: &cell.feedbackView)
-        cell.setColor(colorView: &cell.notchView)
-        cell.setColor(colorView: &cell.commentView)
-        cell.setupUI()
-        cell.displayFeedbackContent(feedback: cellFeedback)
-
-        return cell
+        let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "FeedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
+        
+        if finalFeedbackResult.isEmpty == true {
+            let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
+            
+            cell.setColor(colorView: &cell.feedbackView)
+            cell.setColor(colorView: &cell.notchView)
+            cell.setColor(colorView: &cell.commentView)
+            cell.setupUI()
+            cell.displayFeedbackContent(feedback: cellFeedback)
+            
+            return cell
+        } else {
+            checkFeedback()
+            
+            let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
+            
+            cell.setColor(colorView: &cell.feedbackView)
+            cell.setColor(colorView: &cell.notchView)
+            cell.setColor(colorView: &cell.commentView)
+            cell.setupUI()
+            cell.displayFeedbackContent(feedback: cellFeedback)
+            
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) ->
@@ -75,5 +90,72 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0))?.frame.height ?? collectionView.frame.height / 5)
+    }
+    
+    func checkFeedback() {
+        feedbackDatas.comments = finalFeedbackResult
+        
+        for x in 0 ..< finalFeedbackResult.count {
+            
+            if finalFeedbackResult[0] == "Too many words" || finalFeedbackResult[1] == "Too many repeat words" || finalFeedbackResult[0] == "No action verbs" {
+                feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
+                feedbackDatas.commentedTexts[0] = "You can be better!"
+            }
+            
+            if finalFeedbackResult[1].contains("Email not found") || finalFeedbackResult[1].contains("Phone number not found") {
+                feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
+                feedbackDatas.commentedTexts[1] = "You can be better!"
+            }
+            
+            if finalFeedbackResult[2].contains("Bad GPA") || finalFeedbackResult[2].contains("GPA not found") {
+                feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
+                feedbackDatas.commentedTexts[2] = "You can be better!"
+            }
+            
+            if finalFeedbackResult[3].contains("Work timeline not chronological") {
+                feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
+                feedbackDatas.commentedTexts[3] = "You can be better!"
+            }
+            
+            if finalFeedbackResult[4].contains("Organisation timeline not chronological") {
+                feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
+                feedbackDatas.commentedTexts[4] = "You can be better!"
+            }
+            
+            if finalFeedbackResult[5].contains("Not sufficient relevant skills") {
+                feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
+                feedbackDatas.commentedTexts[5] = "You can be better!"
+            }
+            
+            if finalFeedbackResult[x].isEmpty {
+                finalFeedbackResult[x] = "Data Not Found!"
+                feedbackDatas.commentedTexts[x] = "Missing Content!"
+            }
+            
+            if finalFeedbackResult[0].isEmpty {
+                feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
+            }
+            
+            if finalFeedbackResult[1].isEmpty {
+                feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
+            }
+            
+            if finalFeedbackResult[2].isEmpty {
+                feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
+            }
+            
+            if finalFeedbackResult[3].isEmpty {
+                feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
+            }
+            
+            if finalFeedbackResult[4].isEmpty {
+                feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
+            }
+            
+            if finalFeedbackResult[5].isEmpty {
+                feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
+            }
+            
+        }
     }
 }
