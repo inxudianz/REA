@@ -21,6 +21,7 @@ class PreviewViewController: UIViewController {
     let feedbackDatas = FeedbackData()
     let customFont = CustomFont()
     var finalFeedbackResult: [String] = []
+    var headerCv: [String] = ["Summary", "Identity", "Education", "Working Experience", "Organisational Experience", "Skills"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,9 +74,12 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             
             return cell
         } else {
-            let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
             
             checkFeedback()
+            
+            let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
+            
+            
             
             cell.setColorBlue(colorView: &cell.feedbackView)
             cell.setColorBlue(colorView: &cell.notchView)
@@ -151,7 +155,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
             
             if finalFeedbackResult[x].isEmpty {
-                finalFeedbackResult[x] = "Data Not Found!"
+                finalFeedbackResult[x] = "We're missing \(headerCv[x]) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
                 feedbackDatas.commentedTexts[x] = "Missing Content!"
             }
             
