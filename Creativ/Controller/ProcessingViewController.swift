@@ -29,8 +29,6 @@ class ProcessingViewController: UIViewController {
         var classifications: [Classifications]
     }
     
-    @IBOutlet weak var mascotSpriteImage: UIImageView!
-    @IBOutlet weak var bubbleMessage: UIView!
     @IBOutlet weak var processCollectionView: UICollectionView! {
         didSet {
             processCollectionView.isUserInteractionEnabled = false
@@ -70,14 +68,12 @@ class ProcessingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addBubble()
         // Do any additional setup after loading the view.
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
-        setCollectionViewLayout()
         
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(recursiveLoop), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(recursiveLoop), userInfo: nil, repeats: false)
         
-        addBubble()
+        processCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
@@ -95,7 +91,6 @@ class ProcessingViewController: UIViewController {
         
         decideAppropriateFeedback(dividedExtractedContent: segmentationExtractedResult)
         print(finalFeedbackResult)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -108,9 +103,9 @@ class ProcessingViewController: UIViewController {
     
     var countRecursiveLoop = 0
     @objc func recursiveLoop(){
-        if self.countRecursiveLoop <= self.processDetails.count+1{
-            UIView.animate(withDuration: 1.0, animations: {
-                if self.countRecursiveLoop == 0{
+        if self.countRecursiveLoop <= self.processDetails.count + 1 {
+            UIView.animate(withDuration: 1.3, animations: {
+                if self.countRecursiveLoop == 0 {
                     self.countRecursiveLoop += 1
                 } else {
                     self.moveItem()
@@ -118,7 +113,7 @@ class ProcessingViewController: UIViewController {
                 }
             }) { (finished) in
                 if finished{
-                    UIView.animate(withDuration: 1.0, animations: {
+                    UIView.animate(withDuration: 1.3, animations: {
                         if self.countRecursiveLoop <= self.processDetails.count{
                             self.recursiveLoop()
                         } else{
@@ -417,54 +412,23 @@ class ProcessingViewController: UIViewController {
             let users = try? JSONDecoder().decode([User].self, from: data)
             print("Users :: \(String(describing: users))")
             
-            print(users![0].classifications[0].tag_name)
-            print(users![0].classifications[0].confidence)
-            print(users![0].classifications[1].tag_name)
-            print(users![0].classifications[1].confidence)
+            //            print(users![0].classifications[0].tag_name)
+            //            print(users![0].classifications[0].confidence)
+            //            print(users![0].classifications[1].tag_name)
+            //            print(users![0].classifications[1].confidence)
             
             // Check the classification confidence, which one has higher confidence
-            for user in users! {
-                if user.classifications[0].confidence >= user.classifications[1].confidence {
-                    taggedClassification = user.classifications[0].tag_name
-                }
-                else {
-                    taggedClassification = user.classifications[1].tag_name
-                }
-            }
+            //            for user in users! {
+            //                if user.classifications[0].confidence >= user.classifications[1].confidence {
+            //                    taggedClassification = user.classifications[0].tag_name
+            //                }
+            //                else {
+            //                    taggedClassification = user.classifications[1].tag_name
+            //                }
+            //            }
         }
         task.resume()
         return taggedClassification
-    }
-    
-    
-    func addBubble(){
-        let width: CGFloat = 252
-        let height: CGFloat = 87
-        
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 22, y: height))
-        bezierPath.addLine(to: CGPoint(x: width - 17, y: height))
-        bezierPath.addCurve(to: CGPoint(x: width, y: height - 17), controlPoint1: CGPoint(x: width - 7.61, y: height), controlPoint2: CGPoint(x: width, y: height - 7.61))
-        bezierPath.addLine(to: CGPoint(x: width, y: 17))
-        bezierPath.addCurve(to: CGPoint(x: width - 17, y: 0), controlPoint1: CGPoint(x: width, y: 7.61), controlPoint2: CGPoint(x: width - 7.61, y: 0))
-        bezierPath.addLine(to: CGPoint(x: 21, y: 0))
-        bezierPath.addCurve(to: CGPoint(x: 4, y: 17), controlPoint1: CGPoint(x: 11.61, y: 0), controlPoint2: CGPoint(x: 4, y: 7.61))
-        bezierPath.addLine(to: CGPoint(x: 4, y: height - 11))
-        bezierPath.addCurve(to: CGPoint(x: 0, y: height), controlPoint1: CGPoint(x: 4, y: height - 1), controlPoint2: CGPoint(x: 0, y: height))
-        bezierPath.addLine(to: CGPoint(x: -0.05, y: height - 0.01))
-        bezierPath.addCurve(to: CGPoint(x: 11.04, y: height - 4.04), controlPoint1: CGPoint(x: 4.07, y: height + 0.43), controlPoint2: CGPoint(x: 8.16, y: height - 1.06))
-        bezierPath.addCurve(to: CGPoint(x: 22, y: height), controlPoint1: CGPoint(x: 16, y: height), controlPoint2: CGPoint(x: 19, y: height))
-        bezierPath.close()
-        
-        let outgoingMessageLayer = CAShapeLayer()
-        outgoingMessageLayer.path = bezierPath.cgPath
-        outgoingMessageLayer.frame = CGRect(x: 145,
-                                            y: self.view.frame.maxY/3,
-                                            width: 68,
-                                            height: 34)
-        outgoingMessageLayer.fillColor = UIColor(hex: "#4B96DCFF")?.cgColor
-        
-        self.view.layer.addSublayer(outgoingMessageLayer)
     }
     
     // Change this function with the function to be called automatically upon completion on certain progress
@@ -485,8 +449,11 @@ class ProcessingViewController: UIViewController {
             processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 2, section: 0), at: .top, animated: true)
         }
         else {
-            if onGoingRow.doneArray!.count < processDetails.count {
-                onGoingRow.doneArray?.append(onGoingRow.rowIndexPath!.row)
+            processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 1, section: 0), at: .top, animated: true)
+            if !onGoingRow.doneArray!.contains(onGoingRow.rowIndexPath!.row - 1) {
+                print("-91-=4===========================")
+                guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
+                onGoingRow.doneArray?.append(onGoingIndex.row)
                 cell?.setCellStatus(statusType: .done)
             }
             else {
@@ -508,6 +475,25 @@ class ProcessingViewController: UIViewController {
 }
 
 extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) ->
+        UICollectionReusableView {
+            print("DInasIDBNWOridbqwpefbrepqwifbhqwpiofbnqwopi")
+            if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
+                headerView.textDescription.text = "I'm reviewing your resume..."
+                headerView.textDescription.sizeToFit()
+                headerView.textDescription.numberOfLines = 0
+                headerView.textDescription.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 162, height: headerView.textDescription.bounds.height)
+                headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - 162)
+                headerView.bringSubviewToFront(headerView.textDescription)
+                return headerView
+            }
+            return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: processCollectionView.frame.width, height: 200)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return processDetails.count
     }
@@ -515,7 +501,6 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell  =  processCollectionView.dequeueReusableCell(withReuseIdentifier: "processCell", for: indexPath) as! ProcessCollectionViewCell
         cell.setProcessContent(text: processDetails[indexPath.row])
-        
         if indexPath.row == 0 {
             cell.setCellStatus(statusType: .working)
         }
@@ -527,14 +512,11 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(
-            top: layout.itemSize.height * 2,
-            left: processCollectionView.frame.size.width / 4,
-            bottom: layout.itemSize.height * 2,
-            right: processCollectionView.frame.size.width / 4)
-        layout.itemSize = CGSize(width: self.processCollectionView.frame.width, height: processCollectionView.frame.height / 4)
-        layout.minimumLineSpacing = 1
-        layout.minimumInteritemSpacing = layout.itemSize.width
+        layout.minimumInteritemSpacing = 4
+        layout.estimatedItemSize = CGSize(width: self.processCollectionView.frame.width, height: processCollectionView.frame.height / 8)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2 + 50, bottom: 0, right: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2)
+        layout.headerReferenceSize = CGSize(width: processCollectionView.frame.width, height: 180)
+        layout.sectionHeadersPinToVisibleBounds = true
         
         processCollectionView.contentInsetAdjustmentBehavior = .always
         processCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast

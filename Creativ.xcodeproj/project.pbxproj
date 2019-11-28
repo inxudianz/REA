@@ -80,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10272E63238567EB00032BA3 /* merriweather */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merriweather; path = "../../../../Dropbox (DeveloperAcademy-ID)/Final Challenge/Design/Font/merriweather"; sourceTree = "<group>"; };
 		1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E407539237D6EA200FDAA31 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				1EE84B3323863CAA001E2DA1 /* Fonts */,
+				10272E63238567EB00032BA3 /* merriweather */,
 				F50027B8237BF5D300E0B08F /* Model */,
 				920AF3312374271000F8FB7A /* Helper */,
 				F51CEC30237416270007FCC4 /* Controller */,
@@ -406,6 +408,7 @@
 			files = (
 				1E7F758E237C6A2D00A1DB9D /* FeedbackCollectionViewCell.xib in Resources */,
 				1EE84B482386405B001E2DA1 /* Merriweather-Light.otf in Resources */,
+				10272E64238567EB00032BA3 /* merriweather in Resources */,
 				920F63E42372D0CE00BCFC5C /* LaunchScreen.storyboard in Resources */,
 				1EE84B462386405B001E2DA1 /* Merriweather-BoldItalic.otf in Resources */,
 				F5F7067F237C180300771249 /* CVNewCollectionViewCell.xib in Resources */,

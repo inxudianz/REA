@@ -46,7 +46,8 @@ class ProcessCollectionViewCell: UICollectionViewCell {
             // Set indicator view to indicator view image
         case .done:
             // print("\(String(describing: processLabel.text)) \(statusType)")
-            processLabel.alpha = 0.3
+            processLabel.alpha = 0
+            statusIndicator.alpha = 0
             // Set indicator view to checkmark
             break
         }

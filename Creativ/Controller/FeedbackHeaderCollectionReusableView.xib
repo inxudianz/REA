@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,16 +13,24 @@
             <rect key="frame" x="0.0" y="0.0" width="411" height="198"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="reaMode" translatesAutoresizingMaskIntoConstraints="NO" id="v5K-SI-XDR">
-                    <rect key="frame" x="0.0" y="35" width="128" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reaMode" translatesAutoresizingMaskIntoConstraints="NO" id="Xfb-nn-NdE">
+                    <rect key="frame" x="20" y="36" width="128" height="128"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="128" id="BS4-0A-RrQ"/>
+                        <constraint firstAttribute="width" constant="128" id="vJT-gj-KhC"/>
+                    </constraints>
                 </imageView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Xfb-nn-NdE" secondAttribute="trailing" constant="222" id="PnL-xS-wxw"/>
+                <constraint firstItem="Xfb-nn-NdE" firstAttribute="leading" secondItem="Nr9-C7-J5v" secondAttribute="leading" constant="20" id="iyP-Xn-osw"/>
+                <constraint firstItem="Xfb-nn-NdE" firstAttribute="top" secondItem="Nr9-C7-J5v" secondAttribute="top" constant="36" id="oJP-8Y-qTR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="tZY-wK-Ajg"/>
             <connections>
-                <outlet property="reaImageView" destination="v5K-SI-XDR" id="bif-Ep-Jkt"/>
+                <outlet property="reaImageView" destination="Xfb-nn-NdE" id="Beu-mf-7ky"/>
             </connections>
-            <point key="canvasLocation" x="94.20289855072464" y="127.56696428571428"/>
+            <point key="canvasLocation" x="203.62318840579712" y="136.60714285714286"/>
         </collectionReusableView>
     </objects>
     <resources>
