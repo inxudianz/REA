@@ -108,29 +108,14 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func setColor(colorView: inout UIView) {
+    func setColorBlue(colorView: inout UIView) {
         colorView.layer.borderWidth = 2.0
         colorView.layer.borderColor = UIColor(red: 0.294, green: 0.588, blue: 0.863, alpha: 1.0).cgColor
-        
-        /*
-         switch feedbackSegment.text {
-            case "Profile":
-                colorView.layer.borderColor = UIColor(red: CGFloat(75/255), green: CGFloat(150/255), blue: CGFloat(220/255), alpha: 0.2).cgColor
-            case "Education":
-                colorView.layer.borderColor = UIColor(red: CGFloat(65/255), green: CGFloat(145/255), blue: CGFloat(30/255), alpha: 0.2).cgColor
-            case "Summary":
-                colorView.layer.borderColor = UIColor(red: CGFloat(65/255), green: CGFloat(145/255), blue: CGFloat(30/255), alpha: 0.2).cgColor
-            case "Work Experience":
-                colorView.layer.borderColor = UIColor(red: CGFloat(65/255), green: CGFloat(145/255), blue: CGFloat(30/255), alpha: 0.2).cgColor
-            case "Organisational Experience":
-                colorView.layer.borderColor = UIColor(red: CGFloat(65/255), green: CGFloat(145/255), blue: CGFloat(30/255), alpha: 0.2).cgColor
-            case "Skills":
-                colorView.layer.borderColor = UIColor(red: CGFloat(65/255), green: CGFloat(145/255), blue: CGFloat(30/255), alpha: 0.2).cgColor
-            default:
-                colorView.layer.borderColor = UIColor(red: CGFloat(0/255), green: CGFloat(0/255), blue: CGFloat(0/255), alpha: 0.2).cgColor
-                break
-        }
-        */
+    }
+    
+    func setColorRed(colorView: inout UIView) {
+        colorView.layer.borderWidth = 2.0
+        colorView.layer.borderColor = UIColor(red: 0.764, green: 0.215, blue: 0.215, alpha: 1.0).cgColor
     }
 }
 

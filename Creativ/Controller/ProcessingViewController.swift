@@ -166,55 +166,55 @@ class ProcessingViewController: UIViewController {
         // Check word count
         let words =  text.split { !$0.isLetter }
         if text.count > 200 + words.count {
-            finalFeedbackResult[0].append("Too many words\n")
+            finalFeedbackResult[0].append("Your summary is getting too long, reduce few words to make it more simple.\n")
         } else {
-            finalFeedbackResult[0].append("Good and simple\n")
+            finalFeedbackResult[0].append("You showed a good and simple summary about yourself.\n")
         }
         
         // Check usage of words and frequency
         var wordDict = brain.createWordDictionary(text: text)
         if !brain.isWordFrequencyAppropriate(dictionary: wordDict) {
-            finalFeedbackResult[0].append("Too many repeat words\n")
+            finalFeedbackResult[0].append("It seems that you used 'words' too much, try to use another words!\n")
         } else {
-            finalFeedbackResult[0].append("Nice less repeat words\n")
+            finalFeedbackResult[0].append("You used various words and it makes your summary more unique.\n")
         }
         
         if !brain.isActionVerbAppropriate(text: text) {
-            finalFeedbackResult[0].append("No action verbs\n")
+            finalFeedbackResult[0].append("You have to use more action verbs in your summary.\n")
         } else {
-            finalFeedbackResult[0].append("Good use action verbs\n")
+            finalFeedbackResult[0].append("It's great that you use action verbs in your summary!\n")
         }
     }
     
     func appointProfileFeedback(for text: String) {
         if !brain.isEmailRegexFound(text: text) {
-            finalFeedbackResult[1].append("Email not found\n")
+            finalFeedbackResult[1].append("No email? Please put your email in your summary!\n")
         } else if brain.isEmailRegexFound(text: text) {
-            finalFeedbackResult[1].append("Good! email found\n")
+            finalFeedbackResult[1].append("Good! Email found!\n")
         }
         
         if !brain.isPhoneNumberRegexFound(text: text) {
-            finalFeedbackResult[1].append("Phone number not found\n")
+            finalFeedbackResult[1].append("No phone number? Please put your email in your summary!\n")
         } else if brain.isPhoneNumberRegexFound(text: text) {
-            finalFeedbackResult[1].append("Good! phone number found\n")
+            finalFeedbackResult[1].append("Good! Phone number found!\n")
         }
     }
     
     func appointEducationFeedback(for text: String) {
         if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: text) == .inRange {
-            finalFeedbackResult[2].append("Good GPA\n")
+            finalFeedbackResult[2].append("Wow! You have a great GPA!\n")
         } else if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: text) == .outOfBound {
-            finalFeedbackResult[2].append("Bad GPA\n")
+            finalFeedbackResult[2].append("It's better not to show your GPA in your resume.\n")
         } else {
-            finalFeedbackResult[2].append("GPA not found\n")
+            finalFeedbackResult[2].append("You can add your GPA if it's more than equal to 3.\n")
         }
     }
     
     func appointWorkFeedback(for text: String) {
         if !brain.isChronological(text: brain.getYear(for: text)) {
-            finalFeedbackResult[3].append("Work timeline not chronological\n")
+            finalFeedbackResult[3].append("Rearrange your working experiences from the most current until the latest one!\n")
         } else {
-            finalFeedbackResult[3].append("Work timeline chronological\n")
+            finalFeedbackResult[3].append("You showed your working experiences at chronological order!\n")
         }
         
         // Check whether the description is descriptive enough
@@ -223,9 +223,9 @@ class ProcessingViewController: UIViewController {
     
     func appointOrganisationFeedback(for text: String) {
         if !brain.isChronological(text: brain.getYear(for: text)) {
-            finalFeedbackResult[4].append("Organisation timeline not chronological\n")
+            finalFeedbackResult[4].append("Rearrange your organisational experiences from the most current until the latest one!\n")
         } else {
-            finalFeedbackResult[4].append("Organisation timeline chronological\n")
+            finalFeedbackResult[4].append("You showed your organisational experiences at chronological order!\n")
         }
         
         // Check whether the description is action-based or result-based
@@ -234,9 +234,9 @@ class ProcessingViewController: UIViewController {
     
     func appointSkillsFeedback(for text: String) {
         if !brain.isRelatedSkillsAppropriate(text: text) {
-            finalFeedbackResult[5].append("Not sufficient relevant skills\n")
+            finalFeedbackResult[5].append("You have to put your skills that match with job that you've applied\n")
         } else {
-            finalFeedbackResult[5].append("Sufficient relevant skills\n")
+            finalFeedbackResult[5].append("Great! Your skills are relevant with job that you've applied!\n")
         }
     }
     
