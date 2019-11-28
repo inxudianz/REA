@@ -10,8 +10,15 @@ import UIKit
 
 class AddNewCollectionViewCell: UICollectionViewCell {
     
+    let customFont = CustomFont()
+    
     @IBOutlet weak var addNewCvBtn: UIButton!
-
+    @IBOutlet weak var addNewCvBtnLabel: UILabel! {
+        didSet {
+            addNewCvBtnLabel.font = customFont.getCustomFontType(type: .Regular, size: 14)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -13,14 +13,16 @@ class PreviewViewController: UIViewController {
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
     let feedbackDatas = FeedbackData()
+    let customFont = CustomFont()
     var finalFeedbackResult: [String] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.setHidesBackButton(true, animated: false)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneReview))
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor.init(hex: "#FFD296FF")
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: customFont.getCustomFontType(type: .Regular, size: 17)], for: .normal)
         self.navigationItem.title = "Feedback"
         feedbackCollectionView.delegate = self
         feedbackCollectionView.register(UINib(nibName: "FeedbackHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackHeaderCollectionReusableView")

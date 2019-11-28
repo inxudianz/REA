@@ -31,6 +31,8 @@ class HomeViewController: UIViewController{
     @IBOutlet weak var testImg: UIImageView!
 
     var name: String?
+    
+    let customFont = CustomFont()
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var cvCollectionView: UICollectionView!
     @IBOutlet weak var navBar: UINavigationItem! {
@@ -116,6 +118,9 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         // Do any additional setup after loading the view
         registerXIB()
+        
+//        let custom = CustomFont()
+//        custom.printAllFont()
     }
     
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {

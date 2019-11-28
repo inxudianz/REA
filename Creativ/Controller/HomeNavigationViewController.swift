@@ -10,13 +10,15 @@ import UIKit
 
 class HomeNavigationViewController: UINavigationController {
 
+    let customFont = CustomFont()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 13.0, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            navBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: customFont.getCustomFontType(type: .Bold, size: 17), .foregroundColor: UIColor.white]
+            navBarAppearance.largeTitleTextAttributes = [NSAttributedString.Key.font: customFont.getCustomFontType(type: .Bold, size: 34), .foregroundColor: UIColor.white]
             navBarAppearance.backgroundColor = UIColor.init(hex: "#30669BFF")
             navigationBar.standardAppearance = navBarAppearance
             navigationBar.scrollEdgeAppearance = navBarAppearance

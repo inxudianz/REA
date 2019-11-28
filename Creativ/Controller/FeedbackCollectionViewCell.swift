@@ -9,22 +9,47 @@
 import UIKit
 
 class FeedbackCollectionViewCell: UICollectionViewCell {
+    
+    let customFont = CustomFont()
 
+    @IBOutlet weak var overviewLabel: UILabel! {
+        didSet {
+            overviewLabel.font = customFont.getCustomFontType(type: .Bold, size: 18)
+        }
+    }
+    @IBOutlet weak var keypointLabel: UILabel! {
+        didSet {
+            keypointLabel.font = customFont.getCustomFontType(type: .Bold, size: 18)
+        }
+    }
     @IBOutlet var feedbackGlyph: UIImageView!
     @IBOutlet weak var feedbackSegment: UILabel! {
         didSet {
             feedbackSegment.textColor = UIColor.white
+            feedbackSegment.font = customFont.getCustomFontType(type: .Bold, size: 24)
         }
     }
     @IBOutlet var feedbackOverview: UILabel! {
         didSet {
             feedbackOverview.textAlignment = .left
-            
+            feedbackOverview.font = customFont.getCustomFontType(type: .Regular, size: 16)
         }
     }
-    @IBOutlet weak var feedbackCommentedContent: UILabel!
-    @IBOutlet var feedbackComment: UILabel!
-    @IBOutlet var feedbackRecommendation: UILabel!
+    @IBOutlet weak var feedbackCommentedContent: UILabel! {
+        didSet {
+            feedbackCommentedContent.font = customFont.getCustomFontType(type: .Italic, size: 18)
+        }
+    }
+    @IBOutlet var feedbackComment: UILabel! {
+        didSet {
+            feedbackComment.font = customFont.getCustomFontType(type: .Regular, size: 16)
+        }
+    }
+    @IBOutlet var feedbackRecommendation: UILabel! {
+        didSet {
+            feedbackRecommendation.font = customFont.getCustomFontType(type: .Regular, size: 16)
+        }
+    }
     @IBOutlet weak var feedbackView: UIView!{
         didSet{
             feedbackView.clipsToBounds = true
@@ -43,7 +68,6 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
     
     func displayFeedbackContent(feedback: Feedbacks) {
