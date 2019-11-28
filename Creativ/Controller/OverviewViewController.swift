@@ -52,9 +52,9 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
         let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "FeedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
         let cellFeedback = Feedbacks(image: feedbackData.images[indexPath.row], title: feedbackData.titles[indexPath.row], overviewText: feedbackData.overviewTexts[indexPath.row], commentedText: feedbackData.commentedTexts[indexPath.row], comment: feedbackData.comments[indexPath.row], recommendation: feedbackData.recommendations[indexPath.row])
         
-        cell.setColor(colorView: &cell.feedbackView)
-        cell.setColor(colorView: &cell.notchView)
-        cell.setColor(colorView: &cell.commentView)
+        cell.setColorBlue(colorView: &cell.feedbackView)
+        cell.setColorBlue(colorView: &cell.notchView)
+        cell.setColorBlue(colorView: &cell.commentView)
         cell.setupUI()
         
         cell.displayFeedbackContent(feedback: cellFeedback)

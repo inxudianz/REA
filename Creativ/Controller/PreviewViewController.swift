@@ -65,21 +65,29 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
         if finalFeedbackResult.isEmpty == true {
             let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
             
-            cell.setColor(colorView: &cell.feedbackView)
-            cell.setColor(colorView: &cell.notchView)
-            cell.setColor(colorView: &cell.commentView)
+            cell.setColorBlue(colorView: &cell.feedbackView)
+            cell.setColorBlue(colorView: &cell.notchView)
+            cell.setColorBlue(colorView: &cell.commentView)
             cell.setupUI()
             cell.displayFeedbackContent(feedback: cellFeedback)
             
             return cell
         } else {
-            checkFeedback()
-            
             let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
             
-            cell.setColor(colorView: &cell.feedbackView)
-            cell.setColor(colorView: &cell.notchView)
-            cell.setColor(colorView: &cell.commentView)
+            checkFeedback()
+            
+            cell.setColorBlue(colorView: &cell.feedbackView)
+            cell.setColorBlue(colorView: &cell.notchView)
+            cell.setColorBlue(colorView: &cell.commentView)
+            
+            
+            if feedbackDatas.commentedTexts[indexPath.row] == "Missing Content!" {
+                cell.setColorRed(colorView: &cell.feedbackView)
+                cell.setColorRed(colorView: &cell.notchView)
+                cell.setColorRed(colorView: &cell.commentView)
+            }
+            
             cell.setupUI()
             cell.displayFeedbackContent(feedback: cellFeedback)
             

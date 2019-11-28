@@ -23,8 +23,6 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Xfb-nn-NdE" secondAttribute="trailing" constant="222" id="PnL-xS-wxw"/>
-                <constraint firstItem="Xfb-nn-NdE" firstAttribute="leading" secondItem="Nr9-C7-J5v" secondAttribute="leading" constant="20" id="iyP-Xn-osw"/>
-                <constraint firstItem="Xfb-nn-NdE" firstAttribute="top" secondItem="Nr9-C7-J5v" secondAttribute="top" constant="36" id="oJP-8Y-qTR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="tZY-wK-Ajg"/>
             <connections>
