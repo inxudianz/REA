@@ -159,6 +159,10 @@ class ProcessingViewController: UIViewController {
         
         print("Vague Output : \(output2)")
         
+        finalFeedbackResult[0].append("\(output1)\n")
+        finalFeedbackResult[0].append("\(output2)\n")
+
+        
         // Check word count
         let words =  text.split { !$0.isLetter }
         if text.count > 200 + words.count {
