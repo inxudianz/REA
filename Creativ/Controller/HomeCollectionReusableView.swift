@@ -80,8 +80,8 @@ class HomeCollectionReusableView: UICollectionReusableView {
         
         self.bubbleChatView.layer.addSublayer(outgoingMessageLayer)
         bubbleChatView.bringSubviewToFront(textDescription)
-        print(textDescription)
-        print(bubbleHeight, bubbleWidth)
+        //print(textDescription)
+        //print(bubbleHeight, bubbleWidth)
         //self.bubbleChatView.layer.addSublayer(textLayer)
     }
     
