@@ -496,34 +496,6 @@ class ProcessingViewController: UIViewController {
         }
     }
     
-    @IBAction func moveTableCellTapped(_ sender: Any) {
-        
-        var cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
-        guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
-        onGoingRow.doneArray?.append(onGoingIndex.row)
-        cell?.setCellStatus(statusType: .done)
-        
-        onGoingRow.rowIndexPath?.row += 1
-        cell = processCollectionView.cellForItem(at: onGoingRow.rowIndexPath!) as? ProcessCollectionViewCell
-        cell?.setCellStatus(statusType: .working)
-        
-        if onGoingRow.rowIndexPath!.row + 2 < processDetails.count {
-            processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row + 1, section: 0), at: .bottom, animated: true)
-        }
-        else if onGoingRow.rowIndexPath!.row < processDetails.count{
-            processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 2, section: 0), at: .top, animated: true)
-        }
-        else {
-            if onGoingRow.doneArray!.count < processDetails.count {
-                onGoingRow.doneArray?.append(onGoingRow.rowIndexPath!.row)
-                cell?.setCellStatus(statusType: .done)
-            }
-            else {
-                onGoingRow.rowIndexPath?.row = 0
-                performSegue(withIdentifier: "goToOverview", sender: self)
-            }
-        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)

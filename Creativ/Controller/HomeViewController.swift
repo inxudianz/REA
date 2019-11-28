@@ -77,14 +77,12 @@ class HomeViewController: UIViewController{
             cvCollectionView.reloadData()
         } else {
             
-            let alert = UIAlertController(title: "Delete CV", message: "This CV will be deleted from iCloud Documents on all your devices.", preferredStyle: .actionSheet)
+            let alert = UIAlertController(title: "Delete Resume", message: "This CV will be deleted from iCloud Documents on all your devices.", preferredStyle: .actionSheet)
             
-            alert.addAction(UIAlertAction(title: "Delete CV", style: .default, handler: { action in
-                
+            alert.addAction(UIAlertAction(title: "Delete Resume", style: .destructive, handler: { action in
                 for item in 0..<self.selectedItem.count {
                     self.contents.removeAll{$0.cvName == self.tempContents[self.selectedItem[item]-1].cvName}
                 }
-                
                 self.selectedItem.removeAll()
                 self.tempContents = self.contents
                 self.cvCollectionView.reloadData()
@@ -97,6 +95,7 @@ class HomeViewController: UIViewController{
                 
                 self.isEdit = false
                 self.cvCollectionView.reloadData()
+                
             }))
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
