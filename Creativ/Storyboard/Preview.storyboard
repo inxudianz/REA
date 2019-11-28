@@ -33,6 +33,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="516"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etv-Ff-8JA">
+                                                    <rect key="frame" x="165" y="6" width="40" height="40"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ViJ-tw-pcQ">
+                                                            <rect key="frame" x="6" y="6" width="28" height="28"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="28" id="Asp-kj-vj8"/>
+                                                                <constraint firstAttribute="width" constant="28" id="dOc-5a-JlR"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="2IY-SI-KjY"/>
+                                                        <constraint firstItem="ViJ-tw-pcQ" firstAttribute="centerY" secondItem="Etv-Ff-8JA" secondAttribute="centerY" id="468-ON-WCT"/>
+                                                        <constraint firstItem="ViJ-tw-pcQ" firstAttribute="centerX" secondItem="Etv-Ff-8JA" secondAttribute="centerX" id="JSb-H7-VVN"/>
+                                                        <constraint firstAttribute="height" constant="40" id="qjZ-du-MNp"/>
+                                                    </constraints>
+                                                </view>
                                                 <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="6yJ-pM-ZgC">
                                                     <rect key="frame" x="10" y="26" width="350" height="475"/>
                                                     <subviews>
@@ -131,24 +149,6 @@
                                                         <constraint firstItem="TOF-32-p3d" firstAttribute="leading" secondItem="RDk-zj-eXi" secondAttribute="leading" constant="8" id="tmC-Fl-IAm"/>
                                                         <constraint firstAttribute="trailing" secondItem="WWG-BT-3lw" secondAttribute="trailing" id="vXg-D1-M99"/>
                                                         <constraint firstItem="4wa-HG-vDM" firstAttribute="leading" secondItem="RDk-zj-eXi" secondAttribute="leading" constant="8" id="x5W-3V-SFZ"/>
-                                                    </constraints>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Etv-Ff-8JA">
-                                                    <rect key="frame" x="165" y="6" width="40" height="40"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ViJ-tw-pcQ">
-                                                            <rect key="frame" x="6" y="6" width="28" height="28"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="28" id="Asp-kj-vj8"/>
-                                                                <constraint firstAttribute="width" constant="28" id="dOc-5a-JlR"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="2IY-SI-KjY"/>
-                                                        <constraint firstItem="ViJ-tw-pcQ" firstAttribute="centerY" secondItem="Etv-Ff-8JA" secondAttribute="centerY" id="468-ON-WCT"/>
-                                                        <constraint firstItem="ViJ-tw-pcQ" firstAttribute="centerX" secondItem="Etv-Ff-8JA" secondAttribute="centerX" id="JSb-H7-VVN"/>
-                                                        <constraint firstAttribute="height" constant="40" id="qjZ-du-MNp"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
