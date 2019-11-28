@@ -176,7 +176,9 @@
                                             <outlet property="feedbackRecommendation" destination="o1P-3X-J56" id="YGN-6Z-rYp"/>
                                             <outlet property="feedbackSegment" destination="OvY-3i-8RA" id="hYe-Tu-dHa"/>
                                             <outlet property="feedbackView" destination="6yJ-pM-ZgC" id="zjQ-ht-0JM"/>
+                                            <outlet property="keypointLabel" destination="1U1-FS-Mkq" id="ZBe-GA-1cs"/>
                                             <outlet property="notchView" destination="Etv-Ff-8JA" id="TqQ-LG-EFK"/>
+                                            <outlet property="overviewLabel" destination="klc-dM-oww" id="C63-dY-sDM"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

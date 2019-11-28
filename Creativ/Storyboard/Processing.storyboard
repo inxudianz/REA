@@ -36,19 +36,26 @@
                                             <rect key="frame" x="0.0" y="0.0" width="286" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WWM-Af-Off">
-                                                    <rect key="frame" x="20" y="8" width="227" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QzL-T3-0sw">
+                                                    <rect key="frame" x="246" y="13" width="20" height="20"/>
+                                                    <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WWM-Af-Off">
+                                                    <rect key="frame" x="40" y="13" width="206" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" id="QzL-T3-0sw">
-                                                    <rect key="frame" x="258" y="13" width="20" height="20.000000000000114"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="QzL-T3-0sw" firstAttribute="top" secondItem="Jph-vY-Q8x" secondAttribute="top" constant="13" id="4MG-7R-cnh"/>
+                                                <constraint firstAttribute="trailing" secondItem="WWM-Af-Off" secondAttribute="trailing" constant="40" id="IKw-qD-Lhz"/>
+                                                <constraint firstItem="QzL-T3-0sw" firstAttribute="leading" secondItem="Jph-vY-Q8x" secondAttribute="leading" constant="246" id="Oyj-8T-QX3"/>
+                                                <constraint firstAttribute="bottom" secondItem="QzL-T3-0sw" secondAttribute="bottom" constant="12" id="QDb-0H-jRP"/>
+                                                <constraint firstAttribute="trailing" secondItem="QzL-T3-0sw" secondAttribute="trailing" constant="20" id="Ybc-EH-BX6"/>
+                                                <constraint firstItem="WWM-Af-Off" firstAttribute="leading" secondItem="Jph-vY-Q8x" secondAttribute="leading" constant="40" id="ZOM-gd-44b"/>
+                                                <constraint firstItem="WWM-Af-Off" firstAttribute="centerY" secondItem="Jph-vY-Q8x" secondAttribute="centerY" id="fNk-S0-STu"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="286" height="45"/>
                                         <connections>
