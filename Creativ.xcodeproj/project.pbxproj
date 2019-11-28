@@ -223,9 +223,7 @@
 				920F63E52372D0CE00BCFC5C /* Info.plist */,
 				920F63DD2372D0CC00BCFC5C /* Creativ.xcdatamodeld */,
 				8A244E6A23758751006E6CC0 /* UIColorExtension.swift */,
-				1EE6D1CB237511AE00A07759 /* FeedbackData.swift */,
 				1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */,
-				1E407539237D6EA200FDAA31 /* Brain.swift */,
 			);
 			path = Creativ;
 			sourceTree = "<group>";
@@ -258,6 +256,8 @@
 				920AF3A0237E631800F8FB7A /* FeedbackModel.swift */,
 				920AF3A2237E633500F8FB7A /* FeedbackContentModel.swift */,
 				920AF3A4237E633C00F8FB7A /* FeedbackContentDetailModel.swift */,
+				1EE6D1CB237511AE00A07759 /* FeedbackData.swift */,
+				1E407539237D6EA200FDAA31 /* Brain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

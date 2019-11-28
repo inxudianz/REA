@@ -46,6 +46,7 @@ class HomeCollectionReusableView: UICollectionReusableView {
         outgoingMessageLayer.fillColor = UIColor(hex: "#4B96DCFF")?.cgColor
         
         self.layer.addSublayer(outgoingMessageLayer)
+
     }
     
 }
