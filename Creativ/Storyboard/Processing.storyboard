@@ -25,21 +25,20 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hlb-bF-zAi">
-                                <rect key="frame" x="20" y="244" width="374" height="296"/>
+                                <rect key="frame" x="0.0" y="244" width="414" height="332"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="374" id="8gu-G2-ZaD"/>
-                                    <constraint firstAttribute="height" constant="296" id="bdJ-t1-Wej"/>
+                                    <constraint firstAttribute="height" constant="332" id="qL2-v1-d6A"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="qp8-7J-vzw">
                                     <size key="itemSize" width="286" height="45"/>
-                                    <size key="headerReferenceSize" width="50" height="249"/>
+                                    <size key="headerReferenceSize" width="370" height="200"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="center" reuseIdentifier="processCell" id="7Lw-0y-Tm5" customClass="ProcessCollectionViewCell" customModule="REA" customModuleProvider="target">
-                                        <rect key="frame" x="44" y="249" width="286" height="45"/>
+                                        <rect key="frame" x="64" y="220" width="286" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Jph-vY-Q8x">
                                             <rect key="frame" x="0.0" y="0.0" width="286" height="45"/>
@@ -59,12 +58,6 @@
                                                 </view>
                                             </subviews>
                                         </collectionViewCellContentView>
-                                        <constraints>
-                                            <constraint firstItem="Jph-vY-Q8x" firstAttribute="leading" secondItem="7Lw-0y-Tm5" secondAttribute="leadingMargin" constant="-8" id="LCW-X9-a0U"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="Jph-vY-Q8x" secondAttribute="trailing" constant="-8" id="ceW-bC-cFl"/>
-                                            <constraint firstItem="Jph-vY-Q8x" firstAttribute="top" secondItem="7Lw-0y-Tm5" secondAttribute="topMargin" constant="-8" id="haU-p7-ube"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="Jph-vY-Q8x" secondAttribute="bottom" constant="-8" id="rUK-XG-Coo"/>
-                                        </constraints>
                                         <size key="customSize" width="286" height="45"/>
                                         <connections>
                                             <outlet property="processLabel" destination="WWM-Af-Off" id="jBl-Um-bBo"/>
@@ -73,7 +66,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="FeedbackHeaderCollectionReusableView" id="HCn-SH-6ZW" customClass="FeedbackHeaderCollectionReusableView" customModule="REA" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="249"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                 </collectionReusableView>
                                 <connections>
@@ -84,10 +77,9 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Hlb-bF-zAi" firstAttribute="leading" secondItem="QxG-eb-pos" secondAttribute="leading" constant="20" id="LR4-62-cR7"/>
-                            <constraint firstItem="QxG-eb-pos" firstAttribute="trailing" secondItem="Hlb-bF-zAi" secondAttribute="trailing" constant="20" id="RBe-cB-Mnw"/>
-                            <constraint firstItem="Hlb-bF-zAi" firstAttribute="top" secondItem="QxG-eb-pos" secondAttribute="top" constant="200" id="gv1-hb-qIf"/>
-                            <constraint firstItem="Hlb-bF-zAi" firstAttribute="centerX" secondItem="QxG-eb-pos" secondAttribute="centerX" id="ucl-1C-45C"/>
+                            <constraint firstItem="QxG-eb-pos" firstAttribute="trailing" secondItem="Hlb-bF-zAi" secondAttribute="trailing" id="FXR-0b-Sqg"/>
+                            <constraint firstItem="Hlb-bF-zAi" firstAttribute="top" secondItem="QxG-eb-pos" secondAttribute="top" constant="200" id="Oal-VB-ADC"/>
+                            <constraint firstItem="Hlb-bF-zAi" firstAttribute="leading" secondItem="QxG-eb-pos" secondAttribute="leading" id="SPK-cI-by1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QxG-eb-pos"/>
                     </view>

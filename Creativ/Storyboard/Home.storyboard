@@ -43,13 +43,13 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="j80-mW-Pc5">
                                     <size key="itemSize" width="154" height="277"/>
-                                    <size key="headerReferenceSize" width="640" height="193"/>
+                                    <size key="headerReferenceSize" width="370" height="200"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HomeCollectionReusableViewID" id="ZXF-It-ZmB" customClass="HomeCollectionReusableView" customModule="REA" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="8" width="414" height="193"/>
+                                <collectionReusableView key="sectionHeaderView" autoresizesSubviews="NO" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="HomeCollectionReusableViewID" id="ZXF-It-ZmB" customClass="HomeCollectionReusableView" customModule="REA" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="8" width="414" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>

@@ -48,7 +48,7 @@ class ProcessingViewController: UIViewController {
         
         Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(recursiveLoop), userInfo: nil, repeats: false)
         
-        processCollectionView.register(UINib(nibName: "FeedbackHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "FeedbackHeaderCollectionReusableView")
+        processCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
@@ -57,9 +57,9 @@ class ProcessingViewController: UIViewController {
     }
     var countRecursiveLoop = 0
     @objc func recursiveLoop(){
-        if self.countRecursiveLoop <= self.processDetails.count+1{
-            UIView.animate(withDuration: 1.0, animations: {
-                if self.countRecursiveLoop == 0{
+        if self.countRecursiveLoop <= self.processDetails.count + 1 {
+            UIView.animate(withDuration: 1.3, animations: {
+                if self.countRecursiveLoop == 0 {
                     self.countRecursiveLoop += 1
                 } else {
                     self.moveItem()
@@ -67,7 +67,7 @@ class ProcessingViewController: UIViewController {
                 }
             }) { (finished) in
                 if finished{
-                    UIView.animate(withDuration: 1.0, animations: {
+                    UIView.animate(withDuration: 1.3, animations: {
                         if self.countRecursiveLoop <= self.processDetails.count{
                             self.recursiveLoop()
                         } else{
@@ -173,8 +173,11 @@ class ProcessingViewController: UIViewController {
             processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 2, section: 0), at: .top, animated: true)
         }
         else {
-            if onGoingRow.doneArray!.count < processDetails.count {
-                onGoingRow.doneArray?.append(onGoingRow.rowIndexPath!.row)
+            processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 1, section: 0), at: .top, animated: true)
+            if !onGoingRow.doneArray!.contains(onGoingRow.rowIndexPath!.row - 1) {
+                print("-91-=4===========================")
+                guard let onGoingIndex = onGoingRow.rowIndexPath else { return }
+                onGoingRow.doneArray?.append(onGoingIndex.row)
                 cell?.setCellStatus(statusType: .done)
             }
             else {
@@ -198,11 +201,11 @@ class ProcessingViewController: UIViewController {
         if onGoingRow.rowIndexPath!.row + 2 < processDetails.count {
             processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row + 1, section: 0), at: .bottom, animated: true)
         }
-        else if onGoingRow.rowIndexPath!.row < processDetails.count{
+        else if onGoingRow.rowIndexPath!.row + 1 < processDetails.count{
             processCollectionView.scrollToItem(at: IndexPath(row: onGoingRow.rowIndexPath!.row - 2, section: 0), at: .top, animated: true)
         }
         else {
-            if onGoingRow.doneArray!.count < processDetails.count {
+            if !onGoingRow.doneArray!.contains(onGoingRow.rowIndexPath!.row) {
                 onGoingRow.doneArray?.append(onGoingRow.rowIndexPath!.row)
                 cell?.setCellStatus(statusType: .done)
             }
@@ -227,7 +230,13 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) ->
         UICollectionReusableView {
             print("DInasIDBNWOridbqwpefbrepqwifbhqwpiofbnqwopi")
-            if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FeedbackHeaderCollectionReusableView", for: indexPath) as? UICollectionReusableView {
+            if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
+                headerView.textDescription.text = "I'm reviewing your resume..."
+                headerView.textDescription.sizeToFit()
+                headerView.textDescription.numberOfLines = 0
+                headerView.textDescription.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 162, height: headerView.textDescription.bounds.height)
+                headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - 162)
+                headerView.bringSubviewToFront(headerView.textDescription)
                 return headerView
             }
             return UICollectionReusableView()
@@ -244,7 +253,6 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell  =  processCollectionView.dequeueReusableCell(withReuseIdentifier: "processCell", for: indexPath) as! ProcessCollectionViewCell
         cell.setProcessContent(text: processDetails[indexPath.row])
-        
         if indexPath.row == 0 {
             cell.setCellStatus(statusType: .working)
         }
@@ -256,35 +264,15 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        
+        layout.minimumInteritemSpacing = 4
         layout.estimatedItemSize = CGSize(width: self.processCollectionView.frame.width, height: processCollectionView.frame.height / 8)
-//        layout.sectionInset = UIEdgeInsets(
-//            top: layout.itemSize.height * 2,
-//            left: processCollectionView.frame.size.width / 4,
-//            bottom: layout.itemSize.height * 2,
-//            right: processCollectionView.frame.size.width / 4)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2 + 40, bottom: 0, right: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2)
-
-        layout.minimumInteritemSpacing = layout.itemSize.width
-        layout.headerReferenceSize = CGSize(width: processCollectionView.frame.width, height: 200)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2 + 50, bottom: 0, right: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2)
+        layout.headerReferenceSize = CGSize(width: processCollectionView.frame.width, height: 180)
         layout.sectionHeadersPinToVisibleBounds = true
+        
         processCollectionView.contentInsetAdjustmentBehavior = .always
         processCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         processCollectionView.collectionViewLayout = layout
     }
-    //    func setCollectionViewLayout() {
-    //        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    //        layout.sectionInset = UIEdgeInsets(
-    //            top: layout.itemSize.height * 2,
-    //            left: processCollectionView.frame.size.width / 4,
-    //            bottom: layout.itemSize.height * 2,
-    //            right: processCollectionView.frame.size.width / 4)
-    //        layout.itemSize = CGSize(width: self.processCollectionView.frame.width, height: processCollectionView.frame.height / 4)
-    //        layout.minimumLineSpacing = 1
-    //        layout.minimumInteritemSpacing = layout.itemSize.width
-    //
-    //        processCollectionView.contentInsetAdjustmentBehavior = .always
-    //        processCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
-    //        processCollectionView.collectionViewLayout = layout
-    //    }
+    
 }
