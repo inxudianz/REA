@@ -73,7 +73,7 @@ class HomeCollectionReusableView: UICollectionReusableView {
 //        textLayer.alignmentMode = .left
 //        textLayer.contentsScale = UIScreen.main.scale
         
-        textDescription.font = UIFont(name: "Merriweather", size: 12)
+        textDescription.font = UIFont(name: "Merriweather", size: 16)
         textDescription.textColor = .white
         textDescription.textAlignment = .left
         

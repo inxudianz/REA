@@ -141,6 +141,24 @@ class ProcessingViewController: UIViewController {
 //    var tempString = 0
     
     func appointSummaryFeedback(for text: String) {
+        // ML
+        // Do any additional setup after loading the view.
+        let modelPassionate = TextClassifierPassionate()
+        let modelVague = TextClassifierVague()
+        guard let passionateOutput = try? modelPassionate.prediction(text: text) else {
+            fatalError("Unexpected runtime error.")
+        }
+        let output1 = passionateOutput.label
+        
+        print("Passionate Output : \(output1)")
+        
+        guard let vagueOutput = try? modelVague.prediction(text: text) else {
+            fatalError("Unexpected runtime error.")
+        }
+        let output2 = vagueOutput.label
+        
+        print("Vague Output : \(output2)")
+        
         // Check word count
         let words =  text.split { !$0.isLetter }
         if text.count > 200 + words.count {

@@ -32,6 +32,8 @@
 		1EE84B4A2386405B001E2DA1 /* Merriweather-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B3B2386404C001E2DA1 /* Merriweather-Regular.otf */; };
 		8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A244E6A23758751006E6CC0 /* UIColorExtension.swift */; };
 		8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */; };
+		8AEA5307238FD1BB00BCB545 /* TextClassifierPassionate.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA5305238FD1BB00BCB545 /* TextClassifierPassionate.mlmodel */; };
+		8AEA5308238FD1BB00BCB545 /* TextClassifierVague.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA5306238FD1BB00BCB545 /* TextClassifierVague.mlmodel */; };
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF39E237E630F00F8FB7A /* ResumeModel.swift */; };
 		920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3A0237E631800F8FB7A /* FeedbackModel.swift */; };
@@ -80,7 +82,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		10272E63238567EB00032BA3 /* merriweather */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merriweather; path = "../../../../Dropbox (DeveloperAcademy-ID)/Final Challenge/Design/Font/merriweather"; sourceTree = "<group>"; };
 		1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E407539237D6EA200FDAA31 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
 		1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -104,6 +105,8 @@
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		8A244E6A23758751006E6CC0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeNavigationViewController.swift; path = Creativ/Controller/HomeNavigationViewController.swift; sourceTree = SOURCE_ROOT; };
+		8AEA5305238FD1BB00BCB545 /* TextClassifierPassionate.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierPassionate.mlmodel; path = ../../../Desktop/model/TextClassifierPassionate.mlmodel; sourceTree = "<group>"; };
+		8AEA5306238FD1BB00BCB545 /* TextClassifierVague.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierVague.mlmodel; path = ../../../Desktop/model/TextClassifierVague.mlmodel; sourceTree = "<group>"; };
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920AF39E237E630F00F8FB7A /* ResumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeModel.swift; sourceTree = "<group>"; };
 		920AF3A0237E631800F8FB7A /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
@@ -212,8 +215,9 @@
 		920F63D32372D0CC00BCFC5C /* Creativ */ = {
 			isa = PBXGroup;
 			children = (
+				8AEA5305238FD1BB00BCB545 /* TextClassifierPassionate.mlmodel */,
+				8AEA5306238FD1BB00BCB545 /* TextClassifierVague.mlmodel */,
 				1EE84B3323863CAA001E2DA1 /* Fonts */,
-				10272E63238567EB00032BA3 /* merriweather */,
 				F50027B8237BF5D300E0B08F /* Model */,
 				920AF3312374271000F8FB7A /* Helper */,
 				F51CEC30237416270007FCC4 /* Controller */,
@@ -408,7 +412,6 @@
 			files = (
 				1E7F758E237C6A2D00A1DB9D /* FeedbackCollectionViewCell.xib in Resources */,
 				1EE84B482386405B001E2DA1 /* Merriweather-Light.otf in Resources */,
-				10272E64238567EB00032BA3 /* merriweather in Resources */,
 				920F63E42372D0CE00BCFC5C /* LaunchScreen.storyboard in Resources */,
 				1EE84B462386405B001E2DA1 /* Merriweather-BoldItalic.otf in Resources */,
 				F5F7067F237C180300771249 /* CVNewCollectionViewCell.xib in Resources */,
@@ -477,6 +480,7 @@
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
 				920AF3A5237E633C00F8FB7A /* FeedbackContentDetailModel.swift in Sources */,
 				F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */,
+				8AEA5307238FD1BB00BCB545 /* TextClassifierPassionate.mlmodel in Sources */,
 				920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */,
 				1EE84B3A23863F57001E2DA1 /* FontHelper.swift in Sources */,
 				920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */,
@@ -492,6 +496,7 @@
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
 				F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */,
 				8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */,
+				8AEA5308238FD1BB00BCB545 /* TextClassifierVague.mlmodel in Sources */,
 				1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */,
 				8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */,
 				920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */,
@@ -676,14 +681,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V6PF4NP65V;
+				DEVELOPMENT_TEAM = RZHN8D842K;
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = asddas;
+				PRODUCT_BUNDLE_IDENTIFIER = asddas.Creativ;
 				PRODUCT_NAME = REA;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -696,14 +701,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = V6PF4NP65V;
+				DEVELOPMENT_TEAM = RZHN8D842K;
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = asddas;
+				PRODUCT_BUNDLE_IDENTIFIER = asddas.Creativ;
 				PRODUCT_NAME = REA;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
