@@ -47,7 +47,7 @@ class ProcessingViewController: UIViewController {
     
     var extractedContent: [String] = []
     var brain = Brain()
-    var finalFeedbackResult: [String] = ["", "", "", "", "", ""]
+    var finalFeedbackResult: [FeedbackContentDetailModel] = [FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: "")]
     
     var stringProfile: String = ""
     var stringEducation: String = ""
@@ -159,62 +159,65 @@ class ProcessingViewController: UIViewController {
         
         print("Vague Output : \(output2)")
         
-        finalFeedbackResult[0].append("\(output1)\n")
-        finalFeedbackResult[0].append("\(output2)\n")
+        finalFeedbackResult[0].type = "Summary"
+        finalFeedbackResult[0].overview.append(output1)
+        finalFeedbackResult[0].overview.append(output2)
 
-        
         // Check word count
         let words =  text.split { !$0.isLetter }
         if text.count > 200 + words.count {
-            finalFeedbackResult[0].append("Your summary is getting too long, reduce few words to make it more simple.\n")
+            finalFeedbackResult[0].overview.append("Your summary is getting too long, reduce few words to make it more simple.\n")
         } else {
-            finalFeedbackResult[0].append("You showed a good and simple summary about yourself.\n")
+            finalFeedbackResult[0].overview.append("You showed a good and simple summary about yourself.\n")
         }
         
         // Check usage of words and frequency
         var wordDict = brain.createWordDictionary(text: text)
         if !brain.isWordFrequencyAppropriate(dictionary: wordDict) {
-            finalFeedbackResult[0].append("It seems that you used 'words' too much, try to use another words!\n")
+            finalFeedbackResult[0].overview.append("It seems that you used 'words' too much, try to use another words!\n")
         } else {
-            finalFeedbackResult[0].append("You used various words and it makes your summary more unique.\n")
+            finalFeedbackResult[0].overview.append("You used various words and it makes your summary more unique.\n")
         }
         
         if !brain.isActionVerbAppropriate(text: text) {
-            finalFeedbackResult[0].append("You have to use more action verbs in your summary.\n")
+            finalFeedbackResult[0].overview.append("You have to use more action verbs in your summary.\n")
         } else {
-            finalFeedbackResult[0].append("It's great that you use action verbs in your summary!\n")
+            finalFeedbackResult[0].overview.append("It's great that you use action verbs in your summary!\n")
         }
     }
     
     func appointProfileFeedback(for text: String) {
+        finalFeedbackResult[1].type = "Profile"
         if !brain.isEmailRegexFound(text: text) {
-            finalFeedbackResult[1].append("No email? Please put your email in your summary!\n")
+            finalFeedbackResult[1].overview.append("No email? Please put your email in your summary!\n")
         } else if brain.isEmailRegexFound(text: text) {
-            finalFeedbackResult[1].append("Good! Email found!\n")
+            finalFeedbackResult[1].overview.append("Good! Email found!\n")
         }
         
         if !brain.isPhoneNumberRegexFound(text: text) {
-            finalFeedbackResult[1].append("No phone number? Please put your email in your summary!\n")
+            finalFeedbackResult[1].overview.append("No phone number? Please put your email in your summary!\n")
         } else if brain.isPhoneNumberRegexFound(text: text) {
-            finalFeedbackResult[1].append("Good! Phone number found!\n")
+            finalFeedbackResult[1].overview.append("Good! Phone number found!\n")
         }
     }
     
     func appointEducationFeedback(for text: String) {
+        finalFeedbackResult[0].type = "Education"
         if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: text) == .inRange {
-            finalFeedbackResult[2].append("Wow! You have a great GPA!\n")
+            finalFeedbackResult[2].overview.append("Wow! You have a great GPA!\n")
         } else if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: text) == .outOfBound {
-            finalFeedbackResult[2].append("It's better not to show your GPA in your resume.\n")
+            finalFeedbackResult[2].overview.append("It's better not to show your GPA in your resume.\n")
         } else {
-            finalFeedbackResult[2].append("You can add your GPA if it's more than equal to 3.\n")
+            finalFeedbackResult[2].overview.append("You can add your GPA if it's more than equal to 3.\n")
         }
     }
     
     func appointWorkFeedback(for text: String) {
+        finalFeedbackResult[0].type = "Work Experience"
         if !brain.isChronological(text: brain.getYear(for: text)) {
-            finalFeedbackResult[3].append("Rearrange your working experiences from the most current until the latest one!\n")
+            finalFeedbackResult[3].overview.append("Rearrange your working experiences from the most current until the latest one!\n")
         } else {
-            finalFeedbackResult[3].append("You showed your working experiences at chronological order!\n")
+            finalFeedbackResult[3].overview.append("You showed your working experiences at chronological order!\n")
         }
         
         // Check whether the description is descriptive enough
@@ -222,10 +225,11 @@ class ProcessingViewController: UIViewController {
     }
     
     func appointOrganisationFeedback(for text: String) {
+        finalFeedbackResult[0].type = "Organisational Experience"
         if !brain.isChronological(text: brain.getYear(for: text)) {
-            finalFeedbackResult[4].append("Rearrange your organisational experiences from the most current until the latest one!\n")
+            finalFeedbackResult[4].overview.append("Rearrange your organisational experiences from the most current until the latest one!\n")
         } else {
-            finalFeedbackResult[4].append("You showed your organisational experiences at chronological order!\n")
+            finalFeedbackResult[4].overview.append("You showed your organisational experiences at chronological order!\n")
         }
         
         // Check whether the description is action-based or result-based
@@ -233,20 +237,21 @@ class ProcessingViewController: UIViewController {
     }
     
     func appointSkillsFeedback(for text: String) {
+        finalFeedbackResult[0].type = "Skills"
         if !brain.isRelatedSkillsAppropriate(text: text) {
-            finalFeedbackResult[5].append("You have to put your skills that match with job that you've applied.\n")
+            finalFeedbackResult[5].overview.append("You have to put your skills that match with job that you've applied.\n")
         } else {
-            finalFeedbackResult[5].append("Great! Your skills are relevant with job that you've applied!\n")
+            finalFeedbackResult[5].overview.append("Great! Your skills are relevant with job that you've applied!\n")
         }
     }
     
     func divideExtractedContent(extractedContent: [String]) {
-        print(headerCV.count)
         var index = -1
         var temp: String = ""
         for q in 0 ..< extractedContent.count {
             for x in 0 ..< headerCV.count {
                 if extractedContent[q] == headerCV[x] {
+                    headerCV[x] = headerCV[x].trimmingCharacters(in: .whitespacesAndNewlines)
                     print("ketemu \(headerCV[x])")
                     segmentationExtractedResult["\(headerCV[x])"] = ""
                     index = x
@@ -333,7 +338,7 @@ class ProcessingViewController: UIViewController {
                     extractedContent.append(result.segment[jumlah].contents[i].label)
                     if result.segment[jumlah].contents[i].type.first == "H"{
                         var lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
-                        if lastTypeNumberString == tempFontSize-1 {
+                        if lastTypeNumberString >= tempFontSize-1 {
                             headerCV.append(result.segment[jumlah].contents[i].label)
                         }
                     }
@@ -346,7 +351,7 @@ class ProcessingViewController: UIViewController {
                     extractedContent.append(result.contents[j].label)
                     if result.contents[j].type.first == "H"{
                         var lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
-                        if lastTypeNumberString == tempFontSize-1 {
+                        if lastTypeNumberString >= tempFontSize-1 {
                             headerCV.append(result.contents[j].label)
                         }
                     }
@@ -357,15 +362,18 @@ class ProcessingViewController: UIViewController {
     
     func decideAppropriateFeedback(dividedExtractedContent: [String:String]) {
         for key in dividedExtractedContent.keys {
-            if key.lowercased().contains("Contact Info".lowercased()) || key.lowercased().contains("Contact".lowercased()) || key.lowercased().contains("Personal Information".lowercased()) {
+            if key.lowercased() == "Contact Info".lowercased() || key.lowercased() == "Contact".lowercased() || key.lowercased() == "Personal Information".lowercased() {
                 appointProfileFeedback(for: dividedExtractedContent[key]!)
-            } else if key.lowercased().contains("Education".lowercased()) || key.lowercased().contains("Academic History".lowercased()) || key.lowercased().contains("Academic Background".lowercased()) || key.lowercased().contains("Education History".lowercased()) {
+            } else if key.lowercased() == "Education".lowercased() || key.lowercased() == "Academic History".lowercased() || key.lowercased() == "Academic Background".lowercased() || key.lowercased() == "Education History".lowercased() {
                 appointEducationFeedback(for: dividedExtractedContent[key]!)
-            } else if key.lowercased().contains("Work Experience".lowercased()) || key.lowercased().contains("Work History".lowercased()) || key.lowercased().contains("Working Experience".lowercased()) || key.lowercased().contains("Job History".lowercased()) || key.lowercased().contains("Experience".lowercased()) {
+            } else if key.lowercased() == "Work Experience".lowercased() || key.lowercased() == "Work History".lowercased() || key.lowercased() == "Working Experience".lowercased() || key.lowercased() == "Job History".lowercased() || key.lowercased() == "Experience".lowercased() {
                 appointWorkFeedback(for: dividedExtractedContent[key]!)
-            } else if key.lowercased().contains("Organisation Experience".lowercased()) || key.lowercased().contains("Organisational Experience".lowercased()) || key.lowercased().contains("Organization Experience".lowercased()) || key.lowercased().contains("Organizational Experience".lowercased()) || key.lowercased().contains("Organization History".lowercased()) || key.lowercased().contains("Organisation History".lowercased()) || key.lowercased().contains("Organizational".lowercased()) || key.lowercased().contains("Organisational".lowercased()) {
+            } else if key.lowercased() == "Organisation Experience".lowercased() || key.lowercased() == "Organisational Experience".lowercased() || key.lowercased() == "Organization Experience".lowercased() || key.lowercased() == "Organizational Experience".lowercased() || key.lowercased() == "Organization History".lowercased() || key.lowercased() == "Organisation History".lowercased() {
                 appointOrganisationFeedback(for: dividedExtractedContent[key]!)
             } else if key.lowercased().contains("Summary".lowercased()) || key.lowercased().contains("About Me".lowercased()) || key.lowercased().contains("About".lowercased()) || key.lowercased().contains("Personal Profile".lowercased()) || key.lowercased().contains("Profile".lowercased()) || key.lowercased().contains("In Words".lowercased()) {
+                if brain.isEmailRegexFound(text: dividedExtractedContent[key]!) || brain.isPhoneNumberRegexFound(text: dividedExtractedContent[key]!) {
+                    appointProfileFeedback(for: dividedExtractedContent[key]!)
+                }
                 appointSummaryFeedback(for: dividedExtractedContent[key]!)
             } else if key.lowercased().contains("Skills".lowercased()) || key.lowercased().contains("Skill".lowercased()) || key.lowercased().contains("Expertise".lowercased()) || key.lowercased().contains("Technical Skills".lowercased()) || key.lowercased().contains("Key Skills".lowercased()) {
                 appointSkillsFeedback(for: dividedExtractedContent[key]!)
