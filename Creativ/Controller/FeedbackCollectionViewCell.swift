@@ -117,5 +117,16 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
         colorView.layer.borderWidth = 2.0
         colorView.layer.borderColor = UIColor(red: 0.764, green: 0.215, blue: 0.215, alpha: 1.0).cgColor
     }
+    
+    func setColorYellow(colorView: inout UIView) {
+        colorView.layer.borderWidth = 2.0
+        colorView.layer.borderColor = UIColor(red: 0.745, green: 0.313, blue: 0, alpha: 1.0).cgColor
+        
+    }
+    
+    func setColorGreen(colorView: inout UIView) {
+        colorView.layer.borderWidth = 2.0
+        colorView.layer.borderColor = UIColor(red: 0.254, green: 0.568, blue: 0.117, alpha: 1.0).cgColor
+    }
 }
 
