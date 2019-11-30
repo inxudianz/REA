@@ -25,6 +25,7 @@ class HomeViewController: UIViewController{
     var filePath = Bundle.main.url(forResource: "file", withExtension: "txt")
     var myData: Data!
     var fontMean: Float = 0
+    var checkFileImage = 0
     var totalFont = 0
     
     
@@ -262,8 +263,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         format.dateFormat = "dd-MM-yyyy"
         let formattedDate = format.string(from: date)
         
-        contents.insert(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate), at: 0)
-        
         //save file to directory
         // get the documents directory url
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -299,6 +298,13 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         }
         
         readPDFFile()
+        
+        if checkFileImage != 0 {
+            contents.insert(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate), at: 0)
+            checkFileImage = 0
+        } else {
+            self.cvCollectionView.reloadData()
+        }
         
         tempContents = contents
         cvCollectionView.reloadData()
@@ -344,7 +350,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     func readPDFFile(){
         var cvContents:[(String,Double,Bool)] = []
         var pointAvg:Double = 0
-        var count = 0
         var arrFontSize: [Double] = []
         var categorisedcvContent:[SegmentedModel] = []
         
@@ -369,7 +374,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 let content = documentContent.string
                 let rangeContent = content[range.location..<range.location + range.length]
                 let isBold = currentFont.fontDescriptor.symbolicTraits.contains(.traitBold)
-                count += 1
+                checkFileImage += 1
                 pointAvg += Double(currentFont.pointSize)
                 
                 cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
@@ -377,12 +382,12 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             
         }
         
-        if count != 0 {
+        if checkFileImage != 0 {
             let sortWithoutDuplicates = Array(Set(arrFontSize))
             let fontSizeSorted = sortWithoutDuplicates.sorted()
             let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
             
-            pointAvg = pointAvg / Double(count)
+            pointAvg = pointAvg / Double(checkFileImage)
 
             let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
             var arrHeading:[(String,String)] = []
@@ -418,7 +423,13 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             }
         }
         else {
+            let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your resume is an image. Try to convert it to readable format.", preferredStyle: .alert)
             
+            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                self.cvCollectionView.reloadData()
+            }))
+            
+            present(alert, animated: true, completion: nil)
         }
         segmentedResult = segmentContent(contents: categorisedcvContent)
     }

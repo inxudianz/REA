@@ -234,7 +234,7 @@ class ProcessingViewController: UIViewController {
     
     func appointSkillsFeedback(for text: String) {
         if !brain.isRelatedSkillsAppropriate(text: text) {
-            finalFeedbackResult[5].append("You have to put your skills that match with job that you've applied\n")
+            finalFeedbackResult[5].append("You have to put your skills that match with job that you've applied.\n")
         } else {
             finalFeedbackResult[5].append("Great! Your skills are relevant with job that you've applied!\n")
         }
