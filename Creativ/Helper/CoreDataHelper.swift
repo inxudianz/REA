@@ -57,24 +57,11 @@ class CoreDataHelper {
         let contents = model.feedback.contents
 
         for content in contents {
-            let feedbackContent = FeedbackContent(context: managedContext)
+            let feedbackContent = FeedbackDetail(context: managedContext)
             feedbackContent.type = content.type
             feedbackContent.score = Int64(content.score)
             feedbackContent.overview = content.overview
-            
-            feedback.addToHasManyContent(feedbackContent)
-            
-            let contentDetails = content.details
-            
-            for contentDetail in contentDetails {
-                let feedbackDetail = FeedbackContentDetail(context: managedContext)
-                feedbackDetail.overview = contentDetail.overview
-                feedbackDetail.score = Int64(contentDetail.score)
-                feedbackDetail.type = contentDetail.type
-                
-                feedbackContent.addToHasManyDetail(feedbackDetail)
-            }
-            
+            feedback.addToHasManyDetail(feedbackContent)
         }
         
         do {

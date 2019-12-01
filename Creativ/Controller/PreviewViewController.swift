@@ -20,7 +20,7 @@ class PreviewViewController: UIViewController {
     
     let feedbackDatas = FeedbackData()
     let customFont = CustomFont()
-    var finalFeedbackResult: [FeedbackContentDetailModel] = []
+    var finalFeedbackResult: [FeedbackDetailModel] = []
     var headerCv: [String] = ["Summary", "Identity", "Education", "Working Experience", "Organisational Experience", "Skills"]
 
     override func viewDidLoad() {
@@ -41,7 +41,14 @@ class PreviewViewController: UIViewController {
     
     // Unwind back to the All Resume Page
     @objc func doneReview(_ unwindSegue: UIStoryboardSegue) {
+        saveNewResume()
         performSegue(withIdentifier: "unwindToHome", sender: self)
+    }
+    
+    func saveNewResume() {
+        currentData.feedback.overview = ""
+        currentData.feedback.score = 0
+        currentData.feedback.contents = finalFeedbackResult
     }
     
     func setCollectionViewLayout() {

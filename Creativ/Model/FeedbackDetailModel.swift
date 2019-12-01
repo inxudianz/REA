@@ -8,23 +8,20 @@
 
 import Foundation
 
-struct FeedbackContentModel {
+struct FeedbackDetailModel {
     var type:String
     var score:Int
     var overview:String
-    var details:[FeedbackContentDetailModel]
     
     init() {
         self.type = ""
         self.score = 0
         self.overview = ""
-        self.details = [FeedbackContentDetailModel()]
     }
     
-    init(type: String, score: Int, overview:String, details: [FeedbackContentDetailModel]) {
+    init(type: String, score: Int, overview:String) {
         self.type = type
         self.score = score
         self.overview = overview
-        self.details = details
     }
 }

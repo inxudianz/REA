@@ -11,15 +11,15 @@ import Foundation
 struct FeedbackModel {
     var score:Int
     var overview:String
-    var contents:[FeedbackContentModel]
+    var contents:[FeedbackDetailModel]
     
     init() {
         self.score = 0
         self.overview = ""
-        self.contents = [FeedbackContentModel()]
+        self.contents = [FeedbackDetailModel()]
     }
     
-    init(score: Int, overview: String, contents: [FeedbackContentModel]) {
+    init(score: Int, overview: String, contents: [FeedbackDetailModel]) {
         self.score = score
         self.overview = overview
         self.contents = contents
