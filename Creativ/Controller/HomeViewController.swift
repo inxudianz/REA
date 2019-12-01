@@ -83,9 +83,6 @@ class HomeViewController: UIViewController{
             let alert = UIAlertController(title: "Delete Resume", message: "This CV will be deleted from iCloud Documents on all your devices.", preferredStyle: .actionSheet)
             
             alert.addAction(UIAlertAction(title: "Delete Resume", style: .destructive, handler: { action in
-                for item in 0..<self.selectedItem.count {
-                    self.contents.removeAll{$0.name == self.tempContents[self.selectedItem[item]-1].name}
-                }
                 
                 CoreDataHelper.delete(names: self.getDeletedItem())
                 
@@ -132,13 +129,34 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         // Do any additional setup after loading the view
         registerXIB()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         populateContent()
     }
     
     func fetchData() -> [ResumeModel] {
-        let fetchedDatas:[ResumeModel] = CoreDataHelper.fetch(entityName: "Resume")
+        let fetchedDatas:[Resume] = CoreDataHelper.fetch(entityName: "Resume")
         
-        return fetchedDatas
+        var results:[ResumeModel] = []
+        
+        for fetchedData in fetchedDatas {
+            var resume:ResumeModel = ResumeModel()
+            var feedback:FeedbackModel = FeedbackModel()
+            let feedbackDetails = fetchedData.hasFeedback?.hasManyDetail?.allObjects as! [FeedbackDetail]
+            for feedbackDetail in feedbackDetails {
+                let detailModel:FeedbackDetailModel = FeedbackDetailModel(type: feedbackDetail.type!, score: 0, overview: feedbackDetail.overview!)
+                feedback.contents.append(detailModel)
+            }
+            resume.feedback = feedback
+            resume.name = fetchedData.name!
+            resume.dateCreated = fetchedData.dateCreated!
+            resume.thumbnailImage = fetchedData.thumbnailImage!
+            results.append(resume)
+            
+        }
+        
+        return results
     }
     
     func populateContent() {
@@ -223,6 +241,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let content = contents[indexPath.row - 1]
             
             cell?.content = content
+            dump(cell?.content)
+            print("\n\n\n")
+            dump(content)
             
             if isEdit == true {
                 if selectedItem.contains(indexPath.row){
