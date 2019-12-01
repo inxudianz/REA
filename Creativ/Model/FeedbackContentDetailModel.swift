@@ -18,4 +18,10 @@ struct FeedbackContentDetailModel {
         self.score = 0
         self.overview = ""
     }
+    
+    init(type: String, score: Int, overview: String) {
+        self.type = type
+        self.score = score
+        self.overview = overview
+    }
 }

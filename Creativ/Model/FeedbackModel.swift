@@ -16,6 +16,12 @@ struct FeedbackModel {
     init() {
         self.score = 0
         self.overview = ""
-        self.contents = FeedbackContentModel()
+        self.contents = [FeedbackContentModel()]
+    }
+    
+    init(score: Int, overview: String, contents: [FeedbackContentModel]) {
+        self.score = score
+        self.overview = overview
+        self.contents = contents
     }
 }

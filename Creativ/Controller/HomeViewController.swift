@@ -306,7 +306,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         
         currentData.name = fileName
         currentData.dateCreated = formattedDate
-        currentData.thumbnailImage = urlPicked!.absoluteString
+        currentData.thumbnailImage = thumbnail!
         
         tempContents = contents
         cvCollectionView.reloadData()

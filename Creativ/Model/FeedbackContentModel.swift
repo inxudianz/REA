@@ -18,6 +18,13 @@ struct FeedbackContentModel {
         self.type = ""
         self.score = 0
         self.overview = ""
-        self.details = FeedbackContentDetailModel()
+        self.details = [FeedbackContentDetailModel()]
+    }
+    
+    init(type: String, score: Int, overview:String, details: [FeedbackContentDetailModel]) {
+        self.type = type
+        self.score = score
+        self.overview = overview
+        self.details = details
     }
 }

@@ -20,7 +20,7 @@
         <relationship name="hasContent" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="FeedbackContent" inverseName="hasManyDetail" inverseEntity="FeedbackContent"/>
     </entity>
     <entity name="Resume" representedClassName="Resume" syncable="YES" codeGenerationType="class">
-        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateCreated" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="thumbnailImage" optional="YES" attributeType="String"/>
         <relationship name="hasFeedback" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Feedback" inverseName="hasResume" inverseEntity="Feedback"/>
