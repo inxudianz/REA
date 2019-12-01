@@ -12,8 +12,8 @@ import PDFKit
 
 class HomeViewController: UIViewController{
     
-    var contents: [HomeContent] = HomeContent.createHomeContent()
-    var tempContents : [HomeContent] = HomeContent.createHomeContent()
+    var contents: [ResumeModel] = []
+    var tempContents : [ResumeModel] = []
     var segmentModel: SegmentedModel?
     var segmentedModel: SegmentedModel?
     var urlPicked: URL?
@@ -84,7 +84,7 @@ class HomeViewController: UIViewController{
             
             alert.addAction(UIAlertAction(title: "Delete Resume", style: .destructive, handler: { action in
                 for item in 0..<self.selectedItem.count {
-                    self.contents.removeAll{$0.cvName == self.tempContents[self.selectedItem[item]-1].cvName}
+                    self.contents.removeAll{$0.name == self.tempContents[self.selectedItem[item]-1].name}
                 }
                 self.selectedItem.removeAll()
                 self.tempContents = self.contents
@@ -118,6 +118,17 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         // Do any additional setup after loading the view
         registerXIB()
+        populateContent()
+    }
+    
+    func fetchData() -> [ResumeModel] {
+        let fetchedDatas:[ResumeModel] = CoreDataHelper.fetch(entityName: "Resume")
+        
+        return fetchedDatas
+    }
+    
+    func populateContent() {
+        contents = fetchData()
     }
     
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
@@ -160,14 +171,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return 1
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contents.count + 1
     }
-    
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
             headerView.textDescription.text = "Here are the resumes that I've given feedback on. You can see them over and over again!"
@@ -215,8 +222,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell?.checklistImg.image = .none
                 cell?.backgroundColor = .clear
             }
-            
-            
             return cell!
         }
         
@@ -234,7 +239,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         } else {
             let content = contents[indexPath.row - 1]
             name =
-                content.cvName
+                content.name
             print(name)
             performSegue(withIdentifier: "goToOverview", sender: self)
             print("Delete button not selected")
@@ -298,15 +303,14 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         readPDFFile()
         
         if checkFileImage != 0 {
-            contents.insert(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate), at: 0)
+            currentData.name = fileName
+            currentData.dateCreated = formattedDate
+            currentData.thumbnailImage = thumbnail!.pngData()!
+            
             checkFileImage = 0
         } else {
             self.cvCollectionView.reloadData()
         }
-        
-        currentData.name = fileName
-        currentData.dateCreated = formattedDate
-        currentData.thumbnailImage = thumbnail!
         
         tempContents = contents
         cvCollectionView.reloadData()

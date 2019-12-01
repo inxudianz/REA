@@ -11,18 +11,18 @@ import UIKit
 
 struct ResumeModel {
     var name:String
-    var thumbnailImage:UIImage
+    var thumbnailImage:Data
     var dateCreated:String
     var feedback:FeedbackModel
     
     init() {
         self.name = ""
-        self.thumbnailImage = UIImage()
+        self.thumbnailImage = Data()
         self.dateCreated = ""
         self.feedback = FeedbackModel()
     }
     
-    init(name: String, thumbnailImage:UIImage, dateCreated:String, feedback: FeedbackModel) {
+    init(name: String, thumbnailImage:Data, dateCreated:String, feedback: FeedbackModel) {
         self.name = name
         self.thumbnailImage = thumbnailImage
         self.dateCreated = dateCreated

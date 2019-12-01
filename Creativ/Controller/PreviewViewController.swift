@@ -49,6 +49,7 @@ class PreviewViewController: UIViewController {
         currentData.feedback.overview = ""
         currentData.feedback.score = 0
         currentData.feedback.contents = finalFeedbackResult
+        CoreDataHelper.saveResume(model: currentData)
     }
     
     func setCollectionViewLayout() {
