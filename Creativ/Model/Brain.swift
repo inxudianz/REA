@@ -139,7 +139,7 @@ class Brain {
         print("CHRONOLOGY: \(yearOnly)")
         let sortedText = yearOnly.sorted() { $0 > $1 }
         print("Sorted: \(sortedText)")
-        if yearOnly != sortedText && yearOnly.count > 1 {
+        if (yearOnly != sortedText && yearOnly.count > 1) || yearOnly.count == 0 {
             return false
         }
         return true
