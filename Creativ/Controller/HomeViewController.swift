@@ -86,6 +86,9 @@ class HomeViewController: UIViewController{
                 for item in 0..<self.selectedItem.count {
                     self.contents.removeAll{$0.name == self.tempContents[self.selectedItem[item]-1].name}
                 }
+                
+                CoreDataHelper.delete(names: self.getDeletedItem())
+                
                 self.selectedItem.removeAll()
                 self.tempContents = self.contents
                 self.cvCollectionView.reloadData()
@@ -112,6 +115,17 @@ class HomeViewController: UIViewController{
             self.isEdit = false
             cvCollectionView.reloadData()
         }
+    }
+    
+    func getDeletedItem() ->[String] {
+        var deletedContent:[String] = []
+        
+        for (index,content) in contents.enumerated() {
+            if selectedItem.contains(index) {
+                deletedContent.append(content.name)
+            }
+        }
+            return deletedContent
     }
         
     override func viewDidLoad() {
