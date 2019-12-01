@@ -46,6 +46,7 @@
 		920F63E42372D0CE00BCFC5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 920F63E22372D0CE00BCFC5C /* LaunchScreen.storyboard */; };
 		920F63EF2372D0CE00BCFC5C /* CreativTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63EE2372D0CE00BCFC5C /* CreativTests.swift */; };
 		920F63FA2372D0CE00BCFC5C /* CreativUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63F92372D0CE00BCFC5C /* CreativUITests.swift */; };
+		92B076082393B939003D7082 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B076072393B939003D7082 /* GlobalVariables.swift */; };
 		F507B74D23902B24009FD9DA /* TextClassifierPassionate.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F507B74B23902B24009FD9DA /* TextClassifierPassionate.mlmodel */; };
 		F507B74E23902B24009FD9DA /* TextClassifierVague.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F507B74C23902B24009FD9DA /* TextClassifierVague.mlmodel */; };
 		F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1B237413220007FCC4 /* OnboardingViewController.swift */; };
@@ -125,6 +126,7 @@
 		920F63F52372D0CE00BCFC5C /* CreativUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CreativUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		920F63F92372D0CE00BCFC5C /* CreativUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreativUITests.swift; sourceTree = "<group>"; };
 		920F63FB2372D0CE00BCFC5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92B076072393B939003D7082 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		F507B74B23902B24009FD9DA /* TextClassifierPassionate.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierPassionate.mlmodel; sourceTree = "<group>"; };
 		F507B74C23902B24009FD9DA /* TextClassifierVague.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierVague.mlmodel; sourceTree = "<group>"; };
 		F51CEC1B237413220007FCC4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				920F63DD2372D0CC00BCFC5C /* Creativ.xcdatamodeld */,
 				8A244E6A23758751006E6CC0 /* UIColorExtension.swift */,
 				1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */,
+				92B076072393B939003D7082 /* GlobalVariables.swift */,
 			);
 			path = Creativ;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				920AF3A5237E633C00F8FB7A /* FeedbackContentDetailModel.swift in Sources */,
 				F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */,
 				F507B74D23902B24009FD9DA /* TextClassifierPassionate.mlmodel in Sources */,
+				92B076082393B939003D7082 /* GlobalVariables.swift in Sources */,
 				920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */,
 				1EE84B3A23863F57001E2DA1 /* FontHelper.swift in Sources */,
 				920F63D52372D0CC00BCFC5C /* AppDelegate.swift in Sources */,
@@ -681,14 +685,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RZHN8D842K;
+				DEVELOPMENT_TEAM = WPQ9HAVPNV;
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = asddas.Creativ;
+				PRODUCT_BUNDLE_IDENTIFIER = dsfawafa;
 				PRODUCT_NAME = REA;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -701,14 +705,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = RZHN8D842K;
+				DEVELOPMENT_TEAM = WPQ9HAVPNV;
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = asddas.Creativ;
+				PRODUCT_BUNDLE_IDENTIFIER = dsfawafa;
 				PRODUCT_NAME = REA;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -11,6 +11,13 @@ import Foundation
 struct ResumeModel {
     var name:String
     var thumbnailImage:String
-    var dateCreated:Date
+    var dateCreated:String
     var feedback:FeedbackModel
+    
+    init() {
+        self.name = ""
+        self.thumbnailImage = ""
+        self.dateCreated = ""
+        self.feedback = FeedbackModel()
+    }
 }

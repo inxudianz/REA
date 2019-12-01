@@ -11,7 +11,7 @@ import UIKit
 
 class CoreDataHelper {
     
-    func fetch<T>(entityName :String) -> [T] {
+    static func fetch<T>(entityName :String) -> [T] {
         var result:[T] = []
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else {
@@ -34,7 +34,7 @@ class CoreDataHelper {
         return result
     }
 
-    func saveResume(model: ResumeModel) {
+   static func saveResume(model: ResumeModel) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else {
@@ -86,7 +86,7 @@ class CoreDataHelper {
         }
     }
     
-    func delete(names: [String]) {
+   static func delete(names: [String]) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else {

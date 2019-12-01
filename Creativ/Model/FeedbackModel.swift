@@ -12,4 +12,10 @@ struct FeedbackModel {
     var score:Int
     var overview:String
     var contents:[FeedbackContentModel]
+    
+    init() {
+        self.score = 0
+        self.overview = ""
+        self.contents = FeedbackContentModel()
+    }
 }

@@ -113,9 +113,7 @@ class HomeViewController: UIViewController{
             cvCollectionView.reloadData()
         }
     }
-    
-    var coreData = CoreDataHelper()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
@@ -306,6 +304,10 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             self.cvCollectionView.reloadData()
         }
         
+        currentData.name = fileName
+        currentData.dateCreated = formattedDate
+        currentData.thumbnailImage = urlPicked!.absoluteString
+        
         tempContents = contents
         cvCollectionView.reloadData()
         performSegue(withIdentifier: "gotoprocess", sender: self)
@@ -487,8 +489,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 }
                 continue
             }
-            
-            
             
             // if node is header
             if currNode.type.first == "H" {
