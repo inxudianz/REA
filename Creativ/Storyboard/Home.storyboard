@@ -71,6 +71,7 @@
                     <connections>
                         <outlet property="cvCollectionView" destination="ZXX-ye-g6K" id="Yd5-UY-4Iz"/>
                         <outlet property="navBar" destination="rdZ-eY-Hf0" id="fpa-bz-DDm"/>
+                        <outlet property="resumeCollectionView" destination="ZXX-ye-g6K" id="yb5-3l-fPg"/>
                         <segue destination="5HN-gf-Cj2" kind="show" identifier="gotoprocess" id="PQ1-kg-chH"/>
                         <segue destination="77G-t5-pU3" kind="show" identifier="goToOverview" id="EXy-Aa-JCS"/>
                     </connections>

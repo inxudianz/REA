@@ -12,6 +12,8 @@ import PDFKit
 
 class HomeViewController: UIViewController{
     
+    @IBOutlet weak var resumeCollectionView: UICollectionView!
+    
     var contents: [ResumeModel] = []
     var tempContents : [ResumeModel] = []
     var segmentModel: SegmentedModel?
@@ -31,7 +33,7 @@ class HomeViewController: UIViewController{
     
     @IBOutlet weak var testImg: UIImageView!
 
-    var name: String?
+    var selectedResume:ResumeModel?
     
     let customFont = CustomFont()
     @IBOutlet weak var thumbnailImage: UIImageView!
@@ -84,10 +86,12 @@ class HomeViewController: UIViewController{
             
             alert.addAction(UIAlertAction(title: "Delete Resume", style: .destructive, handler: { action in
                 
-                CoreDataHelper.delete(names: self.getDeletedItem())
+                let deletedItem = self.getDeletedItem()
+                CoreDataHelper.delete(names: deletedItem )
                 
                 self.selectedItem.removeAll()
                 self.tempContents = self.contents
+                self.populateContent()
                 self.cvCollectionView.reloadData()
                 
                 self.cvCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
@@ -118,7 +122,7 @@ class HomeViewController: UIViewController{
         var deletedContent:[String] = []
         
         for (index,content) in contents.enumerated() {
-            if selectedItem.contains(index) {
+            if selectedItem.contains(index + 1) {
                 deletedContent.append(content.name)
             }
         }
@@ -133,6 +137,7 @@ class HomeViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         populateContent()
+        resumeCollectionView.reloadData()
     }
     
     func fetchData() -> [ResumeModel] {
@@ -171,7 +176,7 @@ class HomeViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToOverview" {
             if let overviewViewController = segue.destination as? OverviewViewController {
-                    overviewViewController.nama = name
+                    overviewViewController.fetchedResume = selectedResume!
             }
         } else if segue.identifier == "gotoprocess" {
             if let processingViewController = segue.destination as? ProcessingViewController {
@@ -191,8 +196,6 @@ class HomeViewController: UIViewController{
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let getImagePath = paths.appendingPathComponent("TIKET INDONESIA PERTAMA.pdf")
         //testImg.image = UIImage(contentsOfFile: getImagePath)
-        
-        
 
     }
 }
@@ -241,9 +244,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let content = contents[indexPath.row - 1]
             
             cell?.content = content
-            dump(cell?.content)
-            print("\n\n\n")
-            dump(content)
             
             if isEdit == true {
                 if selectedItem.contains(indexPath.row){
@@ -273,9 +273,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         } else {
             let content = contents[indexPath.row - 1]
-            name =
-                content.name
-            print(name)
+            selectedResume = content
             performSegue(withIdentifier: "goToOverview", sender: self)
             print("Delete button not selected")
         }

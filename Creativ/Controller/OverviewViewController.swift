@@ -14,6 +14,7 @@ class OverviewViewController: UIViewController {
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
     let feedbackData = FeedbackData()
+    var fetchedResume:ResumeModel = ResumeModel()
     let customFont = CustomFont()
     
     override func viewDidLoad() {
@@ -29,6 +30,9 @@ class OverviewViewController: UIViewController {
         feedbackData.createFeedbackSection()
     }
     
+    func updateFeedbackSegment() {
+        
+    }
     
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
