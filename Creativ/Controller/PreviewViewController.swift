@@ -81,8 +81,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             
             return cell
         } else {
-            
-            checkFeedback()
+            checkFeedback(feedbackResult: finalFeedbackResult)
             
             let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
             
@@ -140,13 +139,8 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
         return CGSize(width: collectionView.frame.width, height: 180)
     }
     
-    func checkFeedback() {
-        for feedback in finalFeedbackResult {
-            feedbackDatas.comments.append(feedback.overview)
-        }
-        
+    func checkFeedback(feedbackResult: [FeedbackDetailModel]) {
         for x in 0 ..< finalFeedbackResult.count {
-            
             //kalo semua konten salah (kotak warna merah)
             if finalFeedbackResult[0].overview.contains("Your summary is getting too long, reduce few words to make it more simple.") && finalFeedbackResult[0].overview.contains("It seems that you used 'words' too much, try to use another words!") && finalFeedbackResult[0].overview.contains("You have to use more action verbs in your summary.") && finalFeedbackResult[0].overview.contains("Vague") && finalFeedbackResult[0].overview.contains("Not Passionate") {
                 feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
@@ -213,7 +207,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             
             //kalo konten gaada (kotak warna biru)
             if finalFeedbackResult[x].overview.isEmpty {
-                finalFeedbackResult[x].overview = "We're missing \(headerCv[x]) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
+                feedbackDatas.overviewTexts[x] = "We're missing \(headerCv[x]) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
                 feedbackDatas.commentedTexts[x] = "Missing Content!"
             }
             
@@ -241,6 +235,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
                 feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
             }
             
+            feedbackDatas.comments[x] = feedbackResult[x].overview
         }
     }
 }
