@@ -219,6 +219,8 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             if feedbackResult[x].overview.isEmpty {
                 feedbackDatas.comments[x] = "We're missing \(feedbackResult[x].type) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
                 feedbackDatas.commentedTexts[x] = "Missing content!"
+            } else {
+                feedbackDatas.comments[x] = feedbackResult[x].overview
             }
             
             if feedbackResult[0].overview.isEmpty {
@@ -244,8 +246,6 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             if feedbackResult[5].overview.isEmpty {
                 feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
             }
-            
-            feedbackDatas.comments[x] = feedbackResult[x].overview
         }
     }
 }
