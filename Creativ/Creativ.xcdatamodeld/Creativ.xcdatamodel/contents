@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Feedback" representedClassName="Feedback" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
-        <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="hasManyDetail" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FeedbackDetail" inverseName="hasFeedback" inverseEntity="FeedbackDetail"/>
         <relationship name="hasResume" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Resume" inverseName="hasFeedback" inverseEntity="Resume"/>
     </entity>
     <entity name="FeedbackDetail" representedClassName="FeedbackDetail" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
-        <attribute name="score" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="hasFeedback" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Feedback" inverseName="hasManyDetail" inverseEntity="Feedback"/>
     </entity>

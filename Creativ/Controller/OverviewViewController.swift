@@ -30,10 +30,6 @@ class OverviewViewController: UIViewController {
         feedbackDatas.createFeedbackSection()
     }
     
-    func updateFeedbackSegment() {
-        
-    }
-    
     func setCollectionViewLayout() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 4

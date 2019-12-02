@@ -148,17 +148,24 @@ class HomeViewController: UIViewController{
         for fetchedData in fetchedDatas {
             var resume:ResumeModel = ResumeModel()
             var feedback:FeedbackModel = FeedbackModel()
+            let feedbackID:Int64 = fetchedData.hasFeedback!.id
+            feedback.id = Int(truncatingIfNeeded: feedbackID)
+            
             let feedbackDetails = fetchedData.hasFeedback?.hasManyDetail?.allObjects as! [FeedbackDetail]
             for (index,feedbackDetail) in feedbackDetails.enumerated() {
                 if index == 0 {
                     feedback.contents[0].overview = feedbackDetail.overview!
-                    feedback.contents[0].score = Int(feedbackDetail.score)
+                    feedback.contents[0].id = Int(feedbackDetail.id)
                     feedback.contents[0].type = feedbackDetail.type!
                     continue
                 }
-                let detailModel:FeedbackDetailModel = FeedbackDetailModel(type: feedbackDetail.type!, score: 0, overview: feedbackDetail.overview!)
+                let detailModel:FeedbackDetailModel = FeedbackDetailModel(type: feedbackDetail.type!, id: Int(feedbackDetail.id), overview: feedbackDetail.overview!)
                 feedback.contents.append(detailModel)
             }
+            
+            feedback.contents = feedback.contents.sorted(by: { (feedbackDetail1, feedbackDetail2) -> Bool in
+                return feedbackDetail1.id < feedbackDetail2.id
+            })
             resume.feedback = feedback
             resume.name = fetchedData.name!
             resume.dateCreated = fetchedData.dateCreated!
@@ -166,8 +173,10 @@ class HomeViewController: UIViewController{
             results.append(resume)
             
         }
-        print("DONE")
-        dump(results)
+        
+        results = results.sorted { (resume1, resume2) -> Bool in
+            return resume1.feedback.id > resume2.feedback.id
+        }
         return results
     }
     

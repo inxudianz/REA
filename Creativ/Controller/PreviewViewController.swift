@@ -47,11 +47,19 @@ class PreviewViewController: UIViewController {
     
     func saveNewResume() {
         currentData.feedback.overview = ""
-        currentData.feedback.score = 0
+        currentData.feedback.id = getResumeTotal() + 1
         currentData.feedback.contents = finalFeedbackResult
-        dump(currentData)
-        dump(finalFeedbackResult)
+        
+        for index in 0..<currentData.feedback.contents.count {
+            currentData.feedback.contents[index].id = index
+            print(currentData.feedback.contents[index].id)
+        }
         CoreDataHelper.saveResume(model: currentData)
+    }
+    
+    func getResumeTotal() -> Int {
+        let result:[Resume] = CoreDataHelper.fetch(entityName: "Resume")
+        return result.count
     }
     
     func setCollectionViewLayout() {

@@ -9,18 +9,18 @@
 import Foundation
 
 struct FeedbackModel {
-    var score:Int
+    var id:Int
     var overview:String
     var contents:[FeedbackDetailModel]
     
     init() {
-        self.score = 0
+        self.id = 0
         self.overview = ""
         self.contents = [FeedbackDetailModel()]
     }
     
-    init(score: Int, overview: String, contents: [FeedbackDetailModel]) {
-        self.score = score
+    init(id: Int, overview: String, contents: [FeedbackDetailModel]) {
+        self.id = id
         self.overview = overview
         self.contents = contents
     }

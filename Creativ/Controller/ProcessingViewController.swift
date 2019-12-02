@@ -47,7 +47,7 @@ class ProcessingViewController: UIViewController {
     
     var extractedContent: [String] = []
     var brain = Brain()
-    var finalFeedbackResult: [FeedbackDetailModel] = [FeedbackDetailModel(type: "", score: 0, overview: ""), FeedbackDetailModel(type: "", score: 0, overview: ""), FeedbackDetailModel(type: "", score: 0, overview: ""), FeedbackDetailModel(type: "", score: 0, overview: ""), FeedbackDetailModel(type: "", score: 0, overview: ""), FeedbackDetailModel(type: "", score: 0, overview: "")]
+    var finalFeedbackResult: [FeedbackDetailModel] = [FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: "")]
     
     var stringProfile: String = ""
     var stringEducation: String = ""

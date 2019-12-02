@@ -49,7 +49,7 @@ class CoreDataHelper {
         resume.thumbnailImage = model.thumbnailImage
         
         let feedback = Feedback(context: managedContext)
-        feedback.score = Int64(model.feedback.score)
+        feedback.id = Int64(model.feedback.id)
         feedback.overview = model.feedback.overview
         
         resume.hasFeedback = feedback
@@ -59,7 +59,7 @@ class CoreDataHelper {
         for content in contents {
             let feedbackContent = FeedbackDetail(context: managedContext)
             feedbackContent.type = content.type
-            feedbackContent.score = Int64(content.score)
+            feedbackContent.id = Int64(content.id)
             feedbackContent.overview = content.overview
             feedback.addToHasManyDetail(feedbackContent)
         }
