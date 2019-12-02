@@ -18,9 +18,9 @@ class PreviewViewController: UIViewController {
         }
     }
     
-    let feedbackDatas = FeedbackData()
+    var feedbackDatas = FeedbackData()
     let customFont = CustomFont()
-    var finalFeedbackResult: [FeedbackDetailModel] = []
+    var feedbackResult: [FeedbackDetailModel] = []
     var headerCv: [String] = ["Summary", "Identity", "Education", "Working Experience", "Organisational Experience", "Skills"]
 
     override func viewDidLoad() {
@@ -48,7 +48,7 @@ class PreviewViewController: UIViewController {
     func saveNewResume() {
         currentData.feedback.overview = ""
         currentData.feedback.id = getResumeTotal() + 1
-        currentData.feedback.contents = finalFeedbackResult
+        currentData.feedback.contents = feedbackResult
         
         for index in 0..<currentData.feedback.contents.count {
             currentData.feedback.contents[index].id = index
@@ -80,7 +80,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let cell = feedbackCollectionView.dequeueReusableCell(withReuseIdentifier: "FeedbackCollectionViewCell", for: indexPath) as! FeedbackCollectionViewCell
 
-        if finalFeedbackResult.isEmpty == true {
+        if feedbackResult.isEmpty == true {
             let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
             
             cell.setColorGreen(colorView: &cell.feedbackView)
@@ -91,7 +91,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             
             return cell
         } else {
-            checkFeedback(feedbackResult: finalFeedbackResult)
+            checkFeedback(feedbackResult: feedbackResult)
             
             let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
             
@@ -102,7 +102,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             cell.setColorGreen(colorView: &cell.commentView)
             
             // kalo konten ga ketemu
-            if feedbackDatas.commentedTexts[indexPath.row] == "Missing Content!" {
+            if feedbackDatas.commentedTexts[indexPath.row] == "Missing content!" {
                 cell.setColorBlue(colorView: &cell.feedbackView)
                 cell.setColorBlue(colorView: &cell.notchView)
                 cell.setColorBlue(colorView: &cell.commentView)
@@ -150,98 +150,98 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func checkFeedback(feedbackResult: [FeedbackDetailModel]) {
-        for x in 0 ..< finalFeedbackResult.count {
+        for x in 0 ..< feedbackResult.count {
             //kalo semua konten salah (kotak warna merah)
-            if finalFeedbackResult[0].overview.contains("Your summary is getting too long, reduce few words to make it more simple.") && finalFeedbackResult[0].overview.contains("It seems that you used 'words' too much, try to use another words!") && finalFeedbackResult[0].overview.contains("You have to use more action verbs in your summary.") && finalFeedbackResult[0].overview.contains("Vague") && finalFeedbackResult[0].overview.contains("Not Passionate") {
+            if feedbackResult[0].overview.contains("Your summary is getting too long, reduce few words to make it more simple.") && feedbackResult[0].overview.contains("It seems that you used 'words' too much, try to use another words!") && feedbackResult[0].overview.contains("You have to use more action verbs in your summary.") && feedbackResult[0].overview.contains("Vague") && feedbackResult[0].overview.contains("Not Passionate") {
                 feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
                 feedbackDatas.commentedTexts[0] = "You must improve this part!"
             }
             
-            if finalFeedbackResult[1].overview.contains("No phone number? Please put your email in your summary!") && finalFeedbackResult[1].overview.contains("No email? Please put your email in your summary!") {
+            if feedbackResult[1].overview.contains("No phone number? Please put your email in your summary!") && feedbackResult[1].overview.contains("No email? Please put your email in your summary!") {
                 feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
                 feedbackDatas.commentedTexts[1] = "You must improve this part!"
             }
             
             /* Masih belum di pakai karena blm ada perbandingan (hanya satu hal yang di validasi)
-            if finalFeedbackResult[2].contains("It's better not to show your GPA in your resume.") || finalFeedbackResult[2].contains("You can add your GPA if it's more than equal to 3.") {
+            if feedbackResult[2].contains("It's better not to show your GPA in your resume.") || feedbackResult[2].contains("You can add your GPA if it's more than equal to 3.") {
                 feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
                 feedbackDatas.commentedTexts[2] = "You can be better!"
             }
             
-            if finalFeedbackResult[3].contains("Rearrange your working experiences from the most current until the latest one!") {
+            if feedbackResult[3].contains("Rearrange your working experiences from the most current until the latest one!") {
                 feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
                 feedbackDatas.commentedTexts[3] = "You can be better!"
             }
             
-            if finalFeedbackResult[4].contains("Rearrange your organisational experiences from the most current until the latest one!") {
+            if feedbackResult[4].contains("Rearrange your organisational experiences from the most current until the latest one!") {
                 feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
                 feedbackDatas.commentedTexts[4] = "You can be better!"
             }
             
-            if finalFeedbackResult[5].contains("You have to put your skills that match with job that you've applied.") {
+            if feedbackResult[5].contains("You have to put your skills that match with job that you've applied.") {
                 feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
                 feedbackDatas.commentedTexts[5] = "You can be better!"
             }
              */
             
             // kalo semuanya konten salah semua (kotak warna merah)
-            if finalFeedbackResult[0].overview.contains("Your summary is getting too long, reduce few words to make it more simple.") || finalFeedbackResult[0].overview.contains("It seems that you used 'words' too much, try to use another words!") || finalFeedbackResult[0].overview.contains("You have to use more action verbs in your summary.") || finalFeedbackResult[0].overview.contains("Vague") || finalFeedbackResult[0].overview.contains("Half Vague") || finalFeedbackResult[0].overview.contains("Half Passionate") || finalFeedbackResult[0].overview.contains("Not Passionate") {
+            if feedbackResult[0].overview.contains("Your summary is getting too long, reduce few words to make it more simple.") || feedbackResult[0].overview.contains("It seems that you used 'words' too much, try to use another words!") || feedbackResult[0].overview.contains("You have to use more action verbs in your summary.") || feedbackResult[0].overview.contains("Vague") || feedbackResult[0].overview.contains("Half Vague") || feedbackResult[0].overview.contains("Half Passionate") || feedbackResult[0].overview.contains("Not Passionate") {
                 feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
                 feedbackDatas.commentedTexts[0] = "You can be better!"
             }
             
-            if finalFeedbackResult[1].overview.contains("No phone number? Please put your email in your summary!") || finalFeedbackResult[1].overview.contains("No email? Please put your email in your summary!") {
+            if feedbackResult[1].overview.contains("No phone number? Please put your email in your summary!") || feedbackResult[1].overview.contains("No email? Please put your email in your summary!") {
                 feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
                 feedbackDatas.commentedTexts[1] = "You can be better!"
             }
             
-            if finalFeedbackResult[2].overview.contains("It's better not to show your GPA in your resume.") || finalFeedbackResult[2].overview.contains("You can add your GPA if it's more than equal to 3.") {
+            if feedbackResult[2].overview.contains("It's better not to show your GPA in your resume.") || feedbackResult[2].overview.contains("You can add your GPA if it's more than equal to 3.") {
                 feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
                 feedbackDatas.commentedTexts[2] = "You can be better!"
             }
             
-            if finalFeedbackResult[3].overview.contains("Rearrange your working experiences from the most current until the latest one!") {
+            if feedbackResult[3].overview.contains("Rearrange your working experiences from the most current until the latest one!") {
                 feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
                 feedbackDatas.commentedTexts[3] = "You can be better!"
             }
             
-            if finalFeedbackResult[4].overview.contains("Rearrange your organisational experiences from the most current until the latest one!") {
+            if feedbackResult[4].overview.contains("Rearrange your organisational experiences from the most current until the latest one!") {
                 feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
                 feedbackDatas.commentedTexts[4] = "You can be better!"
             }
             
-            if finalFeedbackResult[5].overview.contains("You have to put your skills that match with job that you've applied.") {
+            if feedbackResult[5].overview.contains("You have to put your skills that match with job that you've applied.") {
                 feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
                 feedbackDatas.commentedTexts[5] = "You can be better!"
             }
             
             //kalo konten gaada (kotak warna biru)
-            if finalFeedbackResult[x].overview.isEmpty {
-                feedbackDatas.overviewTexts[x] = "We're missing \(headerCv[x]) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
-                feedbackDatas.commentedTexts[x] = "Missing Content!"
+            if feedbackResult[x].overview.isEmpty {
+                feedbackDatas.comments[x] = "We're missing \(feedbackResult[x].type) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
+                feedbackDatas.commentedTexts[x] = "Missing content!"
             }
             
-            if finalFeedbackResult[0].overview.isEmpty {
+            if feedbackResult[0].overview.isEmpty {
                 feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
             }
             
-            if finalFeedbackResult[1].overview.isEmpty {
+            if feedbackResult[1].overview.isEmpty {
                 feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
             }
             
-            if finalFeedbackResult[2].overview.isEmpty {
+            if feedbackResult[2].overview.isEmpty {
                 feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
             }
             
-            if finalFeedbackResult[3].overview.isEmpty {
+            if feedbackResult[3].overview.isEmpty {
                 feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
             }
             
-            if finalFeedbackResult[4].overview.isEmpty {
+            if feedbackResult[4].overview.isEmpty {
                 feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
             }
             
-            if finalFeedbackResult[5].overview.isEmpty {
+            if feedbackResult[5].overview.isEmpty {
                 feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
             }
             

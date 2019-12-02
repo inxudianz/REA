@@ -96,7 +96,7 @@ class ProcessingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToOverview" {
             if let PreviewViewController = segue.destination as? PreviewViewController {
-                PreviewViewController.finalFeedbackResult = finalFeedbackResult
+                PreviewViewController.feedbackResult = finalFeedbackResult
             }
         }
     }
@@ -160,8 +160,8 @@ class ProcessingViewController: UIViewController {
         print("Vague Output : \(output2)")
         
         finalFeedbackResult[0].type = "Summary"
-        finalFeedbackResult[0].overview.append(output1)
-        finalFeedbackResult[0].overview.append(output2)
+        finalFeedbackResult[0].overview.append("\(output1)\n")
+        finalFeedbackResult[0].overview.append("\(output2)\n")
 
         // Check word count
         let words =  text.split { !$0.isLetter }

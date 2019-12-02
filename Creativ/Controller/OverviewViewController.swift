@@ -10,17 +10,16 @@ import UIKit
 
 class OverviewViewController: UIViewController {
     
-    var nama: String?
     @IBOutlet weak var feedbackCollectionView: UICollectionView!
     
-    let feedbackDatas = FeedbackData()
-    var fetchedResume:ResumeModel = ResumeModel()
+    var feedbackDatas = FeedbackData()
+    var fetchedResume: ResumeModel = ResumeModel()
     let customFont = CustomFont()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = nama
+        self.navigationItem.title = fetchedResume.name
         self.navigationItem.backBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: customFont.getCustomFontType(type: .Regular, size: 17)], for: .normal)
         feedbackCollectionView.delegate = self
         feedbackCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
@@ -106,7 +105,7 @@ class OverviewViewController: UIViewController {
                 
                 //kalo konten gaada (kotak warna biru)
                 if feedbackResult[x].overview.isEmpty {
-                    feedbackDatas.overviewTexts[x] = "We're missing \(feedbackResult[x].type) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
+                    feedbackDatas.comments[x] = "We're missing \(feedbackResult[x].type) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
                     feedbackDatas.commentedTexts[x] = "Missing Content!"
                 }
                 
@@ -137,6 +136,7 @@ class OverviewViewController: UIViewController {
                 feedbackDatas.comments[x] = feedbackResult[x].overview
             }
         }
+    
     }
     
 
