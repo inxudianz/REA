@@ -149,7 +149,13 @@ class HomeViewController: UIViewController{
             var resume:ResumeModel = ResumeModel()
             var feedback:FeedbackModel = FeedbackModel()
             let feedbackDetails = fetchedData.hasFeedback?.hasManyDetail?.allObjects as! [FeedbackDetail]
-            for feedbackDetail in feedbackDetails {
+            for (index,feedbackDetail) in feedbackDetails.enumerated() {
+                if index == 0 {
+                    feedback.contents[0].overview = feedbackDetail.overview!
+                    feedback.contents[0].score = Int(feedbackDetail.score)
+                    feedback.contents[0].type = feedbackDetail.type!
+                    continue
+                }
                 let detailModel:FeedbackDetailModel = FeedbackDetailModel(type: feedbackDetail.type!, score: 0, overview: feedbackDetail.overview!)
                 feedback.contents.append(detailModel)
             }
@@ -160,7 +166,8 @@ class HomeViewController: UIViewController{
             results.append(resume)
             
         }
-        
+        print("DONE")
+        dump(results)
         return results
     }
     
