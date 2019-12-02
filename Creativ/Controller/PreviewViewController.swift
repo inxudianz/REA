@@ -49,6 +49,8 @@ class PreviewViewController: UIViewController {
         currentData.feedback.overview = ""
         currentData.feedback.score = 0
         currentData.feedback.contents = finalFeedbackResult
+        dump(currentData)
+        dump(finalFeedbackResult)
         CoreDataHelper.saveResume(model: currentData)
     }
     
