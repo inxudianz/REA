@@ -37,7 +37,7 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     }
     @IBOutlet weak var feedbackCommentedContent: UILabel! {
         didSet {
-            feedbackCommentedContent.font = customFont.getCustomFontType(type: .Italic, size: 18)
+            feedbackCommentedContent.font = customFont.getCustomFontType(type: .BoldItalic, size: 18)
         }
     }
     @IBOutlet var feedbackComment: UILabel! {
@@ -82,7 +82,7 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     
     func setupUI() {
         feedbackView.backgroundColor = UIColor(cgColor: feedbackView.layer.borderColor!)
-        feedbackView.layer.cornerRadius = feedbackView.frame.size.height / 20
+        feedbackView.layer.cornerRadius = feedbackView.frame.size.width / 20
         
         notchView.backgroundColor = UIColor(cgColor: notchView.layer.borderColor!)
         notchView.layer.cornerRadius = notchView.frame.size.width / 2
@@ -94,7 +94,7 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
         else if traitCollection.userInterfaceStyle == .light {
             commentView.backgroundColor = UIColor.white
         }
-        commentView.layer.cornerRadius = commentView.frame.size.height / 20
+        commentView.layer.cornerRadius = commentView.frame.size.width / 20
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -110,23 +110,23 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     
     func setColorBlue(colorView: inout UIView) {
         colorView.layer.borderWidth = 2.0
-        colorView.layer.borderColor = UIColor(red: 0.294, green: 0.588, blue: 0.863, alpha: 1.0).cgColor
+        colorView.layer.borderColor = UIColor.init(hex: "#4B96DCFF")!.cgColor
     }
     
     func setColorRed(colorView: inout UIView) {
         colorView.layer.borderWidth = 2.0
-        colorView.layer.borderColor = UIColor(red: 0.764, green: 0.215, blue: 0.215, alpha: 1.0).cgColor
+        colorView.layer.borderColor = UIColor.init(hex: "#C33737FF")!.cgColor
     }
     
     func setColorYellow(colorView: inout UIView) {
         colorView.layer.borderWidth = 2.0
-        colorView.layer.borderColor = UIColor(red: 0.745, green: 0.313, blue: 0, alpha: 1.0).cgColor
+        colorView.layer.borderColor = UIColor.init(hex: "#BE5000FF")!.cgColor
         
     }
     
     func setColorGreen(colorView: inout UIView) {
         colorView.layer.borderWidth = 2.0
-        colorView.layer.borderColor = UIColor(red: 0.254, green: 0.568, blue: 0.117, alpha: 1.0).cgColor
+        colorView.layer.borderColor = UIColor.init(hex: "#41911EFF")!.cgColor
     }
 }
 

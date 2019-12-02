@@ -25,16 +25,16 @@ class CVNewCollectionViewCell: UICollectionViewCell {
     }
     @IBOutlet weak var checklistImg: UIImageView!
     
-    var content: HomeContent! {
+    var content: ResumeModel! {
         didSet {
             updateUI()
         }
     }
     
     func updateUI() {
-        cvThumbnailImage.image = content.cvImage
-        cvNameLbl.text = content.cvName
-        cvDateLbl.text = content.cvCreated
+        cvThumbnailImage.image = UIImage(data: content.thumbnailImage)
+        cvNameLbl.text = content.name
+        cvDateLbl.text = content.dateCreated
         
         cvThumbnailImage.layer.borderWidth = 3.0
         cvThumbnailImage.layer.borderColor = #colorLiteral(red: 0.1882352941, green: 0.4, blue: 0.6078431373, alpha: 1)

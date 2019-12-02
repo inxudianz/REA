@@ -47,7 +47,7 @@ class ProcessingViewController: UIViewController {
     
     var extractedContent: [String] = []
     var brain = Brain()
-    var finalFeedbackResult: [FeedbackContentDetailModel] = [FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: ""), FeedbackContentDetailModel(type: "", score: 0, overview: "")]
+    var finalFeedbackResult: [FeedbackDetailModel] = [FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: "")]
     
     var stringProfile: String = ""
     var stringEducation: String = ""
@@ -96,7 +96,7 @@ class ProcessingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToOverview" {
             if let PreviewViewController = segue.destination as? PreviewViewController {
-                PreviewViewController.finalFeedbackResult = finalFeedbackResult
+                PreviewViewController.feedbackResult = finalFeedbackResult
             }
         }
     }
@@ -160,8 +160,8 @@ class ProcessingViewController: UIViewController {
         print("Vague Output : \(output2)")
         
         finalFeedbackResult[0].type = "Summary"
-        finalFeedbackResult[0].overview.append(output1)
-        finalFeedbackResult[0].overview.append(output2)
+        finalFeedbackResult[0].overview.append("\(output1)\n")
+        finalFeedbackResult[0].overview.append("\(output2)\n")
 
         // Check word count
         let words =  text.split { !$0.isLetter }
@@ -202,7 +202,7 @@ class ProcessingViewController: UIViewController {
     }
     
     func appointEducationFeedback(for text: String) {
-        finalFeedbackResult[0].type = "Education"
+        finalFeedbackResult[2].type = "Education"
         if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: text) == .inRange {
             finalFeedbackResult[2].overview.append("Wow! You have a great GPA!\n")
         } else if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: text) == .outOfBound {
@@ -213,7 +213,7 @@ class ProcessingViewController: UIViewController {
     }
     
     func appointWorkFeedback(for text: String) {
-        finalFeedbackResult[0].type = "Work Experience"
+        finalFeedbackResult[3].type = "Work Experience"
         if !brain.isChronological(text: brain.getYear(for: text)) {
             finalFeedbackResult[3].overview.append("Rearrange your working experiences from the most current until the latest one!\n")
         } else {
@@ -225,7 +225,7 @@ class ProcessingViewController: UIViewController {
     }
     
     func appointOrganisationFeedback(for text: String) {
-        finalFeedbackResult[0].type = "Organisational Experience"
+        finalFeedbackResult[4].type = "Organisational Experience"
         if !brain.isChronological(text: brain.getYear(for: text)) {
             finalFeedbackResult[4].overview.append("Rearrange your organisational experiences from the most current until the latest one!\n")
         } else {
@@ -237,7 +237,7 @@ class ProcessingViewController: UIViewController {
     }
     
     func appointSkillsFeedback(for text: String) {
-        finalFeedbackResult[0].type = "Skills"
+        finalFeedbackResult[5].type = "Skills"
         if !brain.isRelatedSkillsAppropriate(text: text) {
             finalFeedbackResult[5].overview.append("You have to put your skills that match with job that you've applied.\n")
         } else {

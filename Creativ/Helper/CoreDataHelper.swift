@@ -11,7 +11,7 @@ import UIKit
 
 class CoreDataHelper {
     
-    func fetch<T>(entityName :String) -> [T] {
+    static func fetch<T>(entityName :String) -> [T] {
         var result:[T] = []
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else {
@@ -34,7 +34,7 @@ class CoreDataHelper {
         return result
     }
 
-    func saveResume(model: ResumeModel) {
+   static func saveResume(model: ResumeModel) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else {
@@ -49,7 +49,7 @@ class CoreDataHelper {
         resume.thumbnailImage = model.thumbnailImage
         
         let feedback = Feedback(context: managedContext)
-        feedback.score = Int64(model.feedback.score)
+        feedback.id = Int64(model.feedback.id)
         feedback.overview = model.feedback.overview
         
         resume.hasFeedback = feedback
@@ -57,24 +57,11 @@ class CoreDataHelper {
         let contents = model.feedback.contents
 
         for content in contents {
-            let feedbackContent = FeedbackContent(context: managedContext)
+            let feedbackContent = FeedbackDetail(context: managedContext)
             feedbackContent.type = content.type
-            feedbackContent.score = Int64(content.score)
+            feedbackContent.id = Int64(content.id)
             feedbackContent.overview = content.overview
-            
-            feedback.addToHasManyContent(feedbackContent)
-            
-            let contentDetails = content.details
-            
-            for contentDetail in contentDetails {
-                let feedbackDetail = FeedbackContentDetail(context: managedContext)
-                feedbackDetail.overview = contentDetail.overview
-                feedbackDetail.score = Int64(contentDetail.score)
-                feedbackDetail.type = contentDetail.type
-                
-                feedbackContent.addToHasManyDetail(feedbackDetail)
-            }
-            
+            feedback.addToHasManyDetail(feedbackContent)
         }
         
         do {
@@ -86,7 +73,7 @@ class CoreDataHelper {
         }
     }
     
-    func delete(names: [String]) {
+   static func delete(names: [String]) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate
             else {

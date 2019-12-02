@@ -7,10 +7,25 @@
 //
 
 import Foundation
+import UIKit
 
 struct ResumeModel {
     var name:String
-    var thumbnailImage:String
-    var dateCreated:Date
+    var thumbnailImage:Data
+    var dateCreated:String
     var feedback:FeedbackModel
+    
+    init() {
+        self.name = ""
+        self.thumbnailImage = Data()
+        self.dateCreated = ""
+        self.feedback = FeedbackModel()
+    }
+    
+    init(name: String, thumbnailImage:Data, dateCreated:String, feedback: FeedbackModel) {
+        self.name = name
+        self.thumbnailImage = thumbnailImage
+        self.dateCreated = dateCreated
+        self.feedback = feedback
+    }
 }

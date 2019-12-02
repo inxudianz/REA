@@ -12,8 +12,10 @@ import PDFKit
 
 class HomeViewController: UIViewController{
     
-    var contents: [HomeContent] = HomeContent.createHomeContent()
-    var tempContents : [HomeContent] = HomeContent.createHomeContent()
+    @IBOutlet weak var resumeCollectionView: UICollectionView!
+    
+    var contents: [ResumeModel] = []
+    var tempContents : [ResumeModel] = []
     var segmentModel: SegmentedModel?
     var segmentedModel: SegmentedModel?
     var urlPicked: URL?
@@ -31,7 +33,7 @@ class HomeViewController: UIViewController{
     
     @IBOutlet weak var testImg: UIImageView!
 
-    var name: String?
+    var selectedResume:ResumeModel?
     
     let customFont = CustomFont()
     @IBOutlet weak var thumbnailImage: UIImageView!
@@ -83,11 +85,13 @@ class HomeViewController: UIViewController{
             let alert = UIAlertController(title: "Delete Resume", message: "This CV will be deleted from iCloud Documents on all your devices.", preferredStyle: .actionSheet)
             
             alert.addAction(UIAlertAction(title: "Delete Resume", style: .destructive, handler: { action in
-                for item in 0..<self.selectedItem.count {
-                    self.contents.removeAll{$0.cvName == self.tempContents[self.selectedItem[item]-1].cvName}
-                }
+                
+                let deletedItem = self.getDeletedItem()
+                CoreDataHelper.delete(names: deletedItem )
+                
                 self.selectedItem.removeAll()
                 self.tempContents = self.contents
+                self.populateContent()
                 self.cvCollectionView.reloadData()
                 
                 self.cvCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
@@ -114,12 +118,70 @@ class HomeViewController: UIViewController{
         }
     }
     
-    var coreData = CoreDataHelper()
-    
+    func getDeletedItem() ->[String] {
+        var deletedContent:[String] = []
+        
+        for (index,content) in contents.enumerated() {
+            if selectedItem.contains(index + 1) {
+                deletedContent.append(content.name)
+            }
+        }
+            return deletedContent
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
         registerXIB()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        populateContent()
+        resumeCollectionView.reloadData()
+    }
+    
+    func fetchData() -> [ResumeModel] {
+        let fetchedDatas:[Resume] = CoreDataHelper.fetch(entityName: "Resume")
+        
+        var results:[ResumeModel] = []
+        
+        for fetchedData in fetchedDatas {
+            var resume:ResumeModel = ResumeModel()
+            var feedback:FeedbackModel = FeedbackModel()
+            let feedbackID:Int64 = fetchedData.hasFeedback!.id
+            feedback.id = Int(truncatingIfNeeded: feedbackID)
+            
+            let feedbackDetails = fetchedData.hasFeedback?.hasManyDetail?.allObjects as! [FeedbackDetail]
+            for (index,feedbackDetail) in feedbackDetails.enumerated() {
+                if index == 0 {
+                    feedback.contents[0].overview = feedbackDetail.overview!
+                    feedback.contents[0].id = Int(feedbackDetail.id)
+                    feedback.contents[0].type = feedbackDetail.type!
+                    continue
+                }
+                let detailModel:FeedbackDetailModel = FeedbackDetailModel(type: feedbackDetail.type!, id: Int(feedbackDetail.id), overview: feedbackDetail.overview!)
+                feedback.contents.append(detailModel)
+            }
+            
+            feedback.contents = feedback.contents.sorted(by: { (feedbackDetail1, feedbackDetail2) -> Bool in
+                return feedbackDetail1.id < feedbackDetail2.id
+            })
+            resume.feedback = feedback
+            resume.name = fetchedData.name!
+            resume.dateCreated = fetchedData.dateCreated!
+            resume.thumbnailImage = fetchedData.thumbnailImage!
+            results.append(resume)
+            
+        }
+        
+        results = results.sorted { (resume1, resume2) -> Bool in
+            return resume1.feedback.id > resume2.feedback.id
+        }
+        return results
+    }
+    
+    func populateContent() {
+        contents = fetchData()
     }
     
     @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
@@ -130,7 +192,7 @@ class HomeViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToOverview" {
             if let overviewViewController = segue.destination as? OverviewViewController {
-                    overviewViewController.nama = name
+                    overviewViewController.fetchedResume = selectedResume!
             }
         } else if segue.identifier == "gotoprocess" {
             if let processingViewController = segue.destination as? ProcessingViewController {
@@ -150,8 +212,6 @@ class HomeViewController: UIViewController{
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let getImagePath = paths.appendingPathComponent("TIKET INDONESIA PERTAMA.pdf")
         //testImg.image = UIImage(contentsOfFile: getImagePath)
-        
-        
 
     }
 }
@@ -162,14 +222,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return 1
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contents.count + 1
     }
-    
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
             headerView.textDescription.text = "Here are the resumes that I've given feedback on. You can see them over and over again!"
@@ -217,8 +273,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 cell?.checklistImg.image = .none
                 cell?.backgroundColor = .clear
             }
-            
-            
             return cell!
         }
         
@@ -235,9 +289,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         } else {
             let content = contents[indexPath.row - 1]
-            name =
-                content.cvName
-            print(name)
+            selectedResume = content
             performSegue(withIdentifier: "goToOverview", sender: self)
             print("Delete button not selected")
         }
@@ -300,7 +352,10 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         readPDFFile()
         
         if checkFileImage != 0 {
-            contents.insert(HomeContent(cvId: UUID(), cvImage: thumbnail!, cvName: fileName, cvCreated: formattedDate), at: 0)
+            currentData.name = fileName
+            currentData.dateCreated = formattedDate
+            currentData.thumbnailImage = thumbnail!.pngData()!
+            
             checkFileImage = 0
         } else {
             self.cvCollectionView.reloadData()
@@ -487,8 +542,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 }
                 continue
             }
-            
-            
             
             // if node is header
             if currNode.type.first == "H" {

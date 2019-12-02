@@ -1,5 +1,5 @@
 //
-//  FeedbackModel.swift
+//  FeedbackContentModel.swift
 //  Creativ
 //
 //  Created by William Inx on 15/11/19.
@@ -8,20 +8,20 @@
 
 import Foundation
 
-struct FeedbackModel {
+struct FeedbackDetailModel {
+    var type:String
     var id:Int
     var overview:String
-    var contents:[FeedbackDetailModel]
     
     init() {
+        self.type = ""
         self.id = 0
         self.overview = ""
-        self.contents = [FeedbackDetailModel()]
     }
     
-    init(id: Int, overview: String, contents: [FeedbackDetailModel]) {
+    init(type: String, id: Int, overview:String) {
+        self.type = type
         self.id = id
         self.overview = overview
-        self.contents = contents
     }
 }
