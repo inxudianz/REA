@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum GPAStatus {
     case notFound, outOfBound, inRange
@@ -176,7 +177,82 @@ class Brain {
         }
         return lemmatized
     }
+    
+    func isReal(word: String) -> Bool {
+        let checker = UITextChecker()
+        let range = NSRange(location: 0, length: word.utf16.count)
+        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        
+        for var i in 0 ..< word.utf16.count {
+            var lastIndex = 0
+            
+            while true {
+                let textChecker = UITextChecker()
+                let misspelledRange =
+                    textChecker.rangeOfMisspelledWord(in: word,
+                                                      range: NSRange(0..<word.utf16.count),
+                                                      startingAt: lastIndex,
+                                                      wrap: false,
+                                                      language: "en_US")
+                
+                if misspelledRange.location != NSNotFound,
+                    let firstGuess = textChecker.guesses(forWordRange: misspelledRange,
+                                                         in: word,
+                                                         language: "en_US")?.first
+                {
+                    lastIndex = (misspelledRange.location + misspelledRange.length)
+                    print("First guess: \(firstGuess)")
+                    print("\(misspelledRange.length) sama \(misspelledRange.location)")
+                    
+                } else {
+                    print("Not found")
+                    break
+                }
+                i += misspelledRange.location + misspelledRange.length
+
+            }
+            break
+        }
+        
+        return misspelledRange.location == NSNotFound
+    }
 }
+
+//isReal(word: String)
+//
+//                for var i in 0 ..< quote.utf16.count {
+//        var lastIndex = 0
+//
+//                while true {
+//                    let textChecker = UITextChecker()
+//                    let misspelledRange =
+//                        textChecker.rangeOfMisspelledWord(in: quote,
+//                                                          range: NSRange(0..<quote.utf16.count),
+//                                                          startingAt: lastIndex,
+//                                                          wrap: false,
+//                                                          language: "en_US")
+//
+//                    if misspelledRange.location != NSNotFound,
+//                        let firstGuess = textChecker.guesses(forWordRange: misspelledRange,
+//                                                             in: quote,
+//                                                             language: "en_US")?.first
+//                    {
+//                        lastIndex = (misspelledRange.location + misspelledRange.length)
+//                        print("First guess: \(firstGuess)")
+//                        print("\(misspelledRange.length) sama \(misspelledRange.location)")
+//                        } else {
+//                            print("Not found")
+//                            break
+//                        }
+//                }
+//                for (index,element) in quote.enumerated() {
+//
+//                }
+//         First guess: hipster
+//                        print(i)
+//                        i += misspelledRange.location + misspelledRange.length
+//
+//                }
 
 class BrainResult {
     var BrainResult: [String] = []

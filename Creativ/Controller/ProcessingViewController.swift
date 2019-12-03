@@ -104,7 +104,7 @@ class ProcessingViewController: UIViewController {
     var countRecursiveLoop = 0
     @objc func recursiveLoop(){
         if self.countRecursiveLoop <= self.processDetails.count + 2 {
-            UIView.animate(withDuration: 1.2, animations: {
+            UIView.animate(withDuration: 0.1, animations: {
                 if self.countRecursiveLoop == 0 {
                     self.countRecursiveLoop += 1
                 } else {
@@ -113,7 +113,7 @@ class ProcessingViewController: UIViewController {
                 }
             }) { (finished) in
                 if finished{
-                    UIView.animate(withDuration: 1.3, animations: {
+                    UIView.animate(withDuration: 0.1, animations: {
                         if self.countRecursiveLoop <= self.processDetails.count + 2{
                             self.recursiveLoop()
                         } else{
@@ -141,30 +141,84 @@ class ProcessingViewController: UIViewController {
 //    var tempString = 0
     
     func appointSummaryFeedback(for text: String) {
+        var summary: [Substring] = []
+        
+        print(text)
+        print("*&*&*&*&*&*&*&*&*&*")
+        
+        if text.lowercased().contains("About Me".lowercased()) || text.lowercased().contains("About".lowercased()) || text.lowercased().contains("Personal Profile".lowercased()) || text.lowercased().contains("Profile".lowercased()) || text.lowercased().contains("In Words".lowercased()) {
+            summary = text.split(separator: "\n")
+        }
+        print(summary)
+        var tempForEach = 0
+        var summarySetelahPersonalProfile = ""
+        summary.forEach { (cekTemp) in
+            if cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Personal Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About Me".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "In Words".lowercased() {
+                summarySetelahPersonalProfile = String(summary[tempForEach+1])
+            }
+            
+            tempForEach += 1
+        }
+        print("Summary setelah personal profile = \(summarySetelahPersonalProfile)")
         // ML
         // Do any additional setup after loading the view.
-        let modelPassionate = TextClassifierPassionate()
-        let modelVague = TextClassifierVague()
-        guard let passionateOutput = try? modelPassionate.prediction(text: text) else {
-            fatalError("Unexpected runtime error.")
+        let modelPassionate = TextClassifierPassionateSentence()
+        let modelVague = TextClassifierVagueSentence()
+        
+        var textToPredict: [String] = []
+            
+        if summarySetelahPersonalProfile.contains(".") {
+            textToPredict = summarySetelahPersonalProfile.components(separatedBy: ". ")
+        } else {
+            textToPredict.append(summarySetelahPersonalProfile)
         }
-        let output1 = passionateOutput.label
         
-        print("Passionate Output : \(output1)")
+        var passionateCount:Float = 0
+        var personalCount:Float = 0
         
-        guard let vagueOutput = try? modelVague.prediction(text: text) else {
-            fatalError("Unexpected runtime error.")
+        var output1 = ""
+        for sentence in textToPredict {
+            guard let passionateOutput = try? modelPassionate.prediction(text: sentence) else {
+                fatalError("Unexpected runtime error.")
+            }
+            //output1.append("\(passionateOutput.label)\n")
+            if passionateOutput.label == "Passionate"{
+                passionateCount += 1
+            }
         }
-        let output2 = vagueOutput.label
         
-        print("Vague Output : \(output2)")
+        output1 = String(passionateCount/Float(textToPredict.count) * 100)
+        
+        print("Passionate Output : \(output1)% Passionate")
+        
+        var output2 = ""
+        for sentence in textToPredict {
+            guard let vagueOutput = try? modelVague.prediction(text: sentence) else {
+                fatalError("Unexpected runtime error.")
+            }
+            output2.append(vagueOutput.label)
+            if vagueOutput.label == "Personal"{
+                personalCount += 1
+            }
+        }
+        
+        output2 = String(personalCount/Float(textToPredict.count) * 100)
+        print("Vague Output : \(output2)% Personal")
         
         finalFeedbackResult[0].type = "Summary"
-        finalFeedbackResult[0].overview.append("\(output1)\n")
-        finalFeedbackResult[0].overview.append("\(output2)\n")
-
+        finalFeedbackResult[0].overview.append("\(output1)% Passionate\n")
+        finalFeedbackResult[0].overview.append("\(output2)% Personal\n")
+        
+        //Check typo
+        print("typo bool = \(brain.isReal(word: summarySetelahPersonalProfile))")
+        if brain.isReal(word: summarySetelahPersonalProfile) == true{
+            
+        }else if brain.isReal(word: summarySetelahPersonalProfile) == false{
+            finalFeedbackResult[0].overview.append("Your summary has a typo\n")
+        }
+        
         // Check word count
-        let words =  text.split { !$0.isLetter }
+        let words =  summarySetelahPersonalProfile.split { !$0.isLetter }
         if text.count > 200 + words.count {
             finalFeedbackResult[0].overview.append("Your summary is getting too long, reduce few words to make it more simple.\n")
         } else {
