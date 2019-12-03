@@ -109,7 +109,7 @@
 		920AF39E237E630F00F8FB7A /* ResumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeModel.swift; sourceTree = "<group>"; };
 		920AF3A0237E631800F8FB7A /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
 		920AF3A2237E633500F8FB7A /* FeedbackDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackDetailModel.swift; sourceTree = "<group>"; };
-		920F63D12372D0CC00BCFC5C /* REA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = REA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		920F63D12372D0CC00BCFC5C /* REA - Analyser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "REA - Analyser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		920F63D42372D0CC00BCFC5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		920F63D62372D0CC00BCFC5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		920F63D82372D0CC00BCFC5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 		920F63D22372D0CC00BCFC5C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				920F63D12372D0CC00BCFC5C /* REA.app */,
+				920F63D12372D0CC00BCFC5C /* REA - Analyser.app */,
 				920F63EA2372D0CE00BCFC5C /* CreativTests.xctest */,
 				920F63F52372D0CE00BCFC5C /* CreativUITests.xctest */,
 			);
@@ -323,7 +323,7 @@
 			);
 			name = Creativ;
 			productName = Creativ;
-			productReference = 920F63D12372D0CC00BCFC5C /* REA.app */;
+			productReference = 920F63D12372D0CC00BCFC5C /* REA - Analyser.app */;
 			productType = "com.apple.product-type.application";
 		};
 		920F63E92372D0CE00BCFC5C /* CreativTests */ = {
@@ -680,7 +680,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = WPQ9HAVPNV;
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -688,10 +689,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dsfawafa;
-				PRODUCT_NAME = REA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inx.rea.analyser;
+				PRODUCT_NAME = "REA - Analyser";
+				PROVISIONING_PROFILE_SPECIFIER = "REA - Analyser";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -700,7 +702,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = WPQ9HAVPNV;
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -708,10 +711,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = dsfawafa;
-				PRODUCT_NAME = REA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.inx.rea.analyser;
+				PRODUCT_NAME = "REA - Analyser";
+				PROVISIONING_PROFILE_SPECIFIER = "REA - Analyser";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
