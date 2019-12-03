@@ -16,8 +16,8 @@ class FeedbackHeaderCollectionReusableView: UICollectionReusableView {
         super.awakeFromNib()
         addBubble()
         // Initialization code
+       
     }
-    
     func addBubble(){
         let width: CGFloat = UIScreen.main.bounds.width - 162
         let height: CGFloat = 87
@@ -47,5 +47,7 @@ class FeedbackHeaderCollectionReusableView: UICollectionReusableView {
 
         self.layer.addSublayer(outgoingMessageLayer)
     }
+    
+    
 
 }

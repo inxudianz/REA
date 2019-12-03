@@ -507,6 +507,7 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
             print("DInasIDBNWOridbqwpefbrepqwifbhqwpiofbnqwopi")
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
                 headerView.textDescription.text = "I'm reviewing your resume..."
+                headerView.reaProcessing(reaImages: ["reaRollingEyesLeft", "reaRollingEyesCenter", "reaRollingEyesRight"])
                 headerView.textDescription.sizeToFit()
                 headerView.textDescription.numberOfLines = 0
                 headerView.textDescription.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 162, height: headerView.textDescription.bounds.height)

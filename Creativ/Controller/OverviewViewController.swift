@@ -200,6 +200,7 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) ->
         UICollectionReusableView {
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
+                headerView.reaProcessing(reaImages: ["rea1","rea2","rea1","rea2","rea3"])
                 headerView.textDescription.text = "Here are the analysis of your resume based on each content!"
                 headerView.textDescription.sizeToFit()
                 headerView.textDescription.numberOfLines = 0

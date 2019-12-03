@@ -83,4 +83,16 @@ class HomeCollectionReusableView: UICollectionReusableView {
         bubbleChatView.bringSubviewToFront(textDescription)
     }
     
+    
+    func reaProcessing(reaImages: [String]){
+        var reaImage = [UIImage]()
+               
+        for i in 0..<reaImages.count{
+            reaImage.append(UIImage(named: reaImages[i])!)
+        }
+               
+        reaImageView.animationImages = reaImage
+        reaImageView.animationDuration = 2
+        reaImageView.startAnimating()
+    }
 }
