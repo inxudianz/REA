@@ -509,8 +509,7 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
                 headerView.textDescription.text = "I'm reviewing your resume..."
                 headerView.textDescription.sizeToFit()
                 headerView.textDescription.numberOfLines = 0
-                headerView.textDescription.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 162, height: headerView.textDescription.bounds.height)
-                headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - 162)
+                headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - headerView.textDescription.frame.size.width - 60)
                 headerView.bringSubviewToFront(headerView.textDescription)
                 return headerView
             }
