@@ -17,7 +17,7 @@ class Brain {
     /* Array of action verbs necessary in a summary or when making experience description */
     let arrayActionVerb: [String] = ["Simplify", "Create", "Produce", "Achieve", "Improve", "Enhance", "Nurture", "Manage", "Maintain", "Develop", "Lead", "Assemble", "Build", "Ensure", "Help", "Engineer", "Design", "Construct", "Upgrade", "Reduce", "Prove", "Eliminate", "Attain", "Work"]
     
-    let arrayRelatedSkills: [String] = ["JSON", "API", "Array", "Dictionary", "Set", "Git", "Github", "Core Data", "Human Interface Guidelines", "HIG", "MVVM", "MVC", "Swift", "Objective C", "Framework", "UIKit", "SwiftUI", "CoreML", "Machine Learning", "Design Pattern", "Artificial Intelligence"]
+    let arrayRelatedSkills: [String] = ["JSON", "API", "Array", "Dictionary", "Set", "Git", "Github", "Core Data", "Human Interface Guidelines", "HIG", "MVVM", "MVC", "Swift", "Objective C", "Framework", "UIKit", "SwiftUI", "CoreML", "Machine Learning", "Design Pattern", "Artificial Intelligence", "Kotlin", "Java", "C", "C++", "MVP", "Cloud", "CloudKit", "UIKit", "PDFKit", "SpriteKit", "SceneKit", "Ruby", "Fortran", "HTML", "CSS", "Javascript"]
     
     let relevantWordDict: [String: String] = ["Simplify": "Action", "Create": "Action", "Produce": "Action", "Achieve": "Action", "Improve": "Action", "Enhance": "Action", "Nurture": "Action", "Manage": "Action", "Maintain": "Action", "Develop": "Action", "Lead": "Action", "Assemble": "Action", "Build": "Action", "Ensure": "Action", "Help": "Action", "Engineer": "Action", "Design": "Action", "Construct": "Action", "Upgrade": "Action", "Reduce": "Action", "Prove": "Action", "Eliminate": "Action", "Attain": "Action", "API": "Skill", "Array": "Skill", "Dictionary": "Skill", "Set": "Skill", "Git": "Skill", "Github": "Skill", "Core Data": "Skill", "Human Interface Guidelines": "Skill", "HIG": "Skill", "MVVM": "Skill", "MVC": "Skill", "Swift": "Skill", "Objective C": "Skill", "Framework": "Skill", "JSON": "Skill"]
     
@@ -182,6 +182,10 @@ class Brain {
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        
+        for word in arrayRelatedSkills {
+            UITextChecker.learnWord(word)
+        }
         
         for var i in 0 ..< word.utf16.count {
             var lastIndex = 0

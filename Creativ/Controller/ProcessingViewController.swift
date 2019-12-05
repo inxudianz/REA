@@ -132,13 +132,13 @@ class ProcessingViewController: UIViewController {
     var dipisahSpasi: [String] = []
     var temp:[String]?
     var stringIndah: [String] = []
-//    var dataNotFound = "Data Not Found!"
-//    var stringEducation: [String] = []
-//    var stringWork: [String] = []
-//    var stringOrg: [String] = []
-//    var stringSummary: [String] = []
-//    var stringSkills: [String] = []
-//    var tempString = 0
+    //    var dataNotFound = "Data Not Found!"
+    //    var stringEducation: [String] = []
+    //    var stringWork: [String] = []
+    //    var stringOrg: [String] = []
+    //    var stringSummary: [String] = []
+    //    var stringSkills: [String] = []
+    //    var tempString = 0
     
     func appointSummaryFeedback(for text: String) {
         var summary: [Substring] = []
@@ -146,17 +146,20 @@ class ProcessingViewController: UIViewController {
         print(text)
         print("*&*&*&*&*&*&*&*&*&*")
         
-        if text.lowercased().contains("About Me".lowercased()) || text.lowercased().contains("About".lowercased()) || text.lowercased().contains("Personal Profile".lowercased()) || text.lowercased().contains("Profile".lowercased()) || text.lowercased().contains("In Words".lowercased()) {
+        if text.lowercased().contains("Personal Profile".lowercased()) || text.lowercased().contains("About Me".lowercased()) || text.lowercased().contains("About".lowercased()) || text.lowercased().contains("Personal Profile".lowercased()) || text.lowercased().contains("Profile".lowercased()) || text.lowercased().contains("In Words".lowercased()) || text.lowercased().contains("Summary".lowercased()){
             summary = text.split(separator: "\n")
         }
         print(summary)
         var tempForEach = 0
         var summarySetelahPersonalProfile = ""
         summary.forEach { (cekTemp) in
-            if cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Personal Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About Me".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "In Words".lowercased() {
+            if cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Personal Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About Me".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "In Words".lowercased() || text.lowercased().contains("Summary".lowercased()){
                 summarySetelahPersonalProfile = String(summary[tempForEach+1])
+                return
             }
-            
+            else {
+                summarySetelahPersonalProfile = summary.joined()
+            }
             tempForEach += 1
         }
         print("Summary setelah personal profile = \(summarySetelahPersonalProfile)")
@@ -166,7 +169,7 @@ class ProcessingViewController: UIViewController {
         let modelVague = TextClassifierVagueSentence()
         
         var textToPredict: [String] = []
-            
+        
         if summarySetelahPersonalProfile.contains(".") {
             textToPredict = summarySetelahPersonalProfile.components(separatedBy: ". ")
         } else {
@@ -267,13 +270,74 @@ class ProcessingViewController: UIViewController {
     }
     
     func appointWorkFeedback(for text: String) {
+        
+        var workExperience: [Substring] = []
+        
+        print("*&*&*&*&*&*&*&*&*&*")
+        print("Work experience = \(text)")
+        workExperience = text.split(separator: "\n")
+        print("\(workExperience)")
+        var tempForEach = 0
+        var workExperienceDetail: [String] = []
+        var averageWordCount = 0
+        for i in 0..<workExperience.count{
+            print(workExperience[i])
+            averageWordCount += workExperience[i].count
+            print(workExperience[i].count)
+        }
+        averageWordCount = averageWordCount/workExperience.count
+        print("average word count = \(averageWordCount)")
+        workExperience.forEach { (cekTemp) in
+            if cekTemp.count > averageWordCount {
+                workExperienceDetail.append(String(cekTemp))
+                return
+            }
+            else {
+                //                workExperienceDetail = workExperience.joined()
+            }
+            tempForEach += 1
+        }
+        print("Work Experience Detail = \(workExperienceDetail)")
+        let modelWorkExperience = TextClassifierWorkExperience()
+        var outputWorkExperienceGood = ""
+        var outputWorkExperienceMid = ""
+        var outputWorkExperienceBad = ""
+        var goodCount: Float = 0
+        var midCount: Float = 0
+        var badCount: Float = 0
+        for sentence in workExperienceDetail {
+            guard let workExperienceOutput = try? modelWorkExperience.prediction(text: sentence) else {
+                fatalError("Unexpected runtime error.")
+            }
+            //output1.append("\(passionateOutput.label)\n")
+            if workExperienceOutput.label == "Good"{
+                goodCount += 1
+            }else if workExperienceOutput.label == "Mid"{
+                midCount += 1
+            }else if workExperienceOutput.label == "Bad"{
+                badCount += 1
+            }
+        }
+        
+        outputWorkExperienceGood = String(goodCount/Float(workExperienceDetail.count) * 100)
+        outputWorkExperienceMid = String(midCount/Float(workExperienceDetail.count) * 100)
+        outputWorkExperienceBad = String(badCount/Float(workExperienceDetail.count) * 100)
+        
+        print("Good Output : \(outputWorkExperienceGood)% Good")
+        print("Mid Output : \(outputWorkExperienceMid)% Mid")
+        print("Bad Output : \(outputWorkExperienceBad)% Bad")
+        
+        finalFeedbackResult[3].overview.append("Good Output : \(outputWorkExperienceGood)% Good\n")
+        finalFeedbackResult[3].overview.append("Mid Output : \(outputWorkExperienceMid)% Mid\n")
+        finalFeedbackResult[3].overview.append("Bad Output : \(outputWorkExperienceBad)% Bad\n")
+        
+        
         finalFeedbackResult[3].type = "Work Experience"
         if !brain.isChronological(text: brain.getYear(for: text)) {
             finalFeedbackResult[3].overview.append("Rearrange your working experiences from the most current until the latest one!\n")
         } else {
             finalFeedbackResult[3].overview.append("You showed your working experiences at chronological order!\n")
         }
-        
         // Check whether the description is descriptive enough
         // TO DO: Insert using model here
     }
@@ -436,32 +500,32 @@ class ProcessingViewController: UIViewController {
     }
     
     func getHighestFontSize(result: Segment) {
-    //        let a = result.segment[0].contents[0].type.last?.hexDigitValue
-            for jumlah in 0 ..< result.segment.count {
-                if result.segment[jumlah].segment.isEmpty {
-                    for i in 0..<result.segment[jumlah].contents.count {
-                        if result.segment[jumlah].contents[i].type.first == "H"{
-                            var lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
-                            if lastTypeNumberString > tempFontSize{
-                                tempFontSize = lastTypeNumberString
-                            }
+        //        let a = result.segment[0].contents[0].type.last?.hexDigitValue
+        for jumlah in 0 ..< result.segment.count {
+            if result.segment[jumlah].segment.isEmpty {
+                for i in 0..<result.segment[jumlah].contents.count {
+                    if result.segment[jumlah].contents[i].type.first == "H"{
+                        var lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
+                        if lastTypeNumberString > tempFontSize{
+                            tempFontSize = lastTypeNumberString
                         }
                     }
-                }else{
-    //                extractContent(result: result.segment[jumlah])
                 }
-                if jumlah == result.segment.count - 1 {
-                    for j in 0 ..< result.contents.count{
-                        if result.contents[j].type.first == "H"{
-                            var lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
-                            if lastTypeNumberString > tempFontSize{
-                                tempFontSize = lastTypeNumberString
-                            }
+            }else{
+                //                extractContent(result: result.segment[jumlah])
+            }
+            if jumlah == result.segment.count - 1 {
+                for j in 0 ..< result.contents.count{
+                    if result.contents[j].type.first == "H"{
+                        var lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
+                        if lastTypeNumberString > tempFontSize{
+                            tempFontSize = lastTypeNumberString
                         }
                     }
                 }
             }
         }
+    }
     
     func handleClassification(text: String) -> String {
         let json: [String:[String]] = ["data": [text]]
@@ -607,243 +671,243 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
 }
 
 /* func ga kepake
-             if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
-                 ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
-                 ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 {
-                 print("PROFILE SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                 //                if !brain.isEmailRegexFound(text: result[i+1]) {
-                 //                    finalFeedbackResult[0] += "feedback email"
-                 //                }
-                 //                if !brain.isPhoneNumberRegexFound(text: result[i+1]) {
-                 //                    finalFeedbackResult[0] += "feedback phone number"
-                 //                }
-                 for i in q ..< result.count{
-                     if result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
-                         ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
-                             ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
-                             ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0 || result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
-                         ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
-                         ||  result[i].lowercased().contains("About".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
-                         break
-                     }else{
-                         stringIndah.append(result[i])
-                     }
-                 }
-                 counterProfile += 1
-                 print("String indah : \(stringIndah)")
-             }else if result[q].lowercased().contains("Education".lowercased()) ||  result[q].lowercased().contains("Academic Background".lowercased())
-                 ||  result[q].lowercased().contains("Education History".lowercased()) || result[q].lowercased().contains("Academic History".lowercased()){
-                 for i in q ..< result.count{
-                     if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
-                         ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
-                         ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
-                             ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
-                             ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0 || result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
-                         ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
-                         ||  result[i].lowercased().contains("About".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
-                         break
-                     }else{
-                         stringEducation.append(result[i])
-                     }
-                 }
-                 print("String Education : \(stringEducation)")
-             }else if (result[q].lowercased().contains("Work Experience".lowercased()) ||  result[q].lowercased().contains("Experience".lowercased())
-                 ||  result[q].lowercased().contains("Work History".lowercased()) ||  result[q].lowercased().contains("Working Experience".lowercased())
-                 ||  result[q].lowercased().contains("Job History".lowercased())) && counterWork == 0 {
-                 for i in q ..< result.count{
-                     if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
-                         ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
-                         ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
-                         ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
-                         ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
-                         ||  result[i].lowercased().contains("About".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
-                         break
-                     }else{
-                         stringWork.append(result[i])
-                     }
-                 }
-                 print("String Work : \(stringWork)")
-             }else if result[q].lowercased().contains("Organisational Experience".lowercased()) ||  result[q].lowercased().contains("Organizational Experience".lowercased()) ||  result[q].lowercased().contains("Organisation Profile".lowercased()) ||  result[q].lowercased().contains("Organization Experience".lowercased()) {
-                 for i in q ..< result.count{
-                     if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
-                         ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
-                         ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
-                         ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
-                             ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
-                             ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0  || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
-                         ||  result[i].lowercased().contains("About".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
-                         break
-                     }else{
-                         stringOrg.append(result[i])
-                     }
-                 }
-                 print("String Org : \(stringOrg)")
-             }else if result[q].lowercased().contains("Summary".lowercased()) ||  result[q].lowercased().contains("About Me".lowercased()) ||  result[q].lowercased().contains("About".lowercased()) {
-                 for i in q ..< result.count{
-                     if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
-                         ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
-                         ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
-                         ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
-                             ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
-                             ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0  ||  result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
-                         ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
-                         break
-                     }else{
-                         stringSummary.append(result[i])
-                     }
-                 }
-                 print("String Summary : \(stringSummary)")
-             } else if result[q].lowercased().contains("Skills".lowercased()) ||  result[q].lowercased().contains("Language".lowercased()) ||  result[q].lowercased().contains("Skills and Language".lowercased()) ||  result[q].lowercased().contains("Skills & Language".lowercased()) {
-                 for i in q ..< result.count{
-                     if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
-                         ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
-                         ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
-                         ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
-                             ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
-                             ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0  ||  result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
-                         ||  result[i].lowercased().contains("Organisation Profile".lowercased()) || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
-                         ||  result[i].lowercased().contains("About".lowercased()){
-                         break
-                     }else{
-                         stringSkills.append(result[i])
-                     }
-                 }
-                 print("String Skills : \(stringSkills)")
-             }
-                         if temp!.isEmpty{
-                             print("12345678901234567890 \(result[i]) 12345678901234567890")
-                             if (result[i].lowercased().contains("Personal Profile".lowercased()) ||  result[i].lowercased().contains("Profile".lowercased())
-                                 ||  result[i].lowercased().contains("Contact".lowercased()) ||  result[i].lowercased().contains("Personal Information".lowercased())
-                                 ||  brain.personalNameEntityRecognitionFound(for: result[i])) && counterProfile == 0 {
-                                 print("PROFILE SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                                 if !brain.isEmailRegexFound(text: result[i+1]) {
-                                     finalFeedbackResult[0] += "feedback email"
-                                 }
-                                 if !brain.isPhoneNumberRegexFound(text: result[i+1]) {
-                                     finalFeedbackResult[0] += "feedback phone number"
-                                 }
-                                 counterProfile += 1
-             
-                             } else if result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
-                                 ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) {
-             
-                                 print("EDUCATION SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                                 if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: result[i+1]) == .notFound {
-                                     finalFeedbackResult[1] += "MANA GPA LU"
-                                 } else if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: result[i+1]) == .outOfBound {
-                                     finalFeedbackResult[1] += "HILANGIN AJA CUPS"
-                                 }
-             
-                                 if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
-                                     finalFeedbackResult[1] += "Tahun lu ga berurutan descending cuy"
-                                 }
-             
-                             } else if (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
-                                 ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
-                                 ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0 {
-             
-                                 print("WORK SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                                 if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
-                                     finalFeedbackResult[2] += "Tahun lu ga berurutan descending cuy"
-                                 }
-                                 counterWork += 1
-             
-                             } else if result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
-                                 ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) {
-             
-                                 print("ORGANISATION SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                                 if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
-                                     finalFeedbackResult[3] += "Tahun lu ga berurutan descending cuy"
-                                 }
-             
-                             } else if result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
-                                 ||  result[i].lowercased().contains("About".lowercased()) {
-             
-                                 print("SUMMARY SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                                 if !brain.isWordFrequencyAppropriate(dictionary: brain.createWordDictionary(text: result[i+1])) {
-                                     finalFeedbackResult[4] += "Kebanyakan bacot"
-                                 }
-                                 if result[i].count > 200 {
-                                     finalFeedbackResult[4] += "Summarynya yang kebanyakan bacot, bukan lu tenang"
-                                 }
-             
-                                 for i in 0..<result[i].count{
-                                     dipisahSpasi = result[i+1].components(separatedBy: " ")
-                                 }
-                                 print("DIPISAH SPASI = \(dipisahSpasi)")
-             
-                             } else if result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased())
-                                 ||  result[i].lowercased().contains("Skills and Language".lowercased()) ||  result[i].lowercased().contains("Skills & Language".lowercased()) {
-             
-                                 print("SKILLS SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-             
-                             }
-                         }
-                         print("12345678901234567890 \(result[i]) 12345678901234567890")
-                         if (result[i].lowercased().contains("Personal Profile".lowercased()) ||  result[i].lowercased().contains("Profile".lowercased())
-                             ||  result[i].lowercased().contains("Contact".lowercased()) ||  result[i].lowercased().contains("Personal Information".lowercased())
-                             ||  brain.personalNameEntityRecognitionFound(for: result[i])) && counterProfile == 0 {
-                             print("PROFILE SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                             if !brain.isEmailRegexFound(text: result[i+1]) {
-                                 finalFeedbackResult[0] += "feedback email"
-                             }
-                             if !brain.isPhoneNumberRegexFound(text: result[i+1]) {
-                                 finalFeedbackResult[0] += "feedback phone number"
-                             }
-                             counterProfile += 1
-             
-                         } else if result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
-                             ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) {
-             
-                             print("EDUCATION SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                             if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: result[i+1]) == .notFound {
-                                 finalFeedbackResult[1] += "MANA GPA LU"
-                             } else if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: result[i+1]) == .outOfBound {
-                                 finalFeedbackResult[1] += "HILANGIN AJA CUPS"
-                             }
-             
-                             if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
-                                 finalFeedbackResult[1] += "Tahun lu ga berurutan descending cuy"
-                             }
-             
-                         } else if (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
-                             ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
-                             ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0 {
-             
-                             print("WORK SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                             if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
-                                 finalFeedbackResult[2] += "Tahun lu ga berurutan descending cuy"
-                             }
-                             counterWork += 1
-             
-                         } else if result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
-                             ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) {
-             
-                             print("ORGANISATION SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                             if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
-                                 finalFeedbackResult[3] += "Tahun lu ga berurutan descending cuy"
-                             }
-             
-                         } else if result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
-                             ||  result[i].lowercased().contains("About".lowercased()) {
-             
-                             print("SUMMARY SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-                             if !brain.isWordFrequencyAppropriate(dictionary: brain.createWordDictionary(text: result[i+1])) {
-                                 finalFeedbackResult[4] += "Kebanyakan bacot"
-                             }
-                             if result[i].count > 200 {
-                                 finalFeedbackResult[4] += "Summarynya yang kebanyakan bacot, bukan lu tenang"
-                             }
-             
-                             for i in 0..<result[i].count{
-                                 dipisahSpasi = result[i+1].components(separatedBy: " ")
-                             }
-                             print("DIPISAH SPASI = \(dipisahSpasi)")
-             
-                         } else if result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased())
-                             ||  result[i].lowercased().contains("Skills and Language".lowercased()) ||  result[i].lowercased().contains("Skills & Language".lowercased()) {
-             
-                             print("SKILLS SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
-             
-                         }
+ if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
+ ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
+ ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 {
+ print("PROFILE SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ //                if !brain.isEmailRegexFound(text: result[i+1]) {
+ //                    finalFeedbackResult[0] += "feedback email"
+ //                }
+ //                if !brain.isPhoneNumberRegexFound(text: result[i+1]) {
+ //                    finalFeedbackResult[0] += "feedback phone number"
+ //                }
+ for i in q ..< result.count{
+ if result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
+ ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
+ ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
+ ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0 || result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
+ ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
+ ||  result[i].lowercased().contains("About".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
+ break
+ }else{
+ stringIndah.append(result[i])
+ }
+ }
+ counterProfile += 1
+ print("String indah : \(stringIndah)")
+ }else if result[q].lowercased().contains("Education".lowercased()) ||  result[q].lowercased().contains("Academic Background".lowercased())
+ ||  result[q].lowercased().contains("Education History".lowercased()) || result[q].lowercased().contains("Academic History".lowercased()){
+ for i in q ..< result.count{
+ if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
+ ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
+ ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
+ ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
+ ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0 || result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
+ ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
+ ||  result[i].lowercased().contains("About".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
+ break
+ }else{
+ stringEducation.append(result[i])
+ }
+ }
+ print("String Education : \(stringEducation)")
+ }else if (result[q].lowercased().contains("Work Experience".lowercased()) ||  result[q].lowercased().contains("Experience".lowercased())
+ ||  result[q].lowercased().contains("Work History".lowercased()) ||  result[q].lowercased().contains("Working Experience".lowercased())
+ ||  result[q].lowercased().contains("Job History".lowercased())) && counterWork == 0 {
+ for i in q ..< result.count{
+ if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
+ ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
+ ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
+ ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
+ ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
+ ||  result[i].lowercased().contains("About".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
+ break
+ }else{
+ stringWork.append(result[i])
+ }
+ }
+ print("String Work : \(stringWork)")
+ }else if result[q].lowercased().contains("Organisational Experience".lowercased()) ||  result[q].lowercased().contains("Organizational Experience".lowercased()) ||  result[q].lowercased().contains("Organisation Profile".lowercased()) ||  result[q].lowercased().contains("Organization Experience".lowercased()) {
+ for i in q ..< result.count{
+ if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
+ ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
+ ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
+ ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
+ ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
+ ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0  || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
+ ||  result[i].lowercased().contains("About".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
+ break
+ }else{
+ stringOrg.append(result[i])
+ }
+ }
+ print("String Org : \(stringOrg)")
+ }else if result[q].lowercased().contains("Summary".lowercased()) ||  result[q].lowercased().contains("About Me".lowercased()) ||  result[q].lowercased().contains("About".lowercased()) {
+ for i in q ..< result.count{
+ if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
+ ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
+ ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
+ ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
+ ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
+ ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0  ||  result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
+ ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) || result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased()){
+ break
+ }else{
+ stringSummary.append(result[i])
+ }
+ }
+ print("String Summary : \(stringSummary)")
+ } else if result[q].lowercased().contains("Skills".lowercased()) ||  result[q].lowercased().contains("Language".lowercased()) ||  result[q].lowercased().contains("Skills and Language".lowercased()) ||  result[q].lowercased().contains("Skills & Language".lowercased()) {
+ for i in q ..< result.count{
+ if (result[q].lowercased().contains("Personal Profile".lowercased()) ||  result[q].lowercased().contains("Profile".lowercased())
+ ||  result[q].lowercased().contains("Contact".lowercased()) ||  result[q].lowercased().contains("Personal Information".lowercased())
+ ||  brain.personalNameEntityRecognitionFound(for: result[q])) && counterProfile == 0 || result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
+ ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) || (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
+ ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
+ ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0  ||  result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
+ ||  result[i].lowercased().contains("Organisation Profile".lowercased()) || result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
+ ||  result[i].lowercased().contains("About".lowercased()){
+ break
+ }else{
+ stringSkills.append(result[i])
+ }
+ }
+ print("String Skills : \(stringSkills)")
+ }
+ if temp!.isEmpty{
+ print("12345678901234567890 \(result[i]) 12345678901234567890")
+ if (result[i].lowercased().contains("Personal Profile".lowercased()) ||  result[i].lowercased().contains("Profile".lowercased())
+ ||  result[i].lowercased().contains("Contact".lowercased()) ||  result[i].lowercased().contains("Personal Information".lowercased())
+ ||  brain.personalNameEntityRecognitionFound(for: result[i])) && counterProfile == 0 {
+ print("PROFILE SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if !brain.isEmailRegexFound(text: result[i+1]) {
+ finalFeedbackResult[0] += "feedback email"
+ }
+ if !brain.isPhoneNumberRegexFound(text: result[i+1]) {
+ finalFeedbackResult[0] += "feedback phone number"
+ }
+ counterProfile += 1
+ 
+ } else if result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
+ ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) {
+ 
+ print("EDUCATION SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: result[i+1]) == .notFound {
+ finalFeedbackResult[1] += "MANA GPA LU"
+ } else if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: result[i+1]) == .outOfBound {
+ finalFeedbackResult[1] += "HILANGIN AJA CUPS"
+ }
+ 
+ if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
+ finalFeedbackResult[1] += "Tahun lu ga berurutan descending cuy"
+ }
+ 
+ } else if (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
+ ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
+ ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0 {
+ 
+ print("WORK SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
+ finalFeedbackResult[2] += "Tahun lu ga berurutan descending cuy"
+ }
+ counterWork += 1
+ 
+ } else if result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
+ ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) {
+ 
+ print("ORGANISATION SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
+ finalFeedbackResult[3] += "Tahun lu ga berurutan descending cuy"
+ }
+ 
+ } else if result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
+ ||  result[i].lowercased().contains("About".lowercased()) {
+ 
+ print("SUMMARY SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if !brain.isWordFrequencyAppropriate(dictionary: brain.createWordDictionary(text: result[i+1])) {
+ finalFeedbackResult[4] += "Kebanyakan bacot"
+ }
+ if result[i].count > 200 {
+ finalFeedbackResult[4] += "Summarynya yang kebanyakan bacot, bukan lu tenang"
+ }
+ 
+ for i in 0..<result[i].count{
+ dipisahSpasi = result[i+1].components(separatedBy: " ")
+ }
+ print("DIPISAH SPASI = \(dipisahSpasi)")
+ 
+ } else if result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased())
+ ||  result[i].lowercased().contains("Skills and Language".lowercased()) ||  result[i].lowercased().contains("Skills & Language".lowercased()) {
+ 
+ print("SKILLS SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ 
+ }
+ }
+ print("12345678901234567890 \(result[i]) 12345678901234567890")
+ if (result[i].lowercased().contains("Personal Profile".lowercased()) ||  result[i].lowercased().contains("Profile".lowercased())
+ ||  result[i].lowercased().contains("Contact".lowercased()) ||  result[i].lowercased().contains("Personal Information".lowercased())
+ ||  brain.personalNameEntityRecognitionFound(for: result[i])) && counterProfile == 0 {
+ print("PROFILE SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if !brain.isEmailRegexFound(text: result[i+1]) {
+ finalFeedbackResult[0] += "feedback email"
+ }
+ if !brain.isPhoneNumberRegexFound(text: result[i+1]) {
+ finalFeedbackResult[0] += "feedback phone number"
+ }
+ counterProfile += 1
+ 
+ } else if result[i].lowercased().contains("Education".lowercased()) ||  result[i].lowercased().contains("Academic Background".lowercased())
+ ||  result[i].lowercased().contains("Education History".lowercased()) || result[i].lowercased().contains("Academic History".lowercased()) {
+ 
+ print("EDUCATION SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: result[i+1]) == .notFound {
+ finalFeedbackResult[1] += "MANA GPA LU"
+ } else if brain.isRangeGPARegexFound(lowerBoundary: 3, upperBoundary: 4, text: result[i+1]) == .outOfBound {
+ finalFeedbackResult[1] += "HILANGIN AJA CUPS"
+ }
+ 
+ if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
+ finalFeedbackResult[1] += "Tahun lu ga berurutan descending cuy"
+ }
+ 
+ } else if (result[i].lowercased().contains("Work Experience".lowercased()) ||  result[i].lowercased().contains("Experience".lowercased())
+ ||  result[i].lowercased().contains("Work History".lowercased()) ||  result[i].lowercased().contains("Working Experience".lowercased())
+ ||  result[i].lowercased().contains("Job History".lowercased())) && counterWork == 0 {
+ 
+ print("WORK SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
+ finalFeedbackResult[2] += "Tahun lu ga berurutan descending cuy"
+ }
+ counterWork += 1
+ 
+ } else if result[i].lowercased().contains("Organisational Experience".lowercased()) ||  result[i].lowercased().contains("Organizational Experience".lowercased())
+ ||  result[i].lowercased().contains("Organisation Profile".lowercased()) ||  result[i].lowercased().contains("Organization Experience".lowercased()) {
+ 
+ print("ORGANISATION SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if !brain.isChronological(text: brain.getYear(for: result[i+1])) {
+ finalFeedbackResult[3] += "Tahun lu ga berurutan descending cuy"
+ }
+ 
+ } else if result[i].lowercased().contains("Summary".lowercased()) ||  result[i].lowercased().contains("About Me".lowercased())
+ ||  result[i].lowercased().contains("About".lowercased()) {
+ 
+ print("SUMMARY SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ if !brain.isWordFrequencyAppropriate(dictionary: brain.createWordDictionary(text: result[i+1])) {
+ finalFeedbackResult[4] += "Kebanyakan bacot"
+ }
+ if result[i].count > 200 {
+ finalFeedbackResult[4] += "Summarynya yang kebanyakan bacot, bukan lu tenang"
+ }
+ 
+ for i in 0..<result[i].count{
+ dipisahSpasi = result[i+1].components(separatedBy: " ")
+ }
+ print("DIPISAH SPASI = \(dipisahSpasi)")
+ 
+ } else if result[i].lowercased().contains("Skills".lowercased()) ||  result[i].lowercased().contains("Language".lowercased())
+ ||  result[i].lowercased().contains("Skills and Language".lowercased()) ||  result[i].lowercased().contains("Skills & Language".lowercased()) {
+ 
+ print("SKILLS SECTION -=*)!&#)!&!)#&!)$&!)*$)!*#@)*!)@(!)@()!*(#@)(!)@()!(@)")
+ 
+ }
  */
