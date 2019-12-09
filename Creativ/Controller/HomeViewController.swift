@@ -228,8 +228,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
+            headerView.reaProcessing(reaImages: ["rea1","rea2","rea1","rea2","rea3"])
             headerView.textDescription.text = "Here are the resumes that I've given feedback on. You can see them over and over again!"
-
             headerView.textDescription.sizeToFit()
             headerView.textDescription.numberOfLines = 0
             headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - headerView.textDescription.frame.size.width + 15)

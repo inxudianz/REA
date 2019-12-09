@@ -624,6 +624,7 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
         UICollectionReusableView {
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
                 headerView.textDescription.text = "I'm reviewing your resume..."
+                headerView.reaProcessing(reaImages: ["reaRollingEyesLeft", "reaRollingEyesCenter", "reaRollingEyesRight"])
                 headerView.textDescription.sizeToFit()
                 headerView.textDescription.numberOfLines = 0
                 headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - headerView.textDescription.frame.size.width - 60)
