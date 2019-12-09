@@ -447,7 +447,16 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             var arrHeading:[(String,String)] = []
             var arrBody:[(String,String)] = []
             let checkMedian:Bool = pointAvg < medianFontSize
-            
+            if fontSizeSorted.count <= 2{
+                print("font kurang = 2")
+                let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your PDF is not a resume!", preferredStyle: .alert)
+                           
+                           alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                               self.cvCollectionView.reloadData()
+                           }))
+                           
+                           present(alert, animated: true, completion: nil)
+            }else{
             for cvContent in cvContents {
                 if cvContent.1 >= Double(medianFontSize)  {
                     for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
@@ -474,6 +483,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                         }
                     }
                 }
+            }
             }
         }
         else {
