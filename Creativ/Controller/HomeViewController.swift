@@ -451,7 +451,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 print("font kurang = 2")
                 let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your PDF is not a resume!", preferredStyle: .alert)
                            
-                           alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                                self.cvCollectionView.reloadData()
                            }))
                            
@@ -489,7 +489,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         else {
             let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your resume is an image. Try to convert it to readable format.", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 self.cvCollectionView.reloadData()
             }))
             
