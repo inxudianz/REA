@@ -454,12 +454,18 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                         if cvContent.1 == largeFont {
                             arrHeading.append((cvContent.0,"Header\(index + 2)"))
                             categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                            break
                         }
                         else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
                             arrHeading.append((cvContent.0,"Header1"))
                             categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
+                            break
                         }
-                        
+                        else if index == fontSizeSortedSplit[1].count - 1 {
+                            arrBody.append((cvContent.0,"Body\(index + 2)"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                            break
+                        }
                     }
                 }
                 else {
@@ -467,10 +473,17 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                         if cvContent.1 == smallFont {
                             arrBody.append((cvContent.0,"Body\(index + 2)"))
                             categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                            break
                         }
                         else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
                             arrBody.append((cvContent.0,"Body1"))
                             categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
+                            break
+                        }
+                        else if index == fontSizeSortedSplit[0].count - 1 {
+                            arrBody.append((cvContent.0,"Body\(index + 2)"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                            break
                         }
                     }
                 }

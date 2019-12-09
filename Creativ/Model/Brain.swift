@@ -28,7 +28,7 @@ class Brain {
     
     /* Function to check e-mail regex */
     func isEmailRegexFound(text: String) -> Bool {
-        return text.range(of: "[a-z0-9]+@(gmail|yahoo|hotmail).co(m|.[a-z]{2})\\s", options: .regularExpression) != nil
+        return text.range(of: "[a-zA-Z0-9]+@(gmail|yahoo|hotmail|icloud).co(m|.[a-z]{2})\\s", options: .regularExpression) != nil
     }
     
 /*
@@ -79,21 +79,23 @@ class Brain {
         return false
     }
     
-    /* Struct */
+    /* Nanti dibuat jadi struct */
     var summaryDictionary = Dictionary<String, Int>()
+    var overusedWords:[String] = []
     var totalWordSummary = 0
 
     /* Function to check word frequency and what to do with it */
     func isWordFrequencyAppropriate(dictionary: [String: Int]) -> Bool {
         let dictionary = dictionary
-        //print(dictionary)
+        var isAppropriate:Bool = true
         
         for key in dictionary.keys {
             if Double(dictionary[key]!) / Double(totalWordSummary) > 0.2 {
-                return false
+                overusedWords.append(key)
+                isAppropriate = false
             }
         }
-        return true
+        return isAppropriate
     }
 
     /* Function for counting word frequency */
@@ -220,45 +222,4 @@ class Brain {
         
         return misspelledRange.location == NSNotFound
     }
-}
-
-//isReal(word: String)
-//
-//                for var i in 0 ..< quote.utf16.count {
-//        var lastIndex = 0
-//
-//                while true {
-//                    let textChecker = UITextChecker()
-//                    let misspelledRange =
-//                        textChecker.rangeOfMisspelledWord(in: quote,
-//                                                          range: NSRange(0..<quote.utf16.count),
-//                                                          startingAt: lastIndex,
-//                                                          wrap: false,
-//                                                          language: "en_US")
-//
-//                    if misspelledRange.location != NSNotFound,
-//                        let firstGuess = textChecker.guesses(forWordRange: misspelledRange,
-//                                                             in: quote,
-//                                                             language: "en_US")?.first
-//                    {
-//                        lastIndex = (misspelledRange.location + misspelledRange.length)
-//                        print("First guess: \(firstGuess)")
-//                        print("\(misspelledRange.length) sama \(misspelledRange.location)")
-//                        } else {
-//                            print("Not found")
-//                            break
-//                        }
-//                }
-//                for (index,element) in quote.enumerated() {
-//
-//                }
-//         First guess: hipster
-//                        print(i)
-//                        i += misspelledRange.location + misspelledRange.length
-//
-//                }
-
-class BrainResult {
-    var BrainResult: [String] = []
-    
 }
