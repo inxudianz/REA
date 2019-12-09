@@ -27,8 +27,8 @@ class HomeCollectionReusableView: UICollectionReusableView {
         
         let xStart: CGFloat = 22
         
-        let bubbleWidth: CGFloat = width
-        let bubbleHeight: CGFloat = height + 20
+        let bubbleWidth: CGFloat = width + 10
+        let bubbleHeight: CGFloat = height + 10
         
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: xStart, y: bubbleHeight))

@@ -622,13 +622,11 @@ class ProcessingViewController: UIViewController {
 extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) ->
         UICollectionReusableView {
-            print("DInasIDBNWOridbqwpefbrepqwifbhqwpiofbnqwopi")
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
                 headerView.textDescription.text = "I'm reviewing your resume..."
                 headerView.textDescription.sizeToFit()
                 headerView.textDescription.numberOfLines = 0
-                headerView.textDescription.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 162, height: headerView.textDescription.bounds.height)
-                headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - 162)
+                headerView.addBubble(height: headerView.textDescription.frame.maxY, width: UIScreen.main.bounds.width - headerView.textDescription.frame.size.width - 60)
                 headerView.bringSubviewToFront(headerView.textDescription)
                 return headerView
             }
@@ -659,7 +657,7 @@ extension ProcessingViewController: UICollectionViewDelegate, UICollectionViewDa
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 4
         layout.estimatedItemSize = CGSize(width: self.processCollectionView.frame.width, height: processCollectionView.frame.height / 8)
-        layout.sectionInset = UIEdgeInsets(top: 20, left: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2 + 50, bottom: 0, right: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2)
+        layout.sectionInset = UIEdgeInsets(top: 20, left: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2, bottom: 0, right: (self.processCollectionView.bounds.width - layout.estimatedItemSize.width) / 2)
         layout.headerReferenceSize = CGSize(width: processCollectionView.frame.width, height: 180)
         layout.sectionHeadersPinToVisibleBounds = true
         

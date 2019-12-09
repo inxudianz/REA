@@ -30,7 +30,12 @@ class ProcessCollectionViewCell: UICollectionViewCell {
         }
     }
     var doneImage = UIImageView()
-    var actInd = UIActivityIndicatorView()
+    var actInd = UIActivityIndicatorView() {
+        didSet {
+            actInd.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        }
+    }
+    
     
     func setProcessContent(text: String) {
         processLabel.text = text
@@ -45,9 +50,8 @@ class ProcessCollectionViewCell: UICollectionViewCell {
         case .idle:
            // print("\(String(describing: processLabel.text)) \(statusType)")
             processLabel.alpha = 0.4
-            
             //Set indicator view to nothing
-            statusIndicator.isHidden = true
+            statusIndicator.isHidden = false
             break
         case .working:
            // print("\(String(describing: processLabel.text)) \(statusType)")
@@ -56,25 +60,32 @@ class ProcessCollectionViewCell: UICollectionViewCell {
             // Set indicator view to indicator view image
             statusIndicator.isHidden = false
             statusIndicator.addSubview(actInd)
-            actInd.startAnimating()
+            UIView.performWithoutAnimation {
+                actInd.frame.origin.y = statusIndicator.frame.height / 2
+                actInd.frame.origin.x = statusIndicator.frame.width / 2 + 7
+                actInd.startAnimating()
+            }
             break
         case .done:
             // print("\(String(describing: processLabel.text)) \(statusType)")
             doneImage.image = UIImage(named: "Checkmark")
             doneImage.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-            processLabel.alpha = 0
             
             // Set indicator view to checkmark
             statusIndicator.isHidden = false
             actInd.stopAnimating()
             actInd.isHidden = true
-            UIView.animate(withDuration: 1) {
+            
+            UIView.animate(withDuration: 0.3) {
                 self.statusIndicator.addSubview(self.doneImage)
             }
-            UIView.animate(withDuration: 1.5) {
+
+            UIView.animate(withDuration: 1, delay: 0.7, options: .curveEaseOut, animations: {
                 self.statusIndicator.alpha = 0
+                self.processLabel.alpha = 0
+            }) { (true) in
+
             }
-            
             break
         }
     }
