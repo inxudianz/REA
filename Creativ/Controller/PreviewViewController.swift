@@ -200,12 +200,12 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
                 feedbackDatas.commentedTexts[2] = "You can be better!"
             }
             
-            if feedbackResult[3].overview.contains("Rearrange your working experiences from the most current until the latest one!") {
+            if feedbackResult[3].overview.contains("Rearrange your working experiences from the most current until the latest one!") || feedbackResult[3].overview.contains("Your work experience explanation is MID") || feedbackResult[3].overview.contains("Your work experience explanation is BAD"){
                 feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
                 feedbackDatas.commentedTexts[3] = "You can be better!"
             }
             
-            if feedbackResult[4].overview.contains("Rearrange your organisational experiences from the most current until the latest one!") {
+            if feedbackResult[4].overview.contains("Rearrange your organisational experiences from the most current until the latest one!") || feedbackResult[4].overview.contains("Your Organisation experience explanation is MID") || feedbackResult[4].overview.contains("Your Organisation experience explanation is BAD") {
                 feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
                 feedbackDatas.commentedTexts[4] = "You can be better!"
             }

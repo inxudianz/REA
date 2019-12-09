@@ -35,6 +35,7 @@
 		8AEA532723965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */; };
 		8AEA532823965E2600BCB545 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */; };
 		8AEA532C2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */; };
+		8AEA532E239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */; };
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF39E237E630F00F8FB7A /* ResumeModel.swift */; };
 		920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3A0237E631800F8FB7A /* FeedbackModel.swift */; };
@@ -109,6 +110,7 @@
 		8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierPassionateSentence.mlmodel; path = ../../model/TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
 		8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierVagueSentence.mlmodel; path = ../../model/TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
 		8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierWorkExperience.mlmodel; path = ../../model/TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
+		8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierOrganisationExperience.mlmodel; path = ../../model/TextClassifierOrganisationExperience.mlmodel; sourceTree = "<group>"; };
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920AF39E237E630F00F8FB7A /* ResumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeModel.swift; sourceTree = "<group>"; };
 		920AF3A0237E631800F8FB7A /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 		920F63D32372D0CC00BCFC5C /* Creativ */ = {
 			isa = PBXGroup;
 			children = (
+				8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */,
 				8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */,
 				8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */,
 				8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */,
@@ -508,6 +511,7 @@
 				1EE6D1CA2374376500A07759 /* (null) in Sources */,
 				8AEA532C2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel in Sources */,
 				F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */,
+				8AEA532E239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel in Sources */,
 				1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */,
 				1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */,
 				F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */,
