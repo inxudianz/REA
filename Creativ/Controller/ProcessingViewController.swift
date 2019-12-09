@@ -154,10 +154,10 @@ class ProcessingViewController: UIViewController {
         var summarySetelahPersonalProfile = ""
         summary.forEach { (cekTemp) in
             if cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Personal Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About Me".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "In Words".lowercased() || text.lowercased().contains("Summary".lowercased()){
-                summarySetelahPersonalProfile = String(summary[tempForEach+1])
+                summarySetelahPersonalProfile.append(String(summary[tempForEach+1]))
                 return
             }
-            else {
+            else if tempForEach == summary.count - 1 {
                 summarySetelahPersonalProfile = summary.joined()
             }
             tempForEach += 1
