@@ -15,6 +15,7 @@ class OverviewViewController: UIViewController {
     var feedbackDatas = FeedbackData()
     var fetchedResume: ResumeModel = ResumeModel()
     let customFont = CustomFont()
+    var headerCv: [String] = ["summary", "identity", "education", "working experience", "organisational experience", "skills"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +106,7 @@ class OverviewViewController: UIViewController {
             
             //kalo konten gaada (kotak warna biru)
             if feedbackResult[x].overview.isEmpty {
-                feedbackDatas.comments[x] = "We're missing \(feedbackResult[x].type) in your resume! It's either you haven't add it or we can't detect it because it's in another format."
+                feedbackDatas.comments[x] = "We're missing \(headerCv[x]) section in your resume! It's either you haven't add it or we can't detect it because it's in another format."
                 feedbackDatas.commentedTexts[x] = "Missing Content!"
             } else {
                 feedbackDatas.comments[x] = feedbackResult[x].overview
