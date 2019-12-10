@@ -21,6 +21,7 @@ class HomeViewController: UIViewController{
     var urlPicked: URL?
     var cellColour = true
     var segmentedResult: Segment?
+    var brain = Brain()
     
     var isEdit = false
     var selectedItem = [Int]()
@@ -434,71 +435,83 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
             }
             
-        }
-        
-        if checkFileImage != 0 {
-            let sortWithoutDuplicates = Array(Set(arrFontSize))
-            let fontSizeSorted = sortWithoutDuplicates.sorted()
-            let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
-            
-            pointAvg = pointAvg / Double(checkFileImage)
+            if checkFileImage != 0 && pageCount < 2 {
+                let sortWithoutDuplicates = Array(Set(arrFontSize))
+                let fontSizeSorted = sortWithoutDuplicates.sorted()
+                let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
+                
+                pointAvg = pointAvg / Double(checkFileImage)
 
-            let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
-            var arrHeading:[(String,String)] = []
-            var arrBody:[(String,String)] = []
-            let checkMedian:Bool = pointAvg < medianFontSize
-            
-            for cvContent in cvContents {
-                if cvContent.1 >= Double(medianFontSize)  {
-                    for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
-                        if cvContent.1 == largeFont {
-                            arrHeading.append((cvContent.0,"Header\(index + 2)"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                            break
-                        }
-                        else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
-                            arrHeading.append((cvContent.0,"Header1"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
-                            break
-                        }
-                        else if index == fontSizeSortedSplit[1].count - 1 {
-                            arrBody.append((cvContent.0,"Body\(index + 2)"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                            break
+                let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
+                var arrHeading:[(String,String)] = []
+                var arrBody:[(String,String)] = []
+                let checkMedian:Bool = pointAvg < medianFontSize
+                
+                // TODO:
+                // JIKA FONTSIZESORTED LEBINRENDAH DARI 2 PRINT UIALERT NGASIH TAU KYK DIBAWAH UNTUK IMAGE :)
+                    
+                for cvContent in cvContents {
+                    if fontSizeSorted.count < 3 && (!brain.isWorkExperienceFound(in: cvContent.0) || !brain.isEducationFound(in: cvContent.0)) {
+                        let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your file is not a resume. Try to upload a different file.", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                            self.cvCollectionView.reloadData()
+                        }))
+                        
+                        present(alert, animated: true, completion: nil)
+                        break
+                    }
+                    if cvContent.1 >= Double(medianFontSize)  {
+                        for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
+                            if cvContent.1 == largeFont {
+                                arrHeading.append((cvContent.0,"Header\(index + 2)"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                            else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
+                                arrHeading.append((cvContent.0,"Header1"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                            else if index == fontSizeSortedSplit[1].count - 1 {
+                                arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
                         }
                     }
-                }
-                else {
-                    for (index,smallFont) in fontSizeSortedSplit[0].enumerated() {
-                        if cvContent.1 == smallFont {
-                            arrBody.append((cvContent.0,"Body\(index + 2)"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                            break
-                        }
-                        else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
-                            arrBody.append((cvContent.0,"Body1"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
-                            break
-                        }
-                        else if index == fontSizeSortedSplit[0].count - 1 {
-                            arrBody.append((cvContent.0,"Body\(index + 2)"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                            break
+                    else {
+                        for (index,smallFont) in fontSizeSortedSplit[0].enumerated() {
+                            if cvContent.1 == smallFont {
+                                arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                            else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
+                                arrBody.append((cvContent.0,"Body1"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                            else if index == fontSizeSortedSplit[0].count - 1 {
+                                arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
                         }
                     }
                 }
             }
+            else {
+                let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your file is an image or not a resume. Try to upload a different file.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                    self.cvCollectionView.reloadData()
+                }))
+                
+                present(alert, animated: true, completion: nil)
+            }
+            segmentedResult = segmentContent(contents: categorisedcvContent)
         }
-        else {
-            let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your resume is an image. Try to convert it to readable format.", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
-                self.cvCollectionView.reloadData()
-            }))
-            
-            present(alert, animated: true, completion: nil)
-        }
-        segmentedResult = segmentContent(contents: categorisedcvContent)
     }
     
     func segmentContent(contents:[SegmentedModel]) -> Segment {

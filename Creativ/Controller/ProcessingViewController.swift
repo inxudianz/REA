@@ -146,18 +146,18 @@ class ProcessingViewController: UIViewController {
         print(text)
         print("*&*&*&*&*&*&*&*&*&*")
         
-        if text.lowercased().contains("personal profile") || text.lowercased().contains("about me") || text.lowercased().contains("about") || text.lowercased().contains("personal profile") || text.lowercased().contains("profile") || text.lowercased().contains("in words") || text.lowercased().contains("summary"){
+        if brain.isSummaryFound(in: text){
             summary = text.split(separator: "\n")
         }
         print(summary)
         var tempForEach = 0
         var summarySetelahPersonalProfile = ""
         summary.forEach { (cekTemp) in
-            if cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "personal profile" || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "about me" || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "about" || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "profile" || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "in words" || text.lowercased().contains("summary"){
+            if brain.isSummaryFound(in: cekTemp.trimmingCharacters(in: .whitespacesAndNewlines)){
                 summarySetelahPersonalProfile = String(summary[tempForEach+1])
                 return
             }
-            else {
+            else if tempForEach == summary.count - 1{
                 summarySetelahPersonalProfile = summary.joined()
             }
             tempForEach += 1
@@ -229,7 +229,7 @@ class ProcessingViewController: UIViewController {
         }
         
         // Check usage of words and frequency
-        var wordDict = brain.createWordDictionary(text: text)
+        let wordDict = brain.createWordDictionary(text: text)
         if !brain.isWordFrequencyAppropriate(dictionary: wordDict) {
             finalFeedbackResult[0].overview.append("It seems that you overused some words. Try to change some words!\n")
         } else {
@@ -480,21 +480,21 @@ class ProcessingViewController: UIViewController {
     
     func decideAppropriateFeedback(dividedExtractedContent: [String:String]) {
         for key in dividedExtractedContent.keys {
-            if key.lowercased() == "contact info" || key.lowercased() == "contact" || key.lowercased() == "personal information" || key.lowercased() == "personal info" {
-                appointProfileFeedback(for: dividedExtractedContent[key]!)
-            } else if key.lowercased() == "education" || key.lowercased() == "academic history" || key.lowercased() == "academic background" || key.lowercased() == "education history" {
-                appointEducationFeedback(for: dividedExtractedContent[key]!)
-            } else if key.lowercased() == "work experience" || key.lowercased() == "work history" || key.lowercased() == "working experience" || key.lowercased() == "job history" || key.lowercased() == "experience" {
-                appointWorkFeedback(for: dividedExtractedContent[key]!)
-            } else if key.lowercased() == "organisation experience" || key.lowercased() == "organisational experience" || key.lowercased() == "organization experience" || key.lowercased() == "organizational experience" || key.lowercased() == "organisation history" || key.lowercased() == "organization history" || key.lowercased().contains("organisation") || key.lowercased().contains("organization") {
-                appointOrganisationFeedback(for: dividedExtractedContent[key]!)
-            } else if key.lowercased().contains("summary") || key.lowercased().contains("about me") || key.lowercased().contains("about") || key.lowercased().contains("personal profile") || key.lowercased().contains("profile") || key.lowercased().contains("in words") {
-                if brain.isEmailRegexFound(text: dividedExtractedContent[key]!) || brain.isPhoneNumberRegexFound(text: dividedExtractedContent[key]!) {
-                    appointProfileFeedback(for: dividedExtractedContent[key]!)
+            if self.brain.isPersonalInfoFound(in: key) {
+                self.appointProfileFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isEducationFound(in: key) {
+                self.appointEducationFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isWorkExperienceFound(in: key) {
+                self.appointWorkFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isOrganisationExperienceFound(in: key) {
+                self.appointOrganisationFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isSummaryFound(in: key) {
+                if self.brain.isEmailRegexFound(text: dividedExtractedContent[key]!) || self.brain.isPhoneNumberRegexFound(text: dividedExtractedContent[key]!) {
+                    self.appointProfileFeedback(for: dividedExtractedContent[key]!)
                 }
-                appointSummaryFeedback(for: dividedExtractedContent[key]!)
-            } else if key.lowercased().contains("skills") || key.lowercased().contains("skill") || key.lowercased().contains("expertise") || key.lowercased().contains("technical skills") || key.lowercased().contains("key skills") {
-                appointSkillsFeedback(for: dividedExtractedContent[key]!)
+                self.appointSummaryFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isSkillsFound(in: key) {
+                self.appointSkillsFeedback(for: dividedExtractedContent[key]!)
             }
         }
     }

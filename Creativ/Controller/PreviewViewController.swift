@@ -37,11 +37,11 @@ class PreviewViewController: UIViewController {
         // Do any additional setup after loading the view.
         setCollectionViewLayout()
         feedbackDatas.createFeedbackSection()
+        saveNewResume()
     }
     
     // Unwind back to the All Resume Page
     @objc func doneReview(_ unwindSegue: UIStoryboardSegue) {
-        saveNewResume()
         performSegue(withIdentifier: "unwindToHome", sender: self)
     }
     

@@ -222,4 +222,46 @@ class Brain {
         
         return misspelledRange.location == NSNotFound
     }
+    
+    func isPersonalInfoFound(in key: String) -> Bool {
+        if key.lowercased() == "contact info" || key.lowercased() == "contact" || key.lowercased() == "personal information" || key.lowercased() == "personal info" {
+            return true
+        }
+        return false
+    }
+    
+    func isEducationFound(in key: String) -> Bool {
+        if key.lowercased() == "education" || key.lowercased() == "academic history" || key.lowercased() == "academic background" || key.lowercased() == "education history" {
+            return true
+        }
+        return false
+    }
+    
+    func isWorkExperienceFound(in key: String) -> Bool {
+        if key.lowercased() == "work experience" || key.lowercased() == "work history" || key.lowercased() == "working experience" || key.lowercased() == "job history" || key.lowercased() == "experience" {
+            return true
+        }
+        return false
+    }
+    
+    func isOrganisationExperienceFound(in key: String) -> Bool {
+        if key.lowercased() == "organisation experience" || key.lowercased() == "organisational experience" || key.lowercased() == "organization experience" || key.lowercased() == "organizational experience" || key.lowercased() == "organisation history" || key.lowercased() == "organization history" || key.lowercased().contains("organisation") || key.lowercased().contains("organization") {
+            return true
+        }
+        return false
+    }
+    
+    func isSkillsFound(in key: String) -> Bool {
+        if key.lowercased().contains("skills") || key.lowercased().contains("skill") || key.lowercased().contains("expertise") || key.lowercased().contains("technical skills") || key.lowercased().contains("key skills") {
+            return true
+        }
+        return false
+    }
+
+    func isSummaryFound(in key: String) -> Bool {
+        if key.lowercased().contains("summary") || key.lowercased().contains("about me") || key.lowercased().contains("about") || key.lowercased().contains("personal profile") || key.lowercased().contains("profile") || key.lowercased().contains("in words") {
+            return true
+        }
+        return false
+    }
 }
