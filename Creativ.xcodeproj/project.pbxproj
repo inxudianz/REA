@@ -697,7 +697,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.inx.rea.analyser;
+				PRODUCT_BUNDLE_IDENTIFIER = evan.Creativ;
 				PRODUCT_NAME = "REA - Analyser";
 				PROVISIONING_PROFILE_SPECIFIER = "REA - Analyser";
 				SWIFT_VERSION = 5.0;
@@ -719,7 +719,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.inx.rea.analyser;
+				PRODUCT_BUNDLE_IDENTIFIER = evan.Creativ;
 				PRODUCT_NAME = "REA - Analyser";
 				PROVISIONING_PROFILE_SPECIFIER = "REA - Analyser";
 				SWIFT_VERSION = 5.0;

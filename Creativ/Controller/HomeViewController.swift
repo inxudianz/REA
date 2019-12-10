@@ -30,6 +30,8 @@ class HomeViewController: UIViewController{
     var checkFileImage = 0
     var totalFont = 0
     
+    var window: UIWindow?
+
     
     @IBOutlet weak var testImg: UIImageView!
 
@@ -390,7 +392,10 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     
     //view was cancelled
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController")
+//        self.window?.makeKeyAndVisible()
     }
     
     //menampilkan pdf file
