@@ -47,6 +47,7 @@ class ProcessingViewController: UIViewController {
     
     var extractedContent: [String] = []
     var brain = Brain()
+    var timer = Timer()
     var finalFeedbackResult: [FeedbackDetailModel] = [FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: "")]
     
     var stringProfile: String = ""
@@ -71,8 +72,10 @@ class ProcessingViewController: UIViewController {
         // Do any additional setup after loading the view.
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         
-        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(recursiveLoop), userInfo: nil, repeats: false)
-        
+//        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(recursiveLoop), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
+            self.decideAppropriateFeedback(dividedExtractedContent: self.segmentationExtractedResult)
+        }
         processCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
@@ -101,31 +104,31 @@ class ProcessingViewController: UIViewController {
         }
     }
     
-    var countRecursiveLoop = 0
-    @objc func recursiveLoop(){
-        if self.countRecursiveLoop <= self.processDetails.count + 2 {
-            UIView.animate(withDuration: 0.1, animations: {
-                if self.countRecursiveLoop == 0 {
-                    self.countRecursiveLoop += 1
-                } else {
-                    self.moveItem()
-                    self.countRecursiveLoop += 1
-                }
-            }) { (finished) in
-                if finished{
-                    UIView.animate(withDuration: 0.1, animations: {
-                        if self.countRecursiveLoop <= self.processDetails.count + 2{
-                            self.recursiveLoop()
-                        } else{
-                            
-                        }
-                    })
-                }
-            }
-        } else{
-            
-        }
-    }
+//    var countRecursiveLoop = 0
+//    @objc func recursiveLoop(){
+//        if self.countRecursiveLoop <= self.processDetails.count + 2 {
+//            UIView.animate(withDuration: 0.1, animations: {
+//                if self.countRecursiveLoop == 0 {
+//                    self.countRecursiveLoop += 1
+//                } else {
+//                    self.moveItem()
+//                    self.countRecursiveLoop += 1
+//                }
+//            }) { (finished) in
+//                if finished{
+//                    UIView.animate(withDuration: 0.1, animations: {
+//                        if self.countRecursiveLoop <= self.processDetails.count + 2{
+//                            self.recursiveLoop()
+//                        } else{
+//
+//                        }
+//                    })
+//                }
+//            }
+//        } else{
+//
+//        }
+//    }
     
     var counterProfile = 0
     var counterWork = 0
@@ -479,22 +482,34 @@ class ProcessingViewController: UIViewController {
     }
     
     func decideAppropriateFeedback(dividedExtractedContent: [String:String]) {
-        for key in dividedExtractedContent.keys {
-            if self.brain.isPersonalInfoFound(in: key) {
-                self.appointProfileFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isEducationFound(in: key) {
-                self.appointEducationFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isWorkExperienceFound(in: key) {
-                self.appointWorkFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isOrganisationExperienceFound(in: key) {
-                self.appointOrganisationFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isSummaryFound(in: key) {
-                if self.brain.isEmailRegexFound(text: dividedExtractedContent[key]!) || self.brain.isPhoneNumberRegexFound(text: dividedExtractedContent[key]!) {
+        let semaphore = DispatchSemaphore(value: 0)
+        let dispatchQueue = DispatchQueue.global(qos: .background)
+        let dispatchMain = DispatchQueue.main
+        
+        dispatchQueue.async(execute: DispatchWorkItem.init(block: {
+            for key in dividedExtractedContent.keys {
+                if self.brain.isPersonalInfoFound(in: key) {
                     self.appointProfileFeedback(for: dividedExtractedContent[key]!)
+                } else if self.brain.isEducationFound(in: key) {
+                    self.appointEducationFeedback(for: dividedExtractedContent[key]!)
+                } else if self.brain.isWorkExperienceFound(in: key) {
+                    self.appointWorkFeedback(for: dividedExtractedContent[key]!)
+                } else if self.brain.isOrganisationExperienceFound(in: key) {
+                    self.appointOrganisationFeedback(for: dividedExtractedContent[key]!)
+                } else if self.brain.isSummaryFound(in: key) {
+                    if self.brain.isEmailRegexFound(text: dividedExtractedContent[key]!) || self.brain.isPhoneNumberRegexFound(text: dividedExtractedContent[key]!) {
+                        self.appointProfileFeedback(for: dividedExtractedContent[key]!)
+                    }
+                    self.appointSummaryFeedback(for: dividedExtractedContent[key]!)
+                } else if self.brain.isSkillsFound(in: key) {
+                    self.appointSkillsFeedback(for: dividedExtractedContent[key]!)
                 }
-                self.appointSummaryFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isSkillsFound(in: key) {
-                self.appointSkillsFeedback(for: dividedExtractedContent[key]!)
+            }
+        }))
+        
+        dispatchMain.async {
+            UIView.animate(withDuration: 0.8) {
+                self.moveItem()
             }
         }
     }
@@ -603,6 +618,7 @@ class ProcessingViewController: UIViewController {
             }
             else {
                 onGoingRow.rowIndexPath?.row = 0
+                timer.invalidate()
                 performSegue(withIdentifier: "goToOverview", sender: self)
             }
         }
