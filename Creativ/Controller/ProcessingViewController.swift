@@ -17,18 +17,6 @@ class ProcessingViewController: UIViewController {
         var doneArray: [Int]?
     }
     
-    struct Classifications: Codable{
-        var tag_name: String
-        var tag_id: Int
-        var confidence: Float
-    }
-    
-    struct User: Codable{
-        var text: String
-        var error: Bool
-        var classifications: [Classifications]
-    }
-    
     @IBOutlet weak var processCollectionView: UICollectionView! {
         didSet {
             processCollectionView.isUserInteractionEnabled = false
@@ -37,6 +25,8 @@ class ProcessingViewController: UIViewController {
     
     var sharedResources = [String]()
     var resumeClassification = [String]()
+    let dispatchQueue = DispatchQueue.global(qos: .background)
+    let dispatchMain = DispatchQueue.main
     
     // DESC: Process Details memuat detail dari proses yang akan dijalankan
     var processDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating", "Analyzing Skills", "Finalizing"]
@@ -44,6 +34,7 @@ class ProcessingViewController: UIViewController {
     // DESC: instance onGoingProcessp; berisi row yang sedang berjalan dan array proses yang telah selesai berjalan
     var onGoingRow = onGoingProcess()
     var resultContent: Segment?
+    var segmentedContent: [SegmentedModel]?
     
     var extractedContent: [String] = []
     var brain = Brain()
@@ -71,29 +62,18 @@ class ProcessingViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
-        
-//        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(recursiveLoop), userInfo: nil, repeats: false)
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
-            self.decideAppropriateFeedback(dividedExtractedContent: self.segmentationExtractedResult)
-        }
+
         processCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
-        extractContent(result: resultContent!)
         
-        for i in 0 ..< extractedContent.count {
-            print("extractedContent [\(i)] ==== \(extractedContent[i])")
+        dispatchQueue.async {
+            self.resultContent = self.segmentContent(contents: self.segmentedContent!)
+            self.extractContent(result: self.resultContent!)
+            self.divideExtractedContent(extractedContent: self.extractedContent)
+            self.decideAppropriateFeedback(dividedExtractedContent: self.segmentationExtractedResult)
         }
-        
-        divideExtractedContent(extractedContent: extractedContent)
-        //print(finalFeedbackResult)
-        
-        print(headerCV)
-        //dispatchFeedbackHandler()
-        
-        decideAppropriateFeedback(dividedExtractedContent: segmentationExtractedResult)
-        print(finalFeedbackResult)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -104,55 +84,172 @@ class ProcessingViewController: UIViewController {
         }
     }
     
-//    var countRecursiveLoop = 0
-//    @objc func recursiveLoop(){
-//        if self.countRecursiveLoop <= self.processDetails.count + 2 {
-//            UIView.animate(withDuration: 0.1, animations: {
-//                if self.countRecursiveLoop == 0 {
-//                    self.countRecursiveLoop += 1
-//                } else {
-//                    self.moveItem()
-//                    self.countRecursiveLoop += 1
-//                }
-//            }) { (finished) in
-//                if finished{
-//                    UIView.animate(withDuration: 0.1, animations: {
-//                        if self.countRecursiveLoop <= self.processDetails.count + 2{
-//                            self.recursiveLoop()
-//                        } else{
-//
-//                        }
-//                    })
-//                }
-//            }
-//        } else{
-//
-//        }
-//    }
+    func segmentContent(contents:[SegmentedModel]) -> Segment {
+        var result:Segment = Segment()
+        
+        if contents.isEmpty {
+            return result
+        }
+        
+        var currLevelNode: [SegmentedModel] = []
+        var currNode: SegmentedModel = SegmentedModel()
+        var prevNode: SegmentedModel = SegmentedModel()
+        var lastHeader: SegmentedModel = SegmentedModel()
+        var currSegment:Segment = Segment()
+        var nestedSegment:Segment = Segment()
+        
+        var nestedHeaderLevel = -1
+        
+        for (index,content) in contents.enumerated() {
+            currNode = content
+            
+            if currNode == prevNode {
+                continue
+            }
+            // Start of segment
+            if index == 0 {
+                prevNode = currNode
+                if currNode.type.first == "H" {
+                    lastHeader = currNode
+                }
+                currLevelNode.append(currNode)
+                
+                continue
+            }
+            else if index == 1 {
+                prevNode = currNode
+                if currNode.type.first == "H" {
+                    
+                    currSegment.addContents(contents: currLevelNode)
+                    
+                    result.addSegment(segment: currSegment)
+                    
+                    currSegment = Segment()
+                    lastHeader = currNode
+                    
+                    currLevelNode.removeAll()
+                    currLevelNode.append(currNode)
+                    nestedHeaderLevel += 1
+                    
+                }
+                else if currNode.type.first == "B" {
+                    currLevelNode.append(currNode)
+                }
+                continue
+            }
+            
+            // if node is header
+            if currNode.type.first == "H" {
+                // check if node(header) value is lower than equal to the last header
+                if (currNode.type.last?.hexDigitValue)! <= (lastHeader.type.last?.hexDigitValue)! {
+                    // if the previous node is also header
+                    if prevNode.type.first == "H" {
+                        lastHeader = currNode
+                        
+                        nestedSegment.addContents(contents: currLevelNode)
+                        
+                        currLevelNode.removeAll()
+                        currLevelNode.append(currNode)
+                        nestedHeaderLevel += 1
+                    }
+                        // if previous node is a body
+                    else if prevNode.type.first == "B" {
+                        // if the current node header value is equal to the last header value
+                        if (currNode.type.last?.hexDigitValue)! == (lastHeader.type.last?.hexDigitValue)! {
+                            if nestedHeaderLevel > 0 {
+                                nestedSegment.addContents(contents: currLevelNode)
+                                currLevelNode.removeAll()
+                                currSegment.addSegment(segment: nestedSegment)
+                                currLevelNode.append(currNode)
+                            }
+                            else {
+                                nestedSegment.addContents(contents: currLevelNode)
+                                currLevelNode.removeAll()
+                                currLevelNode.append(currNode)
+                                currSegment.addSegment(segment: nestedSegment)
+                                nestedSegment = Segment()
+                                
+                            }
+                        }
+                            // if the current node header value is not equal to the last header value
+                        else {
+                            lastHeader = currNode
+                            currLevelNode.append(currNode)
+                            
+                            nestedSegment.addContents(contents: currLevelNode)
+                            currLevelNode.removeAll()
+                            
+                            result.addSegment(segment: currSegment)
+                            
+                            currSegment = Segment()
+                            nestedHeaderLevel -= 1
+                            
+                        }
+                    }
+                }
+                    // If current header is higher than last header
+                else {
+                    if prevNode.type.first == "H" {
+                        lastHeader = currNode
+                        currLevelNode.append(currNode)
+                        
+                        currSegment.addContents(contents: currLevelNode)
+                        
+                        currLevelNode.removeAll()
+                        currLevelNode.append(currNode)
+                        
+                    }
+                    else if prevNode.type.first == "B" {
+                        if nestedHeaderLevel > 0 {
+                            nestedSegment.addContents(contents: currLevelNode)
+                            
+                            currLevelNode.removeAll()
+                            currLevelNode.append(currNode)
+                            
+                            nestedHeaderLevel -= 1
+                        }
+                        else {
+                            
+                            nestedSegment.addContents(contents: currLevelNode)
+                            currLevelNode.removeAll()
+                            currLevelNode.append(currNode)
+                            
+                            currSegment.addSegment(segment: nestedSegment)
+                            
+                            result.addSegment(segment: currSegment)
+                            
+                            currSegment = Segment()
+                            nestedSegment = Segment()
+                            
+                            nestedHeaderLevel -= 1
+                            
+                        }
+                    }
+                }
+                
+            }
+                // If current node is a body
+            else if currNode.type.first == "B" {
+                currLevelNode.append(currNode)
+            }
+            prevNode = currNode
+        }
+        
+        currSegment.addContents(contents: currLevelNode)
+        currLevelNode.removeAll()
+        result.addSegment(segment: currSegment)
+        currSegment = Segment()
+        
+        return result
+    }
     
-    var counterProfile = 0
-    var counterWork = 0
-    var dipisahSpasi: [String] = []
     var temp:[String]?
-    var stringIndah: [String] = []
-    //    var dataNotFound = "Data Not Found!"
-    //    var stringEducation: [String] = []
-    //    var stringWork: [String] = []
-    //    var stringOrg: [String] = []
-    //    var stringSummary: [String] = []
-    //    var stringSkills: [String] = []
-    //    var tempString = 0
-    
     func appointSummaryFeedback(for text: String) {
         var summary: [Substring] = []
-        
-        print(text)
-        print("*&*&*&*&*&*&*&*&*&*")
-        
         if brain.isSummaryFound(in: text){
             summary = text.split(separator: "\n")
         }
-        print(summary)
+        
         var tempForEach = 0
         var summarySetelahPersonalProfile = ""
         summary.forEach { (cekTemp) in
@@ -166,8 +263,8 @@ class ProcessingViewController: UIViewController {
             tempForEach += 1
         }
         print("Summary setelah personal profile = \(summarySetelahPersonalProfile)")
+        
         // ML
-        // Do any additional setup after loading the view.
         let modelPassionate = TextClassifierPassionateSentence()
         let modelVague = TextClassifierVagueSentence()
         
@@ -275,11 +372,8 @@ class ProcessingViewController: UIViewController {
     func appointWorkFeedback(for text: String) {
         
         var workExperience: [Substring] = []
-        
-        print("*&*&*&*&*&*&*&*&*&*")
-        print("Work experience = \(text)")
         workExperience = text.split(separator: "\n")
-        print("\(workExperience)")
+        
         var tempForEach = 0
         var workExperienceDetail: [String] = []
         var averageWordCount = 0
@@ -341,8 +435,6 @@ class ProcessingViewController: UIViewController {
         } else {
             finalFeedbackResult[3].overview.append("You showed your working experiences at chronological order!\n")
         }
-        // Check whether the description is descriptive enough
-        // TO DO: Insert using model here
     }
     
     func appointOrganisationFeedback(for text: String) {
@@ -352,9 +444,6 @@ class ProcessingViewController: UIViewController {
         } else {
             finalFeedbackResult[4].overview.append("You showed your organisational experiences at chronological order!\n")
         }
-        
-        // Check whether the description is action-based or result-based
-        // TO DO: Insert using model here
     }
     
     func appointSkillsFeedback(for text: String) {
@@ -385,69 +474,6 @@ class ProcessingViewController: UIViewController {
             else {
                 segmentationExtractedResult["\(headerCV[index])"]?.append(extractedContent[q])
             }
-        }
-    }
-    
-    func dispatchFeedbackHandler() {
-        let semaphore = DispatchSemaphore(value: 0)
-        let dispatchQueue = DispatchQueue.global(qos: .background)
-        let dispatchMain = DispatchQueue.main
-        
-        dispatchQueue.async {
-            
-            // 1
-            self.appointProfileFeedback(for: self.stringProfile)
-            semaphore.signal()
-            dispatchMain.sync {
-                // Update UI here
-                self.moveItem()
-            }
-            semaphore.wait()
-            
-            // 2
-            self.appointSummaryFeedback(for: self.stringSummary)
-            semaphore.signal()
-            dispatchMain.sync {
-                // Update UI here
-                self.moveItem()
-            }
-            semaphore.wait()
-            
-            // 3
-            self.appointEducationFeedback(for: self.stringEducation)
-            semaphore.signal()
-            dispatchMain.sync {
-                // Update UI here
-                self.moveItem()
-            }
-            semaphore.wait()
-            
-            // 4
-            self.appointWorkFeedback(for: self.stringWork)
-            semaphore.signal()
-            dispatchMain.sync {
-                // Update UI here
-                self.moveItem()
-            }
-            semaphore.wait()
-            
-            // 5
-            self.appointOrganisationFeedback(for: self.stringOrg)
-            semaphore.signal()
-            dispatchMain.sync {
-                // Update UI here
-                self.moveItem()
-            }
-            semaphore.wait()
-            
-            // 6
-            self.appointSkillsFeedback(for: self.stringSkills)
-            semaphore.signal()
-            dispatchMain.sync {
-                // Update UI here
-                self.moveItem()
-            }
-            semaphore.wait()
         }
     }
     
@@ -482,36 +508,35 @@ class ProcessingViewController: UIViewController {
     }
     
     func decideAppropriateFeedback(dividedExtractedContent: [String:String]) {
-        let semaphore = DispatchSemaphore(value: 0)
-        let dispatchQueue = DispatchQueue.global(qos: .background)
-        let dispatchMain = DispatchQueue.main
-        
-        dispatchQueue.async(execute: DispatchWorkItem.init(block: {
-            for key in dividedExtractedContent.keys {
-                if self.brain.isPersonalInfoFound(in: key) {
+        for key in dividedExtractedContent.keys {
+            if self.brain.isPersonalInfoFound(in: key) {
+                self.appointProfileFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isEducationFound(in: key) {
+                self.appointEducationFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isWorkExperienceFound(in: key) {
+                self.appointWorkFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isOrganisationExperienceFound(in: key) {
+                self.appointOrganisationFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isSummaryFound(in: key) {
+                if self.brain.isEmailRegexFound(text: dividedExtractedContent[key]!) || self.brain.isPhoneNumberRegexFound(text: dividedExtractedContent[key]!) {
                     self.appointProfileFeedback(for: dividedExtractedContent[key]!)
-                } else if self.brain.isEducationFound(in: key) {
-                    self.appointEducationFeedback(for: dividedExtractedContent[key]!)
-                } else if self.brain.isWorkExperienceFound(in: key) {
-                    self.appointWorkFeedback(for: dividedExtractedContent[key]!)
-                } else if self.brain.isOrganisationExperienceFound(in: key) {
-                    self.appointOrganisationFeedback(for: dividedExtractedContent[key]!)
-                } else if self.brain.isSummaryFound(in: key) {
-                    if self.brain.isEmailRegexFound(text: dividedExtractedContent[key]!) || self.brain.isPhoneNumberRegexFound(text: dividedExtractedContent[key]!) {
-                        self.appointProfileFeedback(for: dividedExtractedContent[key]!)
-                    }
-                    self.appointSummaryFeedback(for: dividedExtractedContent[key]!)
-                } else if self.brain.isSkillsFound(in: key) {
-                    self.appointSkillsFeedback(for: dividedExtractedContent[key]!)
                 }
-            }
-        }))
-        
-        dispatchMain.async {
-            UIView.animate(withDuration: 0.8) {
-                self.moveItem()
+                self.appointSummaryFeedback(for: dividedExtractedContent[key]!)
+            } else if self.brain.isSkillsFound(in: key) {
+                self.appointSkillsFeedback(for: dividedExtractedContent[key]!)
             }
         }
+        
+        dispatchMain.async {
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1.3, repeats: true) { (timer) in
+                UIView.animate(withDuration: 1.0) {
+                    self.moveItem()
+                }
+            }
+        }
+        
+        print("final result\(self.finalFeedbackResult)")
+        
     }
     
     func getHighestFontSize(result: Segment) {
@@ -540,54 +565,6 @@ class ProcessingViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func handleClassification(text: String) -> String {
-        let json: [String:[String]] = ["data": [text]]
-        
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
-        let link = "https://api.monkeylearn.com/v3/classifiers/cl_kTazyVJA/classify/"
-        
-        // create post request
-        let url = URL(string: link)!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Token 3ee8491aeae2ddc3a7ac4e82f458df3001093c72", forHTTPHeaderField: "Authorization")
-        
-        // insert json data to the request
-        request.httpBody = jsonData
-        
-        var taggedClassification = ""
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                print(error?.localizedDescription ?? "No data")
-                return
-            }
-            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            print(responseJSON as Any)
-            
-            print("Data :: \(data)")
-            let users = try? JSONDecoder().decode([User].self, from: data)
-            print("Users :: \(String(describing: users))")
-            
-            //            print(users![0].classifications[0].tag_name)
-            //            print(users![0].classifications[0].confidence)
-            //            print(users![0].classifications[1].tag_name)
-            //            print(users![0].classifications[1].confidence)
-            
-            // Check the classification confidence, which one has higher confidence
-            //            for user in users! {
-            //                if user.classifications[0].confidence >= user.classifications[1].confidence {
-            //                    taggedClassification = user.classifications[0].tag_name
-            //                }
-            //                else {
-            //                    taggedClassification = user.classifications[1].tag_name
-            //                }
-            //            }
-        }
-        task.resume()
-        return taggedClassification
     }
     
     // Change this function with the function to be called automatically upon completion on certain progress
@@ -623,7 +600,6 @@ class ProcessingViewController: UIViewController {
             }
         }
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
