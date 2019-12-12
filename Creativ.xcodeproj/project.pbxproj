@@ -49,6 +49,9 @@
 		920F63EF2372D0CE00BCFC5C /* CreativTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63EE2372D0CE00BCFC5C /* CreativTests.swift */; };
 		920F63FA2372D0CE00BCFC5C /* CreativUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63F92372D0CE00BCFC5C /* CreativUITests.swift */; };
 		92B076082393B939003D7082 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B076072393B939003D7082 /* GlobalVariables.swift */; };
+		E69CEB46239E3FF00033530B /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E69CEB43239E3FF00033530B /* TextClassifierWorkExperience.mlmodel */; };
+		E69CEB47239E3FF00033530B /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E69CEB44239E3FF00033530B /* TextClassifierVagueSentence.mlmodel */; };
+		E69CEB48239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E69CEB45239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel */; };
 		F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1B237413220007FCC4 /* OnboardingViewController.swift */; };
 		F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1D237413490007FCC4 /* ProcessingViewController.swift */; };
 		F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1F237413670007FCC4 /* HomeViewController.swift */; };
@@ -132,6 +135,9 @@
 		920F63F92372D0CE00BCFC5C /* CreativUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreativUITests.swift; sourceTree = "<group>"; };
 		920F63FB2372D0CE00BCFC5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92B076072393B939003D7082 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
+		E69CEB43239E3FF00033530B /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierWorkExperience.mlmodel; path = ../../../Downloads/TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
+		E69CEB44239E3FF00033530B /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierVagueSentence.mlmodel; path = ../../../Downloads/TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
+		E69CEB45239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierPassionateSentence.mlmodel; path = ../../../Downloads/TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
 		F51CEC1B237413220007FCC4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F51CEC1D237413490007FCC4 /* ProcessingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingViewController.swift; sourceTree = "<group>"; };
 		F51CEC1F237413670007FCC4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -224,9 +230,10 @@
 			isa = PBXGroup;
 			children = (
 
-				1E793A70239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel */,
-				1E793A71239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel */,
-				1E793A6F239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel */,
+				E69CEB45239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel */,
+				E69CEB44239E3FF00033530B /* TextClassifierVagueSentence.mlmodel */,
+				E69CEB43239E3FF00033530B /* TextClassifierWorkExperience.mlmodel */,
+
 				1EE84B3323863CAA001E2DA1 /* Fonts */,
 				F50027B8237BF5D300E0B08F /* Model */,
 				920AF3312374271000F8FB7A /* Helper */,
@@ -486,7 +493,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */,
-				1E793A72239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel in Sources */,
+
+				E69CEB46239E3FF00033530B /* TextClassifierWorkExperience.mlmodel in Sources */,
+				E69CEB47239E3FF00033530B /* TextClassifierVagueSentence.mlmodel in Sources */,
+
 				920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */,
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
 				F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */,
@@ -500,6 +510,7 @@
 				1EE6D1CC237511AE00A07759 /* FeedbackData.swift in Sources */,
 				920AF3A3237E633500F8FB7A /* FeedbackDetailModel.swift in Sources */,
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
+				E69CEB48239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
 				F5DE2A41239E255B00129FC9 /* TextClassifierVagueSentence.mlmodel in Sources */,
 				F55134662384FDFB0054854F /* SegmentModel.swift in Sources */,
@@ -517,7 +528,6 @@
 				1EE6D1D423753AA000A07759 /* (null) in Sources */,
 				F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* (null) in Sources */,
-
 				F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */,
 				1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */,
 				1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */,
