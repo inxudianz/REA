@@ -32,6 +32,8 @@ class HomeViewController: UIViewController{
     var checkFileImage = 0
     var totalFont = 0
     
+    var window: UIWindow?
+
     
     @IBOutlet weak var testImg: UIImageView!
 
@@ -390,7 +392,10 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     
     //view was cancelled
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        dismiss(animated: true, completion: nil)
+//        dismiss(animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+//        let viewController = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController")
+//        self.window?.makeKeyAndVisible()
     }
     
     //menampilkan pdf file
@@ -433,12 +438,109 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
             }
             
+
+        /*}
+        punya epan
+        if checkFileImage != 0 {
+            let sortWithoutDuplicates = Array(Set(arrFontSize))
+            let fontSizeSorted = sortWithoutDuplicates.sorted()
+            let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
+            
+            pointAvg = pointAvg / Double(checkFileImage)
+
+            let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
+            var arrHeading:[(String,String)] = []
+            var arrBody:[(String,String)] = []
+            let checkMedian:Bool = pointAvg < medianFontSize
+            if fontSizeSorted.count <= 2{
+                print("font kurang = 2")
+                let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your PDF is not a resume!", preferredStyle: .alert)
+                           
+                           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                               self.cvCollectionView.reloadData()
+                           }))
+                           
+                           present(alert, animated: true, completion: nil)
+            }else{
+            for cvContent in cvContents {
+                if cvContent.1 >= Double(medianFontSize)  {
+                    for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
+                        if cvContent.1 == largeFont {
+                            arrHeading.append((cvContent.0,"Header\(index + 2)"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                        }
+                        else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
+                            arrHeading.append((cvContent.0,"Header1"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
+                        }
+                        
+                    }
+                }
+                else {
+                    for (index,smallFont) in fontSizeSortedSplit[0].enumerated() {
+                        if cvContent.1 == smallFont {
+                            arrBody.append((cvContent.0,"Body\(index + 2)"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                        }
+                        else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
+                            arrBody.append((cvContent.0,"Body1"))
+                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
+                        }
+                    }
+                }
+            }
+            }
+        }
+        else {
+            let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your resume is an image. Try to convert it to readable format.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.cvCollectionView.reloadData()
+            }))
+            
+            present(alert, animated: true, completion: nil)
+        }
+        segmentedResult = segmentContent(contents: categorisedcvContent)
+    }
+    
+    func segmentContent(contents:[SegmentedModel]) -> Segment {
+        var result:Segment = Segment()
+        
+        if contents.isEmpty {
+            return result
+        }
+        
+        var currLevelNode: [SegmentedModel] = []
+        var currNode: SegmentedModel = SegmentedModel()
+        var prevNode: SegmentedModel = SegmentedModel()
+        var lastHeader: SegmentedModel = SegmentedModel()
+        var currSegment:Segment = Segment()
+        var nestedSegment:Segment = Segment()
+
+        var nestedHeaderLevel = -1
+
+        for (index,content) in contents.enumerated() {
+            currNode = content
+            
+            if currNode == prevNode {
+                continue
+            }
+            // Start of segment
+            if index == 0 {
+                prevNode = currNode
+                if currNode.type.first == "H" {
+                    lastHeader = currNode
+                }
+                currLevelNode.append(currNode)
+              */
+
             if checkFileImage != 0 && pageCount < 2 {
                 let sortWithoutDuplicates = Array(Set(arrFontSize))
                 let fontSizeSorted = sortWithoutDuplicates.sorted()
                 let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
                 
                 pointAvg = pointAvg / Double(checkFileImage)
+
 
                 let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
                 var arrHeading:[(String,String)] = []

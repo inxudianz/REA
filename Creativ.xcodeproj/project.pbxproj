@@ -35,6 +35,13 @@
 		1EE84B4A2386405B001E2DA1 /* Merriweather-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B3B2386404C001E2DA1 /* Merriweather-Regular.otf */; };
 		8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A244E6A23758751006E6CC0 /* UIColorExtension.swift */; };
 		8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */; };
+
+		8AEA532723965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */; };
+		8AEA532823965E2600BCB545 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */; };
+		8AEA532C2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */; };
+		8AEA532E239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */; };
+
+
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF39E237E630F00F8FB7A /* ResumeModel.swift */; };
 		920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3A0237E631800F8FB7A /* FeedbackModel.swift */; };
@@ -117,6 +124,12 @@
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		8A244E6A23758751006E6CC0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeNavigationViewController.swift; path = Creativ/Controller/HomeNavigationViewController.swift; sourceTree = SOURCE_ROOT; };
+
+		8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierPassionateSentence.mlmodel; path = ../../model/TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
+		8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierVagueSentence.mlmodel; path = ../../model/TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
+		8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierWorkExperience.mlmodel; path = ../../model/TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
+		8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierOrganisationExperience.mlmodel; path = ../../model/TextClassifierOrganisationExperience.mlmodel; sourceTree = "<group>"; };
+
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920AF39E237E630F00F8FB7A /* ResumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeModel.swift; sourceTree = "<group>"; };
 		920AF3A0237E631800F8FB7A /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
@@ -234,9 +247,10 @@
 			isa = PBXGroup;
 			children = (
 
-				F5DE2A3B239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel */,
-				F5DE2A3A239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel */,
-				F5DE2A38239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel */,
+				8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */,
+				8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */,
+				8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */,
+				8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */,
 
 				1EE84B3323863CAA001E2DA1 /* Fonts */,
 				F50027B8237BF5D300E0B08F /* Model */,
@@ -536,6 +550,7 @@
 				F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* (null) in Sources */,
 				F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */,
+				8AEA532E239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel in Sources */,
 				1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */,
 				1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */,
 				F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */,
@@ -724,7 +739,7 @@
 					"@executable_path/Frameworks",
 				);
 
-				PRODUCT_BUNDLE_IDENTIFIER = com.ow27;
+				PRODUCT_BUNDLE_IDENTIFIER = evan.Creativ;
 
 				PRODUCT_NAME = "REA - Analyser";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -750,7 +765,7 @@
 					"@executable_path/Frameworks",
 				);
 
-				PRODUCT_BUNDLE_IDENTIFIER = com.ow27;
+				PRODUCT_BUNDLE_IDENTIFIER = evan.Creativ;
 
 				PRODUCT_NAME = "REA - Analyser";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -43,9 +43,14 @@ class OnboardingViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    var window: UIWindow?
     
     @IBAction func continueButton(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        defaults.set("No", forKey:"isFirstTime")
         performSegue(withIdentifier: "goToHome", sender: self)
+        
+        
     }
     
     /*

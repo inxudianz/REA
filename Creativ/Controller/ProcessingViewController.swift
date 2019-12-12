@@ -432,10 +432,17 @@ class ProcessingViewController: UIViewController {
         print("Mid Output : \(outputWorkExperienceMid)% Mid")
         print("Bad Output : \(outputWorkExperienceBad)% Bad")
         
-        finalFeedbackResult[3].overview.append("Good Output : \(outputWorkExperienceGood)% Good\n")
-        finalFeedbackResult[3].overview.append("Mid Output : \(outputWorkExperienceMid)% Mid\n")
-        finalFeedbackResult[3].overview.append("Bad Output : \(outputWorkExperienceBad)% Bad\n")
+//        finalFeedbackResult[3].overview.append("Good Output : \(outputWorkExperienceGood)% Good\n")
+//        finalFeedbackResult[3].overview.append("Mid Output : \(outputWorkExperienceMid)% Mid\n")
+//        finalFeedbackResult[3].overview.append("Bad Output : \(outputWorkExperienceBad)% Bad\n")
         
+        if outputWorkExperienceBad >= outputWorkExperienceMid && outputWorkExperienceBad >= outputWorkExperienceGood{
+            finalFeedbackResult[3].overview.append("Your work experience explanation is BAD\n")
+        }else if outputWorkExperienceMid >= outputWorkExperienceGood && outputWorkExperienceMid >= outputWorkExperienceBad{
+            finalFeedbackResult[3].overview.append("Your work experience explanation is MID\n")
+        }else if outputWorkExperienceGood >= outputWorkExperienceMid && outputWorkExperienceGood >= outputWorkExperienceBad{
+            finalFeedbackResult[3].overview.append("Your work experience explanation is GOOD\n")
+        }
         
         finalFeedbackResult[3].type = "Work Experience"
         if !brain.isChronological(text: brain.getYear(for: text)) {
@@ -446,6 +453,74 @@ class ProcessingViewController: UIViewController {
     }
     
     func appointOrganisationFeedback(for text: String) {
+        var organisationExperience: [Substring] = []
+        
+        print("*&*&*&*&*&*&*&*&*&*")
+        print("Organisation experience = \(text)")
+        organisationExperience = text.split(separator: "\n")
+        print("\(organisationExperience)")
+        var tempForEach = 0
+        var organisationExperienceDetail: [String] = []
+        var averageWordCount = 0
+        for i in 0..<organisationExperience.count{
+            print(organisationExperience[i])
+            averageWordCount += organisationExperience[i].count
+            print(organisationExperience[i].count)
+        }
+        averageWordCount = averageWordCount/organisationExperience.count
+        print("average word count = \(averageWordCount)")
+        organisationExperience.forEach { (cekTemp) in
+            if cekTemp.count > averageWordCount {
+                organisationExperienceDetail.append(String(cekTemp))
+                return
+            }
+            else {
+                //                workExperienceDetail = workExperience.joined()
+            }
+            tempForEach += 1
+        }
+        print("Organisation Experience Detail = \(organisationExperienceDetail)")
+        let modelOrganisationExperience = TextClassifierOrganisationExperience()
+        var outputOrganisationExperienceGood = ""
+        var outputOrganisationExperienceMid = ""
+        var outputOrganisationExperienceBad = ""
+        var goodCount: Float = 0
+        var midCount: Float = 0
+        var badCount: Float = 0
+        for sentence in organisationExperienceDetail {
+            guard let organisationExperienceOutput = try? modelOrganisationExperience.prediction(text: sentence) else {
+                fatalError("Unexpected runtime error.")
+            }
+            //output1.append("\(passionateOutput.label)\n")
+            if organisationExperienceOutput.label == "Good"{
+                goodCount += 1
+            }else if organisationExperienceOutput.label == "Mid"{
+                midCount += 1
+            }else if organisationExperienceOutput.label == "Bad"{
+                badCount += 1
+            }
+        }
+        
+        outputOrganisationExperienceGood = String(goodCount/Float(organisationExperienceDetail.count) * 100)
+        outputOrganisationExperienceMid = String(midCount/Float(organisationExperienceDetail.count) * 100)
+        outputOrganisationExperienceBad = String(badCount/Float(organisationExperienceDetail.count) * 100)
+        
+        print("Good Output : \(outputOrganisationExperienceGood)% Good")
+        print("Mid Output : \(outputOrganisationExperienceMid)% Mid")
+        print("Bad Output : \(outputOrganisationExperienceBad)% Bad")
+        
+//        finalFeedbackResult[4].overview.append("Good Output : \(outputOrganisationExperienceGood)% Good\n")
+//        finalFeedbackResult[4].overview.append("Mid Output : \(outputOrganisationExperienceMid)% Mid\n")
+//        finalFeedbackResult[4].overview.append("Bad Output : \(outputOrganisationExperienceBad)% Bad\n")
+        
+        if outputOrganisationExperienceBad >= outputOrganisationExperienceMid && outputOrganisationExperienceBad >= outputOrganisationExperienceGood{
+            finalFeedbackResult[4].overview.append("Your Organisation experience explanation is BAD\n")
+        }else if outputOrganisationExperienceMid >= outputOrganisationExperienceGood && outputOrganisationExperienceMid >= outputOrganisationExperienceBad{
+            finalFeedbackResult[4].overview.append("Your Organisation experience explanation is MID\n")
+        }else if outputOrganisationExperienceGood >= outputOrganisationExperienceMid && outputOrganisationExperienceGood >= outputOrganisationExperienceBad{
+            finalFeedbackResult[4].overview.append("Your Organisation experience explanation is GOOD\n")
+        }
+        
         finalFeedbackResult[4].type = "Organisational Experience"
         if !brain.isChronological(text: brain.getYear(for: text)) {
             finalFeedbackResult[4].overview.append("Rearrange your organisational experiences from the most current until the latest one!\n")
