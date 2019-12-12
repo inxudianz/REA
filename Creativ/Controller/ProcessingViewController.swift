@@ -253,6 +253,14 @@ class ProcessingViewController: UIViewController {
         var tempForEach = 0
         var summarySetelahPersonalProfile = ""
         summary.forEach { (cekTemp) in
+            /*
+                         yg punya robby
+            if cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Personal Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About Me".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "In Words".lowercased() || text.lowercased().contains("Summary".lowercased()){
+                summarySetelahPersonalProfile.append(String(summary[tempForEach+1]))
+                return
+            }
+            else if tempForEach == summary.count - 1 {
+                         */
             if brain.isSummaryFound(in: cekTemp.trimmingCharacters(in: .whitespacesAndNewlines)){
                 summarySetelahPersonalProfile = String(summary[tempForEach+1])
                 return

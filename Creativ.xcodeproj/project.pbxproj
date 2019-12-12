@@ -60,9 +60,11 @@
 		F55134662384FDFB0054854F /* SegmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55134652384FDFB0054854F /* SegmentModel.swift */; };
 		F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55134672384FE0F0054854F /* SegmentedModel.swift */; };
 		F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */; };
-		F5DE2A41239E255B00129FC9 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A3E239E255B00129FC9 /* TextClassifierVagueSentence.mlmodel */; };
-		F5DE2A42239E255B00129FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A3F239E255B00129FC9 /* TextClassifierPassionateSentence.mlmodel */; };
-		F5DE2A43239E255B00129FC9 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A40239E255B00129FC9 /* TextClassifierWorkExperience.mlmodel */; };
+
+		F5DE2A39239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A38239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel */; };
+		F5DE2A3C239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A3A239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel */; };
+		F5DE2A3D239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A3B239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel */; };
+
 		F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */; };
 		F5F70677237C0F6100771249 /* HomeCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */; };
 		F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F70678237C17B700771249 /* AddNewCollectionViewCell.swift */; };
@@ -146,9 +148,11 @@
 		F55134652384FDFB0054854F /* SegmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentModel.swift; sourceTree = "<group>"; };
 		F55134672384FE0F0054854F /* SegmentedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedModel.swift; sourceTree = "<group>"; };
 		F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContent.swift; sourceTree = "<group>"; };
-		F5DE2A3E239E255B00129FC9 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
-		F5DE2A3F239E255B00129FC9 /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
-		F5DE2A40239E255B00129FC9 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
+
+		F5DE2A38239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
+		F5DE2A3A239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
+		F5DE2A3B239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
+
 		F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionReusableView.swift; sourceTree = "<group>"; };
 		F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionReusableView.xib; sourceTree = "<group>"; };
 		F5F70678237C17B700771249 /* AddNewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -230,9 +234,9 @@
 			isa = PBXGroup;
 			children = (
 
-				E69CEB45239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel */,
-				E69CEB44239E3FF00033530B /* TextClassifierVagueSentence.mlmodel */,
-				E69CEB43239E3FF00033530B /* TextClassifierWorkExperience.mlmodel */,
+				F5DE2A3B239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel */,
+				F5DE2A3A239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel */,
+				F5DE2A38239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel */,
 
 				1EE84B3323863CAA001E2DA1 /* Fonts */,
 				F50027B8237BF5D300E0B08F /* Model */,
@@ -494,8 +498,7 @@
 			files = (
 				F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */,
 
-				E69CEB46239E3FF00033530B /* TextClassifierWorkExperience.mlmodel in Sources */,
-				E69CEB47239E3FF00033530B /* TextClassifierVagueSentence.mlmodel in Sources */,
+				F5DE2A3C239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel in Sources */,
 
 				920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */,
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
@@ -512,7 +515,9 @@
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
 				E69CEB48239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
-				F5DE2A41239E255B00129FC9 /* TextClassifierVagueSentence.mlmodel in Sources */,
+
+				F5DE2A39239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */,
+
 				F55134662384FDFB0054854F /* SegmentModel.swift in Sources */,
 				920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
@@ -523,7 +528,9 @@
 				1E793A73239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */,
 
 				8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */,
-				1E793A74239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel in Sources */,
+
+				F5DE2A3D239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel in Sources */,
+
 				920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */,
 				1EE6D1D423753AA000A07759 /* (null) in Sources */,
 				F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */,
