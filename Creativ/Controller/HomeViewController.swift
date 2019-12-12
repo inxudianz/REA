@@ -18,9 +18,11 @@ class HomeViewController: UIViewController{
     var tempContents : [ResumeModel] = []
     var segmentModel: SegmentedModel?
     var segmentedModel: SegmentedModel?
+    var categorisedcvContent:[SegmentedModel] = []
     var urlPicked: URL?
     var cellColour = true
     var segmentedResult: Segment?
+    var brain = Brain()
     
     var isEdit = false
     var selectedItem = [Int]()
@@ -196,7 +198,7 @@ class HomeViewController: UIViewController{
             }
         } else if segue.identifier == "gotoprocess" {
             if let processingViewController = segue.destination as? ProcessingViewController {
-                processingViewController.resultContent = segmentedResult
+                processingViewController.segmentedContent = categorisedcvContent
             }
         }
     }
@@ -286,15 +288,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 selectedItem.removeAll{$0 == indexPath.row}
                 collectionView.reloadData()
             }
-        } else {
+        } else if !contents.isEmpty{
             let content = contents[indexPath.row - 1]
             selectedResume = content
             performSegue(withIdentifier: "goToOverview", sender: self)
             print("Delete button not selected")
         }
     }
-    
-    
 }
 
 extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate {
@@ -405,7 +405,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         var cvContents:[(String,Double,Bool)] = []
         var pointAvg:Double = 0
         var arrFontSize: [Double] = []
-        var categorisedcvContent:[SegmentedModel] = []
         
         if let pdf = PDFDocument(url: urlPicked!) {
             let pageCount = pdf.pageCount
@@ -434,217 +433,82 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
             }
             
-        }
-        
-        if checkFileImage != 0 {
-            let sortWithoutDuplicates = Array(Set(arrFontSize))
-            let fontSizeSorted = sortWithoutDuplicates.sorted()
-            let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
-            
-            pointAvg = pointAvg / Double(checkFileImage)
-
-            let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
-            var arrHeading:[(String,String)] = []
-            var arrBody:[(String,String)] = []
-            let checkMedian:Bool = pointAvg < medianFontSize
-            
-            for cvContent in cvContents {
-                if cvContent.1 >= Double(medianFontSize)  {
-                    for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
-                        if cvContent.1 == largeFont {
-                            arrHeading.append((cvContent.0,"Header\(index + 2)"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                        }
-                        else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
-                            arrHeading.append((cvContent.0,"Header1"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
-                        }
-                        
-                    }
-                }
-                else {
-                    for (index,smallFont) in fontSizeSortedSplit[0].enumerated() {
-                        if cvContent.1 == smallFont {
-                            arrBody.append((cvContent.0,"Body\(index + 2)"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                        }
-                        else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
-                            arrBody.append((cvContent.0,"Body1"))
-                            categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
-                        }
-                    }
-                }
-            }
-        }
-        else {
-            let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your resume is an image. Try to convert it to readable format.", preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
-                self.cvCollectionView.reloadData()
-            }))
-            
-            present(alert, animated: true, completion: nil)
-        }
-        segmentedResult = segmentContent(contents: categorisedcvContent)
-    }
-    
-    func segmentContent(contents:[SegmentedModel]) -> Segment {
-        var result:Segment = Segment()
-        
-        if contents.isEmpty {
-            return result
-        }
-        
-        var currLevelNode: [SegmentedModel] = []
-        var currNode: SegmentedModel = SegmentedModel()
-        var prevNode: SegmentedModel = SegmentedModel()
-        var lastHeader: SegmentedModel = SegmentedModel()
-        var currSegment:Segment = Segment()
-        var nestedSegment:Segment = Segment()
-
-        var nestedHeaderLevel = -1
-
-        for (index,content) in contents.enumerated() {
-            currNode = content
-            
-            if currNode == prevNode {
-                continue
-            }
-            // Start of segment
-            if index == 0 {
-                prevNode = currNode
-                if currNode.type.first == "H" {
-                    lastHeader = currNode
-                }
-                currLevelNode.append(currNode)
-
-                continue
-            }
-            else if index == 1 {
-                prevNode = currNode
-                if currNode.type.first == "H" {
-                    
-                    currSegment.addContents(contents: currLevelNode)
-                    
-                    result.addSegment(segment: currSegment)
-                    
-                    currSegment = Segment()
-                    lastHeader = currNode
-                    
-                    currLevelNode.removeAll()
-                    currLevelNode.append(currNode)
-                    nestedHeaderLevel += 1
-                    
-                }
-                else if currNode.type.first == "B" {
-                    currLevelNode.append(currNode)
-                }
-                continue
-            }
-            
-            // if node is header
-            if currNode.type.first == "H" {
-                // check if node(header) value is lower than equal to the last header
-                if (currNode.type.last?.hexDigitValue)! <= (lastHeader.type.last?.hexDigitValue)! {
-                    // if the previous node is also header
-                    if prevNode.type.first == "H" {
-                        lastHeader = currNode
-                        
-                        nestedSegment.addContents(contents: currLevelNode)
-                        
-                        currLevelNode.removeAll()
-                        currLevelNode.append(currNode)
-                        nestedHeaderLevel += 1
-                    }
-                    // if previous node is a body
-                    else if prevNode.type.first == "B" {
-                        // if the current node header value is equal to the last header value
-                        if (currNode.type.last?.hexDigitValue)! == (lastHeader.type.last?.hexDigitValue)! {
-                            if nestedHeaderLevel > 0 {
-                                nestedSegment.addContents(contents: currLevelNode)
-                                currLevelNode.removeAll()
-                                currSegment.addSegment(segment: nestedSegment)
-                                currLevelNode.append(currNode)
-                            }
-                            else {
-                                nestedSegment.addContents(contents: currLevelNode)
-                                currLevelNode.removeAll()
-                                currLevelNode.append(currNode)
-                                currSegment.addSegment(segment: nestedSegment)
-                                nestedSegment = Segment()
-
-                            }
-                        }
-                        // if the current node header value is not equal to the last header value
-                        else {
-                            lastHeader = currNode
-                            currLevelNode.append(currNode)
-                            
-                            nestedSegment.addContents(contents: currLevelNode)
-                            currLevelNode.removeAll()
-                            
-                            result.addSegment(segment: currSegment)
-                            
-                            currSegment = Segment()
-                            nestedHeaderLevel -= 1
-                            
-                        }
-                    }
-                }
-                // If current header is higher than last header
-                else {
-                    if prevNode.type.first == "H" {
-                        lastHeader = currNode
-                        currLevelNode.append(currNode)
-                        
-                        currSegment.addContents(contents: currLevelNode)
-                        
-                        currLevelNode.removeAll()
-                        currLevelNode.append(currNode)
-                        
-                    }
-                    else if prevNode.type.first == "B" {
-                        if nestedHeaderLevel > 0 {
-                            nestedSegment.addContents(contents: currLevelNode)
-                            
-                            currLevelNode.removeAll()
-                            currLevelNode.append(currNode)
-                            
-                            nestedHeaderLevel -= 1
-                        }
-                        else {
-                            
-                            nestedSegment.addContents(contents: currLevelNode)
-                            currLevelNode.removeAll()
-                            currLevelNode.append(currNode)
-                            
-                            currSegment.addSegment(segment: nestedSegment)
-                            
-                            result.addSegment(segment: currSegment)
-                            
-                            currSegment = Segment()
-                            nestedSegment = Segment()
-                            
-                            nestedHeaderLevel -= 1
-                            
-                        }
-                    }
-                }
+            if checkFileImage != 0 && pageCount < 2 {
+                let sortWithoutDuplicates = Array(Set(arrFontSize))
+                let fontSizeSorted = sortWithoutDuplicates.sorted()
+                let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
                 
+                pointAvg = pointAvg / Double(checkFileImage)
+
+                let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
+                var arrHeading:[(String,String)] = []
+                var arrBody:[(String,String)] = []
+                let checkMedian:Bool = pointAvg < medianFontSize
+                
+                // TODO:
+                // JIKA FONTSIZESORTED LEBINRENDAH DARI 2 PRINT UIALERT NGASIH TAU KYK DIBAWAH UNTUK IMAGE :)
+                    
+                for cvContent in cvContents {
+                    if fontSizeSorted.count < 3 && (!brain.isWorkExperienceFound(in: cvContent.0) || !brain.isEducationFound(in: cvContent.0)) {
+                        let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your file is not a resume. Try to upload a different file.", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                            self.cvCollectionView.reloadData()
+                        }))
+                        
+                        present(alert, animated: true, completion: nil)
+                        break
+                    }
+                    if cvContent.1 >= Double(medianFontSize)  {
+                        for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
+                            if cvContent.1 == largeFont {
+                                arrHeading.append((cvContent.0,"Header\(index + 2)"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                            else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
+                                arrHeading.append((cvContent.0,"Header1"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                            else if index == fontSizeSortedSplit[1].count - 1 {
+                                arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                        }
+                    }
+                    else {
+                        for (index,smallFont) in fontSizeSortedSplit[0].enumerated() {
+                            if cvContent.1 == smallFont {
+                                arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                            else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
+                                arrBody.append((cvContent.0,"Body1"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                            else if index == fontSizeSortedSplit[0].count - 1 {
+                                arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                break
+                            }
+                        }
+                    }
+                }
             }
-                // If current node is a body
-            else if currNode.type.first == "B" {
-                currLevelNode.append(currNode)
+            else {
+                let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your file is an image or not a resume. Try to upload a different file.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                    self.cvCollectionView.reloadData()
+                }))
+                
+                present(alert, animated: true, completion: nil)
             }
-            prevNode = currNode
         }
-        
-        currSegment.addContents(contents: currLevelNode)
-        currLevelNode.removeAll()
-        result.addSegment(segment: currSegment)
-        currSegment = Segment()
-        
-        return result
     }
 }
 
