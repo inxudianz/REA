@@ -87,25 +87,14 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
         notchView.backgroundColor = UIColor(cgColor: notchView.layer.borderColor!)
         notchView.layer.cornerRadius = notchView.frame.size.width / 2
         
-        //commentView.backgroundColor = UIColor.white
-        if traitCollection.userInterfaceStyle == .dark {
-            commentView.backgroundColor = UIColor.black
-        }
-        else if traitCollection.userInterfaceStyle == .light {
-            commentView.backgroundColor = UIColor.white
-        }
+        commentViewBackgroundColor()
         commentView.layer.cornerRadius = commentView.frame.size.width / 20
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
+        commentViewBackgroundColor()
         
-        if traitCollection.userInterfaceStyle == .dark {
-            commentView.backgroundColor = UIColor.black
-        }
-        else if traitCollection.userInterfaceStyle == .light {
-            commentView.backgroundColor = UIColor.white
-        }
     }
     
     func setColorBlue(colorView: inout UIView) {
@@ -127,6 +116,15 @@ class FeedbackCollectionViewCell: UICollectionViewCell {
     func setColorGreen(colorView: inout UIView) {
         colorView.layer.borderWidth = 2.0
         colorView.layer.borderColor = UIColor.init(hex: "#41911EFF")!.cgColor
+    }
+    
+    func commentViewBackgroundColor() {
+        if traitCollection.userInterfaceStyle == .dark {
+            commentView.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0.15, alpha: 1.0)
+        }
+        else if traitCollection.userInterfaceStyle == .light {
+            commentView.backgroundColor = UIColor(hue: 0, saturation: 0, brightness: 0.9, alpha: 1.0)
+        }
     }
 }
 
