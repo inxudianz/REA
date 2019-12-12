@@ -28,7 +28,7 @@ class Brain {
     
     /* Function to check e-mail regex */
     func isEmailRegexFound(text: String) -> Bool {
-        return text.range(of: "[a-z0-9]+@(gmail|yahoo|hotmail).co(m|.[a-z]{2})\\s", options: .regularExpression) != nil
+        return text.range(of: "[a-zA-Z0-9]+@(gmail|yahoo|hotmail|icloud).co(m|.[a-z]{2})\\s", options: .regularExpression) != nil
     }
     
 /*
@@ -79,21 +79,23 @@ class Brain {
         return false
     }
     
-    /* Struct */
+    /* Nanti dibuat jadi struct */
     var summaryDictionary = Dictionary<String, Int>()
+    var overusedWords:[String] = []
     var totalWordSummary = 0
 
     /* Function to check word frequency and what to do with it */
     func isWordFrequencyAppropriate(dictionary: [String: Int]) -> Bool {
         let dictionary = dictionary
-        //print(dictionary)
+        var isAppropriate:Bool = true
         
         for key in dictionary.keys {
             if Double(dictionary[key]!) / Double(totalWordSummary) > 0.2 {
-                return false
+                overusedWords.append(key)
+                isAppropriate = false
             }
         }
-        return true
+        return isAppropriate
     }
 
     /* Function for counting word frequency */
@@ -220,45 +222,46 @@ class Brain {
         
         return misspelledRange.location == NSNotFound
     }
-}
-
-//isReal(word: String)
-//
-//                for var i in 0 ..< quote.utf16.count {
-//        var lastIndex = 0
-//
-//                while true {
-//                    let textChecker = UITextChecker()
-//                    let misspelledRange =
-//                        textChecker.rangeOfMisspelledWord(in: quote,
-//                                                          range: NSRange(0..<quote.utf16.count),
-//                                                          startingAt: lastIndex,
-//                                                          wrap: false,
-//                                                          language: "en_US")
-//
-//                    if misspelledRange.location != NSNotFound,
-//                        let firstGuess = textChecker.guesses(forWordRange: misspelledRange,
-//                                                             in: quote,
-//                                                             language: "en_US")?.first
-//                    {
-//                        lastIndex = (misspelledRange.location + misspelledRange.length)
-//                        print("First guess: \(firstGuess)")
-//                        print("\(misspelledRange.length) sama \(misspelledRange.location)")
-//                        } else {
-//                            print("Not found")
-//                            break
-//                        }
-//                }
-//                for (index,element) in quote.enumerated() {
-//
-//                }
-//         First guess: hipster
-//                        print(i)
-//                        i += misspelledRange.location + misspelledRange.length
-//
-//                }
-
-class BrainResult {
-    var BrainResult: [String] = []
     
+    func isPersonalInfoFound(in key: String) -> Bool {
+        if key.lowercased() == "contact info" || key.lowercased() == "contact" || key.lowercased() == "personal information" || key.lowercased() == "personal info" {
+            return true
+        }
+        return false
+    }
+    
+    func isEducationFound(in key: String) -> Bool {
+        if key.lowercased() == "education" || key.lowercased() == "academic history" || key.lowercased() == "academic background" || key.lowercased() == "education history" {
+            return true
+        }
+        return false
+    }
+    
+    func isWorkExperienceFound(in key: String) -> Bool {
+        if key.lowercased() == "work experience" || key.lowercased() == "work history" || key.lowercased() == "working experience" || key.lowercased() == "job history" || key.lowercased() == "experience" {
+            return true
+        }
+        return false
+    }
+    
+    func isOrganisationExperienceFound(in key: String) -> Bool {
+        if key.lowercased() == "organisation experience" || key.lowercased() == "organisational experience" || key.lowercased() == "organization experience" || key.lowercased() == "organizational experience" || key.lowercased() == "organisation history" || key.lowercased() == "organization history" || key.lowercased().contains("organisation") || key.lowercased().contains("organization") {
+            return true
+        }
+        return false
+    }
+    
+    func isSkillsFound(in key: String) -> Bool {
+        if key.lowercased().contains("skills") || key.lowercased().contains("skill") || key.lowercased().contains("expertise") || key.lowercased().contains("technical skills") || key.lowercased().contains("key skills") {
+            return true
+        }
+        return false
+    }
+
+    func isSummaryFound(in key: String) -> Bool {
+        if key.lowercased().contains("summary") || key.lowercased().contains("about me") || key.lowercased().contains("about") || key.lowercased().contains("personal profile") || key.lowercased().contains("profile") || key.lowercased().contains("in words") {
+            return true
+        }
+        return false
+    }
 }

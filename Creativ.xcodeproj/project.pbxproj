@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */; };
 		1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E407539237D6EA200FDAA31 /* Brain.swift */; };
+		1E793A72239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1E793A6F239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel */; };
+		1E793A73239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1E793A70239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel */; };
+		1E793A74239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1E793A71239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel */; };
 		1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */; };
 		1E7F758A237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */; };
 		1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */; };
@@ -85,6 +88,9 @@
 /* Begin PBXFileReference section */
 		1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E407539237D6EA200FDAA31 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
+		1E793A6F239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
+		1E793A70239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
+		1E793A71239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
 		1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -217,9 +223,10 @@
 		920F63D32372D0CC00BCFC5C /* Creativ */ = {
 			isa = PBXGroup;
 			children = (
-				F5DE2A3F239E255B00129FC9 /* TextClassifierPassionateSentence.mlmodel */,
-				F5DE2A3E239E255B00129FC9 /* TextClassifierVagueSentence.mlmodel */,
-				F5DE2A40239E255B00129FC9 /* TextClassifierWorkExperience.mlmodel */,
+
+				1E793A70239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel */,
+				1E793A71239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel */,
+				1E793A6F239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel */,
 				1EE84B3323863CAA001E2DA1 /* Fonts */,
 				F50027B8237BF5D300E0B08F /* Model */,
 				920AF3312374271000F8FB7A /* Helper */,
@@ -479,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */,
+				1E793A72239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel in Sources */,
 				920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */,
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
 				F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */,
@@ -500,13 +508,16 @@
 				F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */,
 				8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */,
 				1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */,
-				F5DE2A42239E255B00129FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */,
+
+				1E793A73239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */,
+
 				8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */,
+				1E793A74239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel in Sources */,
 				920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */,
 				1EE6D1D423753AA000A07759 /* (null) in Sources */,
 				F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* (null) in Sources */,
-				F5DE2A43239E255B00129FC9 /* TextClassifierWorkExperience.mlmodel in Sources */,
+
 				F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */,
 				1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */,
 				1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */,
@@ -686,14 +697,18 @@
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H8N3YN4QX8;
+
+				DEVELOPMENT_TEAM = U795CJ74H6;
+
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = tytytytytytytytyyt.Creativ;
+
+				PRODUCT_BUNDLE_IDENTIFIER = com.ow27;
+
 				PRODUCT_NAME = "REA - Analyser";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -708,14 +723,18 @@
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = H8N3YN4QX8;
+
+				DEVELOPMENT_TEAM = U795CJ74H6;
+
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = tytytytytytytytyyt.Creativ;
+
+				PRODUCT_BUNDLE_IDENTIFIER = com.ow27;
+
 				PRODUCT_NAME = "REA - Analyser";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

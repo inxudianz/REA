@@ -37,12 +37,12 @@ class PreviewViewController: UIViewController {
         // Do any additional setup after loading the view.
         setCollectionViewLayout()
         feedbackDatas.createFeedbackSection()
-        
+        saveNewResume()
+
     }
     
     // Unwind back to the All Resume Page
     @objc func doneReview(_ unwindSegue: UIStoryboardSegue) {
-        saveNewResume()
         performSegue(withIdentifier: "unwindToHome", sender: self)
     }
     
@@ -153,12 +153,12 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
     func checkFeedback(feedbackResult: [FeedbackDetailModel]) {
         for x in 0 ..< feedbackResult.count {
             //kalo semua konten salah (kotak warna merah)
-            if feedbackResult[0].overview.contains("Your summary is getting too long, reduce few words to make it more simple.") && feedbackResult[0].overview.contains("It seems that you used 'words' too much, try to use another words!") && feedbackResult[0].overview.contains("You have to use more action verbs in your summary.") && feedbackResult[0].overview.contains("Vague") && feedbackResult[0].overview.contains("Not Passionate") {
+            if feedbackResult[0].overview.contains("Your summary is too long, reduce few words to make it more simple.") && feedbackResult[0].overview.contains("It seems that you overused some words. Try to change some words!") && feedbackResult[0].overview.contains("You have to use more action verbs in your summary.") && feedbackResult[0].overview.contains("Vague") && feedbackResult[0].overview.contains("Not Passionate") {
                 feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
                 feedbackDatas.commentedTexts[0] = "You must improve this part!"
             }
             
-            if feedbackResult[1].overview.contains("No phone number? Please put your email in your summary!") && feedbackResult[1].overview.contains("No email? Please put your email in your summary!") {
+            if feedbackResult[1].overview.contains("You haven't put your phone number!") && feedbackResult[1].overview.contains("You haven't put your e-mail!") {
                 feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
                 feedbackDatas.commentedTexts[1] = "You must improve this part!"
             }
@@ -186,17 +186,17 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
              */
             
             // kalo semuanya konten salah semua (kotak warna merah)
-            if feedbackResult[0].overview.contains("Your summary is getting too long, reduce few words to make it more simple.") || feedbackResult[0].overview.contains("It seems that you used 'words' too much, try to use another words!") || feedbackResult[0].overview.contains("You have to use more action verbs in your summary.") || feedbackResult[0].overview.contains("Vague") || feedbackResult[0].overview.contains("Half Vague") || feedbackResult[0].overview.contains("Half Passionate") || feedbackResult[0].overview.contains("Not Passionate") {
+            if feedbackResult[0].overview.contains("Your summary is too long, reduce few words to make it more simple.") || feedbackResult[0].overview.contains("It seems that you overused some words. Try to change some words!") || feedbackResult[0].overview.contains("You have to use more action verbs in your summary.") || feedbackResult[0].overview.contains("Vague") || feedbackResult[0].overview.contains("Half Vague") || feedbackResult[0].overview.contains("Half Passionate") || feedbackResult[0].overview.contains("Not Passionate") {
                 feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
                 feedbackDatas.commentedTexts[0] = "You can be better!"
             }
             
-            if feedbackResult[1].overview.contains("No phone number? Please put your email in your summary!") || feedbackResult[1].overview.contains("No email? Please put your email in your summary!") {
+            if feedbackResult[1].overview.contains("You haven't put your phone number!") || feedbackResult[1].overview.contains("You haven't put your e-mail!") {
                 feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
                 feedbackDatas.commentedTexts[1] = "You can be better!"
             }
             
-            if feedbackResult[2].overview.contains("It's better not to show your GPA in your resume.") || feedbackResult[2].overview.contains("You can add your GPA if it's more than equal to 3.") {
+            if feedbackResult[2].overview.contains("Your GPA seems lower than the lower bound.") || feedbackResult[2].overview.contains("You may provide your GPA to boost the chance of being accepted!") {
                 feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
                 feedbackDatas.commentedTexts[2] = "You can be better!"
             }
@@ -211,7 +211,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
                 feedbackDatas.commentedTexts[4] = "You can be better!"
             }
             
-            if feedbackResult[5].overview.contains("You have to put your skills that match with job that you've applied.") {
+            if feedbackResult[5].overview.contains("You have to put more skills which are relevant with the job you're applying for.") {
                 feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
                 feedbackDatas.commentedTexts[5] = "You can be better!"
             }
@@ -225,27 +225,27 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
             
             if feedbackResult[0].overview.isEmpty {
-                feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
+                feedbackDatas.overviewTexts[0] = "You haven't provided a summary about yourself. Try to tell brief description about things you're proud of in few sentences."
             }
             
             if feedbackResult[1].overview.isEmpty {
-                feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
+                feedbackDatas.overviewTexts[1] = "You haven't given any personal information. Provide your contact so the company will be able to contact you."
             }
             
             if feedbackResult[2].overview.isEmpty {
-                feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
+                feedbackDatas.overviewTexts[2] = "You haven't shown any information about your education. Provide a detailed history and include what you learned as well."
             }
             
             if feedbackResult[3].overview.isEmpty {
-                feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
+                feedbackDatas.overviewTexts[3] = "You haven't put your work experiences. You can highlight your achievement and activity during your experience!"
             }
             
             if feedbackResult[4].overview.isEmpty {
-                feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
+                feedbackDatas.overviewTexts[4] = "You haven't provided any organisational experiences. Elaborate a little bit about your duty and show what you accomplished there."
             }
             
             if feedbackResult[5].overview.isEmpty {
-                feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
+                feedbackDatas.overviewTexts[5] = "You forgot to mention your best traits. Put in relevant skills to the job that you’re applying to."
             }
         }
     }

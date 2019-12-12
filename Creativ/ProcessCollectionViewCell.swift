@@ -36,55 +36,56 @@ class ProcessCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
     func setProcessContent(text: String) {
         processLabel.text = text
     }
     
     func setCellStatus(statusType: StatusType) {
         setStatusIndicator(statusType: statusType ?? StatusType.idle)
+        actInd.layoutSubviews()
     }
     
     func setStatusIndicator(statusType: StatusType) {
         switch statusType {
         case .idle:
-           // print("\(String(describing: processLabel.text)) \(statusType)")
-            processLabel.alpha = 0.4
-            //Set indicator view to nothing
-            statusIndicator.isHidden = false
-            break
-        case .working:
-           // print("\(String(describing: processLabel.text)) \(statusType)")
-            processLabel.alpha = 1.0
-            
-            // Set indicator view to indicator view image
-            statusIndicator.isHidden = false
-            statusIndicator.addSubview(actInd)
             UIView.performWithoutAnimation {
                 actInd.frame.origin.y = statusIndicator.frame.height / 2
                 actInd.frame.origin.x = statusIndicator.frame.width / 2 + 7
-                actInd.startAnimating()
             }
+            
+            //Set label to half transparent, indicator view to nothing
+            processLabel.alpha = 0.4
+            statusIndicator.isHidden = false
+            break
+        case .working:
+            UIView.performWithoutAnimation {
+                actInd.frame.origin.y = statusIndicator.frame.height / 2
+                actInd.frame.origin.x = statusIndicator.frame.width / 2 + 7
+            }
+            actInd.startAnimating()
+            
+            //Set label to appear, indicator view to activity indicator
+            processLabel.alpha = 1.0
+            statusIndicator.isHidden = false
+            statusIndicator.addSubview(actInd)
+            
             break
         case .done:
-            // print("\(String(describing: processLabel.text)) \(statusType)")
             doneImage.image = UIImage(named: "Checkmark")
             doneImage.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-            
-            // Set indicator view to checkmark
+        
+            //Set label to appear, indicator view to checkmark
             statusIndicator.isHidden = false
             actInd.stopAnimating()
             actInd.isHidden = true
             
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseIn, animations: {
                 self.statusIndicator.addSubview(self.doneImage)
-            }
-
-            UIView.animate(withDuration: 1, delay: 0.7, options: .curveEaseOut, animations: {
-                self.statusIndicator.alpha = 0
-                self.processLabel.alpha = 0
             }) { (true) in
-
+                UIView.animate(withDuration: 0.5, delay: 0.7, options: .curveEaseOut, animations: {
+                    self.statusIndicator.alpha = 0
+                    self.processLabel.alpha = 0
+                })
             }
             break
         }
