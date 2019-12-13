@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		1E00B96823791CC2009A8DB4 /* ProcessCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */; };
 		1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E407539237D6EA200FDAA31 /* Brain.swift */; };
-		1E793A72239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1E793A6F239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel */; };
-		1E793A73239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1E793A70239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel */; };
-		1E793A74239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1E793A71239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel */; };
 		1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */; };
 		1E7F758A237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */; };
 		1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */; };
@@ -35,13 +32,6 @@
 		1EE84B4A2386405B001E2DA1 /* Merriweather-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1EE84B3B2386404C001E2DA1 /* Merriweather-Regular.otf */; };
 		8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A244E6A23758751006E6CC0 /* UIColorExtension.swift */; };
 		8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */; };
-
-		8AEA532723965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */; };
-		8AEA532823965E2600BCB545 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */; };
-		8AEA532C2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */; };
-		8AEA532E239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */; };
-
-
 		920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3322374272400F8FB7A /* CoreDataHelper.swift */; };
 		920AF39F237E630F00F8FB7A /* ResumeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF39E237E630F00F8FB7A /* ResumeModel.swift */; };
 		920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920AF3A0237E631800F8FB7A /* FeedbackModel.swift */; };
@@ -56,9 +46,6 @@
 		920F63EF2372D0CE00BCFC5C /* CreativTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63EE2372D0CE00BCFC5C /* CreativTests.swift */; };
 		920F63FA2372D0CE00BCFC5C /* CreativUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F63F92372D0CE00BCFC5C /* CreativUITests.swift */; };
 		92B076082393B939003D7082 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B076072393B939003D7082 /* GlobalVariables.swift */; };
-		E69CEB46239E3FF00033530B /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E69CEB43239E3FF00033530B /* TextClassifierWorkExperience.mlmodel */; };
-		E69CEB47239E3FF00033530B /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E69CEB44239E3FF00033530B /* TextClassifierVagueSentence.mlmodel */; };
-		E69CEB48239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = E69CEB45239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel */; };
 		F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1B237413220007FCC4 /* OnboardingViewController.swift */; };
 		F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1D237413490007FCC4 /* ProcessingViewController.swift */; };
 		F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC1F237413670007FCC4 /* HomeViewController.swift */; };
@@ -66,12 +53,11 @@
 		F51CEC24237413890007FCC4 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51CEC23237413890007FCC4 /* OverviewViewController.swift */; };
 		F55134662384FDFB0054854F /* SegmentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55134652384FDFB0054854F /* SegmentModel.swift */; };
 		F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55134672384FE0F0054854F /* SegmentedModel.swift */; };
+		F59DEA8D23A32D9A0046744A /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F59DEA8923A32D990046744A /* TextClassifierPassionateSentence.mlmodel */; };
+		F59DEA8E23A32D9A0046744A /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F59DEA8A23A32D990046744A /* TextClassifierVagueSentence.mlmodel */; };
+		F59DEA8F23A32D9A0046744A /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F59DEA8B23A32D990046744A /* TextClassifierWorkExperience.mlmodel */; };
+		F59DEA9023A32D9A0046744A /* TextClassifierOrganisationExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F59DEA8C23A32D9A0046744A /* TextClassifierOrganisationExperience.mlmodel */; };
 		F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */; };
-
-		F5DE2A39239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A38239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel */; };
-		F5DE2A3C239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A3A239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel */; };
-		F5DE2A3D239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5DE2A3B239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel */; };
-
 		F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */; };
 		F5F70677237C0F6100771249 /* HomeCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */; };
 		F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F70678237C17B700771249 /* AddNewCollectionViewCell.swift */; };
@@ -100,9 +86,6 @@
 /* Begin PBXFileReference section */
 		1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E407539237D6EA200FDAA31 /* Brain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brain.swift; sourceTree = "<group>"; };
-		1E793A6F239E42DF00DE4FC9 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
-		1E793A70239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
-		1E793A71239E42DF00DE4FC9 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
 		1E7F7587237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		1E7F7588237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedbackHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		1E7F758B237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -124,12 +107,6 @@
 		8A03B0012372D71400682C73 /* Creativ.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Creativ.entitlements; sourceTree = "<group>"; };
 		8A244E6A23758751006E6CC0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8AEA44A6237AA913005D394A /* HomeNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeNavigationViewController.swift; path = Creativ/Controller/HomeNavigationViewController.swift; sourceTree = SOURCE_ROOT; };
-
-		8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierPassionateSentence.mlmodel; path = ../../model/TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
-		8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierVagueSentence.mlmodel; path = ../../model/TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
-		8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierWorkExperience.mlmodel; path = ../../model/TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
-		8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierOrganisationExperience.mlmodel; path = ../../model/TextClassifierOrganisationExperience.mlmodel; sourceTree = "<group>"; };
-
 		920AF3322374272400F8FB7A /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		920AF39E237E630F00F8FB7A /* ResumeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResumeModel.swift; sourceTree = "<group>"; };
 		920AF3A0237E631800F8FB7A /* FeedbackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackModel.swift; sourceTree = "<group>"; };
@@ -150,9 +127,6 @@
 		920F63F92372D0CE00BCFC5C /* CreativUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreativUITests.swift; sourceTree = "<group>"; };
 		920F63FB2372D0CE00BCFC5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92B076072393B939003D7082 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
-		E69CEB43239E3FF00033530B /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierWorkExperience.mlmodel; path = ../../../Downloads/TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
-		E69CEB44239E3FF00033530B /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierVagueSentence.mlmodel; path = ../../../Downloads/TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
-		E69CEB45239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierPassionateSentence.mlmodel; path = ../../../Downloads/TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
 		F51CEC1B237413220007FCC4 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F51CEC1D237413490007FCC4 /* ProcessingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingViewController.swift; sourceTree = "<group>"; };
 		F51CEC1F237413670007FCC4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -160,12 +134,11 @@
 		F51CEC23237413890007FCC4 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		F55134652384FDFB0054854F /* SegmentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentModel.swift; sourceTree = "<group>"; };
 		F55134672384FE0F0054854F /* SegmentedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedModel.swift; sourceTree = "<group>"; };
+		F59DEA8923A32D990046744A /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierPassionateSentence.mlmodel; path = ../../../../TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
+		F59DEA8A23A32D990046744A /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierVagueSentence.mlmodel; path = ../../../../TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
+		F59DEA8B23A32D990046744A /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TextClassifierWorkExperience.mlmodel; path = ../../../../TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
+		F59DEA8C23A32D9A0046744A /* TextClassifierOrganisationExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierOrganisationExperience.mlmodel; sourceTree = "<group>"; };
 		F59F2F4E2378C4F6003D8E7E /* HomeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContent.swift; sourceTree = "<group>"; };
-
-		F5DE2A38239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierPassionateSentence.mlmodel; sourceTree = "<group>"; };
-		F5DE2A3A239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
-		F5DE2A3B239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
-
 		F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionReusableView.swift; sourceTree = "<group>"; };
 		F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionReusableView.xib; sourceTree = "<group>"; };
 		F5F70678237C17B700771249 /* AddNewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -246,12 +219,10 @@
 		920F63D32372D0CC00BCFC5C /* Creativ */ = {
 			isa = PBXGroup;
 			children = (
-
-				8AEA532D239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel */,
-				8AEA532B2398C00800BCB545 /* TextClassifierWorkExperience.mlmodel */,
-				8AEA532523965E2600BCB545 /* TextClassifierPassionateSentence.mlmodel */,
-				8AEA532623965E2600BCB545 /* TextClassifierVagueSentence.mlmodel */,
-
+				F59DEA8C23A32D9A0046744A /* TextClassifierOrganisationExperience.mlmodel */,
+				F59DEA8923A32D990046744A /* TextClassifierPassionateSentence.mlmodel */,
+				F59DEA8A23A32D990046744A /* TextClassifierVagueSentence.mlmodel */,
+				F59DEA8B23A32D990046744A /* TextClassifierWorkExperience.mlmodel */,
 				1EE84B3323863CAA001E2DA1 /* Fonts */,
 				F50027B8237BF5D300E0B08F /* Model */,
 				920AF3312374271000F8FB7A /* Helper */,
@@ -511,10 +482,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F59F2F4F2378C4F6003D8E7E /* HomeContent.swift in Sources */,
-
-				F5DE2A3C239E08CB00129FC9 /* TextClassifierWorkExperience.mlmodel in Sources */,
-
 				920AF3332374272400F8FB7A /* CoreDataHelper.swift in Sources */,
+				F59DEA8E23A32D9A0046744A /* TextClassifierVagueSentence.mlmodel in Sources */,
 				920F63D92372D0CC00BCFC5C /* ViewController.swift in Sources */,
 				F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */,
 				92B076082393B939003D7082 /* GlobalVariables.swift in Sources */,
@@ -527,30 +496,22 @@
 				1EE6D1CC237511AE00A07759 /* FeedbackData.swift in Sources */,
 				920AF3A3237E633500F8FB7A /* FeedbackDetailModel.swift in Sources */,
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
-				E69CEB48239E3FF00033530B /* TextClassifierPassionateSentence.mlmodel in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
-
-				F5DE2A39239E08AE00129FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */,
-
 				F55134662384FDFB0054854F /* SegmentModel.swift in Sources */,
 				920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
+				F59DEA8D23A32D9A0046744A /* TextClassifierPassionateSentence.mlmodel in Sources */,
 				F51CEC20237413670007FCC4 /* HomeViewController.swift in Sources */,
 				8A244E6B23758751006E6CC0 /* UIColorExtension.swift in Sources */,
 				1E40753A237D6EA200FDAA31 /* Brain.swift in Sources */,
-
-				1E793A73239E42DF00DE4FC9 /* TextClassifierPassionateSentence.mlmodel in Sources */,
-
 				8AEA44A7237AA913005D394A /* HomeNavigationViewController.swift in Sources */,
-
-				F5DE2A3D239E08CB00129FC9 /* TextClassifierVagueSentence.mlmodel in Sources */,
-
 				920F63D72372D0CC00BCFC5C /* SceneDelegate.swift in Sources */,
 				1EE6D1D423753AA000A07759 /* (null) in Sources */,
 				F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */,
 				1EE6D1CA2374376500A07759 /* (null) in Sources */,
+				F59DEA8F23A32D9A0046744A /* TextClassifierWorkExperience.mlmodel in Sources */,
 				F55134682384FE0F0054854F /* SegmentedModel.swift in Sources */,
-				8AEA532E239DFA4C00BCB545 /* TextClassifierOrganisationExperience.mlmodel in Sources */,
+				F59DEA9023A32D9A0046744A /* TextClassifierOrganisationExperience.mlmodel in Sources */,
 				1E7F7589237C0F0700A1DB9D /* FeedbackHeaderCollectionReusableView.swift in Sources */,
 				1E7F758D237C6A2D00A1DB9D /* FeedbackCollectionViewCell.swift in Sources */,
 				F51CEC22237413780007FCC4 /* PreviewViewController.swift in Sources */,
@@ -729,18 +690,14 @@
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-
 				DEVELOPMENT_TEAM = U795CJ74H6;
-
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				PRODUCT_BUNDLE_IDENTIFIER = evan.Creativ;
-
 				PRODUCT_NAME = "REA - Analyser";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -755,18 +712,14 @@
 				CODE_SIGN_ENTITLEMENTS = Creativ/Creativ.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-
 				DEVELOPMENT_TEAM = U795CJ74H6;
-
 				INFOPLIST_FILE = Creativ/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
 				PRODUCT_BUNDLE_IDENTIFIER = evan.Creativ;
-
 				PRODUCT_NAME = "REA - Analyser";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
