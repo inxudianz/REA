@@ -592,21 +592,24 @@ class ProcessingViewController: UIViewController {
     
     func decideAppropriateFeedback(dividedExtractedContent: [String:String]) {
         for key in dividedExtractedContent.keys {
-            if self.brain.isPersonalInfoFound(in: key) {
+            switch self.brain.checkContentFound(in: key) {
+            case .personalInfo:
                 self.appointProfileFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isEducationFound(in: key) {
+            case .education:
                 self.appointEducationFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isWorkExperienceFound(in: key) {
+            case .workExperience:
                 self.appointWorkFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isOrganisationExperienceFound(in: key) {
+            case .organisationExperience:
                 self.appointOrganisationFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isSummaryFound(in: key) {
+            case .skills:
+                self.appointSkillsFeedback(for: dividedExtractedContent[key]!)
+            case .summary:
+                self.appointSummaryFeedback(for: dividedExtractedContent[key]!)
                 if self.brain.isEmailRegexFound(text: dividedExtractedContent[key]!) || self.brain.isPhoneNumberRegexFound(text: dividedExtractedContent[key]!) {
                     self.appointProfileFeedback(for: dividedExtractedContent[key]!)
                 }
-                self.appointSummaryFeedback(for: dividedExtractedContent[key]!)
-            } else if self.brain.isSkillsFound(in: key) {
-                self.appointSkillsFeedback(for: dividedExtractedContent[key]!)
+            default:
+                break
             }
         }
         
