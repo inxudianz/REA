@@ -13,6 +13,16 @@ enum GPAStatus {
     case notFound, outOfBound, inRange
 }
 
+enum ContentFound: String {
+    case personalInfo
+    case education
+    case workExperience
+    case organisationExperience
+    case skills
+    case summary
+    case notFound
+}
+
 class Brain {
     /* Array of action verbs necessary in a summary or when making experience description */
     let arrayActionVerb: [String] = ["Simplify", "Create", "Produce", "Achieve", "Improve", "Enhance", "Nurture", "Manage", "Maintain", "Develop", "Lead", "Assemble", "Build", "Ensure", "Help", "Engineer", "Design", "Construct", "Upgrade", "Reduce", "Prove", "Eliminate", "Attain", "Work"]
@@ -223,34 +233,53 @@ class Brain {
         return misspelledRange.location == NSNotFound
     }
     
+    func checkContentFound(in key: String) -> ContentFound {
+        switch key.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
+        case "contact info", "contact", "personal information", "personal info":
+            return ContentFound.personalInfo
+        case "education", "academic history", "academic background", "education history":
+            return ContentFound.education
+        case "work experience", "work history", "working experience", "job history":
+            return ContentFound.workExperience
+        case let str where str.contains("organisation"), let str where str.contains("organization"), let str where str.elementsEqual("organisation experience"), let str where str.elementsEqual("organization experience"), let str where str.elementsEqual("organisational experience"), let str where str.elementsEqual("organizational experience"):
+            return ContentFound.organisationExperience
+        case let str where str.contains("skills"), let str where str.contains("skill"), let str where str.contains("expertise"), let str where str.contains("technical skills"), let str where str.contains("skills and language"):
+            return ContentFound.skills
+        case let str where str.contains("summary"), let str where str.contains("about me"), let str where str.contains("about"), let str where str.contains("personal profile"), let str where str.contains("profile"), let str where str.contains("in words"):
+            return ContentFound.summary
+        default:
+            return ContentFound.notFound
+        }
+    }
+    
     func isPersonalInfoFound(in key: String) -> Bool {
         if key.lowercased() == "contact info" || key.lowercased() == "contact" || key.lowercased() == "personal information" || key.lowercased() == "personal info" {
             return true
         }
         return false
     }
-    
+
     func isEducationFound(in key: String) -> Bool {
         if key.lowercased() == "education" || key.lowercased() == "academic history" || key.lowercased() == "academic background" || key.lowercased() == "education history" {
             return true
         }
         return false
     }
-    
+
     func isWorkExperienceFound(in key: String) -> Bool {
         if key.lowercased() == "work experience" || key.lowercased() == "work history" || key.lowercased() == "working experience" || key.lowercased() == "job history" || key.lowercased() == "experience" {
             return true
         }
         return false
     }
-    
+
     func isOrganisationExperienceFound(in key: String) -> Bool {
         if key.lowercased() == "organisation experience" || key.lowercased() == "organisational experience" || key.lowercased() == "organization experience" || key.lowercased() == "organizational experience" || key.lowercased() == "organisation history" || key.lowercased() == "organization history" || key.lowercased().contains("organisation") || key.lowercased().contains("organization") {
             return true
         }
         return false
     }
-    
+
     func isSkillsFound(in key: String) -> Bool {
         if key.lowercased().contains("skills") || key.lowercased().contains("skill") || key.lowercased().contains("expertise") || key.lowercased().contains("technical skills") || key.lowercased().contains("key skills") {
             return true
