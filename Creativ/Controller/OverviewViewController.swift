@@ -41,7 +41,7 @@ class OverviewViewController: UIViewController {
     func checkFeedback(feedbackResult: [FeedbackDetailModel]) {
         for x in 0 ..< feedbackResult.count {
             //kalo semua konten salah (kotak warna merah)
-            if feedbackResult[0].overview.contains("Your summary is too long, reduce few words to make it more simple.") && feedbackResult[0].overview.contains("It seems that you overused some words. Try to change some words!") && feedbackResult[0].overview.contains("You have to use more action verbs in your summary.") && feedbackResult[0].overview.contains("Vague") && feedbackResult[0].overview.contains("Not Passionate") {
+            if feedbackResult[0].overview.contains("- Fill in your summary with things your passionate about and tell a little bit about it!") && feedbackResult[0].overview.contains("- It’s better for you to tell more detailed about what you want to do next and what goals you want to achieve in your journey!\n\n") && feedbackResult[0].overview.contains("- Your summary has a typo\n\n") &&  feedbackResult[0].overview.contains("- Your summary is too long, reduce few words to make it more simple.\n\n") && feedbackResult[0].overview.contains("- It seems that you overused some words. Try to change some words!\n\n") && feedbackResult[0].overview.contains("- You have to use more action verbs in your summary.") {
                 feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
                 feedbackDatas.commentedTexts[0] = "You must improve this part!"
             }
@@ -51,55 +51,56 @@ class OverviewViewController: UIViewController {
                 feedbackDatas.commentedTexts[1] = "You must improve this part!"
             }
             
+            if feedbackResult[3].overview.contains("- You have to explain more of what you did in each of your working experiences so it can be more detailed!\n\n") && feedbackResult[3].overview.contains("- Rearrange your working experiences from the most current until the latest one!"){
+                feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
+                feedbackDatas.commentedTexts[3] = "You must improve this part!"
+            }
+            
+            if feedbackResult[4].overview.contains("- You can elaborate more on each of your experiences and give some details on it.\n\n") && feedbackResult[4].overview.contains("- Rearrange your organisational experiences from the most current until the latest one!") {
+                feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
+                feedbackDatas.commentedTexts[4] = "You must improve this part!"
+            }
+            
+            if feedbackResult[2].overview.contains("- You may provide your GPA to boost the chance of being accepted!") {
+                feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
+                feedbackDatas.commentedTexts[2] = "You must improve this part!"
+            }
+            
             /* Masih belum di pakai karena blm ada perbandingan (hanya satu hal yang di validasi)
-             if feedbackResult[2].contains("It's better not to show your GPA in your resume.") || feedbackResult[2].contains("You can add your GPA if it's more than equal to 3.") {
-             feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
-             feedbackDatas.commentedTexts[2] = "You can be better!"
-             }
-             
-             if feedbackResult[3].contains("Rearrange your working experiences from the most current until the latest one!") {
-             feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
-             feedbackDatas.commentedTexts[3] = "You can be better!"
-             }
-             
-             if feedbackResult[4].contains("Rearrange your organisational experiences from the most current until the latest one!") {
-             feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
-             feedbackDatas.commentedTexts[4] = "You can be better!"
-             }
-             
-             if feedbackResult[5].contains("You have to put your skills that match with job that you've applied.") {
-             feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
-             feedbackDatas.commentedTexts[5] = "You can be better!"
-             }
+            
+            if feedbackResult[5].contains("You have to put your skills that match with job that you've applied.") {
+                feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
+                feedbackDatas.commentedTexts[5] = "You can be better!"
+            }
              */
             
-            // kalo semuanya konten salah semua (kotak warna merah)
-            if feedbackResult[0].overview.contains("Your summary is too long, reduce few words to make it more simple.") || feedbackResult[0].overview.contains("It seems that you overused some words. Try to change some words!") || feedbackResult[0].overview.contains("You have to use more action verbs in your summary.") || feedbackResult[0].overview.contains("Vague") || feedbackResult[0].overview.contains("Half Vague") || feedbackResult[0].overview.contains("Half Passionate") || feedbackResult[0].overview.contains("Not Passionate") {
+            // kalo ada beberapa konten yang salah semua (kotak warna merah)
+            if feedbackResult[0].overview.contains("- Fill in your summary with things your passionate about and tell a little bit about it!") || feedbackResult[0].overview.contains("- It’s better for you to tell more detailed about what you want to do next and what goals you want to achieve in your journey!\n\n") || feedbackResult[0].overview.contains("- Your summary has a typo\n\n") ||  feedbackResult[0].overview.contains("- Your summary is too long, reduce few words to make it more simple.\n\n") || feedbackResult[0].overview.contains("- It seems that you overused some words. Try to change some words!\n\n") || feedbackResult[0].overview.contains("- You have to use more action verbs in your summary.") {
                 feedbackDatas.overviewTexts[0] = "You have vague summary that explain about yourself. Try to tell brief description about things that you're proud of in few sentences."
                 feedbackDatas.commentedTexts[0] = "You can be better!"
             }
             
-            if feedbackResult[1].overview.contains("You haven't put your phone number!") || feedbackResult[1].overview.contains("No email? Please put your email in your summary!") {
+            if feedbackResult[1].overview.contains("You haven't put your phone number!") || feedbackResult[1].overview.contains("You haven't put your e-mail!") {
                 feedbackDatas.overviewTexts[1] = "You haven't given personal information completely. Provide your identity so company will be able to contact you."
                 feedbackDatas.commentedTexts[1] = "You can be better!"
             }
             
-            if feedbackResult[2].overview.contains("Your GPA seems lower than the lower bound.") || feedbackResult[2].overview.contains("You may provide your GPA to boost the chance of being accepted!") {
+            if feedbackResult[2].overview.contains("- Your GPA seems lower than the recommended boundaries.") {
                 feedbackDatas.overviewTexts[2] = "You have shown vague information about your last education. Make it detailed and make sure to include what you learn as well."
                 feedbackDatas.commentedTexts[2] = "You can be better!"
             }
             
-            if feedbackResult[3].overview.contains("Rearrange your working experiences from the most current until the latest one!") {
+            if feedbackResult[3].overview.contains("- You have to explain more of what you did in each of your working experiences so it can be more detailed!\n\n") || feedbackResult[3].overview.contains("- Your working experiences are great but add a little more details of it!\n\n") || feedbackResult[3].overview.contains("- Rearrange your working experiences from the most current until the latest one!"){
                 feedbackDatas.overviewTexts[3] = "Your working experiences aren't detailed. You can improve it by highlighting your achievement and your activity there!"
                 feedbackDatas.commentedTexts[3] = "You can be better!"
             }
             
-            if feedbackResult[4].overview.contains("Rearrange your organisational experiences from the most current until the latest one!") {
+            if feedbackResult[4].overview.contains("- You can elaborate more on each of your experiences and give some details on it.\n\n") || feedbackResult[4].overview.contains("- Your organisational experiences are good enough but you can explain more details of what you did there.\n\n") || feedbackResult[4].overview.contains("- Rearrange your organisational experiences from the most current until the latest one!") {
                 feedbackDatas.overviewTexts[4] = "Your organisational experiences weren't great. Try to Elaborate your duty and accomplishment there."
                 feedbackDatas.commentedTexts[4] = "You can be better!"
             }
             
-            if feedbackResult[5].overview.contains("You have to put your skills that match with job that you've applied.") {
+            if feedbackResult[5].overview.contains("- You have to put more skills which are relevant with the job you're applying for.") {
                 feedbackDatas.overviewTexts[5] = "Your skills should be things that can point out what's best in you. You put skills that are irrelevant to the job that you’re applying to."
                 feedbackDatas.commentedTexts[5] = "You can be better!"
             }
@@ -107,7 +108,7 @@ class OverviewViewController: UIViewController {
             //kalo konten gaada (kotak warna biru)
             if feedbackResult[x].overview.isEmpty {
                 feedbackDatas.comments[x] = "We're missing \(headerCv[x]) section in your resume! It's either you haven't add it or we can't detect it because it's in another format."
-                feedbackDatas.commentedTexts[x] = "Missing Content!"
+                feedbackDatas.commentedTexts[x] = "Missing content!"
             } else {
                 feedbackDatas.comments[x] = feedbackResult[x].overview
             }
@@ -169,7 +170,7 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
             cell.setColorGreen(colorView: &cell.commentView)
             
             // kalo konten ga ketemu
-            if feedbackDatas.commentedTexts[indexPath.row] == "Missing Content!" {
+            if feedbackDatas.commentedTexts[indexPath.row] == "Missing content!" {
                 cell.setColorBlue(colorView: &cell.feedbackView)
                 cell.setColorBlue(colorView: &cell.notchView)
                 cell.setColorBlue(colorView: &cell.commentView)

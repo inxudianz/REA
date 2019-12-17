@@ -5,7 +5,6 @@
 //  Created by Robby Awalul Meviansyah Abdillah on 07/11/19.
 //  Copyright © 2019 William Inx. All rights reserved.
 //
-
 import UIKit
 import MobileCoreServices
 import PDFKit
@@ -216,7 +215,6 @@ class HomeViewController: UIViewController{
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let getImagePath = paths.appendingPathComponent("TIKET INDONESIA PERTAMA.pdf")
         //testImg.image = UIImage(contentsOfFile: getImagePath)
-
     }
 }
 
