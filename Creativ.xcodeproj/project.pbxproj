@@ -56,7 +56,6 @@
 		F5D08A9223A73E5500BA4226 /* TextClassifierWorkExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5D08A8E23A73E5500BA4226 /* TextClassifierWorkExperience.mlmodel */; };
 		F5D08A9323A73E5500BA4226 /* TextClassifierOrganisationExperience.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5D08A8F23A73E5500BA4226 /* TextClassifierOrganisationExperience.mlmodel */; };
 		F5D08A9423A73E5500BA4226 /* TextClassifierVagueSentence.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F5D08A9023A73E5500BA4226 /* TextClassifierVagueSentence.mlmodel */; };
-		F5D08A9F23A744ED00BA4226 /* ReadPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D08A9E23A744ED00BA4226 /* ReadPDF.swift */; };
 		F5F70676237C0F6100771249 /* HomeCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */; };
 		F5F70677237C0F6100771249 /* HomeCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */; };
 		F5F7067A237C17B700771249 /* AddNewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F70678237C17B700771249 /* AddNewCollectionViewCell.swift */; };
@@ -136,7 +135,6 @@
 		F5D08A8E23A73E5500BA4226 /* TextClassifierWorkExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierWorkExperience.mlmodel; sourceTree = "<group>"; };
 		F5D08A8F23A73E5500BA4226 /* TextClassifierOrganisationExperience.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierOrganisationExperience.mlmodel; sourceTree = "<group>"; };
 		F5D08A9023A73E5500BA4226 /* TextClassifierVagueSentence.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassifierVagueSentence.mlmodel; sourceTree = "<group>"; };
-		F5D08A9E23A744ED00BA4226 /* ReadPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadPDF.swift; sourceTree = "<group>"; };
 		F5F70674237C0F6100771249 /* HomeCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionReusableView.swift; sourceTree = "<group>"; };
 		F5F70675237C0F6100771249 /* HomeCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeCollectionReusableView.xib; sourceTree = "<group>"; };
 		F5F70678237C17B700771249 /* AddNewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 		F51CEC30237416270007FCC4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F5D08A9D23A744D700BA4226 /* Processing PDF */,
 				F51CEC1B237413220007FCC4 /* OnboardingViewController.swift */,
 				F51CEC1F237413670007FCC4 /* HomeViewController.swift */,
 				F51CEC1D237413490007FCC4 /* ProcessingViewController.swift */,
@@ -378,14 +375,6 @@
 				1E00B96723791CC2009A8DB4 /* ProcessCollectionViewCell.swift */,
 			);
 			path = Processing;
-			sourceTree = "<group>";
-		};
-		F5D08A9D23A744D700BA4226 /* Processing PDF */ = {
-			isa = PBXGroup;
-			children = (
-				F5D08A9E23A744ED00BA4226 /* ReadPDF.swift */,
-			);
-			path = "Processing PDF";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -575,7 +564,6 @@
 				F51CEC1C237413220007FCC4 /* OnboardingViewController.swift in Sources */,
 				F51CEC1E237413490007FCC4 /* ProcessingViewController.swift in Sources */,
 				F55134662384FDFB0054854F /* SegmentModel.swift in Sources */,
-				F5D08A9F23A744ED00BA4226 /* ReadPDF.swift in Sources */,
 				920AF3A1237E631800F8FB7A /* FeedbackModel.swift in Sources */,
 				920F63DF2372D0CC00BCFC5C /* Creativ.xcdatamodeld in Sources */,
 				F5D08A9123A73E5500BA4226 /* TextClassifierPassionateSentence.mlmodel in Sources */,

@@ -170,7 +170,7 @@ extension OverviewViewController: UICollectionViewDelegate, UICollectionViewData
             cell.setColorGreen(colorView: &cell.commentView)
             
             // kalo konten ga ketemu
-            if feedbackDatas.commentedTexts[indexPath.row] == "Missing Content!" {
+            if feedbackDatas.commentedTexts[indexPath.row] == "Missing content!" {
                 cell.setColorBlue(colorView: &cell.feedbackView)
                 cell.setColorBlue(colorView: &cell.notchView)
                 cell.setColorBlue(colorView: &cell.commentView)
