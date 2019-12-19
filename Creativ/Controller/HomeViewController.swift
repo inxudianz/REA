@@ -15,18 +15,14 @@ class HomeViewController: UIViewController{
     
     var contents: [ResumeModel] = []
     var tempContents : [ResumeModel] = []
-    var segmentModel: SegmentedModel?
-    var segmentedModel: SegmentedModel?
     var categorisedcvContent:[SegmentedModel] = []
     var urlPicked: URL?
     var cellColour = true
-    var segmentedResult: Segment?
     var brain = Brain()
     
     var isEdit = false
     var selectedItem = [Int]()
     var filePath = Bundle.main.url(forResource: "file", withExtension: "txt")
-    var myData: Data!
     var fontMean: Float = 0
     var checkFileImage = 0
     var totalFont = 0
@@ -140,6 +136,7 @@ class HomeViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         populateContent()
+        categorisedcvContent = []
         resumeCollectionView.reloadData()
     }
     
@@ -202,6 +199,10 @@ class HomeViewController: UIViewController{
                 processingViewController.segmentedContent = categorisedcvContent
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        dump(currentData)
     }
     
     func registerXIB() {
@@ -292,7 +293,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let content = contents[indexPath.row - 1]
             selectedResume = content
             performSegue(withIdentifier: "goToOverview", sender: self)
-            print("Delete button not selected")
         }
     }
 }
@@ -336,18 +336,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         //cek ada filenya di directory atau tidak
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)
-        if let pathComponent = url.appendingPathComponent("RobbyC.pdf") {
-            let filePath = pathComponent.path
-            let fileManager = FileManager.default
-            if fileManager.fileExists(atPath: filePath) {
-                print("FILE AVAILABLE")
-            } else {
-                print("FILE NOT AVAILABLE")
-            }
-        } else {
-            print("FILE PATH NOT AVAILABLE")
-        }
-        
         readPDFFile()
         
         if checkFileImage != 0 {
@@ -423,6 +411,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 guard let currentFont = value as? UIFont else {
                     return
                 }
+                
                 let floatFontSize = Double(currentFont.pointSize)
                 arrFontSize.append(floatFontSize)
                 
@@ -442,6 +431,10 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 
                 cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
             }
+            
+            print("deprecated")
+            print(cvContents)
+            print("deprecated")
 
             if checkFileImage != 0 && pageCount < 2 {
                 let sortWithoutDuplicates = Array(Set(arrFontSize))
@@ -470,41 +463,55 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                         present(alert, animated: true, completion: nil)
                         break
                     }
-                    if cvContent.1 >= Double(medianFontSize)  {
-                        for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
-                            if cvContent.1 == largeFont {
-                                arrHeading.append((cvContent.0,"Header\(index + 2)"))
-                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                                break
-                            }
-                            else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
-                                arrHeading.append((cvContent.0,"Header1"))
-                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
-                                break
-                            }
-                            else if index == fontSizeSortedSplit[1].count - 1 {
-                                arrBody.append((cvContent.0,"Body\(index + 2)"))
-                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                                break
+                    else {
+                        if cvContent.1 >= Double(medianFontSize)  {
+                            for (index,largeFont) in fontSizeSortedSplit[1].enumerated() {
+                                if cvContent.1 == largeFont {
+                                    arrHeading.append((cvContent.0,"Header\(index + 2)"))
+                                    categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                    break
+                                }
+                                else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && checkMedian  {
+                                    arrHeading.append((cvContent.0,"Header1"))
+                                    categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H1", fontSize: cvContent.1, isBold: cvContent.2))
+                                    break
+                                }
+                                else if index == fontSizeSortedSplit[1].count - 1 {
+                                    if !(brain.checkContentFound(in: cvContent.0) == .notFound) {
+                                       arrBody.append((cvContent.0,"Header\(index + 2)"))
+                                        categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                    }
+                                    else {
+                                        arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                        categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                    }
+                                    break
+                                }
                             }
                         }
-                    }
-                    else {
-                        for (index,smallFont) in fontSizeSortedSplit[0].enumerated() {
-                            if cvContent.1 == smallFont {
-                                arrBody.append((cvContent.0,"Body\(index + 2)"))
-                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                                break
-                            }
-                            else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
-                                arrBody.append((cvContent.0,"Body1"))
-                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
-                                break
-                            }
-                            else if index == fontSizeSortedSplit[0].count - 1 {
-                                arrBody.append((cvContent.0,"Body\(index + 2)"))
-                                categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
-                                break
+                        else {
+                            for (index,smallFont) in fontSizeSortedSplit[0].enumerated() {
+                                if cvContent.1 == smallFont {
+                                    arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                    categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                    break
+                                }
+                                else if cvContent.1 == fontSizeSorted[fontSizeSorted.count/2] && !checkMedian{
+                                    arrBody.append((cvContent.0,"Body1"))
+                                    categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B1", fontSize: cvContent.1, isBold: cvContent.2))
+                                    break
+                                }
+                                else if index == fontSizeSortedSplit[0].count - 1 {
+                                    if !(brain.checkContentFound(in: cvContent.0) == .notFound) {
+                                       arrBody.append((cvContent.0,"Header\(index + 2)"))
+                                        categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                    }
+                                    else {
+                                        arrBody.append((cvContent.0,"Body\(index + 2)"))
+                                        categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "B\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
+                                    }
+                                    break
+                                }
                             }
                         }
                     }

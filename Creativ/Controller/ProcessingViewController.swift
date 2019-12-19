@@ -27,6 +27,7 @@ class ProcessingViewController: UIViewController {
     var resumeClassification = [String]()
     let dispatchQueue = DispatchQueue.global(qos: .background)
     let dispatchMain = DispatchQueue.main
+    let semaphore = DispatchSemaphore(value: 0)
     
     // DESC: Process Details memuat detail dari proses yang akan dijalankan
     var processDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating", "Analyzing Skills", "Finalizing"]
@@ -47,7 +48,6 @@ class ProcessingViewController: UIViewController {
     var stringOrg: String = ""
     var stringSummary: String = ""
     var stringSkills: String = ""
-    var tempString = 0
     
     var tempFontSize = 0
     var headerCV: [String] = []
@@ -60,6 +60,7 @@ class ProcessingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
 
@@ -68,16 +69,28 @@ class ProcessingViewController: UIViewController {
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
         
+        
         dispatchQueue.async {
+            self.semaphore.signal()
             self.resultContent = self.segmentContent(contents: self.segmentedContent!)
+            self.semaphore.wait()
+            
+            self.semaphore.signal()
             self.extractContent(result: self.resultContent!)
+            self.semaphore.wait()
+            
+            self.semaphore.signal()
             self.divideExtractedContent(extractedContent: self.extractedContent)
+            self.semaphore.wait()
+            
+            self.semaphore.signal()
             self.decideAppropriateFeedback(dividedExtractedContent: self.segmentationExtractedResult)
+            self.semaphore.wait()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToOverview" {
+        if segue.identifier == "goToOvervicew" {
             if let PreviewViewController = segue.destination as? PreviewViewController {
                 PreviewViewController.feedbackResult = finalFeedbackResult
             }
@@ -243,7 +256,6 @@ class ProcessingViewController: UIViewController {
         return result
     }
     
-    var temp:[String]?
     func appointSummaryFeedback(for text: String) {
         var summary: [Substring] = []
         if brain.isSummaryFound(in: text){
@@ -261,7 +273,7 @@ class ProcessingViewController: UIViewController {
             }
             else if tempForEach == summary.count - 1 {
                          */
-            if brain.isSummaryFound(in: cekTemp.trimmingCharacters(in: .whitespacesAndNewlines)){
+            if brain.isSummaryFound(in: String(cekTemp)){
                 summarySetelahPersonalProfile = String(summary[tempForEach+1])
                 return
             }
@@ -486,7 +498,7 @@ class ProcessingViewController: UIViewController {
         averageWordCount = averageWordCount/organisationExperience.count
         print("average word count = \(averageWordCount)")
         organisationExperience.forEach { (cekTemp) in
-            if cekTemp.count > averageWordCount {
+            if cekTemp.count > averageWordCount && !cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty{
                 organisationExperienceDetail.append(String(cekTemp))
                 return
             }
@@ -582,7 +594,7 @@ class ProcessingViewController: UIViewController {
             if result.segment[jumlah].segment.isEmpty {
                 for i in 0..<result.segment[jumlah].contents.count {
                     extractedContent.append(result.segment[jumlah].contents[i].label)
-                    if result.segment[jumlah].contents[i].type.first == "H"{
+                    if result.segment[jumlah].contents[i].type.first == "H" && result.segment[jumlah].contents[i].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
                         var lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
                         if lastTypeNumberString >= tempFontSize-1 {
                             headerCV.append(result.segment[jumlah].contents[i].label)
@@ -595,7 +607,7 @@ class ProcessingViewController: UIViewController {
             if jumlah == result.segment.count - 1 {
                 for j in 0 ..< result.contents.count{
                     extractedContent.append(result.contents[j].label)
-                    if result.contents[j].type.first == "H"{
+                    if result.contents[j].type.first == "H" && result.contents[j].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
                         var lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
                         if lastTypeNumberString >= tempFontSize-1 {
                             headerCV.append(result.contents[j].label)
@@ -645,8 +657,8 @@ class ProcessingViewController: UIViewController {
         //        let a = result.segment[0].contents[0].type.last?.hexDigitValue
         for jumlah in 0 ..< result.segment.count {
             if result.segment[jumlah].segment.isEmpty {
-                for i in 0..<result.segment[jumlah].contents.count {
-                    if result.segment[jumlah].contents[i].type.first == "H"{
+                for i in 0 ..< result.segment[jumlah].contents.count {
+                    if result.segment[jumlah].contents[i].type.first == "H" && result.segment[jumlah].contents[i].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
                         var lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
                         if lastTypeNumberString > tempFontSize{
                             tempFontSize = lastTypeNumberString
@@ -658,7 +670,7 @@ class ProcessingViewController: UIViewController {
             }
             if jumlah == result.segment.count - 1 {
                 for j in 0 ..< result.contents.count{
-                    if result.contents[j].type.first == "H"{
+                    if result.contents[j].type.first == "H" && result.contents[j].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
                         var lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
                         if lastTypeNumberString > tempFontSize{
                             tempFontSize = lastTypeNumberString

@@ -56,6 +56,7 @@ class PreviewViewController: UIViewController {
             print(currentData.feedback.contents[index].id)
         }
         CoreDataHelper.saveResume(model: currentData)
+        currentData = ResumeModel()
     }
     
     func getResumeTotal() -> Int {
