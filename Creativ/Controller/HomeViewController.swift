@@ -431,10 +431,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 
                 cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
             }
-            
-            print("deprecated")
-            print(cvContents)
-            print("deprecated")
 
             if checkFileImage != 0 && pageCount < 2 {
                 let sortWithoutDuplicates = Array(Set(arrFontSize))

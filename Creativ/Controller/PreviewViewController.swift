@@ -18,6 +18,7 @@ class PreviewViewController: UIViewController {
         }
     }
     
+    var missingContentCount = 0
     var feedbackDatas = FeedbackData()
     let customFont = CustomFont()
     var feedbackResult: [FeedbackDetailModel] = []
@@ -38,7 +39,16 @@ class PreviewViewController: UIViewController {
         setCollectionViewLayout()
         feedbackDatas.createFeedbackSection()
         saveNewResume()
-
+        
+        if missingContentCount == 6 {
+            let alert = UIAlertController(title: "Empty Content!", message: "It appears that either your resume content is not detected or you haven't included the segments", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                
+            }))
+            
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     // Unwind back to the All Resume Page
@@ -105,6 +115,7 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             
             // kalo konten ga ketemu
             if feedbackDatas.commentedTexts[indexPath.row] == "Missing content!" {
+                missingContentCount += 1
                 cell.setColorBlue(colorView: &cell.feedbackView)
                 cell.setColorBlue(colorView: &cell.notchView)
                 cell.setColorBlue(colorView: &cell.commentView)

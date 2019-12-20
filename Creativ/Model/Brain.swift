@@ -33,12 +33,12 @@ class Brain {
     
     /* Function to check phone number regex */
     func isPhoneNumberRegexFound(text: String) -> Bool {
-        return text.range(of: "\\+?(\\(?\\+?62\\)?[ ]?|0)8[0-9]{1,3}(([ ]|\\-)?[0-9]{3,4}){2}\\s", options: .regularExpression) != nil
+        return text.range(of: "\\+?(\\(?\\+?62\\)?[ ]?|0)8[0-9]{1,3}(([ ]|\\-)?[0-9]{3,4}){2}", options: .regularExpression) != nil
     }
     
     /* Function to check e-mail regex */
     func isEmailRegexFound(text: String) -> Bool {
-        return text.range(of: "[a-zA-Z0-9]+@(gmail|yahoo|hotmail|icloud).co(m|.[a-z]{2})\\s", options: .regularExpression) != nil
+        return text.range(of: "[a-zA-Z0-9]+@(gmail|yahoo|hotmail|icloud).co(m|.[a-z]{2})", options: .regularExpression) != nil
     }
     
 /*
@@ -165,17 +165,17 @@ class Brain {
         tagger.string = text
         let range = NSRange(location: 0, length: text.utf16.count)
         let tags: [NSLinguisticTag] = [.personalName, .placeName, .organizationName]
-        var isPersonalNameFound: Bool = false
+        var isNameFound = false
         tagger.enumerateTags(in: range, unit: .word, scheme: .nameType, options: options) { tag, tokenRange, stop in
             if let tag = tag, tags.contains(tag) {
                 let name = (text as NSString).substring(with: tokenRange)
                 print("\(name): \(tag.rawValue)")
                 if tag.rawValue == "PersonalName" {
-                    isPersonalNameFound = true
+                    isNameFound = true
                 }
             }
         }
-        return isPersonalNameFound
+        return isNameFound
     }
     
     func lemmatization(for text: String) -> String {
@@ -234,20 +234,24 @@ class Brain {
     }
     
     func checkContentFound(in key: String) -> ContentFound {
-        switch key.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
+        let formattedKey = key.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        switch formattedKey {
         case "contact info", "contact", "personal information", "personal info":
             return ContentFound.personalInfo
         case "education", "academic history", "academic background", "education history":
             return ContentFound.education
-        case "work experience", "work history", "working experience", "job history":
+        case "work experience", "work history", "working experience", "job history", "experience":
             return ContentFound.workExperience
         case let str where str.contains("organisation"), let str where str.contains("organization"), let str where str.elementsEqual("organisation experience"), let str where str.elementsEqual("organization experience"), let str where str.elementsEqual("organisational experience"), let str where str.elementsEqual("organizational experience"):
             return ContentFound.organisationExperience
-        case let str where str.contains("skills"), let str where str.contains("skill"), let str where str.contains("expertise"), let str where str.contains("technical skills"), let str where str.contains("skills and language"):
+        case let str where str.contains("skills"), let str where str.contains("skill"), let str where str.contains("expertise"), let str where str.contains("technical skills"):
             return ContentFound.skills
         case let str where str.contains("summary"), let str where str.contains("about me"), let str where str.contains("about"), let str where str.contains("personal profile"), let str where str.contains("profile"), let str where str.contains("in words"):
             return ContentFound.summary
         default:
+            if personalNameEntityRecognitionFound(for: formattedKey) {
+                return ContentFound.personalInfo
+            }
             return ContentFound.notFound
         }
     }

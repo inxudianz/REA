@@ -90,7 +90,7 @@ class ProcessingViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToOvervicew" {
+        if segue.identifier == "goToOverview" {
             if let PreviewViewController = segue.destination as? PreviewViewController {
                 PreviewViewController.feedbackResult = finalFeedbackResult
             }
@@ -594,9 +594,9 @@ class ProcessingViewController: UIViewController {
             if result.segment[jumlah].segment.isEmpty {
                 for i in 0..<result.segment[jumlah].contents.count {
                     extractedContent.append(result.segment[jumlah].contents[i].label)
-                    if result.segment[jumlah].contents[i].type.first == "H" && result.segment[jumlah].contents[i].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
+                    if result.segment[jumlah].contents[i].type.first == "H" && result.segment[jumlah].contents[0].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
                         var lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
-                        if lastTypeNumberString >= tempFontSize-1 {
+                        if lastTypeNumberString >= tempFontSize-2 {
                             headerCV.append(result.segment[jumlah].contents[i].label)
                         }
                     }
