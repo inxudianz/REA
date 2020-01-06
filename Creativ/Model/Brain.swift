@@ -133,7 +133,6 @@ class Brain {
                 String(text[Range($0.range, in: text)!])
             }
         } catch let error {
-            print("invalid regex: \(error.localizedDescription)")
             return []
         }
     }
@@ -147,11 +146,7 @@ class Brain {
                 yearOnly.append(year)
             }
         }
-        
-        print("Chrono: \(text)")
-        print("CHRONOLOGY: \(yearOnly)")
         let sortedText = yearOnly.sorted() { $0 > $1 }
-        print("Sorted: \(sortedText)")
         if (yearOnly != sortedText && yearOnly.count > 1) || yearOnly.count == 0 {
             return false
         }
@@ -168,8 +163,6 @@ class Brain {
         var isNameFound = false
         tagger.enumerateTags(in: range, unit: .word, scheme: .nameType, options: options) { tag, tokenRange, stop in
             if let tag = tag, tags.contains(tag) {
-                let name = (text as NSString).substring(with: tokenRange)
-                print("\(name): \(tag.rawValue)")
                 if tag.rawValue == "PersonalName" {
                     isNameFound = true
                 }
@@ -217,11 +210,8 @@ class Brain {
                                                          language: "en_US")?.first
                 {
                     lastIndex = (misspelledRange.location + misspelledRange.length)
-                    print("First guess: \(firstGuess)")
-                    print("\(misspelledRange.length) sama \(misspelledRange.location)")
                     
                 } else {
-                    print("Not found")
                     break
                 }
                 i += misspelledRange.location + misspelledRange.length
@@ -249,7 +239,7 @@ class Brain {
         case let str where str.contains("summary"), let str where str.contains("about me"), let str where str.contains("about"), let str where str.contains("personal profile"), let str where str.contains("profile"), let str where str.contains("in words"):
             return ContentFound.summary
         default:
-            if personalNameEntityRecognitionFound(for: formattedKey) {
+            if personalNameEntityRecognitionFound(for: formattedKey) && formattedKey.count < 40 {
                 return ContentFound.personalInfo
             }
             return ContentFound.notFound
