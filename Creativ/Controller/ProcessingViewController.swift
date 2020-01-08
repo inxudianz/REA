@@ -27,12 +27,12 @@ class ProcessingViewController: UIViewController {
     var resumeClassification = [String]()
     let dispatchQueue = DispatchQueue.global(qos: .background)
     let dispatchMain = DispatchQueue.main
-    let semaphore = DispatchSemaphore(value: 0)
+    let semaphore = DispatchSemaphore(value: 1)
     
     // DESC: Process Details memuat detail dari proses yang akan dijalankan
     var processDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating", "Analyzing Skills", "Finalizing"]
     
-    // DESC: instance onGoingProcessp; berisi row yang sedang berjalan dan array proses yang telah selesai berjalan
+    // DESC: instance onGoingProcess; berisi row yang sedang berjalan dan array proses yang telah selesai berjalan
     var onGoingRow = onGoingProcess()
     var resultContent: Segment?
     var segmentedContent: [SegmentedModel]?
@@ -42,16 +42,10 @@ class ProcessingViewController: UIViewController {
     var timer = Timer()
     var finalFeedbackResult: [FeedbackDetailModel] = [FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: "")]
     
-    var stringProfile: String = ""
-    var stringEducation: String = ""
-    var stringWork: String = ""
-    var stringOrg: String = ""
-    var stringSummary: String = ""
-    var stringSkills: String = ""
-    
-    var tempFontSize = 0
+    var tempFontSize: Int = 0
     var headerCV: [String] = []
     var segmentationExtractedResult:[String:String]=[:]
+    var missingContentFound: Int = 0
     
     //nlp
     let tagger = NSLinguisticTagger(tagSchemes:[.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
@@ -63,7 +57,6 @@ class ProcessingViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
-
         processCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
@@ -71,21 +64,21 @@ class ProcessingViewController: UIViewController {
         
         
         dispatchQueue.async {
-            self.semaphore.signal()
+            self.semaphore.wait()
             self.resultContent = self.segmentContent(contents: self.segmentedContent!)
-            self.semaphore.wait()
-            
             self.semaphore.signal()
+            
+            self.semaphore.wait()
             self.extractContent(result: self.resultContent!)
-            self.semaphore.wait()
-            
             self.semaphore.signal()
+            
+            self.semaphore.wait()
             self.divideExtractedContent(extractedContent: self.extractedContent)
-            self.semaphore.wait()
-            
             self.semaphore.signal()
-            self.decideAppropriateFeedback(dividedExtractedContent: self.segmentationExtractedResult)
+            
             self.semaphore.wait()
+            self.decideAppropriateFeedback(dividedExtractedContent: self.segmentationExtractedResult)
+            self.semaphore.signal()
         }
     }
     
@@ -93,6 +86,9 @@ class ProcessingViewController: UIViewController {
         if segue.identifier == "goToOverview" {
             if let PreviewViewController = segue.destination as? PreviewViewController {
                 PreviewViewController.feedbackResult = finalFeedbackResult
+                if missingContentFound == 6 {
+                    PreviewViewController.isNoHeaderFound = true
+                }
             }
         }
     }
@@ -132,7 +128,6 @@ class ProcessingViewController: UIViewController {
             else if index == 1 {
                 prevNode = currNode
                 if currNode.type.first == "H" {
-                    
                     currSegment.addContents(contents: currLevelNode)
                     
                     result.addSegment(segment: currSegment)
@@ -143,16 +138,17 @@ class ProcessingViewController: UIViewController {
                     currLevelNode.removeAll()
                     currLevelNode.append(currNode)
                     nestedHeaderLevel += 1
-                    
                 }
                 else if currNode.type.first == "B" {
                     currLevelNode.append(currNode)
                 }
                 continue
             }
-            
             // if node is header
             if currNode.type.first == "H" {
+                if lastHeader.type.last == nil {
+                    lastHeader = currNode
+                }
                 // check if node(header) value is lower than equal to the last header
                 if (currNode.type.last?.hexDigitValue)! <= (lastHeader.type.last?.hexDigitValue)! {
                     // if the previous node is also header
@@ -165,7 +161,7 @@ class ProcessingViewController: UIViewController {
                         currLevelNode.append(currNode)
                         nestedHeaderLevel += 1
                     }
-                        // if previous node is a body
+                    // if previous node is a body
                     else if prevNode.type.first == "B" {
                         // if the current node header value is equal to the last header value
                         if (currNode.type.last?.hexDigitValue)! == (lastHeader.type.last?.hexDigitValue)! {
@@ -181,10 +177,9 @@ class ProcessingViewController: UIViewController {
                                 currLevelNode.append(currNode)
                                 currSegment.addSegment(segment: nestedSegment)
                                 nestedSegment = Segment()
-                                
                             }
                         }
-                            // if the current node header value is not equal to the last header value
+                        // if the current node header value is not equal to the last header value
                         else {
                             lastHeader = currNode
                             currLevelNode.append(currNode)
@@ -196,11 +191,10 @@ class ProcessingViewController: UIViewController {
                             
                             currSegment = Segment()
                             nestedHeaderLevel -= 1
-                            
                         }
                     }
                 }
-                    // If current header is higher than last header
+                // If current header is higher than last header
                 else {
                     if prevNode.type.first == "H" {
                         lastHeader = currNode
@@ -210,7 +204,6 @@ class ProcessingViewController: UIViewController {
                         
                         currLevelNode.removeAll()
                         currLevelNode.append(currNode)
-                        
                     }
                     else if prevNode.type.first == "B" {
                         if nestedHeaderLevel > 0 {
@@ -235,19 +228,17 @@ class ProcessingViewController: UIViewController {
                             nestedSegment = Segment()
                             
                             nestedHeaderLevel -= 1
-                            
                         }
                     }
                 }
                 
             }
-                // If current node is a body
+            // If current node is a body
             else if currNode.type.first == "B" {
                 currLevelNode.append(currNode)
             }
             prevNode = currNode
         }
-        
         currSegment.addContents(contents: currLevelNode)
         currLevelNode.removeAll()
         result.addSegment(segment: currSegment)
@@ -265,14 +256,6 @@ class ProcessingViewController: UIViewController {
         var tempForEach = 0
         var summarySetelahPersonalProfile = ""
         summary.forEach { (cekTemp) in
-            /*
-                         yg punya robby
-            if cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Personal Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About Me".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "About".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "Profile".lowercased() || cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "In Words".lowercased() || text.lowercased().contains("Summary".lowercased()){
-                summarySetelahPersonalProfile.append(String(summary[tempForEach+1]))
-                return
-            }
-            else if tempForEach == summary.count - 1 {
-                         */
             if brain.isSummaryFound(in: String(cekTemp)){
                 summarySetelahPersonalProfile = String(summary[tempForEach+1])
                 return
@@ -282,7 +265,6 @@ class ProcessingViewController: UIViewController {
             }
             tempForEach += 1
         }
-        print("Summary setelah personal profile = \(summarySetelahPersonalProfile)")
         
         // ML
         let modelPassionate = TextClassifierPassionateSentence()
@@ -301,38 +283,43 @@ class ProcessingViewController: UIViewController {
         
         var output1 = ""
         for sentence in textToPredict {
-            guard let passionateOutput = try? modelPassionate.prediction(text: sentence) else {
-                fatalError("Unexpected runtime error.")
-            }
-            //output1.append("\(passionateOutput.label)\n")
-            if passionateOutput.label == "Passionate"{
-                passionateCount += 1
+            if !sentence.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                guard let passionateOutput = try? modelPassionate.prediction(text: sentence) else {
+                    let alert = UIAlertController(title: "No text found!", message: "It appears that no text is found.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                        self.view.removeFromSuperview()
+                    }))
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                if passionateOutput.label == "Passionate"{
+                    passionateCount += 1
+                }
             }
         }
-        
         output1 = String(passionateCount/Float(textToPredict.count) * 100)
-        
-        print("Passionate Output : \(output1)% Passionate")
         
         var output2 = ""
         for sentence in textToPredict {
-            guard let vagueOutput = try? modelVague.prediction(text: sentence) else {
-                fatalError("Unexpected runtime error.")
-            }
-            output2.append(vagueOutput.label)
-            if vagueOutput.label == "Personal"{
-                personalCount += 1
+            if !sentence.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                guard let vagueOutput = try? modelVague.prediction(text: sentence) else {
+                    let alert = UIAlertController(title: "No text found!", message: "It appears that no text is found.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                        self.view.removeFromSuperview()
+                    }))
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
+                output2.append(vagueOutput.label)
+                if vagueOutput.label == "Personal"{
+                    personalCount += 1
+                }
             }
         }
-        
         output2 = String(personalCount/Float(textToPredict.count) * 100)
-        print("Vague Output : \(output2)% Personal")
         
         finalFeedbackResult[0].type = "Summary"
-        
-        print(output1)
-        print(output2)
-        
         if Float(output1)! < 50 {
             finalFeedbackResult[0].overview.append("- Fill in your summary with things your passionate about and tell a little bit about it!\n\n")
         } else if Float(output1)! >= 50 {
@@ -345,11 +332,7 @@ class ProcessingViewController: UIViewController {
             finalFeedbackResult[0].overview.append("- You also mentioned about what you want to do in your company you applied for and it’s a good thing to do!\n\n")
         }
         
-        //finalFeedbackResult[0].overview.append("\(output1)% Passionate\n")
-        //finalFeedbackResult[0].overview.append("\(output2)% Personal\n")
-        
         //Check typo
-        print("typo bool = \(brain.isReal(word: summarySetelahPersonalProfile))")
         if brain.isReal(word: summarySetelahPersonalProfile) == true{
             
         }else if brain.isReal(word: summarySetelahPersonalProfile) == false{
@@ -414,23 +397,18 @@ class ProcessingViewController: UIViewController {
         var workExperienceDetail: [String] = []
         var averageWordCount = 0
         for i in 0..<workExperience.count{
-            print(workExperience[i])
             averageWordCount += workExperience[i].count
-            print(workExperience[i].count)
         }
+        
         averageWordCount = averageWordCount/workExperience.count
-        print("average word count = \(averageWordCount)")
         workExperience.forEach { (cekTemp) in
             if cekTemp.count > averageWordCount {
                 workExperienceDetail.append(String(cekTemp))
                 return
             }
-            else {
-                //                workExperienceDetail = workExperience.joined()
-            }
             tempForEach += 1
         }
-        print("Work Experience Detail = \(workExperienceDetail)")
+        
         let modelWorkExperience = TextClassifierWorkExperience()
         var outputWorkExperienceGood = ""
         var outputWorkExperienceMid = ""
@@ -439,30 +417,29 @@ class ProcessingViewController: UIViewController {
         var midCount: Float = 0
         var badCount: Float = 0
         for sentence in workExperienceDetail {
-            guard let workExperienceOutput = try? modelWorkExperience.prediction(text: sentence) else {
-                fatalError("Unexpected runtime error.")
-            }
-            //output1.append("\(passionateOutput.label)\n")
-            if workExperienceOutput.label == "Good"{
-                goodCount += 1
-            }else if workExperienceOutput.label == "Mid"{
-                midCount += 1
-            }else if workExperienceOutput.label == "Bad"{
-                badCount += 1
+            if !sentence.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                guard let workExperienceOutput = try? modelWorkExperience.prediction(text: sentence) else {
+                    let alert = UIAlertController(title: "No text found!", message: "It appears that no text is found.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                        self.view.removeFromSuperview()
+                    }))
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+                if workExperienceOutput.label == "Good"{
+                    goodCount += 1
+                }else if workExperienceOutput.label == "Mid"{
+                    midCount += 1
+                }else if workExperienceOutput.label == "Bad"{
+                    badCount += 1
+                }
             }
         }
         
         outputWorkExperienceGood = String(goodCount/Float(workExperienceDetail.count) * 100)
         outputWorkExperienceMid = String(midCount/Float(workExperienceDetail.count) * 100)
         outputWorkExperienceBad = String(badCount/Float(workExperienceDetail.count) * 100)
-        
-        print("Good Output : \(outputWorkExperienceGood)% Good")
-        print("Mid Output : \(outputWorkExperienceMid)% Mid")
-        print("Bad Output : \(outputWorkExperienceBad)% Bad")
-        
-//        finalFeedbackResult[3].overview.append("Good Output : \(outputWorkExperienceGood)% Good\n")
-//        finalFeedbackResult[3].overview.append("Mid Output : \(outputWorkExperienceMid)% Mid\n")
-//        finalFeedbackResult[3].overview.append("Bad Output : \(outputWorkExperienceBad)% Bad\n")
         
         if outputWorkExperienceBad >= outputWorkExperienceMid && outputWorkExperienceBad >= outputWorkExperienceGood{
             finalFeedbackResult[3].overview.append("- You have to explain more of what you did in each of your working experiences so it can be more detailed!\n\n")
@@ -482,32 +459,24 @@ class ProcessingViewController: UIViewController {
     
     func appointOrganisationFeedback(for text: String) {
         var organisationExperience: [Substring] = []
-        
-        print("*&*&*&*&*&*&*&*&*&*")
-        print("Organisation experience = \(text)")
-        organisationExperience = text.split(separator: "\n")
-        print("\(organisationExperience)")
         var tempForEach = 0
         var organisationExperienceDetail: [String] = []
         var averageWordCount = 0
+        
+        organisationExperience = text.split(separator: "\n")
         for i in 0..<organisationExperience.count{
-            print(organisationExperience[i])
             averageWordCount += organisationExperience[i].count
-            print(organisationExperience[i].count)
         }
         averageWordCount = averageWordCount/organisationExperience.count
-        print("average word count = \(averageWordCount)")
+        
         organisationExperience.forEach { (cekTemp) in
             if cekTemp.count > averageWordCount && !cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty{
                 organisationExperienceDetail.append(String(cekTemp))
                 return
             }
-            else {
-                //                workExperienceDetail = workExperience.joined()
-            }
             tempForEach += 1
         }
-        print("Organisation Experience Detail = \(organisationExperienceDetail)")
+        
         let modelOrganisationExperience = TextClassifierOrganisationExperience()
         var outputOrganisationExperienceGood = ""
         var outputOrganisationExperienceMid = ""
@@ -516,30 +485,28 @@ class ProcessingViewController: UIViewController {
         var midCount: Float = 0
         var badCount: Float = 0
         for sentence in organisationExperienceDetail {
-            guard let organisationExperienceOutput = try? modelOrganisationExperience.prediction(text: sentence) else {
-                fatalError("Unexpected runtime error.")
-            }
-            //output1.append("\(passionateOutput.label)\n")
-            if organisationExperienceOutput.label == "Good"{
-                goodCount += 1
-            }else if organisationExperienceOutput.label == "Mid"{
-                midCount += 1
-            }else if organisationExperienceOutput.label == "Bad"{
-                badCount += 1
+            if !sentence.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                guard let organisationExperienceOutput = try? modelOrganisationExperience.prediction(text: sentence) else {
+                    let alert = UIAlertController(title: "No text found!", message: "It appears that no text is found.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                        self.view.removeFromSuperview()
+                    }))
+                    present(alert, animated: true, completion: nil)
+                    return
+                }
+                if organisationExperienceOutput.label == "Good"{
+                    goodCount += 1
+                } else if organisationExperienceOutput.label == "Mid"{
+                    midCount += 1
+                } else if organisationExperienceOutput.label == "Bad"{
+                    badCount += 1
+                }
             }
         }
         
         outputOrganisationExperienceGood = String(goodCount/Float(organisationExperienceDetail.count) * 100)
         outputOrganisationExperienceMid = String(midCount/Float(organisationExperienceDetail.count) * 100)
         outputOrganisationExperienceBad = String(badCount/Float(organisationExperienceDetail.count) * 100)
-        
-        print("Good Output : \(outputOrganisationExperienceGood)% Good")
-        print("Mid Output : \(outputOrganisationExperienceMid)% Mid")
-        print("Bad Output : \(outputOrganisationExperienceBad)% Bad")
-        
-//        finalFeedbackResult[4].overview.append("Good Output : \(outputOrganisationExperienceGood)% Good\n")
-//        finalFeedbackResult[4].overview.append("Mid Output : \(outputOrganisationExperienceMid)% Mid\n")
-//        finalFeedbackResult[4].overview.append("Bad Output : \(outputOrganisationExperienceBad)% Bad\n")
         
         if outputOrganisationExperienceBad >= outputOrganisationExperienceMid && outputOrganisationExperienceBad >= outputOrganisationExperienceGood{
             finalFeedbackResult[4].overview.append("- You can elaborate more on each of your experiences and give some details on it.\n\n")
@@ -573,7 +540,6 @@ class ProcessingViewController: UIViewController {
             for x in 0 ..< headerCV.count {
                 if extractedContent[q] == headerCV[x] {
                     headerCV[x] = headerCV[x].trimmingCharacters(in: .whitespacesAndNewlines)
-                    print("ketemu \(headerCV[x])")
                     segmentationExtractedResult["\(headerCV[x])"] = ""
                     index = x
                     break
@@ -595,7 +561,7 @@ class ProcessingViewController: UIViewController {
                 for i in 0..<result.segment[jumlah].contents.count {
                     extractedContent.append(result.segment[jumlah].contents[i].label)
                     if result.segment[jumlah].contents[i].type.first == "H" && result.segment[jumlah].contents[0].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
-                        var lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
+                        let lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
                         if lastTypeNumberString >= tempFontSize-2 {
                             headerCV.append(result.segment[jumlah].contents[i].label)
                         }
@@ -608,7 +574,7 @@ class ProcessingViewController: UIViewController {
                 for j in 0 ..< result.contents.count{
                     extractedContent.append(result.contents[j].label)
                     if result.contents[j].type.first == "H" && result.contents[j].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
-                        var lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
+                        let lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
                         if lastTypeNumberString >= tempFontSize-1 {
                             headerCV.append(result.contents[j].label)
                         }
@@ -637,41 +603,36 @@ class ProcessingViewController: UIViewController {
                     self.appointProfileFeedback(for: dividedExtractedContent[key]!)
                 }
             default:
+                missingContentFound += 1
                 break
             }
         }
         
         dispatchMain.async {
-            self.timer = Timer.scheduledTimer(withTimeInterval: 1.3, repeats: true) { (timer) in
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true) { (timer) in
                 UIView.animate(withDuration: 1.0) {
                     self.moveItem()
                 }
             }
         }
-        
-        print("final result\(self.finalFeedbackResult)")
-        
     }
     
     func getHighestFontSize(result: Segment) {
-        //        let a = result.segment[0].contents[0].type.last?.hexDigitValue
         for jumlah in 0 ..< result.segment.count {
             if result.segment[jumlah].segment.isEmpty {
                 for i in 0 ..< result.segment[jumlah].contents.count {
                     if result.segment[jumlah].contents[i].type.first == "H" && result.segment[jumlah].contents[i].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
-                        var lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
+                        let lastTypeNumberString = (result.segment[jumlah].contents[i].type.last?.hexDigitValue)!
                         if lastTypeNumberString > tempFontSize{
                             tempFontSize = lastTypeNumberString
                         }
                     }
                 }
-            }else{
-                //                extractContent(result: result.segment[jumlah])
             }
             if jumlah == result.segment.count - 1 {
                 for j in 0 ..< result.contents.count{
                     if result.contents[j].type.first == "H" && result.contents[j].label.range(of: "[a-zA-Z]+", options: .regularExpression) != nil {
-                        var lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
+                        let lastTypeNumberString = (result.contents[j].type.last?.hexDigitValue)!
                         if lastTypeNumberString > tempFontSize{
                             tempFontSize = lastTypeNumberString
                         }

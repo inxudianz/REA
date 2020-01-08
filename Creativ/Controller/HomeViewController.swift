@@ -28,10 +28,10 @@ class HomeViewController: UIViewController{
     var totalFont = 0
     
     var window: UIWindow?
-
+    
     
     @IBOutlet weak var testImg: UIImageView!
-
+    
     var selectedResume:ResumeModel?
     
     let customFont = CustomFont()
@@ -86,7 +86,7 @@ class HomeViewController: UIViewController{
             alert.addAction(UIAlertAction(title: "Delete Resume", style: .destructive, handler: { action in
                 
                 let deletedItem = self.getDeletedItem()
-                CoreDataHelper.delete(names: deletedItem )
+                CoreDataHelper.delete(names: deletedItem)
                 
                 self.selectedItem.removeAll()
                 self.tempContents = self.contents
@@ -125,9 +125,9 @@ class HomeViewController: UIViewController{
                 deletedContent.append(content.name)
             }
         }
-            return deletedContent
+        return deletedContent
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view
@@ -192,7 +192,7 @@ class HomeViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToOverview" {
             if let overviewViewController = segue.destination as? OverviewViewController {
-                    overviewViewController.fetchedResume = selectedResume!
+                overviewViewController.fetchedResume = selectedResume!
             }
         } else if segue.identifier == "gotoprocess" {
             if let processingViewController = segue.destination as? ProcessingViewController {
@@ -210,8 +210,6 @@ class HomeViewController: UIViewController{
         cvCollectionView.register(UINib(nibName: "AddNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddNewCollectionViewCellID")
         cvCollectionView.register(UINib(nibName: "CVNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CVNewCollectionViewCellID")
         
-        //print(listFilesFromDocumentsFolder())
-        
         //read file
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
         let getImagePath = paths.appendingPathComponent("TIKET INDONESIA PERTAMA.pdf")
@@ -228,7 +226,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contents.count + 1
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionReusableViewID", for: indexPath) as? HomeCollectionReusableView {
             headerView.reaProcessing(reaImages: ["rea1","rea2","rea1","rea2","rea3"])
@@ -359,7 +357,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         
         // Full path to documents directory
         let docs = fileMngr.urls(for: .documentDirectory, in: .userDomainMask)[0].path
-
+        
         // List all contents of directory and return as [String] OR nil if failed
         return try? fileMngr.contentsOfDirectory(atPath:docs)
     }
@@ -378,10 +376,10 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     
     //view was cancelled
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-//        dismiss(animated: true, completion: nil)
-//        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-//        let viewController = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController")
-//        self.window?.makeKeyAndVisible()
+        //        dismiss(animated: true, completion: nil)
+        //        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        //        let viewController = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController")
+        //        self.window?.makeKeyAndVisible()
     }
     
     //menampilkan pdf file
@@ -400,7 +398,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         if let pdf = PDFDocument(url: urlPicked!) {
             let pageCount = pdf.pageCount
             let documentContent = NSMutableAttributedString()
-
+            
             for i in 0 ..< pageCount {
                 guard let page = pdf.page(at: i) else { continue }
                 guard let pageContent = page.attributedString else { continue }
@@ -426,20 +424,20 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 }
                 let isBold = currentFont.fontDescriptor.symbolicTraits.contains(.traitBold)
                 checkFileImage += 1
- 
+                
                 pointAvg += Double(currentFont.pointSize)
                 
                 cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
             }
-
+            
             if checkFileImage != 0 && pageCount < 2 {
                 let sortWithoutDuplicates = Array(Set(arrFontSize))
                 let fontSizeSorted = sortWithoutDuplicates.sorted()
                 let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
                 
                 pointAvg = pointAvg / Double(checkFileImage)
-
-
+                
+                
                 let fontSizeSortedSplit = fontSizeSorted.split(separator: medianFontSize)
                 var arrHeading:[(String,String)] = []
                 var arrBody:[(String,String)] = []
@@ -447,7 +445,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 
                 // TODO:
                 // JIKA FONTSIZESORTED LEBINRENDAH DARI 2 PRINT UIALERT NGASIH TAU KYK DIBAWAH UNTUK IMAGE :)
-                    
+                
                 for cvContent in cvContents {
                     if fontSizeSorted.count < 3 && (!brain.isWorkExperienceFound(in: cvContent.0) || !brain.isEducationFound(in: cvContent.0)) {
                         let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your file is not a resume. Try to upload a different file.", preferredStyle: .alert)
@@ -474,7 +472,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                                 }
                                 else if index == fontSizeSortedSplit[1].count - 1 {
                                     if !(brain.checkContentFound(in: cvContent.0) == .notFound) {
-                                       arrBody.append((cvContent.0,"Header\(index + 2)"))
+                                        arrBody.append((cvContent.0,"Header\(index + 2)"))
                                         categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
                                     }
                                     else {
@@ -499,7 +497,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                                 }
                                 else if index == fontSizeSortedSplit[0].count - 1 {
                                     if !(brain.checkContentFound(in: cvContent.0) == .notFound) {
-                                       arrBody.append((cvContent.0,"Header\(index + 2)"))
+                                        arrBody.append((cvContent.0,"Header\(index + 2)"))
                                         categorisedcvContent.append(SegmentedModel(label: cvContent.0, type: "H\(index+2)", fontSize: cvContent.1, isBold: cvContent.2))
                                     }
                                     else {
@@ -532,7 +530,7 @@ extension String {
         let end = index(startIndex, offsetBy: bounds.upperBound)
         return String(self[start...end])
     }
-
+    
     subscript (bounds: CountableRange<Int>) -> String {
         let start = index(startIndex, offsetBy: bounds.lowerBound)
         let end = index(startIndex, offsetBy: bounds.upperBound)
