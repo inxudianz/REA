@@ -450,7 +450,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                     if fontSizeSorted.count < 3 && (!brain.isWorkExperienceFound(in: cvContent.0) || !brain.isEducationFound(in: cvContent.0)) {
                         let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your file is not a resume. Try to upload a different file.", preferredStyle: .alert)
                         
-                        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                             self.cvCollectionView.reloadData()
                         }))
                         
@@ -514,7 +514,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
             else {
                 let alert = UIAlertController(title: "Couldn't Detect Resume!", message: "It appears that your file is an image or not a resume. Try to upload a different file.", preferredStyle: .alert)
                 
-                alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                     self.cvCollectionView.reloadData()
                 }))
                 
