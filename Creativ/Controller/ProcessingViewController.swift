@@ -62,7 +62,6 @@ class ProcessingViewController: UIViewController {
         onGoingRow = onGoingProcess(rowIndexPath: IndexPath(row: 0, section: processCollectionView.numberOfSections - 1), doneArray: [])
         setCollectionViewLayout()
         
-        
         dispatchQueue.async {
             self.semaphore.wait()
             self.resultContent = self.segmentContent(contents: self.segmentedContent!)
@@ -86,8 +85,11 @@ class ProcessingViewController: UIViewController {
         if segue.identifier == "goToOverview" {
             if let PreviewViewController = segue.destination as? PreviewViewController {
                 PreviewViewController.feedbackResult = finalFeedbackResult
-                if missingContentFound == 6 {
+                if missingContentFound == headerCV.count || missingContentFound >= 6 {
                     PreviewViewController.isNoHeaderFound = true
+                }
+                else {
+                    PreviewViewController.isNoHeaderFound = false
                 }
             }
         }
@@ -286,7 +288,7 @@ class ProcessingViewController: UIViewController {
             if !sentence.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 guard let passionateOutput = try? modelPassionate.prediction(text: sentence) else {
                     let alert = UIAlertController(title: "No text found!", message: "It appears that no text is found.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                         self.view.removeFromSuperview()
                     }))
                     present(alert, animated: true, completion: nil)
@@ -305,7 +307,7 @@ class ProcessingViewController: UIViewController {
             if !sentence.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 guard let vagueOutput = try? modelVague.prediction(text: sentence) else {
                     let alert = UIAlertController(title: "No text found!", message: "It appears that no text is found.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                         self.view.removeFromSuperview()
                     }))
                     present(alert, animated: true, completion: nil)
@@ -420,7 +422,7 @@ class ProcessingViewController: UIViewController {
             if !sentence.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 guard let workExperienceOutput = try? modelWorkExperience.prediction(text: sentence) else {
                     let alert = UIAlertController(title: "No text found!", message: "It appears that no text is found.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                         self.view.removeFromSuperview()
                     }))
                     present(alert, animated: true, completion: nil)
@@ -488,7 +490,7 @@ class ProcessingViewController: UIViewController {
             if !sentence.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 guard let organisationExperienceOutput = try? modelOrganisationExperience.prediction(text: sentence) else {
                     let alert = UIAlertController(title: "No text found!", message: "It appears that no text is found.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                         self.view.removeFromSuperview()
                     }))
                     present(alert, animated: true, completion: nil)

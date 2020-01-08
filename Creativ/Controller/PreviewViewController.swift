@@ -22,7 +22,7 @@ class PreviewViewController: UIViewController {
     let customFont = CustomFont()
     var feedbackResult: [FeedbackDetailModel] = []
     var headerCv: [String] = ["summary", "identity", "education", "working experience", "organisational experience", "skills"]
-    var isNoHeaderFound: Bool?
+    var isNoHeaderFound: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class PreviewViewController: UIViewController {
         feedbackDatas.createFeedbackSection()
         saveNewResume()
         
-        if isNoHeaderFound ?? false {
+        if isNoHeaderFound {
             let alert = UIAlertController(title: "Empty Content!", message: "It appears that either your resume content is not detected or you haven't included the segments", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
