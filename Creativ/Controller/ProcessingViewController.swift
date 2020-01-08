@@ -27,12 +27,12 @@ class ProcessingViewController: UIViewController {
     var resumeClassification = [String]()
     let dispatchQueue = DispatchQueue.global(qos: .background)
     let dispatchMain = DispatchQueue.main
-    let semaphore = DispatchSemaphore(value: 0)
+    let semaphore = DispatchSemaphore(value: 1)
     
     // DESC: Process Details memuat detail dari proses yang akan dijalankan
     var processDetails: [String] = ["Checking Identity", "Looking at Summary", "Viewing Education", "Evaluating", "Analyzing Skills", "Finalizing"]
     
-    // DESC: instance onGoingProcessp; berisi row yang sedang berjalan dan array proses yang telah selesai berjalan
+    // DESC: instance onGoingProcess; berisi row yang sedang berjalan dan array proses yang telah selesai berjalan
     var onGoingRow = onGoingProcess()
     var resultContent: Segment?
     var segmentedContent: [SegmentedModel]?
@@ -42,16 +42,10 @@ class ProcessingViewController: UIViewController {
     var timer = Timer()
     var finalFeedbackResult: [FeedbackDetailModel] = [FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: ""), FeedbackDetailModel(type: "", id: 0, overview: "")]
     
-    var stringProfile: String = ""
-    var stringEducation: String = ""
-    var stringWork: String = ""
-    var stringOrg: String = ""
-    var stringSummary: String = ""
-    var stringSkills: String = ""
-    
-    var tempFontSize = 0
+    var tempFontSize: Int = 0
     var headerCV: [String] = []
     var segmentationExtractedResult:[String:String]=[:]
+    var missingContentFound: Int = 0
     
     //nlp
     let tagger = NSLinguisticTagger(tagSchemes:[.tokenType, .language, .lexicalClass, .nameType, .lemma], options: 0)
@@ -70,21 +64,21 @@ class ProcessingViewController: UIViewController {
         
         
         dispatchQueue.async {
-            self.semaphore.signal()
+            self.semaphore.wait()
             self.resultContent = self.segmentContent(contents: self.segmentedContent!)
-            self.semaphore.wait()
-            
             self.semaphore.signal()
+            
+            self.semaphore.wait()
             self.extractContent(result: self.resultContent!)
-            self.semaphore.wait()
-            
             self.semaphore.signal()
+            
+            self.semaphore.wait()
             self.divideExtractedContent(extractedContent: self.extractedContent)
-            self.semaphore.wait()
-            
             self.semaphore.signal()
-            self.decideAppropriateFeedback(dividedExtractedContent: self.segmentationExtractedResult)
+            
             self.semaphore.wait()
+            self.decideAppropriateFeedback(dividedExtractedContent: self.segmentationExtractedResult)
+            self.semaphore.signal()
         }
     }
     
@@ -92,6 +86,9 @@ class ProcessingViewController: UIViewController {
         if segue.identifier == "goToOverview" {
             if let PreviewViewController = segue.destination as? PreviewViewController {
                 PreviewViewController.feedbackResult = finalFeedbackResult
+                if missingContentFound == 6 {
+                    PreviewViewController.isNoHeaderFound = true
+                }
             }
         }
     }
@@ -149,6 +146,9 @@ class ProcessingViewController: UIViewController {
             }
             // if node is header
             if currNode.type.first == "H" {
+                if lastHeader.type.last == nil {
+                    lastHeader = currNode
+                }
                 // check if node(header) value is lower than equal to the last header
                 if (currNode.type.last?.hexDigitValue)! <= (lastHeader.type.last?.hexDigitValue)! {
                     // if the previous node is also header
@@ -265,7 +265,6 @@ class ProcessingViewController: UIViewController {
             }
             tempForEach += 1
         }
-        print("Summary setelah personal profile = \(summarySetelahPersonalProfile)")
         
         // ML
         let modelPassionate = TextClassifierPassionateSentence()
@@ -299,10 +298,7 @@ class ProcessingViewController: UIViewController {
                 }
             }
         }
-        
         output1 = String(passionateCount/Float(textToPredict.count) * 100)
-        
-        print("Passionate Output : \(output1)% Passionate")
         
         var output2 = ""
         for sentence in textToPredict {
@@ -321,10 +317,9 @@ class ProcessingViewController: UIViewController {
                 }
             }
         }
-        
         output2 = String(personalCount/Float(textToPredict.count) * 100)
-        finalFeedbackResult[0].type = "Summary"
         
+        finalFeedbackResult[0].type = "Summary"
         if Float(output1)! < 50 {
             finalFeedbackResult[0].overview.append("- Fill in your summary with things your passionate about and tell a little bit about it!\n\n")
         } else if Float(output1)! >= 50 {
@@ -338,7 +333,6 @@ class ProcessingViewController: UIViewController {
         }
         
         //Check typo
-        print("typo bool = \(brain.isReal(word: summarySetelahPersonalProfile))")
         if brain.isReal(word: summarySetelahPersonalProfile) == true{
             
         }else if brain.isReal(word: summarySetelahPersonalProfile) == false{
@@ -403,9 +397,7 @@ class ProcessingViewController: UIViewController {
         var workExperienceDetail: [String] = []
         var averageWordCount = 0
         for i in 0..<workExperience.count{
-            print(workExperience[i])
             averageWordCount += workExperience[i].count
-            print(workExperience[i].count)
         }
         
         averageWordCount = averageWordCount/workExperience.count
@@ -473,11 +465,10 @@ class ProcessingViewController: UIViewController {
         
         organisationExperience = text.split(separator: "\n")
         for i in 0..<organisationExperience.count{
-            print(organisationExperience[i])
             averageWordCount += organisationExperience[i].count
-            print(organisationExperience[i].count)
         }
         averageWordCount = averageWordCount/organisationExperience.count
+        
         organisationExperience.forEach { (cekTemp) in
             if cekTemp.count > averageWordCount && !cekTemp.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty{
                 organisationExperienceDetail.append(String(cekTemp))
@@ -612,6 +603,7 @@ class ProcessingViewController: UIViewController {
                     self.appointProfileFeedback(for: dividedExtractedContent[key]!)
                 }
             default:
+                missingContentFound += 1
                 break
             }
         }
@@ -623,13 +615,9 @@ class ProcessingViewController: UIViewController {
                 }
             }
         }
-        
-        print("final result\(self.finalFeedbackResult)")
-        
     }
     
     func getHighestFontSize(result: Segment) {
-        //        let a = result.segment[0].contents[0].type.last?.hexDigitValue
         for jumlah in 0 ..< result.segment.count {
             if result.segment[jumlah].segment.isEmpty {
                 for i in 0 ..< result.segment[jumlah].contents.count {

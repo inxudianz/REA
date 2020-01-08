@@ -18,11 +18,11 @@ class PreviewViewController: UIViewController {
         }
     }
     
-    var missingContentCount = 0
     var feedbackDatas = FeedbackData()
     let customFont = CustomFont()
     var feedbackResult: [FeedbackDetailModel] = []
     var headerCv: [String] = ["summary", "identity", "education", "working experience", "organisational experience", "skills"]
+    var isNoHeaderFound: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class PreviewViewController: UIViewController {
         feedbackDatas.createFeedbackSection()
         saveNewResume()
         
-        if missingContentCount == 6 {
+        if isNoHeaderFound ?? false {
             let alert = UIAlertController(title: "Empty Content!", message: "It appears that either your resume content is not detected or you haven't included the segments", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { action in
@@ -107,15 +107,12 @@ extension PreviewViewController: UICollectionViewDelegate, UICollectionViewDataS
             
             let cellFeedback = Feedbacks(image: feedbackDatas.images[indexPath.row], title: feedbackDatas.titles[indexPath.row], overviewText: feedbackDatas.overviewTexts[indexPath.row], commentedText: feedbackDatas.commentedTexts[indexPath.row], comment: feedbackDatas.comments[indexPath.row], recommendation: feedbackDatas.recommendations[indexPath.row])
             
-            
-            
             cell.setColorGreen(colorView: &cell.feedbackView)
             cell.setColorGreen(colorView: &cell.notchView)
             cell.setColorGreen(colorView: &cell.commentView)
             
             // kalo konten ga ketemu
             if feedbackDatas.commentedTexts[indexPath.row] == "Missing content!" {
-                missingContentCount += 1
                 cell.setColorBlue(colorView: &cell.feedbackView)
                 cell.setColorBlue(colorView: &cell.notchView)
                 cell.setColorBlue(colorView: &cell.commentView)
