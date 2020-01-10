@@ -430,7 +430,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 cvContents.append((rangeContent, Double(currentFont.pointSize),isBold))
             }
             
-            if checkFileImage != 0 && pageCount < 2 {
+            if checkFileImage != 0 && pageCount < 3 {
                 let sortWithoutDuplicates = Array(Set(arrFontSize))
                 let fontSizeSorted = sortWithoutDuplicates.sorted()
                 let medianFontSize = fontSizeSorted[fontSizeSorted.count/2]
