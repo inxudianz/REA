@@ -85,7 +85,7 @@ class ProcessingViewController: UIViewController {
         if segue.identifier == "goToOverview" {
             if let PreviewViewController = segue.destination as? PreviewViewController {
                 PreviewViewController.feedbackResult = finalFeedbackResult
-                if missingContentFound == headerCV.count || missingContentFound >= 6 {
+                if missingContentFound == headerCV.count {
                     PreviewViewController.isNoHeaderFound = true
                 }
                 else {
@@ -259,10 +259,10 @@ class ProcessingViewController: UIViewController {
         var summarySetelahPersonalProfile = ""
         summary.forEach { (cekTemp) in
             if brain.isSummaryFound(in: String(cekTemp)){
-                summarySetelahPersonalProfile = String(summary[tempForEach+1])
-                return
-            }
-            else if tempForEach == summary.count - 1{
+                if tempForEach + 1 < summary.count {
+                    summarySetelahPersonalProfile = String(summary[tempForEach+1])
+                }
+            } else if tempForEach == summary.count - 1 {
                 summarySetelahPersonalProfile = summary.joined()
             }
             tempForEach += 1

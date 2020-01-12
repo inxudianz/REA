@@ -226,13 +226,13 @@ class Brain {
     func checkContentFound(in key: String) -> ContentFound {
         let formattedKey = key.lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         switch formattedKey {
-        case "contact info", "contact", "personal information", "personal info":
+        case let str where str.elementsEqual("contact info"), let str where str.elementsEqual("contact"), let str where str.elementsEqual("personal information"), let str where str.elementsEqual("personal info"):
             return ContentFound.personalInfo
-        case "education", "academic history", "academic background", "education history":
+        case let str where str.elementsEqual("education"), let str where str.elementsEqual("academic history"), let str where str.elementsEqual("academic background"), let str where str.elementsEqual("education history"):
             return ContentFound.education
-        case "work experience", "work history", "working experience", "job history", "experience":
+        case let str where str.contains("employment"), let str where str.elementsEqual("work experience"), let str where str.elementsEqual("work history"), let str where str.elementsEqual("working experience"), let str where str.elementsEqual("job history"), let str where str.elementsEqual("experience"):
             return ContentFound.workExperience
-        case let str where str.contains("organisation"), let str where str.contains("organization"), let str where str.elementsEqual("organisation experience"), let str where str.elementsEqual("organization experience"), let str where str.elementsEqual("organisational experience"), let str where str.elementsEqual("organizational experience"):
+        case let str where str.contains("organisation"), let str where str.contains("organization"), let str where str.contains("volunteer"), let str where str.contains("volunteering"), let str where str.elementsEqual("organisation experience"), let str where str.elementsEqual("organization experience"), let str where str.elementsEqual("organisational experience"), let str where str.elementsEqual("organizational experience"):
             return ContentFound.organisationExperience
         case let str where str.contains("skills"), let str where str.contains("skill"), let str where str.contains("expertise"), let str where str.contains("technical skills"):
             return ContentFound.skills
