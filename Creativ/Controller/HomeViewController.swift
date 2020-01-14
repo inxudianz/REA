@@ -28,6 +28,7 @@ class HomeViewController: UIViewController{
     var totalFont = 0
     
     var window: UIWindow?
+    fileprivate var activityIndicatorView: UIView?
     
     
     @IBOutlet weak var testImg: UIImageView!
@@ -209,11 +210,25 @@ class HomeViewController: UIViewController{
         cvCollectionView.register(UINib(nibName: "HomeCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeCollectionReusableViewID")
         cvCollectionView.register(UINib(nibName: "AddNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "AddNewCollectionViewCellID")
         cvCollectionView.register(UINib(nibName: "CVNewCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CVNewCollectionViewCellID")
-        
-        //read file
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString
-        let getImagePath = paths.appendingPathComponent("TIKET INDONESIA PERTAMA.pdf")
-        //testImg.image = UIImage(contentsOfFile: getImagePath)
+    }
+    
+    func showActivityIndicator() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { // Change `2.0` to the desired number of seconds.
+           // Code you want to be delayed
+            self.activityIndicatorView = UIView(frame: self.view.bounds)
+            self.activityIndicatorView?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+            
+            let activityIndicator = UIActivityIndicatorView(style: .large)
+            activityIndicator.center = self.activityIndicatorView!.center
+            activityIndicator.startAnimating()
+            self.activityIndicatorView?.addSubview(activityIndicator)
+            self.view.addSubview(self.activityIndicatorView!)
+        }
+    }
+    
+    func removeActivityIndicator() {
+        activityIndicatorView?.removeFromSuperview()
+        activityIndicatorView = nil
     }
 }
 
@@ -299,9 +314,11 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     
     //mengambil url file
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        
         guard let myURL = urls.first else {
             return
         }
+        
         urlPicked = myURL
         
         let size = CGSize(width: 140, height: 211)
@@ -334,7 +351,11 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         //cek ada filenya di directory atau tidak
         let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let url = NSURL(fileURLWithPath: path)
+        
         readPDFFile()
+        DispatchQueue.main.async {
+            self.removeActivityIndicator()
+        }
         
         if checkFileImage != 0 {
             currentData.name = fileName
@@ -372,10 +393,14 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
     public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         documentPicker.delegate = self
         present(documentPicker, animated: true, completion: nil)
+        showActivityIndicator()
     }
     
     //view was cancelled
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        DispatchQueue.main.async {
+            self.removeActivityIndicator()
+        }
         //        dismiss(animated: true, completion: nil)
         //        let storyboard = UIStoryboard(name: "Home", bundle: nil)
         //        let viewController = storyboard.instantiateViewController(withIdentifier: "HomeNavigationViewController")
@@ -396,6 +421,7 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
         var arrFontSize: [Double] = []
         
         if let pdf = PDFDocument(url: urlPicked!) {
+            
             let pageCount = pdf.pageCount
             let documentContent = NSMutableAttributedString()
             
@@ -517,7 +543,6 @@ extension HomeViewController: UIDocumentMenuDelegate, UIDocumentPickerDelegate, 
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                     self.cvCollectionView.reloadData()
                 }))
-                
                 present(alert, animated: true, completion: nil)
             }
         }
