@@ -51,7 +51,7 @@ class FeedbackData {
 
     func createFeedbackSection() {
         images = [UIImage(named: "summary"), UIImage(named: "identity"), UIImage(named: "education"), UIImage(named: "work"), UIImage(named: "organisation"), UIImage(named: "skill")] as! [UIImage]
-        titles = ["Summary", "Identity", "Education", "Working Experience", "Organisational Experience", "Skills"]
+        titles = ["Summary", "Identity", "Education", "Work Experience", "Organisational Experience", "Skills"]
         overviewTexts = ["You have clear summary that explain about yourself. A brief description leaves a positive impression.", "You have given personal information completely. Company will be able to contact you with ease.", "You have shown clear information about your last education. Consider putting your recent education if you haven't.", "Your working experiences are detailed. Your experiences  have shown that you are capable and accomplished individual.", "Your organisational experiences were great. You explained in detail on how you work in a team and gave amazing impact.", "Your skills should be things that can point out what's best in you. You have most skills that are needed by the company."]
         commentedTexts = ["You did Great!", "You did Great!", "You did Great!", "You did Great!", "You did Great!", "You did Great!"]
         comments = ["Feedback", "Feedback", "Feedback", "Feedback", "Feedback", "Feedback"]

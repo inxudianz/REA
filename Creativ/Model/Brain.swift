@@ -230,9 +230,9 @@ class Brain {
             return ContentFound.personalInfo
         case let str where str.elementsEqual("education"), let str where str.elementsEqual("academic history"), let str where str.elementsEqual("academic background"), let str where str.elementsEqual("education history"):
             return ContentFound.education
-        case let str where str.contains("employment"), let str where str.elementsEqual("work experience"), let str where str.elementsEqual("work history"), let str where str.elementsEqual("working experience"), let str where str.elementsEqual("job history"), let str where str.elementsEqual("experience"):
+        case let str where str.contains("employment"), let str where str.contains("work"), let str where str.elementsEqual("working experience"), let str where str.elementsEqual("job history"), let str where str.elementsEqual("experience"), let str where str.elementsEqual("experiences"):
             return ContentFound.workExperience
-        case let str where str.contains("organisation"), let str where str.contains("organization"), let str where str.contains("volunteer"), let str where str.contains("volunteering"), let str where str.elementsEqual("organisation experience"), let str where str.elementsEqual("organization experience"), let str where str.elementsEqual("organisational experience"), let str where str.elementsEqual("organizational experience"):
+        case let str where str.contains("organisational"), let str where str.contains("organisation"), let str where str.contains("organizational"), let str where str.contains("organization"), let str where str.contains("volunteer"), let str where str.contains("volunteering"), let str where str.contains("extra-curricular"):
             return ContentFound.organisationExperience
         case let str where str.contains("skills"), let str where str.contains("skill"), let str where str.contains("expertise"), let str where str.contains("technical skills"):
             return ContentFound.skills
@@ -261,14 +261,14 @@ class Brain {
     }
 
     func isWorkExperienceFound(in key: String) -> Bool {
-        if key.lowercased() == "work experience" || key.lowercased() == "work history" || key.lowercased() == "working experience" || key.lowercased() == "job history" || key.lowercased() == "experience" {
+        if key.lowercased() == "working experience" || key.lowercased() == "job history" || key.lowercased() == "experience" || key.lowercased() == "experiences" || key.lowercased().contains("employment") || key.lowercased().contains("work") {
             return true
         }
         return false
     }
 
     func isOrganisationExperienceFound(in key: String) -> Bool {
-        if key.lowercased() == "organisation experience" || key.lowercased() == "organisational experience" || key.lowercased() == "organization experience" || key.lowercased() == "organizational experience" || key.lowercased() == "organisation history" || key.lowercased() == "organization history" || key.lowercased().contains("organisation") || key.lowercased().contains("organization") {
+        if key.lowercased().contains("organisational") || key.lowercased().contains("organisation") || key.lowercased().contains("organizational") || key.lowercased().contains("organization") || key.lowercased().contains("volunteer") || key.lowercased().contains("volunteering") || key.lowercased().contains("extra-curricular") {
             return true
         }
         return false
